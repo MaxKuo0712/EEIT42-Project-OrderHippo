@@ -32,9 +32,6 @@ create table USER_INFO (
 	CONSTRAINT CHK_USER_MAIL CHECK (USER_MAIL REGEXP '[a-zA-Z0-9_\-]+@([a-zA-Z0-9_\-]+\.)+(com|org|edu)' = 1),
 	CONSTRAINT CHK_USER_AGE CHECK (USER_AGE > 0)
 );
-
-drop table USER_INFO;
-
 -- --------------------------------------------------------------------------------------------
 -- 店家基本資料(STORE_INFO)
 create table STORE_INFO (
@@ -51,9 +48,6 @@ create table STORE_INFO (
 	CONSTRAINT CHK_STORE_PHONE CHECK (STORE_PHONE REGEXP '[^0-9]' = 0),
 	CONSTRAINT CHK_STORE_MAIL CHECK (STORE_MAIL REGEXP '[a-zA-Z0-9_\-]+@([a-zA-Z0-9_\-]+\.)+(com|org|edu)' = 1)
 );
-
-drop table STORE_INFO;
-
 -- --------------------------------------------------------------------------------------------
 -- 商品分類(MEAL_CATEGORY)
 create table MEAL_CATEGORY (
@@ -61,9 +55,6 @@ create table MEAL_CATEGORY (
 	MEAL_CATEGORY_NAME varchar(100) not null,
 	MEAL_CATEGORY_DESC LONGTEXT not null
 );
-
-drop table MEAL_CATEGORY;
-
 -- --------------------------------------------------------------------------------------------
 -- 商品資料(MEAL)
 create table MEAL (
@@ -85,9 +76,6 @@ create table MEAL (
 	FOREIGN KEY (MEAL_CATEGORY_ID) REFERENCES MEAL_CATEGORY(MEAL_CATEGORY_ID),
 	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID)
 );
-
-drop table MEAL;
-
 -- --------------------------------------------------------------------------------------------
 -- 訂單(ORDERS)
 create table ORDERS (
@@ -108,9 +96,6 @@ create table ORDERS (
 	CONSTRAINT CHK_ORDER_MEAL_QTY CHECK (ORDER_MEAL_QTY > 0),
 	CONSTRAINT CHK_MEAL_PRICE CHECK (MEAL_PRICE > 0)
 );
-
-drop table ORDERS;
-
 -- --------------------------------------------------------------------------------------------
 -- 店家訊息公告(STORE_MESSAGE)
 create table STORE_MESSAGE (
@@ -119,14 +104,12 @@ create table STORE_MESSAGE (
 	STORE_ID varchar(100) not null,
 	STORE_NAME varchar(100) not null,
 	MESSAGE_DESC LONGTEXT not null,
+	MESSAGE_STATUS Boolean not null, --刪除
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
 	REVISE_ID varchar(100) default null,
 	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID)
 );
-
-drop table STORE_MESSAGE;
-
 -- --------------------------------------------------------------------------------------------
 -- 付款頁面(PAYMENT)
 CREATE TABLE PAYMENT (
@@ -143,9 +126,6 @@ CREATE TABLE PAYMENT (
 	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID),
 	CONSTRAINT CHK_PAYMENT_PRICE CHECK (PAYMENT_PRICE > 0)
 );
-
-drop table PAYMENT;
-
 -- --------------------------------------------------------------------------------------------
 -- 餐點BOM(MEAL_BOM)
 CREATE TABLE MEAL_BOM (
@@ -166,21 +146,6 @@ CREATE TABLE MEAL_BOM (
 	FOREIGN KEY (INGREDIENT_ID) REFERENCES INGREDIENT(INGREDIENT_ID)
 );
 
-drop table MEAL_BOM;
-
--- --------------------------------------------------------------------------------------------
--- 優惠券(STORE_COUPON)
-create table STORE_COUPON (
-	COUPON_ID varchar(100) DEFAULT(CONCAT('C', DATE_FORMAT(CURRENT_DATE(),'%Y%m'), '_', REPLACE(UUID(),'-',''))) PRIMARY KEY NOT NULL,
-	COUPON_NAME varchar(100) not null,
-	STORE_ID varchar(100) not null,
-	STORE_NAME varchar(100) not null,
-	COUPON_DESC LONGTEXT not null,
-	CREATE_TIME datetime default (sysdate()) not null,
-	REVISE_TIME datetime default null,
-	REVISE_ID varchar(100) default null,
-	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID)
-);
 
 
 

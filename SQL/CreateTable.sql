@@ -137,6 +137,8 @@ GROUP BY INGREDIENT_Obj
 
 select distinct  INGREDIENT_CATEGORY  from INGREDIENT
 
+select * from INGREDIENT
+
 select count(distinct INGREDIENT_ID)  from INGREDIENT
 
 delete from INGREDIENT
