@@ -102,9 +102,6 @@ create table MEAL (
 	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID)
 );
 
-ALTER TABLE MEAL 
-ADD FOREIGN KEY (MEAL_CATEGORY_NAME) REFERENCES MEAL_CATEGORY(MEAL_CATEGORY_NAME)
-
 drop table MEAL;
 
 -- --------------------------------------------------------------------------------------------
