@@ -1,47 +1,60 @@
 @charset "UTF-8";
 
-/* 嘉彬css */
-
-.my-menu-table {
-    background-color: #fff;
-    border-collapse: collapse;
+#tableMenu , #tableMember{
+    background-color:rgb(255, 255, 255);
+    border-radius: 10px 10px 0px 0px;
+}
+.my-tab-bg{
+    background: linear-gradient(to bottom, rgba(93, 121, 154, 0.563) 0%, rgb(255, 255, 255) 100%);
+}
+#tableMenu thead tr, #tableMenu tbody tr, #tableMenu tfoot tr , #tableMember thead tr, #tableMember tbody tr, #tableMember tfoot tr{
+    /* box-sizing: border-box; */
+    table-layout:fixed;
+    display: table;
     width: 100%;
-    height: 100%;
-    text-align: left;
-    border: none;
 }
-th{
-    background-color:rgb(239, 240, 255);
-    border-bottom: 2px solid rgb(187, 187, 187);
+#tableMenu tbody , #tableMember tbody{
+    border: 3px solid rgb(34, 46, 60);
+    display: block;
+    /* width: calc(100% + 8px);  */
+    height: 500px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
-td{
-    border-bottom: 0.1px solid rgb(174, 174, 174);
+#tableMenu thead tr , #tableMember thead tr{
+    background-color:rgb(34, 46, 60);
+    /* border-bottom: 2px solid rgb(187, 187, 187); */
+    color: #ffffff;
+    height:49px;
+    border-radius: 10px 10px 0px 0px;
+    
+}
+#tableMenu tbody tr:hover , #tableMember tbody tr:hover{
+    background-color: #b882ff33;
 }
 
-tr:hover{
+td{
+    border-bottom: 0.1px solid rgb(184, 184, 184);
+}
+
+/* tr:hover{
     background-color: #feeafb;
-}
-table,
-th,
-td {
-    
-    /* border: 1px solid #c7c7c7; */
-}
-.my-menu-header{
-    color: #ffffff;
-    height:80px;
-    /* width: 200px; */
-    /* text-align:left; */
-    font-size: 10px;
-    background-color: rgb(139, 177, 220);
-    /* font-family: "LiGothic", "FangSong", Arial, serif; */
-    /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
-}
+} */
+
+
 .my-title-css{
     text-align: left;
-    font-size: 25px;
-    font-family: "LiGothic", "FangSong", Arial, serif;
-
+    font-size: 40px;
+    /* font-family: "LiGothic", "FangSong", Arial, serif; */
+    color: rgb(34, 46, 60);
+}
+.my-title-css-2{
+    text-align: left;
+    font-size: 40px;
+    font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
+    /* font-family: "LiGothic", "FangSong", Arial, serif; */
+    /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    color: rgb(239, 239, 239);
 }
 .my-left-radius{
     border-top-left-radius: 3px;
@@ -57,13 +70,13 @@ td {
 
 .my-btn-color{
     color:rgb(255, 255, 255);
-    background-color: rgb(86, 113, 143);
-    border-color: rgb(92, 92, 92);
-    
+    background-color: rgb(34, 46, 60);
+    border-color: rgb(59, 77, 99);
+    font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
 
     border: none;
     /* color: white; */
-    padding: 10px;
+    padding: 15px;
     text-align: center;
     /* text-decoration: none; */
     /* display: inline-block; */
@@ -77,15 +90,17 @@ td {
     border-color:  rgb(196, 196, 196);
 }
 .my-btn-box{
-    width: 322px;
-    background-color: #b9b9b9bd;
+    text-align: center;
+    width: 448px;
+    height: 55px;
+    background-color: #6f6f6fbd;
     border-radius:3px;
     text-align:left;
     margin: 1px;
 }
 .my-search-css{
-    width: 151px;
-    height: 38px;
+    width: 207px;
+    height: 55px;
     border: 1px solid rgb(196, 196, 196);
     padding-left: 10px;
     outline:none;
@@ -94,17 +109,39 @@ td {
 
 .my-btn-search{
     /* font-size: 25px; */
-    width: 40px;
-    height: 38px;
-    margin-left: -39px;
+    width: 57px;
+    height: 55px;
+    margin-left: -50px;
 }
 .my-input{
     border:none;
     outline:none;
 }
 .my-color1{
-    background-color:  rgb(139, 177, 220);
+    background-color:  rgb(34, 46, 60);
 }
 .my-colo2{
     background-color: rgb(86, 113, 143);
+}
+
+.my-shadow{
+    /* background-color: #feeafb; */
+    background-color: #ffffff7c;
+}
+.my-web-header{
+    padding: 40px;
+    width: 100%;
+    height: 120px;
+    /* display: flex; */
+    /* justify-content:left;  */
+    align-items: center;
+}
+.my-search-box{
+    text-align: center;
+    width: 219px;
+    height: 56px;
+    background-color: #6f6f6fbd;
+    border-radius:3px;
+    text-align:left;
+    margin: 1px;
 }

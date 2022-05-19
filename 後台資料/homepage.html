@@ -31,267 +31,337 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Open+Sans&display=swap" rel="stylesheet">
     <style>
-    /*先放榮庭CSS*/
-        
-        section
-        {
-        width:
-        100%;
-        height:
-        100%;
+        /*先放榮庭CSS*/
+        body{
+            font-family: 'Noto Sans TC', sans-serif;
+             
         }
-        section
-        div[id="Padright_navbar"]
-        li[class="nav-item"]
-        {
-        padding:
-        10px
-        10px;
+        section {
+            width:
+                100%;
+            height:
+                100%;
         }
-        section>div>div[class="row"]
-        {
-        width:
-        100vw;
-        height:
-        100vh;
+
+        section div[id="Padright_navbar"] li[class="nav-item"] {
+            padding:
+                10px 10px;
         }
-        section
-        div[id="padleft"]>div
-        {
-        width:
-        100%;
-        height:
-        100%;
+
+        section>div>div[class="row"] {
+            width:
+                100vw;
+            height:
+                100vh;
         }
-        div[id="padleft"]
-        div
-        ul
-        li
-        {
-        height:
-        60px;
+
+        section div[id="padleft"]>div {
+            width:
+                100%;
+            height:
+                100%;
         }
-        div[id="padleft"]>div>a>img
-        {
-        height:
-        65px;
+
+        div[id="padleft"] div ul li {
+            height:
+                60px;
         }
-        div[id="padleft"]
-        ul
-        li
-        i
-        {
-        padding:
-        10px;
+
+        div[id="padleft"]>div>a>img {
+            height:
+                65px;
         }
-        div[id="padleft"]>div
-        {
-        height:
-        100vh;
+
+        div[id="padleft"] ul li i {
+            padding:
+                10px;
         }
-        div[id="padleft"]
-        {
-        padding:
-        0;
-        box-shadow:
-        8px
-        0px
-        5px
-        0px
-        #AEAFB7;
-        z-index:
-        1;
-        height:
-        100vh;
-        ;
+
+        div[id="padleft"]>div {
+            height:
+                100vh;
         }
-        div[id="padright"]
-        {
-        height:
-        100vh;
+
+        div[id="padleft"] {
+            padding:
+                0;
+            box-shadow:
+                8px 0px 5px 0px #AEAFB7;
+            z-index:
+                1;
+            height:
+                100vh;
+            ;
         }
-        #padright{
-        padding:0px;
-        height:
-        100vh;
+
+        div[id="padright"] {
+            height:
+                100vh;
         }
-        #Padright_navbar{
-        height:
-        8vh;
+
+        #padright {
+            padding: 0px;
+            height:
+                100vh;
         }
-        div[id="pills-home"] div[class="row tab-content"] img{
-        height:
-        150px;
+
+        #Padright_navbar {
+            height:
+                8vh;
         }
-        #pills-tabContent{
-            overflow-y:auto;height: 90vh; background-color: rgb(218, 221, 226);
+
+        div[id="pills-home"] div[class="row tab-content"] img {
+            height:
+                150px;
+
         }
-        #bulletinBoard{
-            padding-top:70px ;
+
+        #pills-tabContent {
+            overflow-y: auto;
+            height: 90vh;
+            background: linear-gradient(to bottom, rgba(93, 121, 154, 0.563) 0%, rgb(255, 255, 255) 100%);
         }
-        #padright>div{
+
+        #bulletinBoard {
+            padding-top: 70px;
+        }
+
+        #padright>div {
             height: 100vh;
         }
-        .content{
-            padding-top:70px ;
+
+        .content {
+            padding-top: 70px;
         }
-        .content img{
-            object-fit:contain; width: 100%;
-        }
-        #orderDiv{
+
+        .content img {
+            object-fit: contain;
             width: 100%;
         }
-        #mailUs{
-            color:black 
+
+        #orderDiv {
+            width: 100%;
         }
-        #floatingTextarea{
+
+        #mailUs {
+            color: black
+        }
+
+        #floatingTextarea {
             height: 100px;
         }
+
+        #quickLink>div {
+            margin-top: 50px;
+        }
+
+        /*營業開關*/
+        :root {
+            --switch-width: 50px;
+            --switch-height: 30px;
+            --circle-size: 22px;
+            --circle-padding: 3px;
+            --circle-bg: #fff;
+            --circle-on-bg: #fff;
+            --switch-bg: #c9c9c9;
+            --switch-on-bg: #4cd864;
+        }
+
+
+        .switch {
+            width: var(--switch-width);
+            height: var(--switch-height);
+            border-radius: 100px;
+            cursor: pointer;
+            background: var(--switch-bg);
+            display: flex;
+            position: relative;
+            align-items: center;
+            transition: all 0.5s;
+        }
+
+        .switch::before {
+            content: "";
+            display: block;
+            background: var(--circle-bg);
+            width: var(--circle-size);
+            height: var(--circle-size);
+            border-radius: 50%;
+            position: absolute;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            left: var(--circle-padding);
+            -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            -moz-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            -ms-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            -o-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .switch-input {
+            display: none;
+        }
+
+        .switch-input:checked+.switch {
+            background: var(--switch-on-bg);
+        }
+
+        .switch-input:checked+.switch::before {
+            background: var(--circle-on-bg);
+            left: calc((var(--switch-width) - var(--circle-size)) - var(--circle-padding));
+        }
+
+        /*營業開關結束*/
+
         /* 營養成分表*/
         .table-box {
             margin: 100px auto;
             width: 1024px;
         }
- 
+
         /* 卷軸寬度 */
         ::-webkit-scrollbar {
             width: 8px;
             background-color: transparent;
         }
- 
+
         /* 卷軸顏色 */
         ::-webkit-scrollbar-thumb {
             background-color: #27314d;
         }
- 
+
         #pills-nutrientContent {
             width: 100%;
             border-spacing: 0px;
             border-collapse: collapse;
         }
- 
-        #pills-nutrientContent caption{
+
+        #pills-nutrientContent caption {
             font-weight: bold;
             font-size: 24px;
             line-height: 50px;
         }
- 
-        #pills-nutrientContent th, #pills-nutrientContent td {
+
+        #pills-nutrientContent th,
+        #pills-nutrientContent td {
             height: 20px;
             text-align: center;
             border: 1px solid gray;
         }
- 
+
         #pills-nutrientContent thead {
             color: white;
             background-color: #38F;
         }
- 
+
         #pills-nutrientContent tbody {
             display: block;
-            width: calc(100% + 8px); /*這裡的8px是卷軸的寬度*/
+            width: calc(100% + 8px);
+            /*這裡的8px是卷軸的寬度*/
             height: 500px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
- 
+
         #pills-nutrientContent tfoot {
             background-color: #71ea71;
         }
- 
-        #pills-nutrientContent thead tr, #pills-nutrientContent tbody tr, #pills-nutrientContent tfoot tr {
+
+        #pills-nutrientContent thead tr,
+        #pills-nutrientContent tbody tr,
+        #pills-nutrientContent tfoot tr {
             box-sizing: border-box;
             table-layout: fixed;
             display: table;
             width: 100%;
         }
- 
+
         #pills-nutrientContent tbody tr:nth-of-type(odd) {
             background: #EEE;
         }
- 
+
         #pills-nutrientContent tbody tr:nth-of-type(even) {
             background: #FFF;
         }
- 
-        #pills-nutrientContent tbody tr td{
+
+        #pills-nutrientContent tbody tr td {
             border-bottom: none;
         }
-        #pills-nutrientContent{
+
+        #pills-nutrientContent {
             margin-top: 10px;
         }
-        
-        #nutrientContentsearch
-        {
-        left: 50%;
-        position:relative;
-        -webkit-transform:translate(-50%,-50%);
-        width:40px;
-        height:40px;
-        border-style:none;
-        border-radius:20px;
-        padding:10px;
-        background-color:#081925;
-        outline:none;
-        transition-duration:500ms;
-        cursor:pointer;
-        background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjExR/NCNwAAAWpJREFUWEfNljFOxDAQRbehoKDnIjTcgYtwAHpOwhE4BA3Vig6Je9ABYZ60kZbVc5xkifRHelrleRzP2rGT3TAM0ahMQmUSKpNQmYTKJFQmoTIJlUmonMFlcV88FW/F5+GXazzt1m8xKjvcFh/FVNBOnvVfhMoJHorvgtgXzNZNcXX45RpPkEe+3Wc2KhswIwz6VTwWF4Xl4Wknj/yzZlKlwDM1LiuDW84p5BH0W/1MqhRYOoLla83cKeSNy01/y+miUmB3EksHGv8Y/a29i0qBI4RgI1h7C/IJ+lt7F5UC5xzBbrX2FuQT9Lf2LiqF+BmMfwbHgWJ3cfw5CEvfJD8FcVdY3ixUTrDkXTzGe3Fd2P26qOww92uGmaM4YnWRKmfAM8VssTs5QlrfgxR1VpEq/5mzilS5AauLVLkRq4pUuSHHRb4WlvMHlRtDkS/F85FrojIJlUmoTEJlEiqTUJmEyiRUJqEyh2H3Cz4WH1fC57RBAAAAAElFTkSuQmCC);
-        background-repeat:no-repeat;
-        font-family:'Segoe UI';
-        font-size:15px;
-        color:transparent;
-        overflow:hidden;
-        }
-        #nutrientContentsearch:focus
-        {
-        width:200px;
-        cursor:text;
-        padding-left:40px;
-        color:#A0A0A0;
-        }
-        #nutrientContentsearch:hover,#nutrientContentsearch:focus
-        {
-        background-color:#FFFFFF;
-        background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJTSURBVFiF7ZdNSxtRFIafM5PgJGqXxXy4DIziJhBdFLrwnyi4cym40S4ClkJ/g2B/Qv+BC0s3CtkIDWYZasWtXxEzebswQxGt3sk0Nou8cHfnPTycc+fOOSaJUZb3vwFe0hgwrcaAaTUGTKuRB8wMYrLZ2dxEd3rVPC2aqAoqBi0ZDfXs8DZzsad2++ZfAFrSP0m+NPdO4gtQeSasZcbK9c8f39PAQcIW50vzmxIHQEXQkGzdU2+pc6c3nnpLkq0LGkBF4iBfmt9MC+hcwX7lDgBhfOycTu5IR3ePElotGxSvthFbgJnxPlUlJb14KJdzQSE8CQqhgmJYd/EExbAeFEIFhfCEcjnn4nnqOLV4oju9Sr+tndPJHRdP53RyJ2533z+QnADN0yIAst2n2vqUpKM7ZLsP/EMDFFUAn+gwSfI4PvYPIidA9Z+U6641kySP4/X8k/Ss3CoILYB8RmGS5HF87B9EbhU0GgARfqK7FMfH/kHkBtiz+7tnWjOrZV08ZrUsprUH/mEB3mYu9oCWQTUoXm27eILi1bZBFWj1/cMDVLt9Y8YK0ENs5Upz9b9V0qyWzZXm6ogPAF6PjTSDQ6Jh4f5frE+AJ2gg2/WJDq+71sxnFEb4i5jW+pWL1fS7/vLl+fHZ0AHvId2mGa/HRs/jMxCmgUwMCO7z4NTbhZkoE+2ngRwIMInSQg595L88Pz7zu/4y0ATCKBPtT71dmHH1v8pOkgby1ZamR5DZ6KuL71W3uj+Q9k3SLxfP0D+StBr5vXgMmFZjwLQaA6bVyAP+BkJqfmMbSKF/AAAAAElFTkSuQmCC);
-        }
-        .div1
-        {
-        position:absolute;
-        left:0px;
-        top:45px;
-        width:50px;
-        height:5px;
+
+        #nutrientContentsearch {
+            left: 50%;
+            position: relative;
+            -webkit-transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-style: none;
+            border-radius: 20px;
+            padding: 10px;
+            background-color: #081925;
+            outline: none;
+            transition-duration: 500ms;
+            cursor: pointer;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjExR/NCNwAAAWpJREFUWEfNljFOxDAQRbehoKDnIjTcgYtwAHpOwhE4BA3Vig6Je9ABYZ60kZbVc5xkifRHelrleRzP2rGT3TAM0ahMQmUSKpNQmYTKJFQmoTIJlUmonMFlcV88FW/F5+GXazzt1m8xKjvcFh/FVNBOnvVfhMoJHorvgtgXzNZNcXX45RpPkEe+3Wc2KhswIwz6VTwWF4Xl4Wknj/yzZlKlwDM1LiuDW84p5BH0W/1MqhRYOoLla83cKeSNy01/y+miUmB3EksHGv8Y/a29i0qBI4RgI1h7C/IJ+lt7F5UC5xzBbrX2FuQT9Lf2LiqF+BmMfwbHgWJ3cfw5CEvfJD8FcVdY3ixUTrDkXTzGe3Fd2P26qOww92uGmaM4YnWRKmfAM8VssTs5QlrfgxR1VpEq/5mzilS5AauLVLkRq4pUuSHHRb4WlvMHlRtDkS/F85FrojIJlUmoTEJlEiqTUJmEyiRUJqEyh2H3Cz4WH1fC57RBAAAAAElFTkSuQmCC);
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI';
+            font-size: 15px;
+            color: transparent;
+            overflow: hidden;
         }
 
+        #nutrientContentsearch:focus {
+            width: 200px;
+            cursor: text;
+            padding-left: 40px;
+            color: #A0A0A0;
+        }
+
+        #nutrientContentsearch:hover,
+        #nutrientContentsearch:focus {
+            background-color: #FFFFFF;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJTSURBVFiF7ZdNSxtRFIafM5PgJGqXxXy4DIziJhBdFLrwnyi4cym40S4ClkJ/g2B/Qv+BC0s3CtkIDWYZasWtXxEzebswQxGt3sk0Nou8cHfnPTycc+fOOSaJUZb3vwFe0hgwrcaAaTUGTKuRB8wMYrLZ2dxEd3rVPC2aqAoqBi0ZDfXs8DZzsad2++ZfAFrSP0m+NPdO4gtQeSasZcbK9c8f39PAQcIW50vzmxIHQEXQkGzdU2+pc6c3nnpLkq0LGkBF4iBfmt9MC+hcwX7lDgBhfOycTu5IR3ePElotGxSvthFbgJnxPlUlJb14KJdzQSE8CQqhgmJYd/EExbAeFEIFhfCEcjnn4nnqOLV4oju9Sr+tndPJHRdP53RyJ2533z+QnADN0yIAst2n2vqUpKM7ZLsP/EMDFFUAn+gwSfI4PvYPIidA9Z+U6641kySP4/X8k/Ss3CoILYB8RmGS5HF87B9EbhU0GgARfqK7FMfH/kHkBtiz+7tnWjOrZV08ZrUsprUH/mEB3mYu9oCWQTUoXm27eILi1bZBFWj1/cMDVLt9Y8YK0ENs5Upz9b9V0qyWzZXm6ogPAF6PjTSDQ6Jh4f5frE+AJ2gg2/WJDq+71sxnFEb4i5jW+pWL1fS7/vLl+fHZ0AHvId2mGa/HRs/jMxCmgUwMCO7z4NTbhZkoE+2ngRwIMInSQg595L88Pz7zu/4y0ATCKBPtT71dmHH1v8pOkgby1ZamR5DZ6KuL71W3uj+Q9k3SLxfP0D+StBr5vXgMmFZjwLQaA6bVyAP+BkJqfmMbSKF/AAAAAElFTkSuQmCC);
+        }
+
+        .div1 {
+            position: absolute;
+            left: 0px;
+            top: 45px;
+            width: 50px;
+            height: 5px;
+        }
     </style>
-    <!-- 分析資料表 -->
+    <!-- 分析資料表 直線 -->
     <script>
-                const labels = [
-          'aaaa',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
+        const labels = [
+            'aaaa',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
         ];
-      
+
         const data = {
-          labels: labels,
-          datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [100, 10, 5, 2, 20, 30, 45],
-          }]
+            labels: labels,
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [100, 10, 5, 2, 20, 30, 45],
+            }]
         };
-      
+
         const config = {
-          type: 'line',
-          data: data,
-          options: {}
+            type: 'line',
+            data: data,
+            options: {}
         };
     </script>
-    
+    <!-- 分析資料表 圓餅 -->
+
+
     <link rel="stylesheet" href="./style/mystyle.css">
 </head>
 
@@ -299,9 +369,9 @@
     <!-- 整塊板子 -->
     <section>
         <div class="conatiner">
-            <div class="row">
+            <div class="row" style="margin: 0px;">
                 <!-- 畫面比例 :2 導覽nav-->
-                <div id="padleft" class="col-md-2 ">
+                <div id="padleft" class="col-md-2">
                     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark bg-gradient">
                         <a href="#"
                             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -311,28 +381,28 @@
                         <hr>
                         <ul class="nav nav-pills flex-column mb-auto btn  " id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white active bg-transparent" data-bs-toggle="pill"
+                                <a class="nav-link text-white active bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-home" role="tab" aria-controls="pills-home"
                                     aria-selected="true">
                                     <i class="fa-solid fa-house"></i>
-                                    首頁
+                                    <p style="display:inline-block ; text-align: center;width:120px;">首頁</p>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white bg-transparent" data-bs-toggle="pill"
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-menu" role="tab" aria-controls="pills-menu"
                                     aria-selected="false">
                                     <i class="fa-solid fa-utensils"></i>
-                                    菜單管理
+                                    <p style="display:inline-block ; text-align: center;width:120px;">菜單管理</p>
 
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white bg-transparent" data-bs-toggle="pill"
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-analyze" role="tab" aria-controls="pills-analyze"
                                     aria-selected="false">
                                     <i class="fa-solid fa-chart-line"></i>
-                                    分析資料
+                                    <p style="display:inline-block ; text-align: center;width:120px;">分析資料</p>
 
                                 </a>
                             </li>
@@ -344,35 +414,35 @@
                                 </a>
                             </li> -->
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white bg-transparent" data-bs-toggle="pill"
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-order" role="tab" aria-controls="pills-order"
                                     aria-selected="false">
                                     <i class="fa-solid fa-file-invoice"></i>
-                                    訂單管理
+                                    <p style="display:inline-block ; text-align: center;width:120px;">訂單管理</p>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white bg-transparent" data-bs-toggle="pill"
-                                    data-bs-target="#pills-nutrientContent" role="tab" aria-controls="pills-nutrientContent"
-                                    aria-selected="false">
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
+                                    data-bs-target="#pills-nutrientContent" role="tab"
+                                    aria-controls="pills-nutrientContent" aria-selected="false">
                                     <i class="fa-solid fa-magnifying-glass-chart"></i>
-                                    營養成份表
+                                    <p style="display:inline-block ; text-align: center;width:120px;">營養成份表</p>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white bg-transparent" data-bs-toggle="pill"
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-member" role="tab" aria-controls="pills-member"
                                     aria-selected="false">
                                     <i class="fa-solid fa-circle-user"></i>
-                                    顧客管理
+                                    <p style="display:inline-block ; text-align: center;width:120px;">顧客管理</p>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white bg-transparent" data-bs-toggle="pill"
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-broadcast" role="tab" aria-controls="pills-broadcast"
                                     aria-selected="false">
                                     <i class="fa-solid fa-file-invoice"></i>
-                                    廣播訊息設定
+                                    <p style="display:inline-block ; text-align: center;width:120px;">廣播訊息設定</p>
                                 </a>
                             </li>
                         </ul>
@@ -400,509 +470,482 @@
                 </div>
                 <!-- 畫面比例 :10 -->
                 <div id="padright" class="col-md-10">
-                    <div class="row" >
-                        <div id="Padright_navbar" class="col-md-12">
-                            <!--上頭nav bar-->
-                            <nav class="navbar navbar-light  justify-content-end">
-                                <ul class="nav justify-content-end">
+                    <div class="conatiner">
+                        <div>
+                            <div id="Padright_navbar" class="col-md-12">
+                                <!--上頭nav bar-->
+
+                                <nav class="navbar navbar-light  justify-content-end">
+                                    <ul class="nav justify-content-end">
+                                        <li class="nav-item">
+                                            <input type="checkbox" id="switch" class="switch-input" />
+                                            <label for="switch" class="switch"> </label>
+                                        </li>
                                         <!-- 聯絡資訊 -->
-                                    <li class="nav-item" >
-                                        <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="left"  title='聯絡資訊:aaa@gmail.com'></i>
-                                    </li>
-                                    <li class="nav-item">
-                                        <!-- 訂單提示 -->
-                                        <i class="fa-solid fa-bell"></i>
-                                    </li>
-                                    <li class="nav-item">
-                                        <!-- 寄信給我們 -->
-                                        <a href="mailto:xxx@gmail.com   " id="mailUs" > <i class="fa-solid fa-envelope" ></i></a>
-                                        
-                                    </li>
-                                    <li class="nav-item">
-                                        <!-- <a class="nav-link disabled">Disabled</a> -->
-                                        名悅便當店
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <!-- 首頁 -->
-                        <div class="col-md-12 tab-content" id="pills-tabContent">
-                            <div class="container tab-pane fade show active" id="pills-home" role="tabpanel"
-                                aria-labelledby="pills-home-tab">
-                                <div class="row tab-content">
-                                    <div class="col-md-3">
-                                        <img src="./img/Group 1.png">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <img src="./img/Group 2.png">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <img src="./img/Group 3.png">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <img src="./img/Group 4.png">
-                                    </div>
-                                </div>
-                                <div class="row" id="bulletinBoard" >
-                                    <img src="./img/Group 5.png" alt="">
-                                </div>
-                                <div class="row content"   >
-                                    <div class="col-md-6">
+                                        <li class="nav-item">
+                                            <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip"
+                                                data-bs-placement="left" title='聯絡資訊:aaa@gmail.com'></i>
+                                        </li>
+                                        <li class="nav-item">
+                                            <!-- 訂單提示 -->
+                                            <i class="fa-solid fa-bell"></i>
+                                        </li>
+                                        <li class="nav-item">
+                                            <!-- 寄信給我們 -->
+                                            <a href="mailto:xxx@gmail.com   " id="mailUs"> <i
+                                                    class="fa-solid fa-envelope"></i></a>
 
-                                        <img src="./img/Rectangle 11.png" 
-                                            alt="我不見了">
-
-                                    </div>
-                                    <div class="col-md-6">
-
-                                        <img src="./img/Rectangle 11.png" 
-                                            alt="我不見了">
-
-                                    </div>
-                                </div>
-                                <div class="row content"  >
-                                    <div class="col-md-6">
-
-                                        <img src="./img/Rectangle 11.png" 
-                                            alt="我不見了">
-
-                                    </div>
-                                    <div class="col-md-6">
-
-                                        <img src="./img/Rectangle 11.png" 
-                                            alt="我不見了">
-
-                                    </div>
-                                </div>
-
+                                        </li>
+                                        <li class="nav-item">
+                                            <!-- <a class="nav-link disabled">Disabled</a> -->
+                                            名悅便當店
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
-                            <!-- menu -->
-                            <div class="container tab-pane fade" id="pills-menu" role="tabpanel" aria-labelledby="pills-menu-tab">
-                                <div class="row tab-content" >
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class=" modal-header my-color1 my-menu-header" >
-                                                    <span class="modal-title my-title-css " id="exampleModalLabel">新增菜單</span>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div>
-                                                        <table class="my-menu-table">
-                                                            <tr>
-                                                                <th colspan="2">餐點名稱 :</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="2"><input type="text" class="my-input"  placeholder="輸入餐點名稱"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th colspan="2">餐點種類 :</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="2"><input type="text" class="my-input"  placeholder="輸入餐點種類" ></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th colspan="2">餐點圖檔 :</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="2"><input type="text" placeholder="上傳圖檔"><input type="image" ></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th colspan="2">售價 :</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="2"><input type="number"  placeholder="輸入售價"><span>TWD</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th colspan="2">餐點食材 :</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="2"><input type="text" class="my-input" placeholder="輸入餐點描述"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th colspan="2">食材克數 :</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="2"><input type="number"  placeholder="輸入克數"><span>g</span></td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                   
-                                                </div>
+                            <!-- 首頁 -->
+                            <div>
+                                <div class="col-md-12 tab-content" id="pills-tabContent">
+                                    <div class="container tab-pane fade show active" id="pills-home" role="tabpanel"
+                                        aria-labelledby="pills-home-tab">
+                                        <div id="quickLink" class="row tab-content">
+                                            <div class="col-md-3">
+                                                <img src="./img/Group 1.png">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <img src="./img/Group 2.png">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <img src="./img/Group 3.png">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <img src="./img/Group 4.png">
                                             </div>
                                         </div>
+                                        <div class="row" id="bulletinBoard">
+                                            <img src="./img/Group 5.png" alt="">
+                                        </div>
+                                        <div class="row content">
+                                            <div class="col-md-6">
+
+                                                <img src="./img/Rectangle 11.png" alt="我不見了">
+
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <img src="./img/Rectangle 11.png" alt="我不見了">
+
+                                            </div>
+                                        </div>
+                                        <div class="row content">
+                                            <div class="col-md-6">
+
+                                                <img src="./img/Rectangle 11.png" alt="我不見了">
+
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <img src="./img/Rectangle 11.png" alt="我不見了">
+
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <table  class="my-menu-table">
-                                        <tr>
-                                            <th colspan="7" class="my-menu-header">
-                                                <div>
-                                                    <div class="row">
-                                                        <div class="col-lg-2 col-2">
-                                                            <span class="my-title-css"> Menu</span>
+                                    <!-- menu -->
+                                    <div class="container tab-pane fade" id="pills-menu" role="tabpanel"
+                                        aria-labelledby="pills-menu-tab">
+                                        <div class="row tab-content">
+                                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class=" modal-header my-color1">
+                                                            <span class="modal-title my-title-css-2"
+                                                                id="exampleModalLabel">新增菜單</span>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="col-lg-5 col-2"></div>
-                                                        <div class="col-lg-5 col-8">
+                                                        <div class="modal-body">
+                                                            <div>
+                                                                <table class="">
+                                                                    <tr>
+                                                                        <th colspan="2">餐點名稱 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"><input type="text"
+                                                                                class="my-input" placeholder="輸入餐點名稱"
+                                                                                size="56"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">餐點種類 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"><input type="text"
+                                                                                class="my-input" placeholder="輸入餐點種類"
+                                                                                size="56"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">餐點圖檔 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <!--還不能上傳圖檔-->
+                                                                            <input type="button"
+                                                                                class="my-btn-color my-right-radius my-left-radius"
+                                                                                value="上傳" style="font-size: 10px;">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">售價 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"><span><input type="number"
+                                                                                    class="my-input" placeholder="輸入售價"
+                                                                                    size="56">TWD</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">餐點食材 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <textarea style="width: 466px" rows="2"
+                                                                                class="my-input"
+                                                                                placeholder="輸入食材"></textarea>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">食材克數 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"><input type="number"
+                                                                                class="my-input" placeholder="輸入克數"
+                                                                                size="56"><span>g</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">餐點描述 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <textarea style="width: 466px"
+                                                                                class="my-input" rows="4"
+                                                                                placeholder="輸入餐點描述"></textarea>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="myMenuTable">
+                                                <div class="container-fluid my-web-header">
+                                                    <div class="row">
+                                                        <div class=" col-7">
+                                                            <span class="my-title-css"><i
+                                                                    class="fa-solid fa-utensils"></i>
+                                                                菜單管理</span>
+                                                        </div>
+                                                        <!-- <div class=" col-5"></div> -->
+                                                        <div class="col-5">
                                                             <span>
-                                                                <div class="my-btn-box" >
-                                                                    <button type="button" class=" my-btn-color my-left-radius" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                        新增菜單 
+                                                                <div class="my-btn-box">
+                                                                    <button type="button"
+                                                                        class=" my-btn-color my-left-radius"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModal">
+                                                                        新增菜單
                                                                     </button>
                                                                     <button type="button" class=" my-btn-color">
                                                                         刪除
                                                                     </button>
-                                                                    <button type="button" class=" my-btn-color" >
+                                                                    <button type="button" class=" my-btn-color">
                                                                         修改
                                                                     </button>
-                                                                    <input type="text" class="my-search-css my-right-radius" placeholder="搜尋餐點">
-                                                                    <button type="submit" class=" my-btn-color my-btn-search my-right-radius">
+                                                                    <input type="text" id="searchMenu"
+                                                                        class="my-search-css my-right-radius"
+                                                                        placeholder="搜尋餐點">
+                                                                    <button type="submit" id="menuBtn"
+                                                                        class=" my-btn-color my-btn-search my-right-radius">
                                                                         <i class="fas fa-search"></i>
                                                                     </button>
                                                                 </div>
                                                             </span>
                                                         </div>
                                                     </div>
-                                               
-                                             
-                                                     
                                                 </div>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th></th>
-                                            <th>餐點名稱</th>
-                                            <th>餐點種類</th>
-                                            <th>餐點圖檔</th>
-                                            <th>售價</th>
-                                            <th>餐點食材</th>
-                                            <th>食材克數</th>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>雞腿便當</td>
-                                            <td>便當類</td>
-                                            <td>ＸＸＸＸＸＸ</td>
-                                            <td>100.00TWD</td>
-                                            <td>去骨雞腿肉;橄欖油;…</td>
-                                            <td>150.00g</td>
-                                        </tr>
-                            
-                                    </table>
-                                </div>
+                                                <table border="0" id="tableMenu">
+                                                    <thead>
 
-                            </div>
-                            <!-- order -->
-                            <div class="container tab-pane fade" id="pills-order" role="tabpanel" aria-labelledby="pills-order-tab">
-                                <div class="row tab-content">
-                                        <div class="conatiner" >
-                                        <div class=" bg-gradient">
-                                        <div class="row" >
-                                          <div class="col-md-12">
-                                            <h1 class="display-1">訂單管理</h1>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-md-4" >
-                                            <span><a href="#">全部</a>|<a href="#">未確認訂單</a>|<a href="#">訂單製作中</a>|<a href="#">已完成訂單</a></span>
-                                          </div>
-                                          <div class="col-md-8  text-end">
-                                            
-                                            <button >搜尋訂單</button><input  type="text" >
-                                          </div>
-                                        </div>
-                                        <hr>
-                                    <div class="col-md-12 pt-2" >
-                                      <!--餐點名稱 會員編號 餐點數量  餐點金額 訂單狀態-->
-                                      <div id="orderDiv" >
-                                        <table class="table table-hover table-light" >
-                                          <thead class="">
-                                            <tr>
-                                              <th scope="col"></th>
-                                              <th scope="col">訂單狀態</th>
-                                              <th scope="col">會員編號</th>
-                                              <th scope="col">餐點名稱/餐點數量</th>
-                                              <th scope="col">餐點總計金額</th>
-                                              <th scope="col">訂單建立時間</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <th scope="row"><input type="checkbox" name="" id=""></th>
-                                              <th>未確認訂單</th>
-                                              <td>1</td>
-                                              <td>雞肉飯*6</td>
-                                              <td>100</td>
-                                              <td>年/月/日</td>
-                                            </tr>
-                                            <tr>
-                                              <th scope="row"><input type="checkbox" name="" id=""></th>
-                                              <th>訂單製作中</th>
-                                              <td>2</td>
-                                              <td>排骨麵*8</td>
-                                              <td>200</td>
-                                              <td>年/月/日</td>
-                                            </tr>
-                                            <tr>
-                                              <th scope="row"><input type="checkbox" name="" id=""></th>
-                                              <th>訂單完成</th>
-                                              <td>3</td>
-                                              <td>排骨飯*3</td>
-                                              <td>300</td>
-                                              <td>年/月/日</td>
-                                            </tr>
-                                          </tbody>
-                                          <tfoot>
-                                            <tr>
-                                              <th scope="col"></th>
-                                              <th scope="col">訂單狀態</th>
-                                              <th scope="col">會員編號</th>
-                                              <th scope="col">餐點名稱/餐點數量</th>
-                                              <th scope="col">餐點金額</th>
-                                              <th scope="col">訂單建立時間</th>
-                                            </tr>
-                                          </tfoot>
-                                        </table>
-                                          </div>
-                                        </div>
-                                      </div>
-                                  
-                                  
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>餐點名稱</th>
+                                                            <th>餐點種類</th>
+                                                            <th>餐點圖檔</th>
+                                                            <th>售價</th>
+                                                            <th>餐點食材</th>
+                                                            <th>食材克數</th>
+                                                        </tr>
 
-                                  
-                                      </div>
-                                </div>
-                            </div>
-                            <!-- broadcast -->
-                            <div class="container tab-pane fade" id="pills-broadcast" role="tabpanel" aria-labelledby="pills-broadcast-tab">
-                                <h1 class="display-2">廣播訊息設定</h1>
-                                <div class="text-top" >
-                                    <div class="form-floating" >
-                                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" ></textarea>
-                                        <label for="floatingTextarea">請輸入廣播訊息</label>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <hr>
-                                    <div >
-                                        <pre>折扣卷：</pre><button class="btn btn-outline-secondary">加入一張折扣卷</button><br>
-                                        <pre>商品　：</pre><button class="btn btn-outline-secondary">加入一張商品</button>
-                                    </div>
-                                    <div class="input-group mb-3" >
-                                        <label class="input-group-text" for="inputGroupFile01">上傳圖片</label>
-                                        <input type="file" class="form-control" id="inputGroupFile01">
-                                      </div>
-                                    <div><button class="btn btn-secondary">送出</button></div>
-                                </div>
-                                    
-                            </div >
-                            <!-- member -->
-                            <div class="container tab-pane fade" id="pills-member" role="tabpanel" aria-labelledby="pills-member-tab">
-                                <div>
-                                    <table class="my-menu-table">
-                                        <tr>
-                                            <th colspan="7" class="my-menu-header">
-                                                <div>
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <span  class="my-title-css"> 顧客管理</span>
+                                    <!-- order -->
+                                    <div class="container tab-pane fade" id="pills-order" role="tabpanel"
+                                        aria-labelledby="pills-order-tab">
+                                        <div class="row tab-content">
+                                            <div class="conatiner">
+                                                <div class=" bg-gradient">
+                                                    <div style="padding-top:75px ;">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h1 style="color:rgb(34, 46, 60)white;"><i class="fa-solid fa-file-invoice"></i>訂單管理</h1>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-4"></div>
-                                                        <div class="col-4">
-                                                            <input type="text" class="my-left-radius my-search-css" placeholder="搜尋餐點">
-                                                            <button type="submit" class=" my-btn-color my-btn-search  my-right-radius">
-                                                                <i class="fas fa-search"></i>
-                                                            </button>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <span style="color:rgb(34, 46, 60);"><a href="#" class="link-dark">全部</a>|<a href="#"
+                                                                        class="link-dark">未確認訂單</a>|<a href="#"
+                                                                        class="link-dark">訂單製作中</a>|<a href="#"
+                                                                        class="link-dark">已完成訂單</a></span>
+                                                            </div>
+                                                            <div class="col-md-8  text-end" style="padding-right :50px; ;">
+                                                                <button class="btn btn-outline-secondary" >刪除</button>|<button class="btn btn-outline-secondary">修改</button>
+                                                                <input type="text" style="width: 150px;display:inline;" class="form-control" placeholder="請輸入" aria-label="Example text with button addon" aria-describedby="button-addon1" >
+                                                                <button class="btn btn-outline-secondary" type="button" id="button-addon1">搜尋</button>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-12 pt-2">
+                                                        <!--餐點名稱 會員編號 餐點數量  餐點金額 訂單狀態-->
+                                                        <div id="orderDiv">
+                                                            <table class="table table-hover table-light">
+                                                                <thead class="table-dark">
+                                                                    <tr>
+                                                                        <th scope="col"></th>
+                                                                        <th scope="col">訂單狀態</th>
+                                                                        <th scope="col">會員編號</th>
+                                                                        <th scope="col">餐點名稱/餐點數量</th>
+                                                                        <th scope="col">餐點總計金額</th>
+                                                                        <th scope="col">訂單建立時間</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td scope="row"><input type="checkbox" name=""
+                                                                                id="">
+                                                                        </td>
+                                                                        <td>未確認訂單</td>
+                                                                        <td>1</td>
+                                                                        <td>雞肉飯*6</td>
+                                                                        <td>100</td>
+                                                                        <td>年/月/日</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td scope="row"><input type="checkbox" name=""
+                                                                                id="">
+                                                                        </td>
+                                                                        <td>已確認訂單</td>
+                                                                        <td>2</td>
+                                                                        <td>排骨麵*8</td>
+                                                                        <td>200</td>
+                                                                        <td>年/月/日</td>
+                                                                    </tr>
+                                                                </tbody>
+
+                                                            </table>
+                                                            <table class="table table-hover table-light">
+                                                                <thead class="table-dark">
+                                                                    <tr>
+                                                                        <th scope="col"></th>
+                                                                        <th scope="col">訂單狀態</th>
+                                                                        <th scope="col">會員編號</th>
+                                                                        <th scope="col">餐點名稱/餐點數量</th>
+                                                                        <th scope="col">餐點總計金額</th>
+                                                                        <th scope="col">訂單建立時間</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td scope="row"><input type="checkbox" name=""
+                                                                                id="">
+                                                                        </td>
+                                                                        <td>取消訂單</td>
+                                                                        <td>1</td>
+                                                                        <td>雞肉飯*6</td>
+                                                                        <td>100</td>
+                                                                        <td>年/月/日</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td scope="row"><input type="checkbox" name=""
+                                                                                id="">
+                                                                        </td>
+                                                                        <td>完成訂單 </td>
+                                                                        <td>2</td>
+                                                                        <td>排骨麵*8</td>
+                                                                        <td>200</td>
+                                                                        <td>年/月/日</td>
+                                                                    </tr>
+                                                                </tbody>
+
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th>會員編號</th>
-                                            <th>姓名</th>
-                                            <th>性別</th>
-                                            <th>電話</th>
-                                            <th>電子郵件</th>
-                                            <th>生日</th>
-                                            <th>年齡</th>
-                                            <!-- <th>地址</th> -->
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>M2022040001</td>
-                                            <td>郭哲嘉</td>
-                                            <td>M</td>
-                                            <td>0912345678</td>
-                                            <td>maxkuo712@gmail.com</td>
-                                            <td>2022/5/2</td>
-                                            <td>28</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            
-                            </div>
-                            <!-- nutrientContent -->
-                            <div class="container tab-pane fade" id="pills-nutrientContent" role="tabpanel" aria-labelledby="pills-nutrientContent-tab">
-                                <h1 class="display-2">營養成分表</h1>
-                                <div>
-                                    <input id="nutrientContentsearch"><div class="div1"></div></input>
-                                    <!-- <input type="submit"  onclick="b()" value="確認"> -->
-                                </div>
-                                
-                                <table class="table table-dark table-hover" id="nutrientContenttable">
-                                <thead>
-                                    <tr>
-                                        <th>俗名</th>
-                                        <th>食材分類</th>
-                                        <th>食材描述</th>
-                                        <th>熱量</th>
-                                        <th>碳水化合物</th>
-                                        <th>脂肪</th>
-                                        <th>蛋白質</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="nutrientContenttabletbody">
 
-                                </tbody>
-                                <tfoot>
-                                    
-                                    <tr></tr>
 
-                                    <tr></tr>
-                                </tfoot>
-                                </table>
-                            </div>
-                            <!-- analyze -->
-                            <div class="container tab-pane fade" id="pills-analyze" role="tabpanel" aria-labelledby="pills-analyze-tab">
-                                <div>
-                                    <canvas id="myChart"></canvas>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- broadcast -->
+                                    <div class="container tab-pane fade" id="pills-broadcast" role="tabpanel"
+                                        aria-labelledby="pills-broadcast-tab">
+                                        <h1 class="display-2">廣播訊息設定</h1>
+                                        <div class="text-top">
+                                            <div class="form-floating">
+                                                <textarea class="form-control" placeholder="Leave a comment here"
+                                                    id="floatingTextarea"></textarea>
+                                                <label for="floatingTextarea">請輸入廣播訊息</label>
+                                            </div>
+                                            <hr>
+                                            <div>
+                                                <pre>折扣卷：</pre><button
+                                                    class="btn btn-outline-secondary">加入一張折扣卷</button><br>
+                                                <pre>商品　：</pre><button class="btn btn-outline-secondary">加入一張商品</button>
+                                            </div>
+                                            <div id="myDiv">
+                                                <label for="upload">選擇上傳圖檔</label>
+
+                                                <!-- 選取圖片的 input -->
+                                                <input id="upload" type="file" accept="image/*">
+                                                <p id="url"></p>
+                                                <img id="showImg" src="" referrerpolicy="no-referrer">
+
+                                                <!-- 上傳按鈕 -->
+                                            </div>
+                                            <div><button class="btn btn-secondary" id="myBtn" type="button">送出</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- member -->
+                                    <div class="container tab-pane fade" id="pills-member" role="tabpanel"
+                                        aria-labelledby="pills-member-tab">
+
+                                        <div class="container-fluid my-web-header">
+                                            <div class="row">
+                                                <div class=" col-9">
+                                                    <span class="my-title-css">
+                                                        <i class="fa-solid fa-circle-user"></i>
+                                                        顧客管理
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <span>
+                                                        <div class="my-search-box">
+                                                            <input type="text" id="searchMember"
+                                                                class="my-left-radius my-search-css"
+                                                                placeholder="搜尋顧客資訊">
+                                                            <button type="submit" id="memberBtn"
+                                                                class=" my-btn-color my-btn-search  my-right-radius">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <table id="tableMember">
+                                                <thead>
+                                                    <tr>
+                                                        <th>會員編號</th>
+                                                        <th>姓名</th>
+                                                        <th>性別</th>
+                                                        <th>電話</th>
+                                                        <th>電子郵件</th>
+                                                        <th>生日</th>
+                                                        <th>年齡</th>
+                                                        <!-- <th>地址</th> -->
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- nutrientContent -->
+                                    <div class="container tab-pane fade" id="pills-nutrientContent" role="tabpanel"
+                                        aria-labelledby="pills-nutrientContent-tab">
+                                        <h1><i class="fa-solid fa-magnifying-glass-chart"></i>營養成分表</h1>
+                                        <div>
+                                            <input id="nutrientContentsearch">
+                                            <div class="div1"></div></input>
+                                            <!-- <input type="submit"  onclick="b()" value="確認"> -->
+                                        </div>
+
+                                        <table class="table table-dark table-hover" id="nutrientContenttable">
+                                            <thead >
+                                                <tr>
+                                                    <th>俗名</th>
+                                                    <th>食材分類</th>
+                                                    <th>食材描述</th>
+                                                    <th>熱量</th>
+                                                    <th>碳水化合物</th>
+                                                    <th>脂肪</th>
+                                                    <th>蛋白質</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="nutrientContenttabletbody" class="table-light">
+
+                                            </tbody>
+                                            <tfoot >
+
+                                                <tr></tr>
+
+                                                <tr></tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- analyze -->
+                                    <div class="container tab-pane fade" id="pills-analyze" role="tabpanel"
+                                        aria-labelledby="pills-analyze-tab">
+                                        <div class="row">
+                                            <div class="col-md-6" style="width: 600px;margin-top: 75px;">
+                                                <canvas id="Chart1" style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-6" style="width: 600px;margin-top: 75px;">
+                                                <canvas id="Chart2" style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-6"
+                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                <canvas id="Chart3"
+                                                    style="background-color: rgb(128, 136, 201);"></canvas>
+                                            </div>
+                                            <div class="col-md-6"
+                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                <canvas id="Chart4"
+                                                    style="background-color: rgb(128, 136, 201);"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -910,83 +953,133 @@
             </div>
         </div>
         </div>
-         </section>
-        <script>
-            // var URL="https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=wxV177kLhEE3"
-            // var a= function test(){
-            //     $.ajax({
-            //         url:URL,
-            //         type:"get",
-            //         success:doSuccess,
-            //         error:doError
-            //     })
-            // }();
-            // function doSuccess(json){
-            //     var jsonObj =$.parseJSON(json)
-            // 		$('#table').empty();
-            // 		$(json).each(
-            // 			function(i,val){
-            // 				console.log(val.ID + ":" + val.fname);
-    
-            // 			}
-            // 		);
-            // 	}
-            // function doError(){
-            //     console.log("no")
-            // }
-            $("#nutrientContentsearch").keyup(function () {
-                    //將輸入值轉為小寫去除空格
-                    var keyword = this.value.toLowerCase().trim();
+        </div>
+    </section>
+    <script src="./app/app.js"></script>
+    <script src="./app/myscript.js"></script>
+    <script>
+        // var URL="https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=wxV177kLhEE3"
+        // var a= function test(){
+        //     $.ajax({
+        //         url:URL,
+        //         type:"get",
+        //         success:doSuccess,
+        //         error:doError
+        //     })
+        // }();
+        // function doSuccess(json){
+        //     var jsonObj =$.parseJSON(json)
+        // 		$('#table').empty();
+        // 		$(json).each(
+        // 			function(i,val){
+        // 				console.log(val.ID + ":" + val.fname);
 
-                    $("table tr").each(function (index) {
-                        if (!index) return;
-                        $(this).find("td").each(function () {
-                            var id = $(this).text().toLowerCase().trim();
-                            var unfound = (id.indexOf(keyword) == -1);
-                            //.closest由tr開始搜尋/tr結束
-                            //.toggle()=>hide()、show切換
-                            $(this).closest('tr').toggle(!unfound);
-                            return unfound;
-                        });
-                    });
+        // 			}
+        // 		);
+        // 	}
+        // function doError(){
+        //     console.log("no")
+        // }
+        $("#nutrientContentsearch").keyup(function () {
+            //將輸入值轉為小寫去除空格
+            var keyword = this.value.toLowerCase().trim();
+
+            $("table tr").each(function (index) {
+                if (!index) return;
+                $(this).find("td").each(function () {
+                    var id = $(this).text().toLowerCase().trim();
+                    var unfound = (id.indexOf(keyword) == -1);
+                    //.closest由tr開始搜尋/tr結束
+                    //.toggle()=>hide()、show切換
+                    $(this).closest('tr').toggle(!unfound);
+                    return unfound;
                 });
-                var b=function (){
-                    $.ajax("./Jsontest.json")//toarry
-                    .done(function (apple) {
-                        for (var a of apple) {
-                            console.log($('#nutrientContentsearch').val())
-                                $('#nutrientContenttabletbody').append(
-                                '<tr>' +
+            });
+        });
+        var b = function () {
+            $.ajax("./Jsontest.json")//toarry
+                .done(function (apple) {
+                    for (var a of apple) {
+                        console.log($('#nutrientContentsearch').val())
+                        $('#nutrientContenttabletbody').append(
+                            '<tr>' +
 
-                                '<td>' + `${a.INGREDIENT_NAME}` + '</td>' + 
-                                '<td>' + `${a.INGREDIENT_CATEGORY}` + '</td>' + 
-                                '<td>' + `${a.INGREDIENT_DESC}` + '</td>' + 
-                                '<td>' + `${a.CALORIE}` + 'kcal</td>' + 
-                                '<td>' + `${a.CARB}` + 'g</td>' + 
-                                '<td>' + `${a.FAT}` + 'g</td>' + 
-                                '<td>' + `${a.PROTEIN}` + 'g</td>' + 
-                                '</tr>'
-                                )
-                            
-                            
-                        }
-                    })
-                    .fail(function () {
-                        alert("error");
-                    })
-                    // .always(function () {
-                    //     alert("complete");
-                    // });
-                }();
-                /*畫分析圖表*/
-                const myChart = new Chart(
-                  document.getElementById('myChart'),
-                  config
-                );
-            
-            
-        
-        </script>
+                            '<td>' + `${a.INGREDIENT_NAME}` + '</td>' +
+                            '<td>' + `${a.INGREDIENT_CATEGORY}` + '</td>' +
+                            '<td>' + `${a.INGREDIENT_DESC}` + '</td>' +
+                            '<td>' + `${a.CALORIE}` + 'kcal</td>' +
+                            '<td>' + `${a.CARB}` + 'g</td>' +
+                            '<td>' + `${a.FAT}` + 'g</td>' +
+                            '<td>' + `${a.PROTEIN}` + 'g</td>' +
+                            '</tr>'
+                        )
+
+
+                    }
+                })
+                .fail(function () {
+                    alert("error");
+                })
+            // .always(function () {
+            //     alert("complete");
+            // });
+        }();
+        /*畫分析圖表*/
+        const Chart1 = new Chart(
+            document.getElementById('Chart1'),
+            config
+        );
+        const Chart2 = new Chart(
+            document.getElementById('Chart2'),
+            config
+        );
+        let chart3 = new Chart(document.getElementById('Chart3'), {
+            type: 'pie', //圖表類型
+            data: {
+                labels: [ //圓餅圖的每一塊，分別叫做什麼名字
+                    '台北', //第一塊名字
+                    '台中', //第二塊名字
+                    '高雄'
+                ],
+                datasets: [{
+                    label: '三都人口', //這些資料都是在講什麼，也就是data 300 500 100是什麼
+                    data: [300, 50, 100], //每一塊的資料分別是什麼，台北：300、台中：50..
+                    backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ],
+                    hoverOffset: 4
+                }]
+            }, //設定圖表資料
+            options: {} //圖表的一些其他設定，像是hover時外匡加粗
+        })
+
+        let chart = new Chart(document.getElementById('Chart4'), {
+            type: 'pie', //圖表類型
+            data: {
+                labels: [ //圓餅圖的每一塊，分別叫做什麼名字
+                    '台北', //第一塊名字
+                    '台中', //第二塊名字
+                    '高雄'
+                ],
+                datasets: [{
+                    label: '三都人口', //這些資料都是在講什麼，也就是data 300 500 100是什麼
+                    data: [300, 50, 100], //每一塊的資料分別是什麼，台北：300、台中：50..
+                    backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ],
+                    hoverOffset: 4
+                }]
+            }, //設定圖表資料
+            options: {} //圖表的一些其他設定，像是hover時外匡加粗
+        })
+        /*讀取*/
+
+
+    </script>
 
 </body>
 
