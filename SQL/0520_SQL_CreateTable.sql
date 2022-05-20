@@ -64,6 +64,9 @@ create table STORE_INFO (
 	CONSTRAINT CHK_STORE_MAIL CHECK (STORE_MAIL REGEXP '[a-zA-Z0-9_\-]+@([a-zA-Z0-9_\-]+\.)+(com|org|edu)' = 1)
 );
 
+insert STORE_INFO (STORE_NAME, STORE_ADDRESS, STORE_PHONE, STORE_MAIL, STORE_LOCATION, STORE_OPEN_STATUS, CREATE_ID)
+values ('Order Hippo', '408台中市南屯區公益路二段51號', '091234569', 'eeit42orderhippo@gmail.com', '24.1505311,120.6488196', false, 'Admin')
+
 select * from STORE_INFO
 
 delete from STORE_INFO
@@ -78,6 +81,23 @@ create table MEAL_CATEGORY (
 	MEAL_CATEGORY_NAME varchar(100) UNIQUE not null,
 	MEAL_CATEGORY_DESC LONGTEXT not null
 );
+
+insert MEAL_CATEGORY (MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, MEAL_CATEGORY_DESC)
+values ('HOTMEAL', '熱門餐點', '熱門餐點')
+
+insert MEAL_CATEGORY (MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, MEAL_CATEGORY_DESC)
+values ('HEALTHMEAL', '健康餐盒', '健康餐盒')
+
+insert MEAL_CATEGORY (MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, MEAL_CATEGORY_DESC)
+values ('SALAD', '沙拉', '沙拉')
+
+insert MEAL_CATEGORY (MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, MEAL_CATEGORY_DESC)
+values ('PASTA', '麵食', '麵食')
+
+insert MEAL_CATEGORY (MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, MEAL_CATEGORY_DESC)
+values ('DRINK', '飲料', '飲料')
+
+select * from MEAL_CATEGORY mc 
 
 drop table MEAL_CATEGORY;
 
