@@ -35,6 +35,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public OrdersBean getOrderByOrderId(String orderId) {
 		List<OrdersBean> result = ordersRepository.findByOrderid(orderId);
+		
 		if (result.size() > 0) {
 			return result.get(0);
 		}
@@ -53,10 +54,10 @@ public class OrdersServicelmp implements OrdersService {
 	
 	// By StoreID 搜尋
 	@Override
-	public OrdersBean getOrderByStoreid(String storeid) {
+	public List<OrdersBean> getOrderByStoreid(String storeid) {
 		List<OrdersBean> result = ordersRepository.findByStoreid(storeid);
 		if (result.size() > 0) {
-			return result.get(0);
+			return result;
 		}
 		return null;
 	}
@@ -73,10 +74,11 @@ public class OrdersServicelmp implements OrdersService {
 
 	// By USER_ID 搜尋
 	@Override
-	public OrdersBean getOrderByUserid(String userid) {
+	public List<OrdersBean> getOrderByUserid(String userid) {
 		List<OrdersBean> result = ordersRepository.findByUserid(userid);
+		
 		if (result.size() > 0) {
-			return result.get(0);
+			return result;
 		}
 		return null;
 	}

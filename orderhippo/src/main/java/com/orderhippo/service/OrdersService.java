@@ -18,13 +18,13 @@ public interface OrdersService {
 	public List<OrdersBean> getOrderByOrderidAndOrderstatus(String orderid, String orderstatus);
 	
 	// By StoreID 搜尋
-	public OrdersBean getOrderByStoreid(String storeid);
+	public List<OrdersBean> getOrderByStoreid(String storeid);
 	
 	// By StoreID + ORDER_STATUS 搜尋
 	public List<OrdersBean> getOrderByStoreIDAndOrderStatus(String storeid, String orderstatus);
 	
 	// By USER_ID 搜尋
-	public OrdersBean getOrderByUserid(String userid);
+	public List<OrdersBean> getOrderByUserid(String userid);
 	
 	// By USER_ID + ORDER_STATUS 搜尋
 	public List<OrdersBean> getOrderByUseridAndOrderstatus(String userid, String orderstatus);
