@@ -33,7 +33,7 @@ public class UserController {
 	@Autowired 
 	private UserInfoService userInfoService;
 	
-	@ApiOperation("查詢所有使用者資料")
+	@ApiOperation("查詢使用者資料")
 	@ApiResponses({
 		@ApiResponse(code = 401, message = "沒有權限"),
 		@ApiResponse(code = 404, message = "找不到路徑")

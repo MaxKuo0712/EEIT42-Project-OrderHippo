@@ -24,8 +24,10 @@ public class UserInfoServiceImp implements UserInfoService {
 		List<UserInfoBean> userInfo = userInfoRepository.findByUserid(userInfoBean.getUserid());
 		
 		if (userInfo.size() == 0) {
-			userInfoRepository.save(userInfoBean);
-			return true;
+			UserInfoBean result = userInfoRepository.save(userInfoBean);
+			if (result != null) {
+				return true;
+			}
 		}
 		return false;
 	}
