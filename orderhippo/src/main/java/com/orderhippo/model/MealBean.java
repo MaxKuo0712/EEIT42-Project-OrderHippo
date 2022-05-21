@@ -51,7 +51,7 @@ public class MealBean {
 	private String mealimage;
 	
 	@JsonProperty("MEAL_DESC")
-	@Column(name = "MEAL_DESC", length = 2147483647)
+	@Column(name = "MEAL_DESC", columnDefinition = "LONGTEXT")
 	private String mealdesc;
 	
 	@JsonProperty("MEAL_PRICE")

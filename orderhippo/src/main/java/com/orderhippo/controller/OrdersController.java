@@ -46,8 +46,10 @@ public class OrdersController {
 			return ordersService.getOrderByStoreid(storeId);
 		} else if (userId != null && userId.trim().length() != 0) {
 			return ordersService.getOrderByUserid(userId);
-		} else {
+		} else if (orderId != null && orderId.trim().length() != 0) {
 			return ordersService.getOrderByOrderId(orderId);
+		} else {
+			return null;
 		}
 	}
 	
