@@ -60,7 +60,7 @@ public class OrdersController {
 			@RequestParam(name = "storeid", required = false) String storeId, 
 			@RequestParam(name = "userid", required = false) String userId, 
 			@RequestParam(name = "orderstatus", required = true) String orderStatus) {
-		if (Integer.parseInt(orderStatus) >= 0 && Integer.parseInt(orderStatus) <= 4) {
+		if (Integer.parseInt(orderStatus) >= 0 && Integer.parseInt(orderStatus) <= 3) {
 			if (storeId != null && storeId.trim().length() != 0) {
 				return ordersService.getOrderByStoreIDAndOrderStatus(storeId, orderStatus);
 			} else if (userId != null && userId.trim().length() != 0) {
@@ -78,7 +78,7 @@ public class OrdersController {
 	@ApiOperation("新增單筆訂單資料")
 	@PostMapping("/order")
 	public boolean addOrder(@RequestBody OrdersBean ordersBean) {
-		if ((ordersBean != null) && (ordersBean.getOrderstatus() >= 0 && ordersBean.getOrderstatus() <= 4)) {
+		if ((ordersBean != null) && (ordersBean.getOrderstatus() >= 0 && ordersBean.getOrderstatus() <= 3)) {
 			return ordersService.addOrder(ordersBean); 
 		}
 		return false;
