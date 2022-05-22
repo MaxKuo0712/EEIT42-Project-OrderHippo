@@ -66,9 +66,9 @@ public class MealServicelmp implements MealService {
 	}
 
 	@Override
-	public Object deleteMeal(String mealId) {
+	public boolean deleteMeal(String mealId) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
