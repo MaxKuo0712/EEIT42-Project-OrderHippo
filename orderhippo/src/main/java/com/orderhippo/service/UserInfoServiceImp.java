@@ -95,23 +95,44 @@ public class UserInfoServiceImp implements UserInfoService {
 //		}
 //	}
 	// 更新單筆使用者資料
+//	@Override
+//	public boolean updateUserInfo(String reviseId, String userid, UserInfoBean userInfoBean) {
+//		List<UserInfoBean> userInfo = userInfoRepository.findByUserid(userid);
+//		
+//		if (userInfo.size() == 1) {
+//			UserInfoBean currentUserInfo = userInfo.get(0);
+//			
+//			userInfoBean.setId(currentUserInfo.getId());
+//			userInfoBean.setUserid(userid);
+//			if (userInfoBean.getUsername() == null) userInfoBean.setUsername(currentUserInfo.getUsername());
+//			if (userInfoBean.getUsergender() == null) userInfoBean.setUsergender(currentUserInfo.getUsergender());
+//			if (userInfoBean.getUserphone() == null) userInfoBean.setUserphone(currentUserInfo.getUserphone());
+//			if (userInfoBean.getUsermail() == null) userInfoBean.setUsermail(currentUserInfo.getUsermail());
+//			if (userInfoBean.getUserbirth() == null) userInfoBean.setUserbirth(currentUserInfo.getUserbirth());
+//			if (userInfoBean.getUserage() == null) userInfoBean.setUserage(currentUserInfo.getUserage());
+//			if (userInfoBean.getUseraddress() == null) userInfoBean.setUseraddress(currentUserInfo.getUseraddress());
+//			if (userInfoBean.getLastlogintime() == null) userInfoBean.setLastlogintime(currentUserInfo.getLastlogintime());
+//			userInfoBean.setReviseid(reviseId);
+//			userInfoBean.setRevisetime(new Date());
+//
+//			userInfoRepository.save(userInfoBean);
+//			
+//			return true;
+//		} 
+//		return false;
+//	}
+	// 更新單筆使用者資料
 	@Override
 	public boolean updateUserInfo(String reviseId, String userid, UserInfoBean userInfoBean) {
-		List<UserInfoBean> userInfo = userInfoRepository.findByUserid(userid);
+		System.out.println(userInfoBean.toString());
+		List<UserInfoBean> userInfo = userInfoRepository.findByUsermail(userInfoBean.getUsermail());
 		
 		if (userInfo.size() == 1) {
 			UserInfoBean currentUserInfo = userInfo.get(0);
 			
 			userInfoBean.setId(currentUserInfo.getId());
 			userInfoBean.setUserid(userid);
-			if (userInfoBean.getUsername() == null) userInfoBean.setUsername(currentUserInfo.getUsername());
-			if (userInfoBean.getUsergender() == null) userInfoBean.setUsergender(currentUserInfo.getUsergender());
-			if (userInfoBean.getUserphone() == null) userInfoBean.setUserphone(currentUserInfo.getUserphone());
-			if (userInfoBean.getUsermail() == null) userInfoBean.setUsermail(currentUserInfo.getUsermail());
-			if (userInfoBean.getUserbirth() == null) userInfoBean.setUserbirth(currentUserInfo.getUserbirth());
-			if (userInfoBean.getUserage() == null) userInfoBean.setUserage(currentUserInfo.getUserage());
-			if (userInfoBean.getUseraddress() == null) userInfoBean.setUseraddress(currentUserInfo.getUseraddress());
-			if (userInfoBean.getLastlogintime() == null) userInfoBean.setLastlogintime(currentUserInfo.getLastlogintime());
+			userInfoBean.setLastlogintime(new Date());
 			userInfoBean.setReviseid(reviseId);
 			userInfoBean.setRevisetime(new Date());
 
