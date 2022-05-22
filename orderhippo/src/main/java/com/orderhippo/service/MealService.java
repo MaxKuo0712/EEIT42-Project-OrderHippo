@@ -22,7 +22,7 @@ public interface MealService {
 	public List<MealBean> getMealByStoreID(String storeId);
 	
 	// 修改單筆餐點
-	public Object updateMeal(String reviseId, String mealId, MealBean mealBean);
+	public boolean updateMeal(String reviseId, MealBean mealBean);
 	
 	// 刪除單筆餐點
 	public Object deleteMeal(String mealId);

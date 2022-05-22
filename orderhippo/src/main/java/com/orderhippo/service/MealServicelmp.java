@@ -1,5 +1,6 @@
 package com.orderhippo.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,26 @@ public class MealServicelmp implements MealService {
 	}
 
 	@Override
-	public Object updateMeal(String reviseId, String mealId, MealBean mealBean) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean updateMeal(String reviseId, MealBean mealBean) {
+		List<MealBean> meal = mealRepository.findByMealid(mealBean.getMealid());
+		
+		if (meal.size() == 1) {
+			MealBean currentMeal = meal.get(0);
+			
+			mealBean.setStoreid(currentMeal.getStoreid());
+			mealBean.setReviseid(reviseId);
+			mealBean.setRevisetime(new Date());
+			
+			try {
+				mealRepository.save(mealBean);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
+		return false;
 	}
 
 	@Override
