@@ -53,10 +53,9 @@ function userMailLogin(e) {
             const user = userCredential.user;
             const userName = user.displayName;
             const userMailVerified = auth.currentUser.emailVerified;
-                let REVISE_ID = auth.currentUser.uid;
-                let USER_ID = auth.currentUser.uid;
-                let LAST_LOGININ_TIME = new Date();
-                const userLoginInfo = {LAST_LOGININ_TIME};
+            let REVISE_ID = auth.currentUser.uid;
+            let USER_ID = auth.currentUser.uid;
+            const userLoginInfo = {LAST_LOGININ_TIME};
             if (userMailVerified === false) {
                 Swal.fire({
                     icon: 'warning',
@@ -69,7 +68,7 @@ function userMailLogin(e) {
                 let USER_ID = auth.currentUser.uid;
                 let LAST_LOGININ_TIME = new Date();
                 const userLoginInfo = {LAST_LOGININ_TIME};
-                fetch(`http://localhost:8080/api/users/${REVISE_ID}/${USER_ID}`, {
+                fetch(`http://localhost:8080/api/users/${REVISE_ID}`, {
                     method: "PUT",
                     headers: {"content-Type":"application/json"},
                     body:JSON.stringify(userLoginInfo)

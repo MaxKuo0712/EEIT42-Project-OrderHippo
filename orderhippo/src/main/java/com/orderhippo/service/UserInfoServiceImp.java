@@ -134,10 +134,14 @@ public class UserInfoServiceImp implements UserInfoService {
 			userInfoBean.setLastlogintime(new Date());
 			userInfoBean.setReviseid(reviseId);
 			userInfoBean.setRevisetime(new Date());
-
-			userInfoRepository.save(userInfoBean);
 			
-			return true;
+			try {
+				userInfoRepository.save(userInfoBean);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
 		} 
 		return false;
 	}
