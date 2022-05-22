@@ -15,20 +15,16 @@ import org.hibernate.annotations.DynamicUpdate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "USER_ORDERS")
+@Table(name = "ORDER_MEALDETAIL")
 @DynamicInsert(true)
 @DynamicUpdate(true)
-public class UserOrdersBean {
+public class OrderMealDetailBean {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty("ID")
 	@Column(name = "ID")
 	private Integer id;
-	
-	@JsonProperty("USER_ID")
-	@Column(name = "USER_ID")
-	private String userid;
 	
 	@JsonProperty("ORDER_ID")
 	@Column(name = "ORDER_ID")
@@ -50,18 +46,6 @@ public class UserOrdersBean {
 	@Column(name = "MEAL_PRICE")
 	private Integer mealprice;
 	
-	@JsonProperty("STORE_ID")
-	@Column(name = "STORE_ID")
-	private String storeid;
-	
-	@JsonProperty("USER_MAIL")
-	@Column(name = "USER_MAIL")
-	private String usermail;
-	
-	@JsonProperty("ORDER_STATUS")
-	@Column(name = "ORDER_STATUS")
-	private Integer orderstatus;
-	
 	@JsonProperty("CREATE_ID")
 	@Column(name = "CREATE_ID", updatable = false, insertable = false)
 	private String createtid;
@@ -80,11 +64,9 @@ public class UserOrdersBean {
 
 	@Override
 	public String toString() {
-		return "UserOrdersBean [id=" + id + ", userid=" + userid + ", orderid=" + orderid + ", mealid=" + mealid
-				+ ", mealname=" + mealname + ", ordermealqty=" + ordermealqty + ", mealprice=" + mealprice
-				+ ", storeid=" + storeid + ", usermail=" + usermail + ", orderstatus=" + orderstatus + ", createtid="
-				+ createtid + ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime=" + revisetime
-				+ "]";
+		return "ORDER_MEALDETAIL [id=" + id + ", orderid=" + orderid + ", mealid=" + mealid + ", mealname=" + mealname
+				+ ", ordermealqty=" + ordermealqty + ", mealprice=" + mealprice + ", createtid=" + createtid
+				+ ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime=" + revisetime + "]";
 	}
 
 	public Integer getId() {
@@ -93,14 +75,6 @@ public class UserOrdersBean {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
 	}
 
 	public String getOrderid() {
@@ -141,30 +115,6 @@ public class UserOrdersBean {
 
 	public void setMealprice(Integer mealprice) {
 		this.mealprice = mealprice;
-	}
-
-	public String getStoreid() {
-		return storeid;
-	}
-
-	public void setStoreid(String storeid) {
-		this.storeid = storeid;
-	}
-
-	public String getUsermail() {
-		return usermail;
-	}
-
-	public void setUsermail(String usermail) {
-		this.usermail = usermail;
-	}
-
-	public Integer getOrderstatus() {
-		return orderstatus;
-	}
-
-	public void setOrderstatus(Integer orderstatus) {
-		this.orderstatus = orderstatus;
 	}
 
 	public String getCreatetid() {
