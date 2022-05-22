@@ -33,7 +33,7 @@ public class MealCategoryBean {
 	private String mealcategoryname;
 	
 	@JsonProperty("MEAL_CATEGORY_DESC")
-	@Column(name = "MEAL_CATEGORY_DESC", length = 2147483647)
+	@Column(name = "MEAL_CATEGORY_DESC", columnDefinition="LONGTEXT")
 	private String mealcategorydesc;
 
 	@Override
