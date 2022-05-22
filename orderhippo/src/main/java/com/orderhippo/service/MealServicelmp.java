@@ -20,9 +20,7 @@ public class MealServicelmp implements MealService {
 		if (mealBean != null) {
 			MealBean result = mealRepository.save(mealBean);
 			
-			if (result != null) {
-				return true;
-			}
+			return mealRepository.existsById(result.getId());
 		}
 		return false;
 	}
