@@ -21,8 +21,7 @@ create table USER_INFO (
 	-- USER_ID varchar(100) DEFAULT(CONCAT('U', DATE_FORMAT(CURRENT_DATE(),'%Y%m'), '_', REPLACE(UUID(),'-',''))) PRIMARY KEY NOT NULL,
 	USER_ID varchar(100) UNIQUE NOT NULL,
 	USER_NAME varchar(100) not null,
-	-- USER_GENDER ENUM('M','F','X') not null,
-	USER_GENDER varchar(10) not null, -- ENUM('M','F','X')
+	USER_GENDER ENUM('M','F','X') not null,
 	USER_PHONE varchar(100) not null,
 	USER_MAIL varchar(200) UNIQUE not null,
 	USER_BIRTH date not null,
@@ -138,7 +137,7 @@ create table ORDERS (
 	USER_ID varchar(100) not null,
 	USER_MAIL varchar(200) not null,
 	ORDERS_PRICE int not null,
-	ORDER_STATUS int not null, -- 0取消的訂單 1未確認訂單, 2已確認訂單, 3已完成訂單
+	ORDER_STATUS ENUM('0','1','2','3') not null, -- 0取消的訂單 1未確認訂單, 2已確認訂單, 3已完成訂單
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
@@ -233,8 +232,7 @@ CREATE TABLE PAYMENT (
 	USER_ID varchar(100) NOT NULL,
 	STORE_ID varchar(100) NOT NULL,
 	PAYMENT_PRICE int NOT NULL,
-	-- PAYMENT_CATEGORY ENUM('1','2','3') NOT NULL, -- 1. Credit Card, 2. Cash, 3. 3rd payment
-	PAYMENT_CATEGORY int NOT NULL, -- 1. Credit Card, 2. Cash, 3. 3rd payment
+	PAYMENT_CATEGORY ENUM('1','2','3') NOT NULL, -- 1. Credit Card, 2. Cash, 3. 3rd payment
 	PAYMENT_STATUS BOOLEAN default true not null, -- true 有效 false 無效(退款)
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) NOT NULL,
