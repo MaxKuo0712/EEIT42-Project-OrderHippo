@@ -37,7 +37,7 @@ public class OrdersController {
 	}
 
 	@ApiOperation("查詢單筆訂單資料 by 店家ID or 使用者ID or 訂單ID")
-	@GetMapping("/orders/findby")
+	@GetMapping("/orders/findbyID")
 	public List<OrdersBean> getOrederByOrderId(
 			@RequestParam(name = "storeid", required = false) String storeId, 
 			@RequestParam(name = "userid", required = false) String userId,
@@ -60,25 +60,21 @@ public class OrdersController {
 			@RequestParam(name = "storeid", required = false) String storeId, 
 			@RequestParam(name = "userid", required = false) String userId, 
 			@RequestParam(name = "orderstatus", required = true) String orderStatus) {
-		if (Integer.parseInt(orderStatus) >= 0 && Integer.parseInt(orderStatus) <= 3) {
-			if (storeId != null && storeId.trim().length() != 0) {
-				return ordersService.getOrderByStoreIDAndOrderStatus(storeId, orderStatus);
-			} else if (userId != null && userId.trim().length() != 0) {
-				return ordersService.getOrderByUseridAndOrderstatus(userId, orderStatus);
-			} else if (orderId != null && orderId.trim().length() != 0) {
-				return ordersService.getOrderByOrderidAndOrderstatus(orderId, orderStatus);
-			} else {
-				return ordersService.getOrderByOrderstatus(orderStatus);
-			}
+		if (storeId != null && storeId.trim().length() != 0) {
+			return ordersService.getOrderByStoreIDAndOrderStatus(storeId, orderStatus);
+		} else if (userId != null && userId.trim().length() != 0) {
+			return ordersService.getOrderByUseridAndOrderstatus(userId, orderStatus);
+		} else if (orderId != null && orderId.trim().length() != 0) {
+			return ordersService.getOrderByOrderidAndOrderstatus(orderId, orderStatus);
 		} else {
-			return null;
+			return ordersService.getOrderByOrderstatus(orderStatus);
 		}
 	}
 	
 	@ApiOperation("新增單筆訂單資料")
 	@PostMapping("/order")
 	public boolean addOrder(@RequestBody OrdersBean ordersBean) {
-		if ((ordersBean != null) && (ordersBean.getOrderstatus() >= 0 && ordersBean.getOrderstatus() <= 3)) {
+		if (ordersBean != null) {
 			return ordersService.addOrder(ordersBean); 
 		}
 		return false;

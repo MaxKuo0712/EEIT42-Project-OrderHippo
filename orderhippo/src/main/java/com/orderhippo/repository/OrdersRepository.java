@@ -12,21 +12,21 @@ public interface OrdersRepository extends JpaRepository<OrdersBean, Integer> {
 	List<OrdersBean> findByOrderid(String orderid);
 	
 	// By OrdersID + ORDER_STATUS 搜尋
-	List<OrdersBean> findByOrderidAndOrderstatus(String orderid, Integer orderstatus);
+	List<OrdersBean> findByOrderidAndOrderstatus(String orderid, String orderstatus);
 	
 	// By StoreID 搜尋
 	List<OrdersBean> findByStoreid(String storeid);
 	
 	// By StoreID + ORDER_STATUS 搜尋
-	List<OrdersBean> findByStoreidAndOrderstatus(String storeid, Integer orderstatus);
+	List<OrdersBean> findByStoreidAndOrderstatus(String storeid, String orderstatus);
 	
 	// By USER_ID 搜尋
 	List<OrdersBean> findByUserid(String userid);
 	
 	// By USER_ID + ORDER_STATUS 搜尋
-	List<OrdersBean> findByUseridAndOrderstatus(String userid, Integer orderstatus);
+	List<OrdersBean> findByUseridAndOrderstatus(String userid, String orderstatus);
 	
 	// By ORDER_STATUS 搜尋
-	List<OrdersBean> findByOrderstatus(Integer orderstatus);
+	List<OrdersBean> findByOrderstatus(String orderstatus);
 	
 }

@@ -52,7 +52,7 @@ public class OrdersServicelmp implements OrdersService {
 	// By OrdersID + ORDER_STATUS 搜尋
 	@Override
 	public List<OrdersBean> getOrderByOrderidAndOrderstatus(String orderid, String orderstatus) {
-		List<OrdersBean> result = ordersRepository.findByOrderidAndOrderstatus(orderid, Integer.parseInt(orderstatus));
+		List<OrdersBean> result = ordersRepository.findByOrderidAndOrderstatus(orderid, orderstatus);
 		if (result.size() > 0) {
 			return result;
 		}
@@ -72,7 +72,7 @@ public class OrdersServicelmp implements OrdersService {
 	// By StoreID + ORDER_STATUS 搜尋
 	@Override
 	public List<OrdersBean> getOrderByStoreIDAndOrderStatus(String storeid, String orderstatus) {
-		List<OrdersBean> result = ordersRepository.findByStoreidAndOrderstatus(storeid, Integer.parseInt(orderstatus));
+		List<OrdersBean> result = ordersRepository.findByStoreidAndOrderstatus(storeid, orderstatus);
 		if (result.size() > 0) {
 			return result;
 		}
@@ -93,7 +93,7 @@ public class OrdersServicelmp implements OrdersService {
 	// By USER_ID + ORDER_STATUS 搜尋
 	@Override
 	public List<OrdersBean> getOrderByUseridAndOrderstatus(String userid, String orderstatus) {
-		List<OrdersBean> result = ordersRepository.findByUseridAndOrderstatus(userid, Integer.parseInt(orderstatus));
+		List<OrdersBean> result = ordersRepository.findByUseridAndOrderstatus(userid, orderstatus);
 		if (result.size() > 0) {
 			return result;
 		}
@@ -103,7 +103,7 @@ public class OrdersServicelmp implements OrdersService {
 	// By ORDER_STATUS 搜尋
 	@Override
 	public List<OrdersBean> getOrderByOrderstatus(String orderstatus) {
-		List<OrdersBean> result = ordersRepository.findByOrderstatus(Integer.parseInt(orderstatus));
+		List<OrdersBean> result = ordersRepository.findByOrderstatus(orderstatus);
 		if (result.size() > 0) {
 			return result;
 		}

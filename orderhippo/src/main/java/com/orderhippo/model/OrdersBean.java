@@ -49,8 +49,8 @@ public class OrdersBean {
 	private Integer ordermealqty;
 	
 	@JsonProperty("ORDER_STATUS")
-	@Column(name = "ORDER_STATUS")
-	private Integer orderstatus;
+	@Column(name = "ORDER_STATUS", columnDefinition="ENUM")
+	private String orderstatus;
 	
 	@JsonProperty("CREATE_ID")
 	@Column(name = "CREATE_ID", updatable = false)
@@ -124,11 +124,11 @@ public class OrdersBean {
 		this.ordermealqty = ordermealqty;
 	}
 
-	public Integer getOrderstatus() {
+	public String getOrderstatus() {
 		return orderstatus;
 	}
 
-	public void setOrderstatus(Integer orderstatus) {
+	public void setOrderstatus(String orderstatus) {
 		this.orderstatus = orderstatus;
 	}
 
