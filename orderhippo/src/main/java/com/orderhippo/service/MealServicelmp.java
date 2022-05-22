@@ -15,9 +15,16 @@ public class MealServicelmp implements MealService {
 	private MealRepository mealRepository;
 
 	@Override
-	public MealBean addMeal(MealBean mealBean) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean addMeal(MealBean mealBean) {
+		
+		if (mealBean != null) {
+			MealBean result = mealRepository.save(mealBean);
+			
+			if (result != null) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
