@@ -123,15 +123,14 @@ public class UserInfoServiceImp implements UserInfoService {
 //	}
 	// 更新單筆使用者資料
 	@Override
-	public boolean updateUserInfo(String reviseId, String userid, UserInfoBean userInfoBean) {
-		System.out.println(userInfoBean.toString());
+	public boolean updateUserInfo(String reviseId, UserInfoBean userInfoBean) {
 		List<UserInfoBean> userInfo = userInfoRepository.findByUsermail(userInfoBean.getUsermail());
 		
 		if (userInfo.size() == 1) {
 			UserInfoBean currentUserInfo = userInfo.get(0);
 			
 			userInfoBean.setId(currentUserInfo.getId());
-			userInfoBean.setUserid(userid);
+			userInfoBean.setUserid(currentUserInfo.getUserid());
 			userInfoBean.setLastlogintime(new Date());
 			userInfoBean.setReviseid(reviseId);
 			userInfoBean.setRevisetime(new Date());

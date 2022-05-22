@@ -74,11 +74,11 @@ public class UserController {
 //	}
 	
 	@ApiOperation("更新使用者資料")
-	@PutMapping("/users/{reviseId}/{userId}")
-	public boolean updateLoginTime(@PathVariable String reviseId, @PathVariable String userId, @RequestBody UserInfoBean userInfoBean) {
-		if ((userInfoBean != null) && ((reviseId.equals(userId)) || (reviseId.equals("Admin"))) 
-				&& (userId != null) && (userId.trim().length() != 0)) {
-			return userInfoService.updateUserInfo(reviseId, userId, userInfoBean);	
+	@PutMapping("/users/{reviseId}")
+	public boolean updateLoginTime(@PathVariable String reviseId, @RequestBody UserInfoBean userInfoBean) {
+		String userId = userInfoBean.getUserid();
+		if ((userInfoBean != null) && ((reviseId.equals(userId)) || (reviseId.equals("Admin")))) {
+			return userInfoService.updateUserInfo(reviseId, userInfoBean);	
 		} else {
 			return false;
 		}
