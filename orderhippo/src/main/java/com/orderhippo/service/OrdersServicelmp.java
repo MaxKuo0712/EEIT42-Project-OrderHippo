@@ -16,8 +16,15 @@ public class OrdersServicelmp implements OrdersService {
 
 	@Override
 	public boolean addOrder(OrdersBean ordersBean) {
-		if (ordersRepository.save(ordersBean) != null) {
-			return true;
+		
+		if (ordersBean != null) {
+			try {
+				OrdersBean result = ordersRepository.save(ordersBean);
+				return ordersRepository.existsById(result.getId());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
 		}
 		return false;
 	}
