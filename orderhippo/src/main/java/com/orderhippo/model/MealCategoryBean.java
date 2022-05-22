@@ -25,7 +25,7 @@ public class MealCategoryBean {
 	private Integer id;
 	
 	@JsonProperty("MEAL_CATEGORY_ID")
-	@Column(name = "MEAL_CATEGORY_ID")
+	@Column(name = "MEAL_CATEGORY_ID", updatable = false, unique = true)
 	private String mealcategoryid;
 	
 	@JsonProperty("MEAL_CATEGORY_NAME")

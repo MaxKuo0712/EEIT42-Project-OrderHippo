@@ -20,7 +20,6 @@ public class StoreInfoServiceImp implements StoreInfoService {
 	@Override
 	public boolean addStoreInfo(StoreInfoBean storeInfoBean) {
 		if (storeInfoBean != null) {
-			
 			try {
 				StoreInfoBean result = storeInfoRepository.save(storeInfoBean);
 				return storeInfoRepository.existsById(result.getId());

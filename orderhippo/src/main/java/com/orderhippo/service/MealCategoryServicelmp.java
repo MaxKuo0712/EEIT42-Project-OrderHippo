@@ -15,9 +15,17 @@ public class MealCategoryServicelmp implements MealCategoryService {
 	private MealCategoryRepository mealCategoryRepository;
 
 	@Override
-	public MealCategoryBean addMealCategory(MealCategoryBean mealCategoryBean) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean addMealCategory(MealCategoryBean mealCategoryBean) {
+		if (mealCategoryBean != null) {
+			try {
+				mealCategoryRepository.save(mealCategoryBean);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -31,9 +39,20 @@ public class MealCategoryServicelmp implements MealCategoryService {
 	}
 
 	@Override
-	public Object updateMealCategory(String reviseId, String mealCategoryId, MealCategoryBean mealCategoryBean) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean updateMealCategory(String reviseId, MealCategoryBean mealCategoryBean) {
+		List<MealCategoryBean> mealCateory = mealCategoryRepository.findByMealcategoryid(mealCategoryBean.getMealcategoryid());
+		
+		if (mealCateory.size() == 1) {
+			try {
+				mealCategoryRepository.save(mealCategoryBean);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
+		return false;
 	}
 
 }
