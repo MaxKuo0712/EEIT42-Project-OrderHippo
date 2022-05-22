@@ -38,7 +38,7 @@ public class OrdersController {
 
 	@ApiOperation("查詢單筆訂單資料 by 店家ID or 使用者ID or 訂單ID")
 	@GetMapping("/orders/findby")
-	public OrdersBean getOrederByOrderId(
+	public List<OrdersBean> getOrederByOrderId(
 			@RequestParam(name = "storeid", required = false) String storeId, 
 			@RequestParam(name = "userid", required = false) String userId,
 			@RequestParam(name = "orderid", required = false) String orderId) {

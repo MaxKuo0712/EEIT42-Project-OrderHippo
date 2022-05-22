@@ -12,7 +12,7 @@ public interface OrdersService {
 	public List<OrdersBean> getAllOrders();
 	
 	// 查詢單筆訂單 By OrdersID
-	public OrdersBean getOrderByOrderId(String orderid);
+	public List<OrdersBean> getOrderByOrderId(String orderid);
 	
 	// By OrdersID + ORDER_STATUS 搜尋
 	public List<OrdersBean> getOrderByOrderidAndOrderstatus(String orderid, String orderstatus);

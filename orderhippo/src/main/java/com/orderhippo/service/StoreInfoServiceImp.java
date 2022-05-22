@@ -21,9 +21,12 @@ public class StoreInfoServiceImp implements StoreInfoService {
 	public boolean addStoreInfo(StoreInfoBean storeInfoBean) {
 		if (storeInfoBean != null) {
 			
-			StoreInfoBean result = storeInfoRepository.save(storeInfoBean);
-			if (result != null) {
-				return true;
+			try {
+				StoreInfoBean result = storeInfoRepository.save(storeInfoBean);
+				return storeInfoRepository.existsById(result.getId());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
 			}
 		}
 		return false;

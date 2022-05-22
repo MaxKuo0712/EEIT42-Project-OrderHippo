@@ -33,11 +33,11 @@ public class OrdersServicelmp implements OrdersService {
 
 	// By OrdersID 搜尋
 	@Override
-	public OrdersBean getOrderByOrderId(String orderId) {
+	public List<OrdersBean> getOrderByOrderId(String orderId) {
 		List<OrdersBean> result = ordersRepository.findByOrderid(orderId);
 		
 		if (result.size() > 0) {
-			return result.get(0);
+			return result;
 		}
 		return null;
 	}
