@@ -36,7 +36,7 @@ public class UserInfoBean {
 	private String username;
 	
 	@JsonProperty("USER_GENDER")
-	@Column(name = "USER_GENDER")
+	@Column(name = "USER_GENDER", columnDefinition="ENUM")
 	private String usergender;
 	
 	@JsonProperty("USER_PHONE")
