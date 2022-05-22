@@ -133,34 +133,6 @@ drop table MEAL;
 -- 訂單(ORDERS)
 create table ORDERS (
 	ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
-	-- ORDER_ID varchar(100) UNIQUE NOT NULL,
-	ORDER_ID varchar(100) DEFAULT(CONCAT('O', DATE_FORMAT(CURRENT_DATE(),'%Y%m%d'), '_', REPLACE(UUID(),'-',''))) UNIQUE NOT NULL,
-	STORE_ID varchar(100) not null,
-	USER_ID varchar(100) not null,
-	USER_MAIL varchar(200) not null,
-	MEAL_ID varchar(100) not null,
-	MEAL_NAME varchar(100) not null,
-	ORDER_MEAL_QTY int not null,
-	MEAL_PRICE int not null,
-	-- ORDER_STATUS ENUM('0','1','2','3') not null, -- 0取消的訂單 1未確認訂單, 2已確認訂單, 3已完成訂單
-	ORDER_STATUS int not null, -- 0取消的訂單 1未確認訂單, 2已確認訂單, 3已完成訂單
-	CREATE_ID varchar(100) not null,
-	CREATE_TIME datetime default (sysdate()) not null,
-	REVISE_TIME datetime default null,
-	REVISE_ID varchar(100) default null,
-	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID),
-	FOREIGN KEY (USER_ID) REFERENCES USER_INFO(USER_ID),
-	FOREIGN KEY (USER_MAIL) REFERENCES USER_INFO(USER_MAIL),
-	FOREIGN KEY (MEAL_ID) REFERENCES MEAL(MEAL_ID),
-	FOREIGN KEY (MEAL_NAME) REFERENCES MEAL(MEAL_NAME),
-	CONSTRAINT CHK_USER_MAIL CHECK (USER_MAIL REGEXP '[a-zA-Z0-9_\-]+@([a-zA-Z0-9_\-]+\.)+(com|org|edu)' = 1),
-	CONSTRAINT CHK_ORDER_MEAL_QTY CHECK (ORDER_MEAL_QTY > 0),
-	CONSTRAINT CHK_MEAL_PRICE CHECK (MEAL_PRICE > 0)
-);
-
--- 訂單(ORDERS)
-create table ORDERS (
-	ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	ORDER_ID varchar(100) DEFAULT(CONCAT('O', DATE_FORMAT(CURRENT_DATE(),'%Y%m%d'), '_', REPLACE(UUID(),'-',''))) UNIQUE NOT NULL,
 	STORE_ID varchar(100) not null,
 	USER_ID varchar(100) not null,
@@ -183,6 +155,7 @@ drop table ORDERS;
 
 -- --------------------------------------------------------------------------------------------
 -- 顧客訂餐資訊(USER_ORDERS)
+/*
 create table USER_ORDERS (
 	ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	USER_ID varchar(100) not null,
@@ -193,6 +166,7 @@ create table USER_ORDERS (
 	MEAL_PRICE int not null,
 	STORE_ID varchar(100) not null,
 	USER_MAIL varchar(200) not null,
+	ORDER_STATUS int not null, -- 0取消的訂單 1未確認訂單, 2已確認訂單, 3已完成訂單
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
@@ -206,8 +180,29 @@ create table USER_ORDERS (
 	CONSTRAINT CHK_ORDER_MEAL_QTY CHECK (ORDER_MEAL_QTY > 0),
 	CONSTRAINT CHK_MEAL_PRICE CHECK (MEAL_PRICE > 0)
 );
-
 drop table USER_ORDERS;
+**/
+
+-- 訂單餐點資訊(ORDER_MEALDETAIL)
+create table ORDER_MEALDETAIL (
+	ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+	ORDER_ID varchar(100) not null,
+	MEAL_ID varchar(100) not null,
+	MEAL_NAME varchar(100) not null,
+	ORDER_MEAL_QTY int not null,
+	MEAL_PRICE int not null,
+	CREATE_ID varchar(100) not null,
+	CREATE_TIME datetime default (sysdate()) not null,
+	REVISE_TIME datetime default null,
+	REVISE_ID varchar(100) default null,
+	FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
+	FOREIGN KEY (MEAL_ID) REFERENCES MEAL(MEAL_ID),
+	FOREIGN KEY (MEAL_NAME) REFERENCES MEAL(MEAL_NAME),
+	CONSTRAINT CHK_ORDER_MEAL_QTY CHECK (ORDER_MEAL_QTY > 0),
+	CONSTRAINT CHK_MEAL_PRICE CHECK (MEAL_PRICE > 0)
+);
+
+drop table ORDER_MEALDETAIL;
 
 -- --------------------------------------------------------------------------------------------
 -- 店家訊息公告(STORE_MESSAGE)
