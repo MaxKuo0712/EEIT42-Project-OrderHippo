@@ -77,11 +77,12 @@ public class StoreController {
 		@ApiResponse(code = 401, message = "沒有權限"),
 		@ApiResponse(code = 404, message = "找不到路徑")
 	})
-	@PutMapping("/stores/{reviseId}/{storeId}")
-	public boolean updateStoreInfo(@PathVariable String reviseId, @PathVariable String storeId, @RequestBody StoreInfoBean storeInfoBean) {
-		if ((storeInfoBean != null) && ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) 
-				&& (storeId != null && storeId.trim().length() != 0)) {
-			return storeInfoService.updateStoreInfo(reviseId, storeId, storeInfoBean);
+	@PutMapping("/stores/{reviseId}")
+	public boolean updateStoreInfo(@PathVariable String reviseId, @RequestBody StoreInfoBean storeInfoBean) {
+		String storeId = storeInfoBean.getStoreid();
+		
+		if ((storeInfoBean != null) && ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) ) {
+			return storeInfoService.updateStoreInfo(reviseId, storeInfoBean);
 		} else {
 			return false;
 		}

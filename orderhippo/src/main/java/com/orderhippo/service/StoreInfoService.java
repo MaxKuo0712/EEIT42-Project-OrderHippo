@@ -12,5 +12,5 @@ public interface StoreInfoService {
     public List<StoreInfoBean> getAllStoreInfo();
     
     // 更新單筆店家資料
-    public boolean updateStoreInfo(String reviseid, String storeid, StoreInfoBean storeInfoBean);
+    public boolean updateStoreInfo(String reviseid, StoreInfoBean storeInfoBean);
 }

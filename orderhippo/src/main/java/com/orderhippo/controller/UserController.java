@@ -77,6 +77,7 @@ public class UserController {
 	@PutMapping("/users/{reviseId}")
 	public boolean updateLoginTime(@PathVariable String reviseId, @RequestBody UserInfoBean userInfoBean) {
 		String userId = userInfoBean.getUserid();
+		
 		if ((userInfoBean != null) && ((reviseId.equals(userId)) || (reviseId.equals("Admin")))) {
 			return userInfoService.updateUserInfo(reviseId, userInfoBean);	
 		} else {

@@ -66,28 +66,51 @@ public class StoreInfoServiceImp implements StoreInfoService {
 //		}		
 //	}
 	
+//	// 更新單筆店家資料
+//	@Override
+//	public boolean updateStoreInfo(String reviseid, String storeid, StoreInfoBean storeInfoBean) {
+//		List<StoreInfoBean> storeInfo = storeInfoRepository.findByStoreid(storeid);
+//			
+//		if (storeInfo.size() == 1) {
+//			StoreInfoBean currentStoreInfo = storeInfo.get(0);
+//
+//			storeInfoBean.setId(currentStoreInfo.getId());
+//			storeInfoBean.setStoreid(storeid);
+//			if(storeInfoBean.getStorename() == null) storeInfoBean.setStorename(currentStoreInfo.getStorename());
+//			if(storeInfoBean.getStoreaddress() == null) storeInfoBean.setStoreaddress(currentStoreInfo.getStoreaddress());
+//			if(storeInfoBean.getStorephone() == null) storeInfoBean.setStorephone(currentStoreInfo.getStorephone());
+//			if(storeInfoBean.getStoremail() == null) storeInfoBean.setStoremail(currentStoreInfo.getStoremail());
+//			if(storeInfoBean.getStorelocation() == null) storeInfoBean.setStorelocation(currentStoreInfo.getStorelocation());
+//			if(storeInfoBean.getStoreopenstatus() == null) storeInfoBean.setStoreopenstatus(currentStoreInfo.getStoreopenstatus());
+//			storeInfoBean.setRevisetime(new Date());
+//			storeInfoBean.setReviseid(reviseid);
+//			
+//			storeInfoRepository.save(storeInfoBean);
+//			
+//			return true;
+//		}
+//		return false;
+//	}
 	// 更新單筆店家資料
 	@Override
-	public boolean updateStoreInfo(String reviseid, String storeid, StoreInfoBean storeInfoBean) {
-		List<StoreInfoBean> storeInfo = storeInfoRepository.findByStoreid(storeid);
+	public boolean updateStoreInfo(String reviseid, StoreInfoBean storeInfoBean) {
+		List<StoreInfoBean> storeInfo = storeInfoRepository.findByStoremail(storeInfoBean.getStoremail());
 			
 		if (storeInfo.size() == 1) {
 			StoreInfoBean currentStoreInfo = storeInfo.get(0);
 
 			storeInfoBean.setId(currentStoreInfo.getId());
-			storeInfoBean.setStoreid(storeid);
-			if(storeInfoBean.getStorename() == null) storeInfoBean.setStorename(currentStoreInfo.getStorename());
-			if(storeInfoBean.getStoreaddress() == null) storeInfoBean.setStoreaddress(currentStoreInfo.getStoreaddress());
-			if(storeInfoBean.getStorephone() == null) storeInfoBean.setStorephone(currentStoreInfo.getStorephone());
-			if(storeInfoBean.getStoremail() == null) storeInfoBean.setStoremail(currentStoreInfo.getStoremail());
-			if(storeInfoBean.getStorelocation() == null) storeInfoBean.setStorelocation(currentStoreInfo.getStorelocation());
-			if(storeInfoBean.getStoreopenstatus() == null) storeInfoBean.setStoreopenstatus(currentStoreInfo.getStoreopenstatus());
+			storeInfoBean.setStoreid(currentStoreInfo.getStoreid());
 			storeInfoBean.setRevisetime(new Date());
 			storeInfoBean.setReviseid(reviseid);
 			
-			storeInfoRepository.save(storeInfoBean);
-			
-			return true;
+			try {
+				storeInfoRepository.save(storeInfoBean);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
 		}
 		return false;
 	}
