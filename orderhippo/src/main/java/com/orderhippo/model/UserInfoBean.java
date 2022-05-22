@@ -32,31 +32,31 @@ public class UserInfoBean {
 	private String userid;
 	
 	@JsonProperty("USER_NAME")
-	@Column(name = "USER_NAME", nullable = false)
+	@Column(name = "USER_NAME")
 	private String username;
 	
 	@JsonProperty("USER_GENDER")
-	@Column(name = "USER_GENDER", nullable = false)
+	@Column(name = "USER_GENDER")
 	private String usergender;
 	
 	@JsonProperty("USER_PHONE")
-	@Column(name = "USER_PHONE", nullable = false)
+	@Column(name = "USER_PHONE")
 	private String userphone;
 	
 	@JsonProperty("USER_MAIL")
-	@Column(name = "USER_MAIL", nullable = false, unique = true)
+	@Column(name = "USER_MAIL", unique = true)
 	private String usermail;
 	
 	@JsonProperty("USER_BIRTH")
-	@Column(name = "USER_BIRTH", nullable = false)
+	@Column(name = "USER_BIRTH")
 	private Date userbirth;
 	
 	@JsonProperty("USER_AGE")
-	@Column(name = "USER_AGE", insertable = false, nullable = false)
+	@Column(name = "USER_AGE", insertable = false)
 	private Integer userage;
 	
 	@JsonProperty("USER_ADDRESS")
-	@Column(name = "USER_ADDRESS", nullable = false)
+	@Column(name = "USER_ADDRESS")
 	private String useraddress;
 
 	@JsonProperty("LAST_LOGININ_TIME")
@@ -68,7 +68,7 @@ public class UserInfoBean {
 	private String createid;
 	
 	@JsonProperty("CREATE_TIME")
-	@Column(name = "CREATE_TIME", insertable = false, updatable = false, nullable = false)
+	@Column(name = "CREATE_TIME", insertable = false, updatable = false)
 	private Date createtime;
 	
 	@JsonProperty("REVISE_ID")
