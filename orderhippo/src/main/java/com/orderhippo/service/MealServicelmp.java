@@ -48,6 +48,7 @@ public class MealServicelmp implements MealService {
 		if (meal.size() == 1) {
 			MealBean currentMeal = meal.get(0);
 			
+			mealBean.setId(currentMeal.getId());
 			mealBean.setStoreid(currentMeal.getStoreid());
 			mealBean.setReviseid(reviseId);
 			mealBean.setRevisetime(new Date());
