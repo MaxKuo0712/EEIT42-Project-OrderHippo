@@ -21,12 +21,15 @@ public class UserInfoServiceImp implements UserInfoService {
 	// 新增單筆使用者資料
 	@Override
 	public boolean addUserInfo(UserInfoBean userInfoBean) {
-		List<UserInfoBean> userInfo = userInfoRepository.findByUserid(userInfoBean.getUserid());
+		List<UserInfoBean> userInfo = userInfoRepository.findByUsermail(userInfoBean.getUsermail());
 		
 		if (userInfo.size() == 0) {
-			UserInfoBean result = userInfoRepository.save(userInfoBean);
-			if (result != null) {
-				return true;
+			try {
+				UserInfoBean result = userInfoRepository.save(userInfoBean);
+				return userInfoRepository.existsById(result.getId());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
 			}
 		}
 		return false;
