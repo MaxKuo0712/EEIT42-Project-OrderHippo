@@ -155,6 +155,7 @@ drop table ORDERS;
 
 -- --------------------------------------------------------------------------------------------
 -- 顧客訂餐資訊(USER_ORDERS)
+/*
 create table USER_ORDERS (
 	ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	USER_ID varchar(100) not null,
@@ -178,9 +179,28 @@ create table USER_ORDERS (
 	CONSTRAINT CHK_USER_MAIL CHECK (USER_MAIL REGEXP '[a-zA-Z0-9_\-]+@([a-zA-Z0-9_\-]+\.)+(com|org|edu)' = 1),
 	CONSTRAINT CHK_ORDER_MEAL_QTY CHECK (ORDER_MEAL_QTY > 0),
 	CONSTRAINT CHK_MEAL_PRICE CHECK (MEAL_PRICE > 0)
+);*/
+
+-- 訂單餐點資訊(ORDER_MEALDETAIL)
+create table ORDER_MEALDETAIL (
+	ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+	ORDER_ID varchar(100) not null,
+	MEAL_ID varchar(100) not null,
+	MEAL_NAME varchar(100) not null,
+	ORDER_MEAL_QTY int not null,
+	MEAL_PRICE int not null,
+	CREATE_ID varchar(100) not null,
+	CREATE_TIME datetime default (sysdate()) not null,
+	REVISE_TIME datetime default null,
+	REVISE_ID varchar(100) default null,
+	FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
+	FOREIGN KEY (MEAL_ID) REFERENCES MEAL(MEAL_ID),
+	FOREIGN KEY (MEAL_NAME) REFERENCES MEAL(MEAL_NAME),
+	CONSTRAINT CHK_ORDER_MEAL_QTY CHECK (ORDER_MEAL_QTY > 0),
+	CONSTRAINT CHK_MEAL_PRICE CHECK (MEAL_PRICE > 0)
 );
 
-drop table USER_ORDERS;
+drop table ORDER_MEALDETAIL;
 
 -- --------------------------------------------------------------------------------------------
 -- 店家訊息公告(STORE_MESSAGE)
