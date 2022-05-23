@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.MealBean;
 import com.orderhippo.service.MealService;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @Api("餐點資料API")
 @RestController
@@ -26,9 +28,22 @@ public class MealController {
 	@Autowired
 	private MealService mealService;
 	
+	@ApiOperation("查詢餐點資料 by 餐點ID or 餐點種類ID or 店家ID or All")
 	@GetMapping("/meals")
-	public List<MealBean> getAllMeals(){
-		return mealService.getAllMeal();
+	public List<MealBean> getAllMeals(
+			@RequestParam(name = "mealid", required = false) String mealId, 
+			@RequestParam(name = "mealcategoryid", required = false) String mealcategoryId,
+			@RequestParam(name = "storeid", required = false) String storeId)
+	{
+		if (mealId != null && mealId.trim().length() > 0) {
+			return mealService.getMealByMealID(mealId);
+		} else if (mealcategoryId != null && mealcategoryId.trim().length() > 0) {
+			return mealService.getMealByMealCategoryID(mealcategoryId);
+		} else if (storeId != null && storeId.trim().length() > 0) {
+			return mealService.getMealByStoreID(storeId);
+		} else {
+			return mealService.getAllMeal();
+		}
 	}
 	
 	@PostMapping("/meal")

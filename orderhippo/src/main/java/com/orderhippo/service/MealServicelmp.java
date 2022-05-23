@@ -14,7 +14,8 @@ public class MealServicelmp implements MealService {
 	
 	@Autowired
 	private MealRepository mealRepository;
-
+	
+	// 新增單筆餐點
 	@Override
 	public boolean addMeal(MealBean mealBean) {
 		
@@ -31,6 +32,7 @@ public class MealServicelmp implements MealService {
 		return false;
 	}
 
+	// 查詢所有餐點
 	@Override
 	public List<MealBean> getAllMeal() {
 		List<MealBean> result = mealRepository.findAll();
@@ -41,6 +43,7 @@ public class MealServicelmp implements MealService {
 		return null;
 	}
 
+	// 修改單筆餐點
 	@Override
 	public boolean updateMeal(String reviseId, MealBean mealBean) {
 		List<MealBean> meal = mealRepository.findByMealid(mealBean.getMealid());
@@ -61,26 +64,28 @@ public class MealServicelmp implements MealService {
 				return false;
 			}
 		}
-		
 		return false;
 	}
 
+	// 刪除單筆餐點
 	@Override
 	public boolean deleteMeal(String mealId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	// 查詢餐點 By MealID 搜尋
 	@Override
-	public MealBean getMealByMealID(String mealId) {
+	public List<MealBean> getMealByMealID(String mealId) {
 		List<MealBean> result = mealRepository.findByMealid(mealId);
 		
 		if (result.size() > 0) {
-			return result.get(0);
+			return result;
 		}
 		return null;
 	}
 
+	// 查詢餐點 By MEAL_CATEGORY_ID 搜尋
 	@Override
 	public List<MealBean> getMealByMealCategoryID(String mealcategoryId) {
 		List<MealBean> result = mealRepository.findByMealcategoryid(mealcategoryId);
@@ -91,6 +96,7 @@ public class MealServicelmp implements MealService {
 		return null;
 	}
 
+	// 查詢餐點 By STORE_ID 搜尋
 	@Override
 	public List<MealBean> getMealByStoreID(String storeId) {
 		List<MealBean> result = mealRepository.findByStoreid(storeId);

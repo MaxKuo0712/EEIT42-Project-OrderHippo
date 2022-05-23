@@ -30,18 +30,19 @@ public class OrdersController {
 	@Autowired 
 	private OrdersService ordersService;
 	
-	@ApiOperation("查詢所有訂單資料")
-	@GetMapping("/orders")
-	public List<OrdersBean> getAllOreders() {
-		return ordersService.getAllOrders();
-	}
+//	@ApiOperation("查詢所有訂單資料")
+//	@GetMapping("/orders")
+//	public List<OrdersBean> getAllOreders() {
+//		return ordersService.getAllOrders();
+//	}
 
-	@ApiOperation("查詢單筆訂單資料 by 店家ID or 使用者ID or 訂單ID")
-	@GetMapping("/orders/findbyID")
+	@ApiOperation("查詢訂單資料 by 店家ID or 使用者ID or 訂單ID or All")
+	@GetMapping("/orders")
 	public List<OrdersBean> getOrederByOrderId(
 			@RequestParam(name = "storeid", required = false) String storeId, 
 			@RequestParam(name = "userid", required = false) String userId,
-			@RequestParam(name = "orderid", required = false) String orderId) {
+			@RequestParam(name = "orderid", required = false) String orderId) 
+	{
 		if (storeId != null && storeId.trim().length() != 0) {
 			return ordersService.getOrderByStoreid(storeId);
 		} else if (userId != null && userId.trim().length() != 0) {
@@ -49,17 +50,18 @@ public class OrdersController {
 		} else if (orderId != null && orderId.trim().length() != 0) {
 			return ordersService.getOrderByOrderId(orderId);
 		} else {
-			return null;
+			return ordersService.getAllOrders();
 		}
 	}
 	
-	@ApiOperation("查詢訂單資料 by (店家ID or 使用者ID) and 訂單狀態")
+	@ApiOperation("查詢訂單資料(+訂單狀態) by (店家ID or 使用者ID) and 訂單狀態")
 	@GetMapping("/orders/findbyorderstatus")
 	public List<OrdersBean> getOrderByStoreIDAndOrderStatus(
 			@RequestParam(name = "orderid", required = false) String orderId,
 			@RequestParam(name = "storeid", required = false) String storeId, 
 			@RequestParam(name = "userid", required = false) String userId, 
-			@RequestParam(name = "orderstatus", required = true) String orderStatus) {
+			@RequestParam(name = "orderstatus", required = true) String orderStatus) 
+	{
 		if (storeId != null && storeId.trim().length() != 0) {
 			return ordersService.getOrderByStoreIDAndOrderStatus(storeId, orderStatus);
 		} else if (userId != null && userId.trim().length() != 0) {

@@ -13,7 +13,7 @@ public interface MealService {
 	public List<MealBean> getAllMeal();
 
 	// 查詢餐點 By MealID 搜尋
-	public MealBean getMealByMealID(String mealId);
+	public List<MealBean> getMealByMealID(String mealId);
 	
 	// 查詢餐點 By MEAL_CATEGORY_ID 搜尋
 	public List<MealBean> getMealByMealCategoryID(String mealcategoryId);
