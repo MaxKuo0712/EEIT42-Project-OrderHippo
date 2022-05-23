@@ -111,6 +111,6 @@ public class StoreInfoServiceImp implements StoreInfoService {
 				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return new ResponseEntity<String>("資料不存在：MealID", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<String>("資料不存在：StoreID", HttpStatus.NOT_FOUND);
 	}
 }

@@ -20,19 +20,19 @@ public class UserInfoServiceImp implements UserInfoService {
 
 	// 新增單筆使用者資料
 	@Override
-	public boolean addUserInfo(UserInfoBean userInfoBean) {
+	public Object addUserInfo(UserInfoBean userInfoBean) {
 		List<UserInfoBean> userInfo = userInfoRepository.findByUsermail(userInfoBean.getUsermail());
 		
 		if (userInfo.size() == 0) {
 			try {
 				UserInfoBean result = userInfoRepository.save(userInfoBean);
-				return userInfoRepository.existsById(result.getId());
+				return new ResponseEntity<Boolean>(userInfoRepository.existsById(result.getId()), HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 
 	// 取得全部使用者資料
@@ -123,7 +123,7 @@ public class UserInfoServiceImp implements UserInfoService {
 //	}
 	// 更新單筆使用者資料
 	@Override
-	public boolean updateUserInfo(String reviseId, UserInfoBean userInfoBean) {
+	public Object updateUserInfo(String reviseId, UserInfoBean userInfoBean) {
 		List<UserInfoBean> userInfo = userInfoRepository.findByUsermail(userInfoBean.getUsermail());
 		
 		if (userInfo.size() == 1) {
@@ -137,12 +137,12 @@ public class UserInfoServiceImp implements UserInfoService {
 			
 			try {
 				userInfoRepository.save(userInfoBean);
-				return true;
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		} 
-		return false;
+		return new ResponseEntity<String>("資料不存在：UserMail", HttpStatus.NOT_FOUND);
 	}
 }

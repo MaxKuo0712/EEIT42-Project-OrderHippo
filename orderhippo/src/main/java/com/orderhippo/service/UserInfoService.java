@@ -6,7 +6,7 @@ import com.orderhippo.model.UserInfoBean;
 
 public interface UserInfoService {
 	// 新增單筆使用者資料
-    public boolean addUserInfo(UserInfoBean userInfoBean);
+    public Object addUserInfo(UserInfoBean userInfoBean);
     
     // 取得全部使用者資料
     public List<UserInfoBean> getAllUserInfo();
@@ -18,5 +18,5 @@ public interface UserInfoService {
     public List<UserInfoBean> getUserInfofindfindByUsermail(String usermail);
     
     // 更新單筆使用者資料
-    public boolean updateUserInfo(String reviseId, UserInfoBean userInfoBean);
+    public Object updateUserInfo(String reviseId, UserInfoBean userInfoBean);
 }

@@ -53,14 +53,14 @@ public class UserController {
 	
 	@ApiOperation("新增使用者資料")
 	@PostMapping("/users")
-	public boolean addNewUser(
+	public Object addNewUser(
 			@RequestBody @ApiParam(name ="使用者資料", value = "需要欄位資料：USER_ID, USER_NAME, "
 			+ "USER_GENDER, USER_PHONE, USER_MAIL, USER_BIRTH, USER_ADDRESS, CREATE_ID") 
 			UserInfoBean userInfoBean) {
 		if (userInfoBean != null) {
 			return userInfoService.addUserInfo(userInfoBean);
 		}
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 
 //	@ApiOperation("更新使用者資料")
