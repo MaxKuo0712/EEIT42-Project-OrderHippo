@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.orderhippo.model.MealBean;
@@ -17,10 +19,9 @@ public class MealServicelmp implements MealService {
 	
 	// 新增單筆餐點
 	@Override
-	public boolean addMeal(MealBean mealBean) {
+	public Object addMeal(MealBean mealBean) {
 		
 		if (mealBean != null) {
-			
 			try {
 				MealBean result = mealRepository.save(mealBean);
 				return mealRepository.existsById(result.getId());
@@ -38,14 +39,14 @@ public class MealServicelmp implements MealService {
 		List<MealBean> result = mealRepository.findAll();
 		
 		if (!result.isEmpty()) {
-			return mealRepository.findAll();
+			return result;
 		}
 		return null;
 	}
 
 	// 修改單筆餐點
 	@Override
-	public boolean updateMeal(String reviseId, MealBean mealBean) {
+	public Object updateMeal(String reviseId, MealBean mealBean) {
 		List<MealBean> meal = mealRepository.findByMealid(mealBean.getMealid());
 		
 		if (meal.size() == 1) {
@@ -58,13 +59,13 @@ public class MealServicelmp implements MealService {
 			
 			try {
 				mealRepository.save(mealBean);
-				return true;
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return false;
+		return new ResponseEntity<String>("餐點不存在(MealID)", HttpStatus.NOT_FOUND);
 	}
 
 	// 刪除單筆餐點

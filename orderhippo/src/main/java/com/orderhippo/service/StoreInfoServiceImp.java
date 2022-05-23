@@ -93,7 +93,7 @@ public class StoreInfoServiceImp implements StoreInfoService {
 	// 更新單筆店家資料
 	@Override
 	public boolean updateStoreInfo(String reviseid, StoreInfoBean storeInfoBean) {
-		List<StoreInfoBean> storeInfo = storeInfoRepository.findByStoremail(storeInfoBean.getStoremail());
+		List<StoreInfoBean> storeInfo = storeInfoRepository.findByStoreid(storeInfoBean.getStoreid());
 			
 		if (storeInfo.size() == 1) {
 			StoreInfoBean currentStoreInfo = storeInfo.get(0);

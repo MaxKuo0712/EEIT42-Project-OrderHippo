@@ -3,6 +3,8 @@ package com.orderhippo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,22 +37,28 @@ public class MealCategoryController {
 	
 	@ApiOperation("新增商品類別資料")
 	@PostMapping("/mealcategory")
-	public boolean addMealCategory(@RequestBody MealCategoryBean mealCategoryBean) {
+	public Object addMealCategory(@RequestBody MealCategoryBean mealCategoryBean) {
 		if (mealCategoryBean != null) {
 			return mealCategoryService.addMealCategory(mealCategoryBean);
 		}
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 	
 	@ApiOperation("修改商品類別資料")
 	@PutMapping("/mealcategory/{reviseId}")
-	public boolean updateMealCategory(@PathVariable String reviseId, @RequestBody MealCategoryBean mealCategoryBean) {
-		String mealCategoryId = mealCategoryBean.getMealcategoryid();
+	public Object updateMealCategory(@PathVariable String reviseId, @RequestBody MealCategoryBean mealCategoryBean) {
 		
-		if ((mealCategoryBean != null) && ((reviseId.equals(mealCategoryId)) || (reviseId.equals("Admin")))) {
+		if (mealCategoryBean == null) {
+			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
+		} else if (!reviseId.equals("Admin")) {
+			return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin", HttpStatus.BAD_REQUEST);
+		} else {
 			return mealCategoryService.updateMealCategory(reviseId, mealCategoryBean);
 		}
 		
-		return false;
+//		if ((mealCategoryBean != null) && (reviseId.equals("Admin"))) {
+//			return mealCategoryService.updateMealCategory(reviseId, mealCategoryBean);
+//		}
+//		return false;
 	}
 }

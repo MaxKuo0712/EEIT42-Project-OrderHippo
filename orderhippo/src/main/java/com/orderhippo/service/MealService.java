@@ -7,7 +7,7 @@ import com.orderhippo.model.MealBean;
 public interface MealService {
 	
 	// 新增單筆餐點
-	public boolean addMeal(MealBean mealBean);
+	public Object addMeal(MealBean mealBean);
 	
 	// 查詢所有餐點
 	public List<MealBean> getAllMeal();
@@ -22,7 +22,7 @@ public interface MealService {
 	public List<MealBean> getMealByStoreID(String storeId);
 	
 	// 修改單筆餐點
-	public boolean updateMeal(String reviseId, MealBean mealBean);
+	public Object updateMeal(String reviseId, MealBean mealBean);
 	
 	// 刪除單筆餐點
 	public boolean deleteMeal(String mealId);

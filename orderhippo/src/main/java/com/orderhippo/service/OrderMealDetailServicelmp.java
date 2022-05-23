@@ -16,7 +16,17 @@ public class OrderMealDetailServicelmp implements OrderMealDetailService {
 
 	@Override
 	public boolean addOrderMealDetail(OrderMealDetailBean orderMealDetailBean) {
-		// TODO Auto-generated method stub
+		
+		if (orderMealDetailBean != null) {
+			try {
+				orderMealDetailRepository.save(orderMealDetailBean);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
 		return false;
 	}
 
@@ -44,8 +54,13 @@ public class OrderMealDetailServicelmp implements OrderMealDetailService {
 	}
 
 	@Override
-	public List<OrderMealDetailBean> getOrderMealDetailByMealid(String mealid) {
-		// TODO Auto-generated method stub
+	public List<OrderMealDetailBean> getOrderMealDetailByMealid(String mealid) {	
+		List<OrderMealDetailBean> result = orderMealDetailRepository.findByOrderid(mealid);
+
+		if (!result.isEmpty()) {
+			return result;
+		}
+		
 		return null;
 	}
 

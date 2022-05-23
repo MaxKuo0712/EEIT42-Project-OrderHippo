@@ -3,6 +3,8 @@ package com.orderhippo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.orderhippo.model.MealCategoryBean;
@@ -15,17 +17,17 @@ public class MealCategoryServicelmp implements MealCategoryService {
 	private MealCategoryRepository mealCategoryRepository;
 
 	@Override
-	public boolean addMealCategory(MealCategoryBean mealCategoryBean) {
+	public Object addMealCategory(MealCategoryBean mealCategoryBean) {
 		if (mealCategoryBean != null) {
 			try {
 				mealCategoryRepository.save(mealCategoryBean);
-				return true;
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 
 	@Override
@@ -39,20 +41,19 @@ public class MealCategoryServicelmp implements MealCategoryService {
 	}
 
 	@Override
-	public boolean updateMealCategory(String reviseId, MealCategoryBean mealCategoryBean) {
+	public Object updateMealCategory(String reviseId, MealCategoryBean mealCategoryBean) {
 		List<MealCategoryBean> mealCateory = mealCategoryRepository.findByMealcategoryid(mealCategoryBean.getMealcategoryid());
 		
 		if (mealCateory.size() == 1) {
 			try {
 				mealCategoryRepository.save(mealCategoryBean);
-				return true;
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		
-		return false;
+		return new ResponseEntity<String>("資料不存在：MealCategoryID", HttpStatus.NOT_FOUND);
 	}
 
 }

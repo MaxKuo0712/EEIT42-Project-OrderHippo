@@ -19,7 +19,7 @@ public class IngredientServiceImp implements IngredientService {
 		List<IngredientBean> result = ingredientRepository.findAll();
 		
 		if (!result.isEmpty()) {
-			return ingredientRepository.findAll();
+			return result;
 		}
 		return null;
 	}

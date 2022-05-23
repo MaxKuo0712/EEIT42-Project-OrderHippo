@@ -3,6 +3,8 @@ package com.orderhippo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,13 +59,13 @@ public class MealController {
 	
 	@ApiOperation("修改餐點資料")
 	@PutMapping("/meal/{reviseId}")
-	public boolean updateMeal(@PathVariable String reviseId, @RequestBody MealBean mealBean) {
+	public Object updateMeal(@PathVariable String reviseId, @RequestBody MealBean mealBean) {
 		String storeId = mealBean.getStoreid();
 		
 		if ((mealBean != null) && ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) ) {
 			return mealService.updateMeal(reviseId, mealBean);
 		}
-		return false;
+		return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
 	}
 
 }
