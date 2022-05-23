@@ -6,7 +6,7 @@ import com.orderhippo.model.OrdersBean;
 
 public interface OrdersService {
 	// 新增單筆訂單
-	public boolean addOrder(OrdersBean ordersBean);
+	public Object addOrder(OrdersBean ordersBean);
 	
 	// 查詢所有訂單
 	public List<OrdersBean> getAllOrders();

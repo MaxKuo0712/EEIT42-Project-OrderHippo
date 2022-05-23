@@ -3,6 +3,8 @@ package com.orderhippo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.orderhippo.model.OrdersBean;
@@ -15,18 +17,18 @@ public class OrdersServicelmp implements OrdersService {
 	private OrdersRepository ordersRepository;
 
 	@Override
-	public boolean addOrder(OrdersBean ordersBean) {
+	public Object addOrder(OrdersBean ordersBean) {
 		
 		if (ordersBean != null) {
 			try {
 				OrdersBean result = ordersRepository.save(ordersBean);
-				return ordersRepository.existsById(result.getId());
+				return new ResponseEntity<Boolean>(ordersRepository.existsById(result.getId()), HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 
 	@Override
@@ -54,6 +56,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getOrderByOrderidAndOrderstatus(String orderid, String orderstatus) {
 		List<OrdersBean> result = ordersRepository.findByOrderidAndOrderstatus(orderid, orderstatus);
+		
 		if (!result.isEmpty()) {
 			return result;
 		}
@@ -64,6 +67,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getOrderByStoreid(String storeid) {
 		List<OrdersBean> result = ordersRepository.findByStoreid(storeid);
+		
 		if (!result.isEmpty()) {
 			return result;
 		}
@@ -74,6 +78,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getOrderByStoreIDAndOrderStatus(String storeid, String orderstatus) {
 		List<OrdersBean> result = ordersRepository.findByStoreidAndOrderstatus(storeid, orderstatus);
+		
 		if (!result.isEmpty()) {
 			return result;
 		}
@@ -95,6 +100,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getOrderByUseridAndOrderstatus(String userid, String orderstatus) {
 		List<OrdersBean> result = ordersRepository.findByUseridAndOrderstatus(userid, orderstatus);
+		
 		if (!result.isEmpty()) {
 			return result;
 		}
@@ -105,6 +111,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getOrderByOrderstatus(String orderstatus) {
 		List<OrdersBean> result = ordersRepository.findByOrderstatus(orderstatus);
+		
 		if (!result.isEmpty()) {
 			return result;
 		}

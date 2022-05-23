@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,11 +70,11 @@ public class OrdersController {
 	
 	@ApiOperation("新增單筆訂單資料")
 	@PostMapping("/order")
-	public boolean addOrder(@RequestBody OrdersBean ordersBean) {
+	public Object addOrder(@RequestBody OrdersBean ordersBean) {
 		if (ordersBean != null) {
 			return ordersService.addOrder(ordersBean); 
 		}
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 
 }
