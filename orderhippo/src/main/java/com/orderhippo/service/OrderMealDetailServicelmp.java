@@ -3,6 +3,8 @@ package com.orderhippo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.orderhippo.model.OrderMealDetailBean;
@@ -15,19 +17,18 @@ public class OrderMealDetailServicelmp implements OrderMealDetailService {
 	private OrderMealDetailRepository orderMealDetailRepository;
 
 	@Override
-	public boolean addOrderMealDetail(OrderMealDetailBean orderMealDetailBean) {
+	public Object addOrderMealDetail(OrderMealDetailBean orderMealDetailBean) {
 		
 		if (orderMealDetailBean != null) {
 			try {
 				orderMealDetailRepository.save(orderMealDetailBean);
-				return true;
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.orderhippo.model.OrderMealDetailBean;
 
 public interface OrderMealDetailService {
 	// 新增訂單餐點資訊
-	public boolean addOrderMealDetail(OrderMealDetailBean orderMealDetailBean);
+	public Object addOrderMealDetail(OrderMealDetailBean orderMealDetailBean);
 	
 	// 查詢訂單餐點資訊
 	public List<OrderMealDetailBean> getAllOrderMealDetail();
