@@ -18,17 +18,17 @@ public class StoreInfoServiceImp implements StoreInfoService {
 	private StoreInfoRepository storeInfoRepository;
 
 	@Override
-	public boolean addStoreInfo(StoreInfoBean storeInfoBean) {
+	public Object addStoreInfo(StoreInfoBean storeInfoBean) {
 		if (storeInfoBean != null) {
 			try {
 				StoreInfoBean result = storeInfoRepository.save(storeInfoBean);
-				return storeInfoRepository.existsById(result.getId());
+				return new ResponseEntity<Boolean>(storeInfoRepository.existsById(result.getId()), HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class StoreInfoServiceImp implements StoreInfoService {
 //	}
 	// 更新單筆店家資料
 	@Override
-	public boolean updateStoreInfo(String reviseid, StoreInfoBean storeInfoBean) {
+	public Object updateStoreInfo(String reviseid, StoreInfoBean storeInfoBean) {
 		List<StoreInfoBean> storeInfo = storeInfoRepository.findByStoreid(storeInfoBean.getStoreid());
 			
 		if (storeInfo.size() == 1) {
@@ -105,12 +105,12 @@ public class StoreInfoServiceImp implements StoreInfoService {
 			
 			try {
 				storeInfoRepository.save(storeInfoBean);
-				return true;
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return false;
+		return new ResponseEntity<String>("資料不存在：MealID", HttpStatus.NOT_FOUND);
 	}
 }

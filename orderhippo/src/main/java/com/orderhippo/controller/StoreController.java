@@ -49,14 +49,14 @@ public class StoreController {
 		@ApiResponse(code = 404, message = "找不到路徑")
 	})
 	@PostMapping("/stores")
-	public boolean addNewStore(
+	public Object addNewStore(
 			@RequestBody @ApiParam(name ="店家資料", value = "需要欄位資料：STORE_NAME, STORE_ADDRESS, "
 			+ "STORE_PHONE, STORE_MAIL, STORE_LOCATION, CREATE_ID") 
 			StoreInfoBean storeInfoBean) {
 		if (storeInfoBean != null) {
 			return storeInfoService.addStoreInfo(storeInfoBean);
 		}
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 	
 //	@ApiOperation("更新店家資料")
@@ -78,13 +78,26 @@ public class StoreController {
 		@ApiResponse(code = 404, message = "找不到路徑")
 	})
 	@PutMapping("/stores/{reviseId}")
-	public boolean updateStoreInfo(@PathVariable String reviseId, @RequestBody StoreInfoBean storeInfoBean) {
-		String storeId = storeInfoBean.getStoreid();
+	public Object updateStoreInfo(@PathVariable String reviseId, @RequestBody StoreInfoBean storeInfoBean) {
 		
-		if ((storeInfoBean != null) && ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) ) {
-			return storeInfoService.updateStoreInfo(reviseId, storeInfoBean);
+		if (storeInfoBean == null) {
+			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 		} else {
-			return false;
+			String storeId = storeInfoBean.getStoreid();
+			
+			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
+				return storeInfoService.updateStoreInfo(reviseId, storeInfoBean);
+			} else {
+				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or StoreId", HttpStatus.BAD_REQUEST);
+			}
 		}
+
+//		String storeId = storeInfoBean.getStoreid();
+//		
+//		if ((storeInfoBean != null) && ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) ) {
+//			return storeInfoService.updateStoreInfo(reviseId, storeInfoBean);
+//		} else {
+//			return false;
+//		}
 	}
 }
