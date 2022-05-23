@@ -46,7 +46,6 @@ public class OrderMealDetailServicelmp implements OrderMealDetailService {
 	public List<OrderMealDetailBean> getOrderMealDetailByOrderid(String orderid) {
 		List<OrderMealDetailBean> result = orderMealDetailRepository.findByOrderid(orderid);
 		
-		
 		if (!result.isEmpty()) {
 			return result;
 		}

@@ -75,13 +75,26 @@ public class UserController {
 	
 	@ApiOperation("更新使用者資料")
 	@PutMapping("/users/{reviseId}")
-	public boolean updateLoginTime(@PathVariable String reviseId, @RequestBody UserInfoBean userInfoBean) {
-		String userId = userInfoBean.getUserid();
+	public Object updateLoginTime(@PathVariable String reviseId, @RequestBody UserInfoBean userInfoBean) {
 		
-		if ((userInfoBean != null) && ((reviseId.equals(userId)) || (reviseId.equals("Admin")))) {
-			return userInfoService.updateUserInfo(reviseId, userInfoBean);	
+		if (userInfoBean == null) {
+			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 		} else {
-			return false;
+			String storeId = userInfoBean.getUserid();
+			
+			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
+				return userInfoService.updateUserInfo(reviseId, userInfoBean);
+			} else {
+				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or UserId", HttpStatus.BAD_REQUEST);
+			}
 		}
+		
+//		String userId = userInfoBean.getUserid();
+//		
+//		if ((userInfoBean != null) && ((reviseId.equals(userId)) || (reviseId.equals("Admin")))) {
+//			return userInfoService.updateUserInfo(reviseId, userInfoBean);	
+//		} else {
+//			return false;
+//		}
 	}
 }
