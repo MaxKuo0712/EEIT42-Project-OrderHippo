@@ -32,7 +32,7 @@ public class MealCategoryServicelmp implements MealCategoryService {
 	public List<MealCategoryBean> getAllMealCategory() {
 		List<MealCategoryBean> result = mealCategoryRepository.findAll();
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;

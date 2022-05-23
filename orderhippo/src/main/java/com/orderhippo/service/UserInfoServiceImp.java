@@ -40,7 +40,7 @@ public class UserInfoServiceImp implements UserInfoService {
 	public List<UserInfoBean> getAllUserInfo() {
 		List<UserInfoBean> result = userInfoRepository.findAll();
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
@@ -51,7 +51,7 @@ public class UserInfoServiceImp implements UserInfoService {
 	public List<UserInfoBean> getUserInfofindByUserid(String userid) {
 		List<UserInfoBean> result = userInfoRepository.findByUserid(userid);
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
@@ -62,7 +62,7 @@ public class UserInfoServiceImp implements UserInfoService {
 	public List<UserInfoBean> getUserInfofindfindByUsermail(String usermail) {
 		List<UserInfoBean> result = userInfoRepository.findByUsermail(usermail);
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		} 
 		return null;

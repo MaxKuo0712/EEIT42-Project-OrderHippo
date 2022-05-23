@@ -32,7 +32,8 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getAllOrders() {
 		List<OrdersBean> result = ordersRepository.findAll();
-		if (result.size() > 0) {
+		
+		if (!result.isEmpty()) {
 			return result;
 		} 
 		return null;
@@ -43,7 +44,7 @@ public class OrdersServicelmp implements OrdersService {
 	public List<OrdersBean> getOrderByOrderId(String orderId) {
 		List<OrdersBean> result = ordersRepository.findByOrderid(orderId);
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
@@ -53,7 +54,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getOrderByOrderidAndOrderstatus(String orderid, String orderstatus) {
 		List<OrdersBean> result = ordersRepository.findByOrderidAndOrderstatus(orderid, orderstatus);
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
@@ -63,7 +64,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getOrderByStoreid(String storeid) {
 		List<OrdersBean> result = ordersRepository.findByStoreid(storeid);
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
@@ -73,7 +74,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getOrderByStoreIDAndOrderStatus(String storeid, String orderstatus) {
 		List<OrdersBean> result = ordersRepository.findByStoreidAndOrderstatus(storeid, orderstatus);
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
@@ -84,7 +85,7 @@ public class OrdersServicelmp implements OrdersService {
 	public List<OrdersBean> getOrderByUserid(String userid) {
 		List<OrdersBean> result = ordersRepository.findByUserid(userid);
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
@@ -94,7 +95,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getOrderByUseridAndOrderstatus(String userid, String orderstatus) {
 		List<OrdersBean> result = ordersRepository.findByUseridAndOrderstatus(userid, orderstatus);
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
@@ -104,7 +105,7 @@ public class OrdersServicelmp implements OrdersService {
 	@Override
 	public List<OrdersBean> getOrderByOrderstatus(String orderstatus) {
 		List<OrdersBean> result = ordersRepository.findByOrderstatus(orderstatus);
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;

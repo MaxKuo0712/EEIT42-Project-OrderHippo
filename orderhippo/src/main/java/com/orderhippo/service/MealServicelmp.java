@@ -37,7 +37,7 @@ public class MealServicelmp implements MealService {
 	public List<MealBean> getAllMeal() {
 		List<MealBean> result = mealRepository.findAll();
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return mealRepository.findAll();
 		}
 		return null;
@@ -79,7 +79,7 @@ public class MealServicelmp implements MealService {
 	public List<MealBean> getMealByMealID(String mealId) {
 		List<MealBean> result = mealRepository.findByMealid(mealId);
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
@@ -90,7 +90,7 @@ public class MealServicelmp implements MealService {
 	public List<MealBean> getMealByMealCategoryID(String mealcategoryId) {
 		List<MealBean> result = mealRepository.findByMealcategoryid(mealcategoryId);
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
@@ -101,7 +101,7 @@ public class MealServicelmp implements MealService {
 	public List<MealBean> getMealByStoreID(String storeId) {
 		List<MealBean> result = mealRepository.findByStoreid(storeId);
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;

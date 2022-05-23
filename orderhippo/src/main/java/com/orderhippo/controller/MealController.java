@@ -46,6 +46,7 @@ public class MealController {
 		}
 	}
 	
+	@ApiOperation("新增餐點資料")
 	@PostMapping("/meal")
 	public boolean addMeal(@RequestBody MealBean mealBean) {
 		if (mealBean != null) {
@@ -54,6 +55,7 @@ public class MealController {
 		return false;
 	}
 	
+	@ApiOperation("修改餐點資料")
 	@PutMapping("/meal/{reviseId}")
 	public boolean updateMeal(@PathVariable String reviseId, @RequestBody MealBean mealBean) {
 		String storeId = mealBean.getStoreid();

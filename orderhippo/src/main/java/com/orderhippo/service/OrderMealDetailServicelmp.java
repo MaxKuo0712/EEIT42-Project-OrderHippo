@@ -24,7 +24,7 @@ public class OrderMealDetailServicelmp implements OrderMealDetailService {
 	public List<OrderMealDetailBean> getAllOrderMealDetail() {
 		List<OrderMealDetailBean> result = orderMealDetailRepository.findAll();
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		
@@ -33,7 +33,13 @@ public class OrderMealDetailServicelmp implements OrderMealDetailService {
 
 	@Override
 	public List<OrderMealDetailBean> getOrderMealDetailByOrderid(String orderid) {
-		// TODO Auto-generated method stub
+		List<OrderMealDetailBean> result = orderMealDetailRepository.findByOrderid(orderid);
+		
+		
+		if (!result.isEmpty()) {
+			return result;
+		}
+		
 		return null;
 	}
 

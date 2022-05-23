@@ -35,7 +35,7 @@ public class StoreInfoServiceImp implements StoreInfoService {
 	public List<StoreInfoBean> getAllStoreInfo() {
 		List<StoreInfoBean> result = storeInfoRepository.findAll();
 		
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		}
 		return null;
