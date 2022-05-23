@@ -24,13 +24,13 @@ public class MealServicelmp implements MealService {
 		if (mealBean != null) {
 			try {
 				MealBean result = mealRepository.save(mealBean);
-				return mealRepository.existsById(result.getId());
+				return new ResponseEntity<Boolean>(mealRepository.existsById(result.getId()), HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 
 	// 查詢所有餐點
@@ -62,17 +62,27 @@ public class MealServicelmp implements MealService {
 				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		return new ResponseEntity<String>("餐點不存在(MealID)", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<String>("資料不存在：MealID", HttpStatus.NOT_FOUND);
 	}
 
 	// 刪除單筆餐點
 	@Override
-	public boolean deleteMeal(String mealId) {
-		// TODO Auto-generated method stub
-		return false;
+	public Object deleteMeal(String mealId) {
+		List<MealBean> result = mealRepository.findByMealid(mealId);
+		
+		if (result.size() == 1) {
+			try {
+				mealRepository.deleteById(result.get(0).getId());
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+		return new ResponseEntity<String>("資料不存在：MealID", HttpStatus.NOT_FOUND);
 	}
 
 	// 查詢餐點 By MealID 搜尋

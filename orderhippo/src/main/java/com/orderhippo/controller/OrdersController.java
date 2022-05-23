@@ -30,12 +30,6 @@ public class OrdersController {
 	@Autowired 
 	private OrdersService ordersService;
 	
-//	@ApiOperation("查詢所有訂單資料")
-//	@GetMapping("/orders")
-//	public List<OrdersBean> getAllOreders() {
-//		return ordersService.getAllOrders();
-//	}
-
 	@ApiOperation("查詢訂單資料 by 店家ID or 使用者ID or 訂單ID or All")
 	@GetMapping("/orders")
 	public List<OrdersBean> getOrederByOrderId(

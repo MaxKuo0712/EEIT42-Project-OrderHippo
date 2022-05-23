@@ -25,5 +25,5 @@ public interface MealService {
 	public Object updateMeal(String reviseId, MealBean mealBean);
 	
 	// 刪除單筆餐點
-	public boolean deleteMeal(String mealId);
+	public Object deleteMeal(String mealId);
 }

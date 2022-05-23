@@ -50,22 +50,33 @@ public class MealController {
 	
 	@ApiOperation("新增餐點資料")
 	@PostMapping("/meal")
-	public boolean addMeal(@RequestBody MealBean mealBean) {
+	public Object addMeal(@RequestBody MealBean mealBean) {
 		if (mealBean != null) {
 			return mealService.addMeal(mealBean);
 		}
-		return false;
+		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 	
 	@ApiOperation("修改餐點資料")
 	@PutMapping("/meal/{reviseId}")
 	public Object updateMeal(@PathVariable String reviseId, @RequestBody MealBean mealBean) {
-		String storeId = mealBean.getStoreid();
 		
-		if ((mealBean != null) && ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) ) {
-			return mealService.updateMeal(reviseId, mealBean);
+		if (mealBean == null) {
+			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
+		} else {
+			String storeId = mealBean.getStoreid();
+			
+			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
+				return mealService.updateMeal(reviseId, mealBean);
+			} else {
+				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or StoreId", HttpStatus.BAD_REQUEST);
+			}
 		}
-		return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
+		
+//		if ((mealBean != null) && ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) ) {
+//			return mealService.updateMeal(reviseId, mealBean);
+//		}
+//		return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
 	}
 
 }
