@@ -24,7 +24,7 @@ public class MealServicelmp implements MealService {
 		if (mealBean != null) {
 			try {
 				MealBean result = mealRepository.save(mealBean);
-				return new ResponseEntity<Boolean>(mealRepository.existsById(result.getId()), HttpStatus.OK);
+				return new ResponseEntity<String>(result.getMealid(), HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
