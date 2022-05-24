@@ -22,7 +22,7 @@ public class OrdersServicelmp implements OrdersService {
 		if (ordersBean != null) {
 			try {
 				OrdersBean result = ordersRepository.save(ordersBean);
-				return new ResponseEntity<Boolean>(ordersRepository.existsById(result.getId()), HttpStatus.OK);
+				return new ResponseEntity<OrdersBean>(result, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
