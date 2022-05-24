@@ -5,9 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Entity
 @Table(name = "v_meal_mealbom")
 public class VMealMelaBomBean {
