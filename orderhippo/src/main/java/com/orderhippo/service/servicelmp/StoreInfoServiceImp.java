@@ -1,4 +1,4 @@
-package com.orderhippo.service;
+package com.orderhippo.service.servicelmp;
 
 import java.util.Date;
 import java.util.List;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.orderhippo.model.StoreInfoBean;
 import com.orderhippo.repository.StoreInfoRepository;
+import com.orderhippo.service.service.StoreInfoService;
 
 @Service
 public class StoreInfoServiceImp implements StoreInfoService {

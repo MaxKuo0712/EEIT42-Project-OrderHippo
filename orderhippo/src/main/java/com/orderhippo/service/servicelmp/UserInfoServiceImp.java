@@ -1,4 +1,4 @@
-package com.orderhippo.service;
+package com.orderhippo.service.servicelmp;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.orderhippo.model.UserInfoBean;
 import com.orderhippo.repository.UserInfoRepository;
+import com.orderhippo.service.service.UserInfoService;
 
 @Service
 public class UserInfoServiceImp implements UserInfoService {

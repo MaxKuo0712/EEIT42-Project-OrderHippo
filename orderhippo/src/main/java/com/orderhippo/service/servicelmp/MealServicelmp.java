@@ -1,4 +1,4 @@
-package com.orderhippo.service;
+package com.orderhippo.service.servicelmp;
 
 import java.util.Date;
 import java.util.List;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.orderhippo.model.MealBean;
 import com.orderhippo.repository.MealRepository;
+import com.orderhippo.service.service.MealService;
 
 @Service
 public class MealServicelmp implements MealService {

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.IngredientBean;
-import com.orderhippo.service.IngredientService;
+import com.orderhippo.service.service.IngredientService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

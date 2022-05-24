@@ -1,4 +1,4 @@
-package com.orderhippo.service;
+package com.orderhippo.service.service;
 
 import java.util.List;
 

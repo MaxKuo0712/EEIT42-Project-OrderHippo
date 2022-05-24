@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.orderhippo.model.VMealMelaBomBean;
-import com.orderhippo.service.VMealMelaBomService;
+import com.orderhippo.model.viewBean.VMealMelaBomBean;
+import com.orderhippo.service.service.VMealMelaBomService;
 
 import io.swagger.annotations.Api;
 

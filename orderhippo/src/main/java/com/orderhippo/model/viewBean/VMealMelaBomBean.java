@@ -1,4 +1,4 @@
-package com.orderhippo.model;
+package com.orderhippo.model.viewBean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

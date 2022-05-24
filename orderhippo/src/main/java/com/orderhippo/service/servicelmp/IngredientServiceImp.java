@@ -1,4 +1,4 @@
-package com.orderhippo.service;
+package com.orderhippo.service.servicelmp;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.orderhippo.model.IngredientBean;
 import com.orderhippo.repository.IngredientRepository;
+import com.orderhippo.service.service.IngredientService;
 
 @Service
 public class IngredientServiceImp implements IngredientService {

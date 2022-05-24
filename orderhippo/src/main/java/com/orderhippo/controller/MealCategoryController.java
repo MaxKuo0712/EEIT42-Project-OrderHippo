@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.MealCategoryBean;
-import com.orderhippo.service.MealCategoryService;
+import com.orderhippo.service.service.MealCategoryService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
