@@ -36,8 +36,7 @@ public class SwaggerConfig {
                 "Order Hippo",
                 "v1.0",
                 "",
-                new Contact("OrderHippo", "",
-                        "eeit42orderhippo@gmail.com"),
+                new Contact("OrderHippo", "", "eeit42orderhippo@gmail.com"),
                 "", "", Collections.emptyList());
     }
 }
