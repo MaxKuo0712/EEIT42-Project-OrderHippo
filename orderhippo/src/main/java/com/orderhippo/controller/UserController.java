@@ -27,17 +27,13 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = "使用者資訊API")
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://127.0.0.1:8080")
+//@CrossOrigin(origins = "http://127.0.0.1:8080")
 public class UserController {
 	
 	@Autowired 
 	private UserInfoService userInfoService;
 	
 	@ApiOperation("查詢使用者資料")
-	@ApiResponses({
-		@ApiResponse(code = 401, message = "沒有權限"),
-		@ApiResponse(code = 404, message = "找不到路徑")
-	})
 	@GetMapping("/users")
 	public List<UserInfoBean> getUserInfo(			
 			@RequestParam(name = "userid", required = false) String userid,
