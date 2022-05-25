@@ -16,4 +16,7 @@ public interface OrderMealDetailService {
 	
 	// 查詢訂單餐點資訊 By MEAL_ID
 	public List<OrderMealDetailBean> getOrderMealDetailByMealid(String mealid);
+	
+	// 修改訂單餐點資訊
+//	public Object updateOrderMealDetail(String reviseId, OrderMealDetailBean orderMealDetailBean);
 }

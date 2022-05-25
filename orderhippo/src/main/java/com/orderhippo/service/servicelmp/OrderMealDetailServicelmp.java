@@ -1,5 +1,6 @@
 package com.orderhippo.service.servicelmp;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.orderhippo.model.MealBean;
 import com.orderhippo.model.OrderMealDetailBean;
 import com.orderhippo.repository.OrderMealDetailRepository;
 import com.orderhippo.service.service.OrderMealDetailService;
@@ -65,4 +67,25 @@ public class OrderMealDetailServicelmp implements OrderMealDetailService {
 		return null;
 	}
 
+//	@Override
+//	public Object updateOrderMealDetail(String reviseId, OrderMealDetailBean orderMealDetailBean) {
+//		List<OrderMealDetailBean> orderMealDetail = orderMealDetailRepository.findByOrderid(orderMealDetailBean.getOrderid());
+//		
+//		if (orderMealDetail.size() == 1) {
+//			OrderMealDetailBean currentMeal = orderMealDetail.get(0);
+//			
+//			orderMealDetailBean.setId(currentMeal.getId());
+//			orderMealDetailBean.setReviseid(reviseId);
+//			orderMealDetailBean.setRevisetime(new Date());
+//			
+//			try {
+//				orderMealDetailRepository.save(orderMealDetailBean);
+//				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+//			}
+//		}
+//		return new ResponseEntity<String>("資料不存在：MealID", HttpStatus.NOT_FOUND);
+//	}
 }
