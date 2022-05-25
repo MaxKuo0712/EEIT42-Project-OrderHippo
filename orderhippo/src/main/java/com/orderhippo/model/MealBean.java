@@ -27,52 +27,56 @@ public class MealBean {
 	private Integer id;
 	
 	@JsonProperty("MEAL_ID")
-	@Column(name = "MEAL_ID", updatable = false, unique = true, nullable = true)
+	@Column(name = "MEAL_ID", updatable = false, unique = true)
 	private String mealid;
 	
 	@JsonProperty("MEAL_NAME")
-	@Column(name = "MEAL_NAME", nullable = true)
+	@Column(name = "MEAL_NAME")
 	private String mealname;
 	
 	@JsonProperty("MEAL_CATEGORY_ID")
-	@Column(name = "MEAL_CATEGORY_ID", nullable = true)
+	@Column(name = "MEAL_CATEGORY_ID")
 	private String mealcategoryid;
 	
 	@JsonProperty("MEAL_CATEGORY_NAME")
-	@Column(name = "MEAL_CATEGORY_NAME", nullable = true)
+	@Column(name = "MEAL_CATEGORY_NAME")
 	private String mealcategoryname;
 	
 	@JsonProperty("STORE_ID")
-	@Column(name = "STORE_ID", nullable = true)
+	@Column(name = "STORE_ID")
 	private String storeid;
 	
 	@JsonProperty("MEAL_IMAGE")
-	@Column(name = "MEAL_IMAGE", nullable = true)
+	@Column(name = "MEAL_IMAGE")
 	private String mealimage;
 	
 	@JsonProperty("MEAL_DESC")
-	@Column(name = "MEAL_DESC", columnDefinition = "LONGTEXT", nullable = true)
+	@Column(name = "MEAL_DESC", columnDefinition = "LONGTEXT")
 	private String mealdesc;
 	
 	@JsonProperty("MEAL_PRICE")
-	@Column(name = "MEAL_PRICE", nullable = true)
+	@Column(name = "MEAL_PRICE")
 	private Integer mealprice;
 	
 	@JsonProperty("MEAL_CALORIE")
-	@Column(name = "MEAL_CALORIE", nullable = true)
+	@Column(name = "MEAL_CALORIE")
 	private Double mealcalorie;
 	
 	@JsonProperty("MEAL_CARB")
-	@Column(name = "MEAL_CARB", nullable = true)
+	@Column(name = "MEAL_CARB")
 	private Double mealcarb;
 	
 	@JsonProperty("MEAL_FAT")
-	@Column(name = "MEAL_FAT", nullable = true)
+	@Column(name = "MEAL_FAT")
 	private Double mealfat;
 	
 	@JsonProperty("MEAL_PROTEIN")
-	@Column(name = "MEAL_PROTEIN", nullable = true)
+	@Column(name = "MEAL_PROTEIN")
 	private Double mealprotein;
+	
+	@JsonProperty("MEAL_STATUS")
+	@Column(name = "MEAL_STATUS")
+	private Double mealstatus;
 	
 	@JsonProperty("CREATE_ID")
 	@Column(name = "CREATE_ID", updatable = false)
@@ -95,9 +99,9 @@ public class MealBean {
 		return "MealBean [id=" + id + ", mealid=" + mealid + ", mealname=" + mealname + ", mealcategoryid="
 				+ mealcategoryid + ", mealcategoryname=" + mealcategoryname + ", storeid=" + storeid + ", mealimage="
 				+ mealimage + ", mealdesc=" + mealdesc + ", mealprice=" + mealprice + ", mealcalorie=" + mealcalorie
-				+ ", mealcarb=" + mealcarb + ", mealfat=" + mealfat + ", mealprotein=" + mealprotein + ", createtid="
-				+ createtid + ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime=" + revisetime
-				+ "]";
+				+ ", mealcarb=" + mealcarb + ", mealfat=" + mealfat + ", mealprotein=" + mealprotein + ", mealstatus="
+				+ mealstatus + ", createtid=" + createtid + ", createtime=" + createtime + ", reviseid=" + reviseid
+				+ ", revisetime=" + revisetime + "]";
 	}
 
 	public Integer getId() {
@@ -202,6 +206,14 @@ public class MealBean {
 
 	public void setMealprotein(Double mealprotein) {
 		this.mealprotein = mealprotein;
+	}
+
+	public Double getMealstatus() {
+		return mealstatus;
+	}
+
+	public void setMealstatus(Double mealstatus) {
+		this.mealstatus = mealstatus;
 	}
 
 	public String getCreatetid() {
