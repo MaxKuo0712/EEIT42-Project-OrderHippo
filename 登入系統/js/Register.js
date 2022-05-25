@@ -123,7 +123,7 @@ submitBnt.addEventListener("click", (e) => {
         userRegister(e);
         welcomeToUse(getUserName());
         setInterval(() => {
-            window.location.href = "login"
+            window.location.href = "login.html"
         }, 2000); // 等待2秒導向回到登入頁面
     }
     form.classList.add('was-validated')

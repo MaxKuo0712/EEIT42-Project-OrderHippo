@@ -48,11 +48,9 @@ function signOutOK() {
 function setSignBntStatus() {
     const auth = getAuth();
     const signBnt = document.getElementById("signBnt");
-    console.log(auth);
     auth.onAuthStateChanged((user) =>{
         if (user) {
             signBnt.innerText = "Sign out";
-           console.log(user);
         } else {
             signBnt.innerText = "Sign in";
         }
@@ -62,8 +60,9 @@ function setSignBntStatus() {
 signBnt.addEventListener("click", (e) => {
     let signText = signBnt.innerText;
     if (signText === "Sign in") {
-        window.location.href = "login";
+        window.location.href = "login.html";
     } else if (signText === "Sign out") {
         userSignOut();
+        localStorage.removeItem("userinfo");
     }
 });

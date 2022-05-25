@@ -62,22 +62,22 @@ function userMailLogin(e) {
                 }).then(res => {
                     return res.json();
                 }).then(result => {
-
+                    let REVISE_ID = USER_ID;
                     let queryResult = result[0];
 
                     queryResult.LAST_LOGININ_TIME = new Date();
 
-                    let REVISE_ID = USER_ID;
+                    addLocalstorage(queryResult);
 
                     fetch(`http://localhost:8080/api/users/${REVISE_ID}`, {
                         method: "PUT",
-                        headers: {"content-Type":"application/json"},
+                        headers: { "content-Type": "application/json" },
                         body: JSON.stringify(queryResult)
                     }).then((e) => {
-                        console.log(e.status)
+                        console.log(e.status);
                         welcomeToUse(userName);
                         setInterval(() => {
-                            //window.location.href = "homepage"
+                            window.location.href = "homepage.html"
                         }, 2000); // 等待2秒導向回到登入頁面
                     })
                 });
@@ -103,11 +103,7 @@ function userGoogleLogin(e) {
             const token = credential.accessToken;
             const user = result.user;
             const userName = user.displayName;
-            welcomeToUse(userName);
-            console.log(auth.currentUser);
-            setInterval(() => {
-                window.location.href = "homepage"
-            }, 2000); // 等待2秒導向回到上一頁(登入頁面)
+            addGoogleUserInfo(result);
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -177,6 +173,54 @@ function welcomeToUse(userName) {
         showConfirmButton: false,
         timer: 1500
     });
+}
+
+function addGoogleUserInfo(result) {
+
+    const userId = result.user.uid;
+
+    fetch(`http://localhost:8080/api/users?userid=${userId}`, {
+        method: "GET"
+    }).then(res => {
+        return res.text();
+    }).then(queryResult => {
+        if (queryResult.length === 0) {
+
+            const USER_ID = userId;
+            const USER_NAME = "";
+            const USER_GENDER = "";
+            const USER_PHONE = "";
+            const USER_MAIL = result.user.email;
+            const USER_BIRTH = new Date("2021-01-01");
+            const USER_ADDRESS = "";
+            const CREATE_ID = userId;
+
+            const userInfo = { USER_ID, USER_NAME, USER_GENDER, USER_BIRTH, USER_PHONE, USER_ADDRESS, USER_MAIL, CREATE_ID };
+
+            fetch("http://localhost:8080/api/users", {
+                method: "POST",
+                headers: { "content-Type": "application/json" },
+                body: JSON.stringify(userInfo)
+            }).then(() => {
+                addLocalstorage(userInfo);
+                console.log("Add New User.");
+                setInterval(() => {
+                    window.location.href = "changeUserInfo.html"
+                }, 1000); // 等待2秒導向回到上一頁(登入頁面)
+            })
+        } else {
+            addLocalstorage(JSON.parse(queryResult)[0]);
+            welcomeToUse(JSON.parse(localStorage.getItem("userinfo")).USER_NAME);
+            setInterval(() => {
+                window.location.href = " homepage.html"
+            }, 2000); // 等待2秒導向回到上一頁(登入頁面)
+        }
+    });
+}
+
+function addLocalstorage(userInfo) {
+    localStorage.removeItem('userinfo');
+    localStorage.setItem('userinfo', JSON.stringify(userInfo));
 }
 
 mailLoginBnt.addEventListener("click", (e) => {
