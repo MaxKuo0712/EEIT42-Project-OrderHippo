@@ -31,7 +31,7 @@ public class MealController {
 	@Autowired
 	private MealService mealService;
 	
-	@ApiOperation("查詢餐點資料 by 餐點ID or 餐點種類ID or 店家ID or All")
+	@ApiOperation("查詢餐點資料(mealstatus = true) by 餐點ID or 餐點種類ID or 店家ID or All")
 	@GetMapping("/meals")
 	public List<MealBean> getAllMeals(
 			@RequestParam(name = "mealid", required = false) String mealId, 

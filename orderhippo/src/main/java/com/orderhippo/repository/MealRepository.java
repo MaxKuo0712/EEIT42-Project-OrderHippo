@@ -9,12 +9,12 @@ import com.orderhippo.model.MealBean;
 public interface MealRepository extends JpaRepository<MealBean, Integer> {
 	
 	// By MealID 搜尋
-	List<MealBean> findByMealid(String mealid);
+	List<MealBean> findByMealidAndMealstatus(String mealid, Boolean mealstatus);
 	
 	// By MEAL_CATEGORY_ID 搜尋
-	List<MealBean> findByMealcategoryid(String mealcategoryid);
+	List<MealBean> findByMealcategoryidAndMealstatus(String mealcategoryid, Boolean mealstatus);
 	
 	// By STORE_ID 搜尋
-	List<MealBean> findByStoreid(String storeid);
+	List<MealBean> findByStoreidAndMealstatus(String storeid, Boolean mealstatus);
 	
 }

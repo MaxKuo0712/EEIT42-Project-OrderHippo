@@ -48,7 +48,7 @@ public class MealServicelmp implements MealService {
 	// 修改單筆餐點
 	@Override
 	public Object updateMeal(String reviseId, MealBean mealBean) {
-		List<MealBean> meal = mealRepository.findByMealid(mealBean.getMealid());
+		List<MealBean> meal = mealRepository.findByMealidAndMealstatus(mealBean.getMealid(), true);
 		
 		if (meal.size() == 1) {
 			MealBean currentMeal = meal.get(0);
@@ -69,14 +69,16 @@ public class MealServicelmp implements MealService {
 		return new ResponseEntity<String>("資料不存在：MealID", HttpStatus.NOT_FOUND);
 	}
 
-	// 刪除單筆餐點
+	// 刪除單筆餐點 -- 更改餐點狀態為false
 	@Override
 	public Object deleteMeal(String mealId) {
-		List<MealBean> result = mealRepository.findByMealid(mealId);
+		List<MealBean> result = mealRepository.findByMealidAndMealstatus(mealId, true);
 		
 		if (result.size() == 1) {
 			try {
-				mealRepository.deleteById(result.get(0).getId());
+				MealBean targetMeal = result.get(0);
+				targetMeal.setMealstatus(false);
+				mealRepository.save(targetMeal);
 				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -84,12 +86,23 @@ public class MealServicelmp implements MealService {
 			}
 		}
 		return new ResponseEntity<String>("資料不存在：MealID", HttpStatus.NOT_FOUND);
+		
+//		if (result.size() == 1) {
+//			try {
+//				mealRepository.deleteById(result.get(0).getId());
+//				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+//			}
+//		}
+		
 	}
 
 	// 查詢餐點 By MealID 搜尋
 	@Override
 	public List<MealBean> getMealByMealID(String mealId) {
-		List<MealBean> result = mealRepository.findByMealid(mealId);
+		List<MealBean> result = mealRepository.findByMealidAndMealstatus(mealId, true);
 		
 		if (!result.isEmpty()) {
 			return result;
@@ -100,7 +113,7 @@ public class MealServicelmp implements MealService {
 	// 查詢餐點 By MEAL_CATEGORY_ID 搜尋
 	@Override
 	public List<MealBean> getMealByMealCategoryID(String mealcategoryId) {
-		List<MealBean> result = mealRepository.findByMealcategoryid(mealcategoryId);
+		List<MealBean> result = mealRepository.findByMealcategoryidAndMealstatus(mealcategoryId, true);
 		
 		if (!result.isEmpty()) {
 			return result;
@@ -111,7 +124,7 @@ public class MealServicelmp implements MealService {
 	// 查詢餐點 By STORE_ID 搜尋
 	@Override
 	public List<MealBean> getMealByStoreID(String storeId) {
-		List<MealBean> result = mealRepository.findByStoreid(storeId);
+		List<MealBean> result = mealRepository.findByStoreidAndMealstatus(storeId, true);
 		
 		if (!result.isEmpty()) {
 			return result;

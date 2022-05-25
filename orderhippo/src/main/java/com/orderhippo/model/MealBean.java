@@ -76,7 +76,7 @@ public class MealBean {
 	
 	@JsonProperty("MEAL_STATUS")
 	@Column(name = "MEAL_STATUS")
-	private Double mealstatus;
+	private Boolean mealstatus;
 	
 	@JsonProperty("CREATE_ID")
 	@Column(name = "CREATE_ID", updatable = false)
@@ -208,11 +208,11 @@ public class MealBean {
 		this.mealprotein = mealprotein;
 	}
 
-	public Double getMealstatus() {
+	public Boolean getMealstatus() {
 		return mealstatus;
 	}
 
-	public void setMealstatus(Double mealstatus) {
+	public void setMealstatus(Boolean mealstatus) {
 		this.mealstatus = mealstatus;
 	}
 
