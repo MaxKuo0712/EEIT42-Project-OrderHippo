@@ -1,25 +1,11 @@
 package com.orderhippo.utils;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class ProjectUtils {
 	
-	public static Double calMealCalorie() {
-		
-		return null;
+	public static String createToken(String requestID) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+		return encoder.encode(requestID);
 	}
-	
-	public static Double calMealCarb() {
-		
-		return null;
-	}
-	
-	public static Double calMealFat() {
-		
-		return null;
-	}
-	
-	public static Double calMealProtein() {
-		
-		return null;
-	}
-
 }
