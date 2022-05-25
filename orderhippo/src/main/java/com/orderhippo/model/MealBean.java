@@ -27,51 +27,51 @@ public class MealBean {
 	private Integer id;
 	
 	@JsonProperty("MEAL_ID")
-	@Column(name = "MEAL_ID", updatable = false, unique = true)
+	@Column(name = "MEAL_ID", updatable = false, unique = true, nullable = true)
 	private String mealid;
 	
 	@JsonProperty("MEAL_NAME")
-	@Column(name = "MEAL_NAME")
+	@Column(name = "MEAL_NAME", nullable = true)
 	private String mealname;
 	
 	@JsonProperty("MEAL_CATEGORY_ID")
-	@Column(name = "MEAL_CATEGORY_ID")
+	@Column(name = "MEAL_CATEGORY_ID", nullable = true)
 	private String mealcategoryid;
 	
 	@JsonProperty("MEAL_CATEGORY_NAME")
-	@Column(name = "MEAL_CATEGORY_NAME")
+	@Column(name = "MEAL_CATEGORY_NAME", nullable = true)
 	private String mealcategoryname;
 	
 	@JsonProperty("STORE_ID")
-	@Column(name = "STORE_ID")
+	@Column(name = "STORE_ID", nullable = true)
 	private String storeid;
 	
 	@JsonProperty("MEAL_IMAGE")
-	@Column(name = "MEAL_IMAGE")
+	@Column(name = "MEAL_IMAGE", nullable = true)
 	private String mealimage;
 	
 	@JsonProperty("MEAL_DESC")
-	@Column(name = "MEAL_DESC", columnDefinition = "LONGTEXT")
+	@Column(name = "MEAL_DESC", columnDefinition = "LONGTEXT", nullable = true)
 	private String mealdesc;
 	
 	@JsonProperty("MEAL_PRICE")
-	@Column(name = "MEAL_PRICE")
+	@Column(name = "MEAL_PRICE", nullable = true)
 	private Integer mealprice;
 	
 	@JsonProperty("MEAL_CALORIE")
-	@Column(name = "MEAL_CALORIE")
+	@Column(name = "MEAL_CALORIE", nullable = true)
 	private Double mealcalorie;
 	
 	@JsonProperty("MEAL_CARB")
-	@Column(name = "MEAL_CARB")
+	@Column(name = "MEAL_CARB", nullable = true)
 	private Double mealcarb;
 	
 	@JsonProperty("MEAL_FAT")
-	@Column(name = "MEAL_FAT")
+	@Column(name = "MEAL_FAT", nullable = true)
 	private Double mealfat;
 	
 	@JsonProperty("MEAL_PROTEIN")
-	@Column(name = "MEAL_PROTEIN")
+	@Column(name = "MEAL_PROTEIN", nullable = true)
 	private Double mealprotein;
 	
 	@JsonProperty("CREATE_ID")

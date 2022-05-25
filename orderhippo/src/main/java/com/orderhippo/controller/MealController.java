@@ -73,7 +73,7 @@ public class MealController {
 				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or StoreId", HttpStatus.BAD_REQUEST);
 			}
 		}
-		
+
 //		if ((mealBean != null) && ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) ) {
 //			return mealService.updateMeal(reviseId, mealBean);
 //		}
