@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.orderhippo.model.MealBean;
 import com.orderhippo.model.OrderMealDetailBean;
 import com.orderhippo.service.service.OrderMealDetailService;
 import com.orderhippo.service.service.OrdersService;
@@ -30,9 +29,6 @@ public class OrderMealDetailController {
 	
 	@Autowired
 	private OrderMealDetailService orderMealDetailService;
-	
-	@Autowired
-	private OrdersService ordersService;
 	
 	@ApiOperation("查詢訂單餐點資料 by 餐點ID or 訂單ID or All")
 	@GetMapping("/ordermealdetails")
