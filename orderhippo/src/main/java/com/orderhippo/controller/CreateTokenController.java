@@ -39,9 +39,20 @@ public class CreateTokenController {
 
 		if ((userinfo.size() == 1 && userinfo.get(0).getUserid().equals(requestID))) {
 			String token = ProjectUtils.createToken(requestID);
+			String saveToken = ProjectUtils.createToken(token);
+			
+			UserInfoBean saveTarget = userinfo.get(0);
+			saveTarget.setUsertoken(saveToken);
+			userInfoService.updateUserInfo(requestID, saveTarget);
+			
 			return new ResponseEntity<String>(token, HttpStatus.OK);
 		} else if ((storeinfo.getStoreid().equals(requestID))) {
 			String token = ProjectUtils.createToken(requestID);
+			String saveToken = ProjectUtils.createToken(token);
+			
+			storeinfo.setStoretoken(saveToken);
+			storeInfoService.updateStoreInfo(requestID, storeinfo);
+			
 			return new ResponseEntity<String>(token, HttpStatus.OK);
 		}
 

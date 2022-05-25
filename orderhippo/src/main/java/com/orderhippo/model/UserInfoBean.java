@@ -58,6 +58,10 @@ public class UserInfoBean {
 	@JsonProperty("USER_ADDRESS")
 	@Column(name = "USER_ADDRESS")
 	private String useraddress;
+	
+	@JsonProperty("USER_TOKEN")
+	@Column(name = "USER_TOKEN", updatable = false, insertable = false)
+	private String usertoken;
 
 	@JsonProperty("LAST_LOGININ_TIME")
 	@Column(name = "LAST_LOGININ_TIME", insertable = false)	
@@ -83,9 +87,9 @@ public class UserInfoBean {
 	public String toString() {
 		return "UserInfoBean [id=" + id + ", userid=" + userid + ", username=" + username + ", usergender=" + usergender
 				+ ", userphone=" + userphone + ", usermail=" + usermail + ", userbirth=" + userbirth + ", userage="
-				+ userage + ", useraddress=" + useraddress + ", lastlogintime=" + lastlogintime + ", createid="
-				+ createid + ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime=" + revisetime
-				+ "]";
+				+ userage + ", useraddress=" + useraddress + ", usertoken=" + usertoken + ", lastlogintime="
+				+ lastlogintime + ", createid=" + createid + ", createtime=" + createtime + ", reviseid=" + reviseid
+				+ ", revisetime=" + revisetime + "]";
 	}
 
 	public Integer getId() {
@@ -158,6 +162,14 @@ public class UserInfoBean {
 
 	public void setUseraddress(String useraddress) {
 		this.useraddress = useraddress;
+	}
+
+	public String getUsertoken() {
+		return usertoken;
+	}
+
+	public void setUsertoken(String usertoken) {
+		this.usertoken = usertoken;
 	}
 
 	public Date getLastlogintime() {

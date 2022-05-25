@@ -56,6 +56,10 @@ public class StoreInfoBean {
 	@Column(name = "STORE_OPEN_STATUS", insertable = false)
 	private Boolean storeopenstatus;
 	
+	@JsonProperty("STORE_TOKEN")
+	@Column(name = "STORE_TOKEN", updatable = false, insertable = false)
+	private String storetoken;
+	
 	@JsonProperty("CREATE_ID")
 	@Column(name = "CREATE_ID", updatable = false)
 	private String createid;
@@ -76,8 +80,9 @@ public class StoreInfoBean {
 	public String toString() {
 		return "StoreInfoBean [id=" + id + ", storeid=" + storeid + ", storename=" + storename + ", storeaddress="
 				+ storeaddress + ", storephone=" + storephone + ", storemail=" + storemail + ", storelocation="
-				+ storelocation + ", storeopenstatus=" + storeopenstatus + ", createid=" + createid + ", createtime="
-				+ createtime + ", revisetime=" + revisetime + ", reviseid=" + reviseid + "]";
+				+ storelocation + ", storeopenstatus=" + storeopenstatus + ", storetoken=" + storetoken + ", createid="
+				+ createid + ", createtime=" + createtime + ", revisetime=" + revisetime + ", reviseid=" + reviseid
+				+ "]";
 	}
 
 	public Integer getId() {
@@ -142,6 +147,14 @@ public class StoreInfoBean {
 
 	public void setStoreopenstatus(Boolean storeopenstatus) {
 		this.storeopenstatus = storeopenstatus;
+	}
+
+	public String getStoretoken() {
+		return storetoken;
+	}
+
+	public void setStoretoken(String storetoken) {
+		this.storetoken = storetoken;
 	}
 
 	public String getCreateid() {
