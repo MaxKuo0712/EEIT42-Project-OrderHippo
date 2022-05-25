@@ -117,6 +117,7 @@ create table MEAL (
 	MEAL_CARB double not null,
 	MEAL_FAT double not null,
 	MEAL_PROTEIN double not null,
+	MEAL_STATUS BOOLEAN default true NOT NULL, -- 不會有default
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
