@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.OrderMealDetailBean;
+import com.orderhippo.model.StoreInfoBean;
+import com.orderhippo.model.UserInfoBean;
 import com.orderhippo.service.service.OrderMealDetailService;
 import com.orderhippo.service.service.OrdersService;
+import com.orderhippo.service.service.StoreInfoService;
+import com.orderhippo.service.service.UserInfoService;
+import com.orderhippo.utils.ProjectUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,27 +35,60 @@ public class OrderMealDetailController {
 	@Autowired
 	private OrderMealDetailService orderMealDetailService;
 	
+	@Autowired 
+	private UserInfoService userInfoService;
+	
+	@Autowired
+	private StoreInfoService storeInfoService;
+	
 	@ApiOperation("查詢訂單餐點資料 by 餐點ID or 訂單ID or All")
-	@GetMapping("/ordermealdetails")
-	public List<OrderMealDetailBean> getAllOrderMealDetail(
+	@GetMapping("/{requestID}/ordermealdetails")
+	public Object getAllOrderMealDetail(
+			@PathVariable String requestID,
+			@RequestParam(name = "token", required = true) String realHashToken,
 			@RequestParam(name = "mealid", required = false) String mealId, 
 			@RequestParam(name = "orderid", required = false) String orderId) {
-		if (mealId != null && mealId.trim().length() > 0) {
-			return orderMealDetailService.getOrderMealDetailByMealid(mealId);
-		} else if (orderId != null && orderId.trim().length() > 0) {
-			return orderMealDetailService.getOrderMealDetailByOrderid(orderId);
+		
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (mealId != null && mealId.trim().length() > 0) {
+				return orderMealDetailService.getOrderMealDetailByMealid(mealId);
+			} else if (orderId != null && orderId.trim().length() > 0) {
+				return orderMealDetailService.getOrderMealDetailByOrderid(orderId);
+			} else {
+				return orderMealDetailService.getAllOrderMealDetail();
+			}
 		} else {
-			return orderMealDetailService.getAllOrderMealDetail();
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@ApiOperation("新增訂單餐點資料")
-	@PostMapping("/ordermealdetail")
-	public Object addMeal(@RequestBody OrderMealDetailBean orderMealDetailBean) {
-		if (orderMealDetailBean != null) {
-			return orderMealDetailService.addOrderMealDetail(orderMealDetailBean);
+	@PostMapping("/{requestID}/ordermealdetail")
+	public Object addMeal(
+			@PathVariable String requestID,
+			@RequestParam(name = "token", required = true) String realHashToken,
+			@RequestBody OrderMealDetailBean orderMealDetailBean) {
+		
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(userinfo, null, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (orderMealDetailBean != null) {
+				orderMealDetailBean.setCreatetid(requestID);
+				return orderMealDetailService.addOrderMealDetail(orderMealDetailBean);
+			}
+			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 	
 //	@ApiOperation("修改訂單餐點資料")

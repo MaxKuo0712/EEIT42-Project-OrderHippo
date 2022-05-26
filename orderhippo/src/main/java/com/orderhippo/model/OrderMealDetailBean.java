@@ -43,7 +43,7 @@ public class OrderMealDetailBean {
 	private Integer mealprice;
 	
 	@JsonProperty("CREATE_ID")
-	@Column(name = "CREATE_ID", updatable = false, insertable = false)
+	@Column(name = "CREATE_ID", updatable = false)
 	private String createtid;
 	
 	@JsonProperty("CREATE_TIME")
