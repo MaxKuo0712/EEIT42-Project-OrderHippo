@@ -27,6 +27,7 @@ create table USER_INFO (
 	USER_BIRTH date not null,
 	USER_AGE int DEFAULT (TIMESTAMPDIFF(YEAR, USER_BIRTH, CURRENT_DATE())),
 	USER_ADDRESS varchar(300) not null,
+	USER_TOKEN varchar(300) default (REPLACE(UUID(),'-','')),
 	LAST_LOGININ_TIME datetime default null,
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
@@ -55,6 +56,7 @@ create table STORE_INFO (
 	STORE_MAIL varchar(200) UNIQUE NOT NULL,
 	STORE_LOCATION varchar(200) UNIQUE NOT NULL,
 	STORE_OPEN_STATUS BOOLEAN default false NOT NULL, -- 不會有default
+	STORE_TOKEN varchar(300) default (REPLACE(UUID(),'-','')),
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) NOT NULL,
 	REVISE_TIME datetime default null,
@@ -65,6 +67,14 @@ create table STORE_INFO (
 
 insert STORE_INFO (STORE_NAME, STORE_ADDRESS, STORE_PHONE, STORE_MAIL, STORE_LOCATION, STORE_OPEN_STATUS, CREATE_ID)
 values ('Order Hippo', '408台中市南屯區公益路二段51號', '091234569', 'eeit42orderhippo@gmail.com', '24.1505311,120.6488196', false, 'Admin')
+
+update STORE_INFO 
+SET STore_token = '$2a$10$fFBFr4RtQZCSgp4e5GND9umKFN.pQ2yaiZoUffSS3kz7Bj82cfXyu'
+where STORE_ID  = 'S202205_2c157218dc9611ec95b9068cdc81eecb'
+
+update STORE_INFO 
+SET STORE_PHONE = '091234568'
+where STORE_ID  = 'S202205_2c157218dc9611ec95b9068cdc81eecb'
 
 select * from STORE_INFO
 
@@ -136,7 +146,7 @@ create table ORDERS (
 	ORDER_ID varchar(100) DEFAULT(CONCAT('O', DATE_FORMAT(CURRENT_DATE(),'%Y%m%d'), '_', REPLACE(UUID(),'-',''))) UNIQUE NOT NULL,
 	STORE_ID varchar(100) not null,
 	USER_ID varchar(100) not null,
-	USER_MAIL varchar(200) not null,
+	-- USER_MAIL varchar(200) not null,
 	ORDERS_PRICE int not null,
 	ORDER_STATUS ENUM('0','1','2','3') not null, -- 0取消的訂單 1未確認訂單, 2已確認訂單, 3已完成訂單
 	CREATE_ID varchar(100) not null,
@@ -145,8 +155,8 @@ create table ORDERS (
 	REVISE_ID varchar(100) default null,
 	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID),
 	FOREIGN KEY (USER_ID) REFERENCES USER_INFO(USER_ID),
-	FOREIGN KEY (USER_MAIL) REFERENCES USER_INFO(USER_MAIL),
-	CONSTRAINT CHK_USER_MAIL CHECK (USER_MAIL REGEXP '[a-zA-Z0-9_\-]+@([a-zA-Z0-9_\-]+\.)+(com|org|edu)' = 1),
+	-- FOREIGN KEY (USER_MAIL) REFERENCES USER_INFO(USER_MAIL),
+	-- CONSTRAINT CHK_USER_MAIL CHECK (USER_MAIL REGEXP '[a-zA-Z0-9_\-]+@([a-zA-Z0-9_\-]+\.)+(com|org|edu)' = 1),
 	CONSTRAINT CHK_ORDERS_PRICE CHECK (ORDERS_PRICE > 0)
 );
 
@@ -188,7 +198,7 @@ create table ORDER_MEALDETAIL (
 	ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	ORDER_ID varchar(100) not null,
 	MEAL_ID varchar(100) not null,
-	MEAL_NAME varchar(100) not null,
+	-- MEAL_NAME varchar(100) not null,
 	ORDER_MEAL_QTY int not null,
 	MEAL_PRICE int not null,
 	CREATE_ID varchar(100) not null,
@@ -197,7 +207,7 @@ create table ORDER_MEALDETAIL (
 	REVISE_ID varchar(100) default null,
 	FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
 	FOREIGN KEY (MEAL_ID) REFERENCES MEAL(MEAL_ID),
-	FOREIGN KEY (MEAL_NAME) REFERENCES MEAL(MEAL_NAME),
+	-- FOREIGN KEY (MEAL_NAME) REFERENCES MEAL(MEAL_NAME),
 	CONSTRAINT CHK_ORDER_MEAL_QTY CHECK (ORDER_MEAL_QTY > 0),
 	CONSTRAINT CHK_MEAL_PRICE CHECK (MEAL_PRICE > 0)
 );
@@ -211,15 +221,15 @@ create table STORE_MESSAGE (
 	MESSAGE_ID varchar(100) DEFAULT(CONCAT('M', DATE_FORMAT(CURRENT_DATE(),'%Y%m'), '_', REPLACE(UUID(),'-',''))) UNIQUE NOT NULL,
 	MESSAGE_NAME varchar(100) UNIQUE not null,
 	STORE_ID varchar(100) not null,
-	STORE_NAME varchar(100) not null,
+	-- STORE_NAME varchar(100) not null,
 	MESSAGE_DESC LONGTEXT not null,
 	MESSAGE_IMAGE varchar(100) not null,
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
 	REVISE_ID varchar(100) default null,
-	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID),
-	FOREIGN KEY (STORE_NAME) REFERENCES STORE_INFO(STORE_NAME)
+	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID)
+	-- FOREIGN KEY (STORE_NAME) REFERENCES STORE_INFO(STORE_NAME)
 );
 
 drop table STORE_MESSAGE;
@@ -253,7 +263,7 @@ CREATE TABLE MEAL_BOM (
 	ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	BOM_ID varchar(100) DEFAULT(CONCAT('MLB', DATE_FORMAT(CURRENT_DATE(),'%Y%m%d'), '_', REPLACE(UUID(),'-',''))) UNIQUE NOT NULL,
 	MEAL_ID varchar(100) NOT NULL,
-	MEAL_NAME varchar(100) NOT NULL,
+	-- MEAL_NAME varchar(100) NOT NULL,
 	INGREDIENT_ID varchar(100) NOT NULL,
 	INGREDIENT_NAME varchar(100) NOT NULL,
 	MEAL_INGREDIENT_WEIGHT double not null, -- default 不會空的
@@ -266,7 +276,7 @@ CREATE TABLE MEAL_BOM (
 	REVISE_TIME datetime default null,
 	REVISE_ID varchar(100) default null,
 	FOREIGN KEY (MEAL_ID) REFERENCES MEAL(MEAL_ID),
-	FOREIGN KEY (MEAL_NAME) REFERENCES MEAL(MEAL_NAME),
+	-- FOREIGN KEY (MEAL_NAME) REFERENCES MEAL(MEAL_NAME),
 	FOREIGN KEY (INGREDIENT_ID) REFERENCES INGREDIENT(INGREDIENT_ID)
 );
 
@@ -279,14 +289,14 @@ create table STORE_COUPON (
 	COUPON_ID varchar(100) DEFAULT(CONCAT('C', DATE_FORMAT(CURRENT_DATE(),'%Y%m'), '_', REPLACE(UUID(),'-',''))) UNIQUE NOT NULL,
 	COUPON_NAME varchar(100) UNIQUE not null,
 	STORE_ID varchar(100) not null,
-	STORE_NAME varchar(100) not null,
+	-- STORE_NAME varchar(100) not null,
 	COUPON_DESC LONGTEXT not null,
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
 	REVISE_ID varchar(100) default null,
-	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID),
-	FOREIGN KEY (STORE_NAME) REFERENCES STORE_INFO(STORE_NAME)
+	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID)
+	-- FOREIGN KEY (STORE_NAME) REFERENCES STORE_INFO(STORE_NAME)
 );
 
 drop table STORE_COUPON;
