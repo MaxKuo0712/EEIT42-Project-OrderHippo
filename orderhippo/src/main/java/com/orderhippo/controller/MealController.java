@@ -17,7 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.MealBean;
+import com.orderhippo.model.StoreInfoBean;
+import com.orderhippo.model.UserInfoBean;
 import com.orderhippo.service.service.MealService;
+import com.orderhippo.service.service.StoreInfoService;
+import com.orderhippo.service.service.UserInfoService;
+import com.orderhippo.utils.ProjectUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,48 +36,97 @@ public class MealController {
 	@Autowired
 	private MealService mealService;
 	
+	@Autowired 
+	private UserInfoService userInfoService;
+	
+	@Autowired
+	private StoreInfoService storeInfoService;
+	
 	@ApiOperation("查詢餐點資料(mealstatus = true) by 餐點ID or 餐點種類ID or 店家ID or All")
-	@GetMapping("/meals")
-	public List<MealBean> getAllMeals(
+	@GetMapping("/{requestID}/meals")
+	public Object getAllMeals(
+			@PathVariable String requestID,
 			@RequestParam(name = "mealid", required = false) String mealId, 
 			@RequestParam(name = "mealcategoryid", required = false) String mealcategoryId,
-			@RequestParam(name = "storeid", required = false) String storeId)
-	{
-		if (mealId != null && mealId.trim().length() > 0) {
-			return mealService.getMealByMealID(mealId);
-		} else if (mealcategoryId != null && mealcategoryId.trim().length() > 0) {
-			return mealService.getMealByMealCategoryID(mealcategoryId);
-		} else if (storeId != null && storeId.trim().length() > 0) {
-			return mealService.getMealByStoreID(storeId);
+			@RequestParam(name = "storeid", required = false) String storeId,
+			@RequestParam(name = "token", required = true) String realHashToken) {
+		
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (mealId != null && mealId.trim().length() > 0) {
+				return mealService.getMealByMealID(mealId);
+			} else if (mealcategoryId != null && mealcategoryId.trim().length() > 0) {
+				return mealService.getMealByMealCategoryID(mealcategoryId);
+			} else if (storeId != null && storeId.trim().length() > 0) {
+				return mealService.getMealByStoreID(storeId);
+			} else {
+				return mealService.getAllMeal();
+			}
 		} else {
-			return mealService.getAllMeal();
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@ApiOperation("新增餐點資料")
-	@PostMapping("/meal")
-	public Object addMeal(@RequestBody MealBean mealBean) {
-		if (mealBean != null) {
-			return mealService.addMeal(mealBean);
+	@PostMapping("/{requestID}/meal")
+	public Object addMeal(
+			@PathVariable String requestID,
+			@RequestBody MealBean mealBean,
+			@RequestParam(name = "token", required = true) String realHashToken) {
+
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(null, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (mealBean != null) {
+				return mealService.addMeal(mealBean);
+			}
+			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 	
 	@ApiOperation("修改餐點資料")
-	@PutMapping("/meal/{reviseId}")
-	public Object updateMeal(@PathVariable String reviseId, @RequestBody MealBean mealBean) {
+	@PutMapping("/{requestID}/meal")
+	public Object updateMeal(
+			@PathVariable String requestID,
+			@RequestParam(name = "token", required = true) String realHashToken,
+			@RequestBody MealBean mealBean) {
+
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
 		
-		if (mealBean == null) {
-			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
-		} else {
-			String storeId = mealBean.getStoreid();
-			
-			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
-				return mealService.updateMeal(reviseId, mealBean);
+		String dbToken = ProjectUtils.getDBToken(null, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (mealBean != null) {
+				return mealService.updateMeal(requestID, mealBean);
 			} else {
-				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or StoreId", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 			}
+		} else {
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
+		
+//		if (mealBean == null) {
+//			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
+//		} else {
+//			String storeId = mealBean.getStoreid();
+//			
+//			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
+//				return mealService.updateMeal(reviseId, mealBean);
+//			} else {
+//				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or StoreId", HttpStatus.BAD_REQUEST);
+//			}
+//		}
 
 //		if ((mealBean != null) && ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) ) {
 //			return mealService.updateMeal(reviseId, mealBean);

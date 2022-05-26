@@ -99,8 +99,9 @@ public class StoreController {
 			} else {
 				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 			}
+		} else {
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		
 //		if (storeInfoBean == null) {
 //			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
