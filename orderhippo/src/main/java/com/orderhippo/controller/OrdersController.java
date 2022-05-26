@@ -73,31 +73,57 @@ public class OrdersController {
 	}
 	
 	@ApiOperation("查詢訂單資料(+訂單狀態) by (店家ID or 使用者ID) and 訂單狀態")
-	@GetMapping("/orders/findbyorderstatus")
-	public List<OrdersBean> getOrderByStoreIDAndOrderStatus(
+	@GetMapping("/{requestID}/orders/findbyorderstatus")
+	public Object getOrderByStoreIDAndOrderStatus(
+			@PathVariable String requestID,
 			@RequestParam(name = "orderid", required = false) String orderId,
 			@RequestParam(name = "storeid", required = false) String storeId, 
 			@RequestParam(name = "userid", required = false) String userId, 
-			@RequestParam(name = "orderstatus", required = true) String orderStatus) 
-	{
-		if (storeId != null && storeId.trim().length() != 0) {
-			return ordersService.getOrderByStoreIDAndOrderStatus(storeId, orderStatus);
-		} else if (userId != null && userId.trim().length() != 0) {
-			return ordersService.getOrderByUseridAndOrderstatus(userId, orderStatus);
-		} else if (orderId != null && orderId.trim().length() != 0) {
-			return ordersService.getOrderByOrderidAndOrderstatus(orderId, orderStatus);
+			@RequestParam(name = "orderstatus", required = true) String orderStatus,
+			@RequestParam(name = "token", required = true) String realHashToken) {
+		
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (storeId != null && storeId.trim().length() != 0) {
+				return ordersService.getOrderByStoreIDAndOrderStatus(storeId, orderStatus);
+			} else if (userId != null && userId.trim().length() != 0) {
+				return ordersService.getOrderByUseridAndOrderstatus(userId, orderStatus);
+			} else if (orderId != null && orderId.trim().length() != 0) {
+				return ordersService.getOrderByOrderidAndOrderstatus(orderId, orderStatus);
+			} else {
+				return ordersService.getOrderByOrderstatus(orderStatus);
+			}
 		} else {
-			return ordersService.getOrderByOrderstatus(orderStatus);
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@ApiOperation("新增單筆訂單資料")
-	@PostMapping("/order")
-	public Object addOrder(@RequestBody OrdersBean ordersBean) {
-		if (ordersBean != null) {
-			return ordersService.addOrder(ordersBean); 
+	@PostMapping("/{requestID}/order")
+	public Object addOrder(
+			@PathVariable String requestID,
+			@RequestParam(name = "token", required = true) String realHashToken,
+			@RequestBody OrdersBean ordersBean) {
+		
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(userinfo, null, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (ordersBean != null) {
+				ordersBean.setCreatetid(requestID);
+				return ordersService.addOrder(ordersBean); 
+			}
+			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 	}
 
 }
