@@ -15,7 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.OrdersBean;
+import com.orderhippo.model.StoreInfoBean;
+import com.orderhippo.model.UserInfoBean;
 import com.orderhippo.service.service.OrdersService;
+import com.orderhippo.service.service.StoreInfoService;
+import com.orderhippo.service.service.UserInfoService;
+import com.orderhippo.utils.ProjectUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,21 +36,39 @@ public class OrdersController {
 	@Autowired 
 	private OrdersService ordersService;
 	
+	@Autowired 
+	private UserInfoService userInfoService;
+	
+	@Autowired
+	private StoreInfoService storeInfoService;
+	
 	@ApiOperation("查詢訂單資料 by 店家ID or 使用者ID or 訂單ID or All")
-	@GetMapping("/orders")
-	public List<OrdersBean> getOrederByOrderId(
+	@GetMapping("/{requestID}/orders")
+	public Object getOrederByOrderId(
+			@PathVariable String requestID,
 			@RequestParam(name = "storeid", required = false) String storeId, 
 			@RequestParam(name = "userid", required = false) String userId,
-			@RequestParam(name = "orderid", required = false) String orderId) 
-	{
-		if (storeId != null && storeId.trim().length() != 0) {
-			return ordersService.getOrderByStoreid(storeId);
-		} else if (userId != null && userId.trim().length() != 0) {
-			return ordersService.getOrderByUserid(userId);
-		} else if (orderId != null && orderId.trim().length() != 0) {
-			return ordersService.getOrderByOrderId(orderId);
+			@RequestParam(name = "orderid", required = false) String orderId,
+			@RequestParam(name = "token", required = true) String realHashToken) {
+		
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (storeId != null && storeId.trim().length() != 0) {
+				return ordersService.getOrderByStoreid(storeId);
+			} else if (userId != null && userId.trim().length() != 0) {
+				return ordersService.getOrderByUserid(userId);
+			} else if (orderId != null && orderId.trim().length() != 0) {
+				return ordersService.getOrderByOrderId(orderId);
+			} else {
+				return ordersService.getAllOrders();
+			}
 		} else {
-			return ordersService.getAllOrders();
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
