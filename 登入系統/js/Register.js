@@ -121,7 +121,7 @@ submitBnt.addEventListener("click", (e) => {
         e.stopPropagation();
     } else {
         userRegister(e);
-        welcomeToUse(getUserName());
+        // welcomeToUse(getUserName());
         setInterval(() => {
             window.location.href = "login.html"
         }, 2000); // 等待2秒導向回到登入頁面

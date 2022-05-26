@@ -27,16 +27,24 @@ submitBnt.addEventListener("click", (e) => {
 
     addLocalstorage(target);
 
-    fetch(`http://localhost:8080/api/users/${REVISE_ID}`, {
-        method: "PUT",
-        headers: {"content-Type":"application/json"},
-        body: JSON.stringify(target)
-    }).then((e) => {
-        console.log(e.status)
-        welcomeToUse(USER_NAME);
-        setInterval(() => {
-            window.location.href = " homepage.html"
-        }, 2000); // 等待2秒導向回到上一頁(登入頁面)
+    fetch(`http://localhost:8080/api/getToken/${USER_ID}`, {
+        method: "GET"
+    }).then(res => {
+        return res.text();
+    }).then(resultToken => {
+        localStorage.setItem('userToken', resultToken);
+
+        fetch(`http://localhost:8080/api/${USER_ID}/users?token=${resultToken}`, {
+            method: "PUT",
+            headers: { "content-Type": "application/json" },
+            body: JSON.stringify(target)
+        }).then((e) => {
+            console.log(e.status)
+            welcomeToUse(USER_NAME);
+            setInterval(() => {
+                window.location.href = " homepage.html"
+            }, 2000); // 等待2秒導向回到上一頁(登入頁面)
+        })
     })
 });
 

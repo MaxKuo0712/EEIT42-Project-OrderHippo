@@ -57,30 +57,37 @@ function userMailLogin(e) {
             } else {
                 let USER_ID = auth.currentUser.uid;
 
-                fetch(`http://localhost:8080/api/users?userid=${USER_ID}`, {
+                fetch(`http://localhost:8080/api/getToken/${USER_ID}`, {
                     method: "GET"
                 }).then(res => {
-                    return res.json();
-                }).then(result => {
-                    let REVISE_ID = USER_ID;
-                    let queryResult = result[0];
+                    return res.text();
+                }).then(resultToken => {
+                    localStorage.setItem('userToken', resultToken);
+                    fetch(`http://localhost:8080/api/${USER_ID}/users?userid=${USER_ID}&token=${resultToken}`, {
+                        method: "GET"
+                    }).then(res => {
+                        return res.json();
+                    }).then(result => {
+                        let REVISE_ID = USER_ID;
+                        let queryResult = result[0];
 
-                    queryResult.LAST_LOGININ_TIME = new Date();
+                        queryResult.LAST_LOGININ_TIME = new Date();
 
-                    addLocalstorage(queryResult);
+                        addLocalstorage(queryResult);
 
-                    fetch(`http://localhost:8080/api/users/${REVISE_ID}`, {
-                        method: "PUT",
-                        headers: { "content-Type": "application/json" },
-                        body: JSON.stringify(queryResult)
-                    }).then((e) => {
-                        console.log(e.status);
-                        welcomeToUse(userName);
-                        setInterval(() => {
-                            window.location.href = "homepage.html"
-                        }, 2000); // 等待2秒導向回到登入頁面
+                        fetch(`http://localhost:8080/api/${USER_ID}/users?token=${resultToken}`, {
+                            method: "PUT",
+                            headers: { "content-Type": "application/json" },
+                            body: JSON.stringify(queryResult)
+                        }).then((e) => {
+                            console.log(e.status);
+                            welcomeToUse(userName);
+                            setInterval(() => {
+                                window.location.href = "homepage.html"
+                            }, 2000); // 等待2秒導向回到登入頁面
+                        })
                     })
-                });
+                })
             }
         })
         .catch((error) => {
@@ -179,16 +186,15 @@ function addGoogleUserInfo(result) {
 
     const userId = result.user.uid;
 
-    fetch(`http://localhost:8080/api/users?userid=${userId}`, {
+    fetch(`http://localhost:8080/api/getToken/${userId}`, {
         method: "GET"
     }).then(res => {
         return res.text();
-    }).then(queryResult => {
-        if (queryResult.length === 0) {
-
+    }).then(resultToken => {
+        if (resultToken === '使用者不存在 / 權限不足') {
             const USER_ID = userId;
             const USER_NAME = "";
-            const USER_GENDER = "";
+            const USER_GENDER = "M";
             const USER_PHONE = "";
             const USER_MAIL = result.user.email;
             const USER_BIRTH = new Date("2021-01-01");
@@ -209,13 +215,21 @@ function addGoogleUserInfo(result) {
                 }, 1000); // 等待2秒導向回到上一頁(登入頁面)
             })
         } else {
-            addLocalstorage(JSON.parse(queryResult)[0]);
-            welcomeToUse(JSON.parse(localStorage.getItem("userinfo")).USER_NAME);
-            setInterval(() => {
-                window.location.href = " homepage.html"
-            }, 2000); // 等待2秒導向回到上一頁(登入頁面)
+            localStorage.setItem('userToken', resultToken);
+            fetch(`http://localhost:8080/api/${userId}/users?userid=${userId}&token=${resultToken}`, {
+                method: "GET"
+            }).then(res => {
+                return res.json();
+            }).then(queryResult => {
+                console.log("AA");
+                addLocalstorage(queryResult[0]);
+                welcomeToUse(JSON.parse(localStorage.getItem("userinfo")).USER_NAME);
+                setInterval(() => {
+                    window.location.href = " homepage.html"
+                }, 2000); // 等待2秒導向回到上一頁(登入頁面)
+            })
         }
-    });
+    })
 }
 
 function addLocalstorage(userInfo) {

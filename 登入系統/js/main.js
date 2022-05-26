@@ -64,5 +64,6 @@ signBnt.addEventListener("click", (e) => {
     } else if (signText === "Sign out") {
         userSignOut();
         localStorage.removeItem("userinfo");
+        localStorage.removeItem("userToken");
     }
 });
