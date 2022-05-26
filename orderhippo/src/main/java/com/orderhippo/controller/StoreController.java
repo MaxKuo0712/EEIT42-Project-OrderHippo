@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.StoreInfoBean;
 import com.orderhippo.service.service.StoreInfoService;
+import com.orderhippo.utils.ProjectUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,9 +35,21 @@ public class StoreController {
 	private StoreInfoService storeInfoService;
 	
 	@ApiOperation("查詢所有店家資料")
-	@GetMapping("/stores")
-	public List<StoreInfoBean> getAllStores() {
-		return storeInfoService.getAllStoreInfo();
+	@GetMapping("/{requestID}/stores")
+	public Object getAllStores(
+			@PathVariable String requestID,
+			@RequestParam(name = "token", required = true) String realHashToken) {
+		
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(null, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			return storeInfoService.getAllStoreInfo();
+		} else {
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@ApiOperation("新增店家資料")
@@ -69,20 +82,37 @@ public class StoreController {
 		@ApiResponse(code = 401, message = "沒有權限"),
 		@ApiResponse(code = 404, message = "找不到路徑")
 	})
-	@PutMapping("/stores/{reviseId}")
-	public Object updateStoreInfo(@PathVariable String reviseId, @RequestBody StoreInfoBean storeInfoBean) {
+	@PutMapping("/{requestID}/stores")
+	public Object updateStoreInfo(
+			@PathVariable String requestID, 
+			@RequestParam(name = "token", required = true) String realHashToken,
+			@RequestBody StoreInfoBean storeInfoBean) {
 		
-		if (storeInfoBean == null) {
-			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
-		} else {
-			String storeId = storeInfoBean.getStoreid();
-			
-			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
-				return storeInfoService.updateStoreInfo(reviseId, storeInfoBean);
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(null, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (storeInfoBean != null) {
+				return storeInfoService.updateStoreInfo(requestID, storeInfoBean);
 			} else {
-				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or StoreId", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 			}
 		}
+		return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
+		
+//		if (storeInfoBean == null) {
+//			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
+//		} else {
+//			String storeId = storeInfoBean.getStoreid();
+//			
+//			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
+//				return storeInfoService.updateStoreInfo(reviseId, storeInfoBean);
+//			} else {
+//				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or StoreId", HttpStatus.BAD_REQUEST);
+//			}
+//		}
 
 //		String storeId = storeInfoBean.getStoreid();
 //		

@@ -17,11 +17,8 @@ public interface MealBomBeanRepository extends JpaRepository<MealBomBean, Intege
 	// By IngredientID 搜尋
 	List<MealBomBean> findByIngredientid(String ingredientid);
 	
-	// By MealName 搜尋
-	List<MealBomBean> findByMealname(String mealname);
-	
 	// By MealName + IngredientName 搜尋
-	List<MealBomBean> findByMealnameAndIngredientname(String mealname, String ingredientname);
+//	List<MealBomBean> findByMealnameAndIngredientname(String mealname, String ingredientname);
 	
 //	// save
 //	MealBomBean save(MealBomBean bom);
