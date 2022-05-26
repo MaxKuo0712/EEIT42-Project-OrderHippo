@@ -12,5 +12,5 @@ public interface MealCategoryService {
 	public List<MealCategoryBean> getAllMealCategory();
 	
 	// 修改類別資料
-	public Object updateMealCategory(String reviseId, MealCategoryBean mealCategoryBean);
+	public Object updateMealCategory(String requestID, MealCategoryBean mealCategoryBean);
 }

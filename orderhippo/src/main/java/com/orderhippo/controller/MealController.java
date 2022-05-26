@@ -86,6 +86,7 @@ public class MealController {
 		
 		if (verifyResult) {
 			if (mealBean != null) {
+				mealBean.setCreatetid(requestID);
 				return mealService.addMeal(mealBean);
 			}
 			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);

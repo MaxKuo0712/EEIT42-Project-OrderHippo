@@ -47,7 +47,7 @@ public class MealServicelmp implements MealService {
 
 	// 修改單筆餐點
 	@Override
-	public Object updateMeal(String reviseId, MealBean mealBean) {
+	public Object updateMeal(String requestID, MealBean mealBean) {
 		List<MealBean> meal = mealRepository.findByMealidAndMealstatus(mealBean.getMealid(), true);
 		
 		if (meal.size() == 1) {
@@ -55,7 +55,7 @@ public class MealServicelmp implements MealService {
 			
 			mealBean.setId(currentMeal.getId());
 			mealBean.setStoreid(currentMeal.getStoreid());
-			mealBean.setReviseid(reviseId);
+			mealBean.setReviseid(requestID);
 			mealBean.setRevisetime(new Date());
 			
 			try {

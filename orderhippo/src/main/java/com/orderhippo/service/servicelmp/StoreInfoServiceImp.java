@@ -93,7 +93,7 @@ public class StoreInfoServiceImp implements StoreInfoService {
 //	}
 	// 更新單筆店家資料
 	@Override
-	public Object updateStoreInfo(String reviseid, StoreInfoBean storeInfoBean) {
+	public Object updateStoreInfo(String requestID, StoreInfoBean storeInfoBean) {
 		List<StoreInfoBean> storeInfo = storeInfoRepository.findByStoreid(storeInfoBean.getStoreid());
 			
 		if (storeInfo.size() == 1) {
@@ -103,7 +103,7 @@ public class StoreInfoServiceImp implements StoreInfoService {
 			storeInfoBean.setStoreid(currentStoreInfo.getStoreid());
 			storeInfoBean.setStoretoken(currentStoreInfo.getStoretoken());
 			storeInfoBean.setRevisetime(new Date());
-			storeInfoBean.setReviseid(reviseid);
+			storeInfoBean.setReviseid(requestID);
 			
 			try {
 				storeInfoRepository.save(storeInfoBean);

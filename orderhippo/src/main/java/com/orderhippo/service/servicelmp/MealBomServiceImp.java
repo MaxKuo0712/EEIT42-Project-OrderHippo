@@ -100,7 +100,7 @@ public class MealBomServiceImp implements MealBomService {
 
 	// 修改BOM資料
 	@Override
-	public Object updateMealbom(String reviseid, MealBomBean mealBomBean) {
+	public Object updateMealbom(String requestID, MealBomBean mealBomBean) {
 		List<MealBomBean> result = mealBOMBeanRepository.findByBomid(mealBomBean.getBomid());
 		
 		if(result.size() == 1) {
@@ -109,7 +109,7 @@ public class MealBomServiceImp implements MealBomService {
 			mealBomBean.setId(currentMealBom.getId());
 			mealBomBean.setBomid(currentMealBom.getBomid());
 			mealBomBean.setRevisetime(new Date());
-			mealBomBean.setReviseid(reviseid);
+			mealBomBean.setReviseid(requestID);
 			
 			try {
 				mealBOMBeanRepository.save(mealBomBean);

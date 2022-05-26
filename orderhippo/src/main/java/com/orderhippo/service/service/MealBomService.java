@@ -27,6 +27,6 @@ public interface MealBomService {
 //	public List<MealBomBean> getBomByMealnameAndIngredientname(String mealname, String ingredientname);
 	
 	// 修改BOM資料
-	public Object updateMealbom(String reviseid, MealBomBean mealBomBean);
+	public Object updateMealbom(String requestID, MealBomBean mealBomBean);
 
 }

@@ -1,5 +1,6 @@
 package com.orderhippo.service.servicelmp;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class MealCategoryServicelmp implements MealCategoryService {
 	}
 
 	@Override
-	public Object updateMealCategory(String reviseId, MealCategoryBean mealCategoryBean) {
+	public Object updateMealCategory(String requestID, MealCategoryBean mealCategoryBean) {
 		List<MealCategoryBean> mealCateory = mealCategoryRepository.findByMealcategoryid(mealCategoryBean.getMealcategoryid());
 		
 		if (mealCateory.size() == 1) {

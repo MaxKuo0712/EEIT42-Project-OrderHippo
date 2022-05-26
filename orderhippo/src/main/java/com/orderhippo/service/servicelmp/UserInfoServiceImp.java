@@ -124,7 +124,7 @@ public class UserInfoServiceImp implements UserInfoService {
 //	}
 	// 更新單筆使用者資料
 	@Override
-	public Object updateUserInfo(String reviseId, UserInfoBean userInfoBean) {
+	public Object updateUserInfo(String requestID, UserInfoBean userInfoBean) {
 		List<UserInfoBean> userInfo = userInfoRepository.findByUsermail(userInfoBean.getUsermail());
 		
 		if (userInfo.size() == 1) {
@@ -134,7 +134,7 @@ public class UserInfoServiceImp implements UserInfoService {
 			userInfoBean.setUserid(currentUserInfo.getUserid());
 			userInfoBean.setLastlogintime(new Date());
 			userInfoBean.setUsertoken(currentUserInfo.getUsertoken());
-			userInfoBean.setReviseid(reviseId);
+			userInfoBean.setReviseid(requestID);
 			userInfoBean.setRevisetime(new Date());
 			
 			try {
