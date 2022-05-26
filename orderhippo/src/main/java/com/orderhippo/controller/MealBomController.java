@@ -116,7 +116,6 @@ public class MealBomController {
 		
 		if (verifyResult) {
 			if (mealBomBean != null) {
-				mealBomBean.setCreateid(requestID);
 				return mealBOMService.updateMealbom(requestID, mealBomBean);
 			} else {
 				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
