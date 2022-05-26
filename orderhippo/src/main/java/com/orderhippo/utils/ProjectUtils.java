@@ -8,4 +8,9 @@ public class ProjectUtils {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 		return encoder.encode(requestID);
 	}
+	
+	public static boolean verifyToken(String realHashToken, String dbToken) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder.matches(realHashToken, dbToken);
+	}
 }

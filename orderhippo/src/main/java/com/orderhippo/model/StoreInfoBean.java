@@ -57,7 +57,7 @@ public class StoreInfoBean {
 	private Boolean storeopenstatus;
 	
 	@JsonProperty("STORE_TOKEN")
-	@Column(name = "STORE_TOKEN", updatable = false, insertable = false)
+	@Column(name = "STORE_TOKEN", insertable = false)
 	private String storetoken;
 	
 	@JsonProperty("CREATE_ID")
