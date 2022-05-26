@@ -33,5 +33,5 @@ public interface OrdersService {
 	public List<OrdersBean> getOrderByOrderstatus(String orderstatus);
 	
 	// 修改訂單資料
-	public Object updateOrder(String reviseId, String orderId, OrdersBean ordersBean);
+	public Object updateOrder(String requestID, OrdersBean ordersBean);
 }

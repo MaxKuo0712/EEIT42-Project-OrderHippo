@@ -1,5 +1,6 @@
 package com.orderhippo.service.servicelmp;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,8 +121,26 @@ public class OrdersServicelmp implements OrdersService {
 	}
 	
 	@Override
-	public Object updateOrder(String reviseId, String orderId, OrdersBean ordersBean) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object updateOrder(String requestID, OrdersBean ordersBean) {
+		List<OrdersBean> order = ordersRepository.findByOrderid(ordersBean.getOrderid());
+		
+		if (order.size() == 1) {
+			OrdersBean currentOrders = order.get(0);
+			
+			ordersBean.setId(currentOrders.getId());
+			ordersBean.setStoreid(currentOrders.getStoreid());
+			ordersBean.setUserid(currentOrders.getUserid());
+			ordersBean.setReviseid(requestID);
+			ordersBean.setRevisetime(new Date());
+			
+			try {
+				ordersRepository.save(ordersBean);
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+		return new ResponseEntity<String>("資料不存在：OrderID", HttpStatus.NOT_FOUND);
 	}
 }
