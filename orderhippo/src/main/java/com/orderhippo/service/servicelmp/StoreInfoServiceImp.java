@@ -101,6 +101,7 @@ public class StoreInfoServiceImp implements StoreInfoService {
 
 			storeInfoBean.setId(currentStoreInfo.getId());
 			storeInfoBean.setStoreid(currentStoreInfo.getStoreid());
+			storeInfoBean.setStoretoken(currentStoreInfo.getStoretoken());
 			storeInfoBean.setRevisetime(new Date());
 			storeInfoBean.setReviseid(reviseid);
 			
@@ -113,5 +114,15 @@ public class StoreInfoServiceImp implements StoreInfoService {
 			}
 		}
 		return new ResponseEntity<String>("資料不存在：StoreID", HttpStatus.NOT_FOUND);
+	}
+
+	@Override
+	public List<StoreInfoBean> getStoreInfoByStoreid(String storeid) {
+		List<StoreInfoBean> result = storeInfoRepository.findByStoreid(storeid);
+		
+		if (!result.isEmpty()) {
+			return result;
+		}
+		return null;
 	}
 }

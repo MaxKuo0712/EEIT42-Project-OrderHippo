@@ -34,20 +34,12 @@ public class StoreController {
 	private StoreInfoService storeInfoService;
 	
 	@ApiOperation("查詢所有店家資料")
-	@ApiResponses({
-		@ApiResponse(code = 401, message = "沒有權限"),
-		@ApiResponse(code = 404, message = "找不到路徑")
-	})
 	@GetMapping("/stores")
 	public List<StoreInfoBean> getAllStores() {
 		return storeInfoService.getAllStoreInfo();
 	}
 	
 	@ApiOperation("新增店家資料")
-	@ApiResponses({
-		@ApiResponse(code = 401, message = "沒有權限"),
-		@ApiResponse(code = 404, message = "找不到路徑")
-	})
 	@PostMapping("/stores")
 	public Object addNewStore(
 			@RequestBody @ApiParam(name ="店家資料", value = "需要欄位資料：STORE_NAME, STORE_ADDRESS, "

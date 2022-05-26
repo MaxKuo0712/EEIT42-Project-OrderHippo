@@ -22,7 +22,7 @@ import com.orderhippo.service.service.MealService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api("餐點資料API")
+@Api(tags = "餐點資料API")
 @RestController
 @RequestMapping("/api")
 //@CrossOrigin(origins = "http://127.0.0.1:8080")

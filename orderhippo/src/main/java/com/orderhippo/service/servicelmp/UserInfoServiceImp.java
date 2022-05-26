@@ -133,6 +133,7 @@ public class UserInfoServiceImp implements UserInfoService {
 			userInfoBean.setId(currentUserInfo.getId());
 			userInfoBean.setUserid(currentUserInfo.getUserid());
 			userInfoBean.setLastlogintime(new Date());
+			userInfoBean.setUsertoken(currentUserInfo.getUsertoken());
 			userInfoBean.setReviseid(reviseId);
 			userInfoBean.setRevisetime(new Date());
 			

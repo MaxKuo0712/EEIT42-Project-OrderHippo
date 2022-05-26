@@ -51,7 +51,6 @@ public class PaymentBean {
 	
 	@JsonProperty("PAYMENT_CATEGORY")
 	@Column(name = "PAYMENT_CATEGORY", columnDefinition="ENUM")
-//	@Enumerated(EnumType.STRING)
 	private String paymentcategory;
 	
 	@JsonProperty("PAYMENT_STATUS")

@@ -35,10 +35,6 @@ public class MealBomBean {
 	@Column(name = "MEAL_ID")
 	private String mealid;
 	
-	@JsonProperty("MEAL_NAME")
-	@Column(name = "MEAL_NAME")
-	private String mealname;
-	
 	@JsonProperty("INGREDIENT_ID")
 	@Column(name = "INGREDIENT_ID")
 	private String ingredientid;
@@ -82,15 +78,15 @@ public class MealBomBean {
 	@JsonProperty("REVISE_ID")
 	@Column(name = "REVISE_ID", insertable = false)
 	private String reviseid;
-	
+
 	@Override
 	public String toString() {
-		return "MealBOMBean [id=" + id + ", bomid=" + bomid + ", mealid=" + mealid + ", mealname=" + mealname
-				+ ", ingredientid=" + ingredientid + ", ingredientname=" + ingredientname + ", mealingredientweight="
-				+ mealingredientweight + ", mealingredientcalorie=" + mealingredientcalorie + ", mealingredientcarb="
-				+ mealingredientcarb + ", mealingredientfat=" + mealingredientfat + ", mealingredientprotein="
-				+ mealingredientprotein + ", createid=" + createid + ", createtime=" + createtime + ", revisetime="
-				+ revisetime + ", reviseid=" + reviseid + "]";
+		return "MealBomBean [id=" + id + ", bomid=" + bomid + ", mealid=" + mealid + ", ingredientid=" + ingredientid
+				+ ", ingredientname=" + ingredientname + ", mealingredientweight=" + mealingredientweight
+				+ ", mealingredientcalorie=" + mealingredientcalorie + ", mealingredientcarb=" + mealingredientcarb
+				+ ", mealingredientfat=" + mealingredientfat + ", mealingredientprotein=" + mealingredientprotein
+				+ ", createid=" + createid + ", createtime=" + createtime + ", revisetime=" + revisetime + ", reviseid="
+				+ reviseid + "]";
 	}
 
 	public Integer getId() {
@@ -115,14 +111,6 @@ public class MealBomBean {
 
 	public void setMealid(String mealid) {
 		this.mealid = mealid;
-	}
-
-	public String getMealname() {
-		return mealname;
-	}
-
-	public void setMealname(String mealname) {
-		this.mealname = mealname;
 	}
 
 	public String getIngredientid() {
@@ -212,6 +200,4 @@ public class MealBomBean {
 	public void setReviseid(String reviseid) {
 		this.reviseid = reviseid;
 	}
-	
-	
 }

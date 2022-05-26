@@ -6,8 +6,8 @@ public class TokenTest {
 
 	public static void main(String[] args) {
 		
-		String dbToken = "$2a$10$9eCdZngrRHRoGdby5tkuKO2pDzN3Vy7KgnV4JzWPwzgRghcG59XMC";
-		String realHashToken = "$2a$10$gxA9g0lueDipV.a8wv65Le3g.ws9529rNceRHJHrsvqqGvEOprSBC";
+		String dbToken = "$2a$10$KFBKQ9Tve5if/gxp36.VqOVy4Cj8ep9W2m1oupIyNr6ZobqpIOOWO";
+		String realHashToken = "$2a$10$yP9nyDYa500O3nD0/Bi.FOjEGw93bluuTPvL8N0PBKQm6FX3xPWnG";
 		
 		System.out.println(ProjectUtils.verifyToken(realHashToken, dbToken));
 	}

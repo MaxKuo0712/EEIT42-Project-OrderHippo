@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Api("訂單資訊API")
+@Api(tags = "訂單資訊API")
 @RestController
 @RequestMapping("/api")
 //@CrossOrigin(origins = "http://127.0.0.1:8080")

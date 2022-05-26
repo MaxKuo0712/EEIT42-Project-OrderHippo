@@ -35,7 +35,7 @@ public class CreateTokenController {
 	public Object getToken(@PathVariable String requestID) {
 		
 		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
-		StoreInfoBean storeinfo = storeInfoService.getAllStoreInfo().get(0);
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
 
 		if (userinfo != null) {
 			if (userinfo.get(0).getUserid().equals(requestID)) {
@@ -48,16 +48,20 @@ public class CreateTokenController {
 				
 				return new ResponseEntity<String>(token, HttpStatus.OK);
 			}
-		} else if ((storeinfo.getStoreid().equals(requestID))) {
-			String token = ProjectUtils.createToken(requestID);
-			String saveToken = ProjectUtils.createToken(token);
-			
-			storeinfo.setStoretoken(saveToken);
-			storeInfoService.updateStoreInfo(requestID, storeinfo);
-			
-			return new ResponseEntity<String>(token, HttpStatus.OK);
+		} else if (storeinfo != null) {
+			if (storeinfo.get(0).getStoreid().equals(requestID)) {
+				String token = ProjectUtils.createToken(requestID);
+				String saveToken = ProjectUtils.createToken(token);
+				
+				StoreInfoBean saveTarget = storeinfo.get(0);
+				saveTarget.setStoretoken(saveToken);
+				storeInfoService.updateStoreInfo(requestID, saveTarget);
+				
+				return new ResponseEntity<String>(token, HttpStatus.OK);	
+			}
+		} else {
+			return new ResponseEntity<String>("使用者不存在 / 權限不足", HttpStatus.BAD_REQUEST);
 		}
-
-		return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<String>("使用者不存在 / 權限不足", HttpStatus.BAD_REQUEST);
 	}
 }

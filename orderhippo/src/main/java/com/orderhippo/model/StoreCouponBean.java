@@ -34,11 +34,7 @@ public class StoreCouponBean {
 	@Column(name = "STORE_ID")
 	private String storeid;
 	
-	@JsonProperty("STORE_NAME")
-	@Column(name = "STORE_NAME")
-	private String storename;
-	
-	@JsonProperty("STORE_NAME")
+	@JsonProperty("COUPON_DESC")
 	@Column(name = "COUPON_DESC", columnDefinition="LONGTEXT")
 	private String coupondesc;
 	
@@ -61,8 +57,8 @@ public class StoreCouponBean {
 	@Override
 	public String toString() {
 		return "StoreCouponBean [id=" + id + ", couponid=" + couponid + ", couponname=" + couponname + ", storeid="
-				+ storeid + ", storename=" + storename + ", coupondesc=" + coupondesc + ", createid=" + createid
-				+ ", createtime=" + createtime + ", revisetime=" + revisetime + ", reviseid=" + reviseid + "]";
+				+ storeid + ", coupondesc=" + coupondesc + ", createid=" + createid + ", createtime=" + createtime
+				+ ", revisetime=" + revisetime + ", reviseid=" + reviseid + "]";
 	}
 
 	public Integer getId() {
@@ -95,14 +91,6 @@ public class StoreCouponBean {
 
 	public void setStoreid(String storeid) {
 		this.storeid = storeid;
-	}
-
-	public String getStorename() {
-		return storename;
-	}
-
-	public void setStorename(String storename) {
-		this.storename = storename;
 	}
 
 	public String getCoupondesc() {
@@ -144,5 +132,4 @@ public class StoreCouponBean {
 	public void setReviseid(String reviseid) {
 		this.reviseid = reviseid;
 	}
-	
 }

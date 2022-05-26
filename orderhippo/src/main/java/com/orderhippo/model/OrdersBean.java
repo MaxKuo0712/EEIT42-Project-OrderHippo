@@ -40,10 +40,6 @@ public class OrdersBean {
 	@Column(name = "USER_ID")
 	private String userid;
 	
-	@JsonProperty("USER_MAIL")
-	@Column(name = "USER_MAIL")
-	private String usermail;
-	
 	@JsonProperty("ORDERS_PRICE")
 	@Column(name = "ORDERS_PRICE")
 	private Integer ordermealqty;
@@ -71,9 +67,8 @@ public class OrdersBean {
 	@Override
 	public String toString() {
 		return "OrdersBean [id=" + id + ", orderid=" + orderid + ", storeid=" + storeid + ", userid=" + userid
-				+ ", usermail=" + usermail + ", ordermealqty=" + ordermealqty + ", orderstatus=" + orderstatus
-				+ ", createtid=" + createtid + ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime="
-				+ revisetime + "]";
+				+ ", ordermealqty=" + ordermealqty + ", orderstatus=" + orderstatus + ", createtid=" + createtid
+				+ ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime=" + revisetime + "]";
 	}
 
 	public Integer getId() {
@@ -106,14 +101,6 @@ public class OrdersBean {
 
 	public void setUserid(String userid) {
 		this.userid = userid;
-	}
-
-	public String getUsermail() {
-		return usermail;
-	}
-
-	public void setUsermail(String usermail) {
-		this.usermail = usermail;
 	}
 
 	public Integer getOrdermealqty() {

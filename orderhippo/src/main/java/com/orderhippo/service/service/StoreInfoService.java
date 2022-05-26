@@ -11,6 +11,9 @@ public interface StoreInfoService {
     // 取得全部店家資料
     public List<StoreInfoBean> getAllStoreInfo();
     
+    // 取得單筆店家資料 by storeID
+    public List<StoreInfoBean> getStoreInfoByStoreid(String storeid);
+    
     // 更新單筆店家資料
     public Object updateStoreInfo(String reviseid, StoreInfoBean storeInfoBean);
 }

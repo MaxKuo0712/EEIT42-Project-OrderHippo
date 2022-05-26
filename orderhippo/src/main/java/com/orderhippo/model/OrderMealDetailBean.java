@@ -34,10 +34,6 @@ public class OrderMealDetailBean {
 	@Column(name = "MEAL_ID")
 	private String mealid;
 	
-	@JsonProperty("MEAL_NAME")
-	@Column(name = "MEAL_NAME")
-	private String mealname;
-	
 	@JsonProperty("ORDER_MEAL_QTY")
 	@Column(name = "ORDER_MEAL_QTY")
 	private Integer ordermealqty;
@@ -64,9 +60,9 @@ public class OrderMealDetailBean {
 
 	@Override
 	public String toString() {
-		return "ORDER_MEALDETAIL [id=" + id + ", orderid=" + orderid + ", mealid=" + mealid + ", mealname=" + mealname
-				+ ", ordermealqty=" + ordermealqty + ", mealprice=" + mealprice + ", createtid=" + createtid
-				+ ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime=" + revisetime + "]";
+		return "OrderMealDetailBean [id=" + id + ", orderid=" + orderid + ", mealid=" + mealid + ", ordermealqty="
+				+ ordermealqty + ", mealprice=" + mealprice + ", createtid=" + createtid + ", createtime=" + createtime
+				+ ", reviseid=" + reviseid + ", revisetime=" + revisetime + "]";
 	}
 
 	public Integer getId() {
@@ -91,14 +87,6 @@ public class OrderMealDetailBean {
 
 	public void setMealid(String mealid) {
 		this.mealid = mealid;
-	}
-
-	public String getMealname() {
-		return mealname;
-	}
-
-	public void setMealname(String mealname) {
-		this.mealname = mealname;
 	}
 
 	public Integer getOrdermealqty() {

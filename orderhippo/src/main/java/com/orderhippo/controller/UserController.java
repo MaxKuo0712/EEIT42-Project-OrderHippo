@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.orderhippo.model.StoreInfoBean;
 import com.orderhippo.model.UserInfoBean;
+import com.orderhippo.service.service.StoreInfoService;
 import com.orderhippo.service.service.UserInfoService;
+import com.orderhippo.utils.ProjectUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,26 +36,39 @@ public class UserController {
 	@Autowired 
 	private UserInfoService userInfoService;
 	
+	@Autowired
+	private StoreInfoService storeInfoService;
+	
 	@ApiOperation("查詢使用者資料")
-	@GetMapping("/users")
-	public List<UserInfoBean> getUserInfo(			
+	@GetMapping("/{requestID}/users")
+	public Object getUserInfo(
+			@PathVariable String requestID,
 			@RequestParam(name = "userid", required = false) String userid,
-			@RequestParam(name = "usermail", required = false) String usermail) {
-		if (userid != null && userid.trim().length() != 0) {
-			return userInfoService.getUserInfofindByUserid(userid);
-		} else if (usermail != null && usermail.trim().length() != 0) {
-			return userInfoService.getUserInfofindfindByUsermail(usermail);
+			@RequestParam(name = "usermail", required = false) String usermail,
+			@RequestParam(name = "token", required = true) String realHashToken) {
+		
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (userid != null && userid.trim().length() != 0) {
+				return userInfoService.getUserInfofindByUserid(userid);
+			} else if (usermail != null && usermail.trim().length() != 0) {
+				return userInfoService.getUserInfofindfindByUsermail(usermail); 
+			} else {
+				return userInfoService.getAllUserInfo();
+			}
 		} else {
-			return userInfoService.getAllUserInfo();
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@ApiOperation("新增使用者資料")
 	@PostMapping("/users")
-	public Object addNewUser(
-			@RequestBody @ApiParam(name ="使用者資料", value = "需要欄位資料：USER_ID, USER_NAME, "
-			+ "USER_GENDER, USER_PHONE, USER_MAIL, USER_BIRTH, USER_ADDRESS, CREATE_ID") 
-			UserInfoBean userInfoBean) {
+	public Object addNewUser(@RequestBody UserInfoBean userInfoBean) {
 		if (userInfoBean != null) {
 			return userInfoService.addUserInfo(userInfoBean);
 		}
@@ -70,20 +86,38 @@ public class UserController {
 //	}
 	
 	@ApiOperation("更新使用者資料")
-	@PutMapping("/users/{reviseId}")
-	public Object updateLoginTime(@PathVariable String reviseId, @RequestBody UserInfoBean userInfoBean) {
+	@PutMapping("/{requestID}/users")
+	public Object updateLoginTime(
+			@PathVariable String requestID,
+			@RequestParam(name = "token", required = true) String realHashToken,
+			@RequestBody UserInfoBean userInfoBean) {
 		
-		if (userInfoBean == null) {
-			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
-		} else {
-			String storeId = userInfoBean.getUserid();
-			
-			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
-				return userInfoService.updateUserInfo(reviseId, userInfoBean);
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (userInfoBean != null) {
+				return userInfoService.updateUserInfo(requestID, userInfoBean);
 			} else {
-				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or UserId", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 			}
 		}
+		return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
+		
+//		if (userInfoBean == null) {
+//			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
+//		} else {
+//			String storeId = userInfoBean.getUserid();
+//			
+//			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
+//				return userInfoService.updateUserInfo(reviseId, userInfoBean);
+//			} else {
+//				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or UserId", HttpStatus.BAD_REQUEST);
+//			}
+//		}
 		
 //		String userId = userInfoBean.getUserid();
 //		

@@ -39,10 +39,6 @@ public class StoreMessageBean {
 	@Column(name = "STORE_ID")
 	private String storeid;
 	
-	@JsonProperty("STORE_NAME")
-	@Column(name = "STORE_NAME")
-	private String storename;
-	
 	@JsonProperty("MESSAGE_DESC")
 	@Column(name = "MESSAGE_DESC", columnDefinition="LONGTEXT")
 	private String messagedesc;
@@ -66,13 +62,12 @@ public class StoreMessageBean {
 	@JsonProperty("REVISE_ID")
 	@Column(name = "REVISE_ID", insertable = false)
 	private String reviseid;
-	
+
 	@Override
 	public String toString() {
 		return "StoreMessageBean [id=" + id + ", messageid=" + messageid + ", messagename=" + messagename + ", storeid="
-				+ storeid + ", storename=" + storename + ", messagedesc=" + messagedesc + ", messageimage="
-				+ messageimage + ", createid=" + createid + ", createtime=" + createtime + ", revisetime=" + revisetime
-				+ ", reviseid=" + reviseid + "]";
+				+ storeid + ", messagedesc=" + messagedesc + ", messageimage=" + messageimage + ", createid=" + createid
+				+ ", createtime=" + createtime + ", revisetime=" + revisetime + ", reviseid=" + reviseid + "]";
 	}
 
 	public Integer getId() {
@@ -105,14 +100,6 @@ public class StoreMessageBean {
 
 	public void setStoreid(String storeid) {
 		this.storeid = storeid;
-	}
-
-	public String getStorename() {
-		return storename;
-	}
-
-	public void setStorename(String storename) {
-		this.storename = storename;
 	}
 
 	public String getMessagedesc() {
@@ -162,5 +149,4 @@ public class StoreMessageBean {
 	public void setReviseid(String reviseid) {
 		this.reviseid = reviseid;
 	}
-	
 }

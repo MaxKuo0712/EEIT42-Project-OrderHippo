@@ -60,7 +60,7 @@ public class UserInfoBean {
 	private String useraddress;
 	
 	@JsonProperty("USER_TOKEN")
-	@Column(name = "USER_TOKEN", updatable = false, insertable = false)
+	@Column(name = "USER_TOKEN", insertable = false)
 	private String usertoken;
 
 	@JsonProperty("LAST_LOGININ_TIME")
