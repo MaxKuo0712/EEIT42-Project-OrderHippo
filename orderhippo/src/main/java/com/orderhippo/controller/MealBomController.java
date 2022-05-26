@@ -17,8 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.MealBomBean;
+import com.orderhippo.model.StoreInfoBean;
+import com.orderhippo.model.UserInfoBean;
 import com.orderhippo.repository.MealBomBeanRepository;
 import com.orderhippo.service.service.MealBomService;
+import com.orderhippo.service.service.StoreInfoService;
+import com.orderhippo.service.service.UserInfoService;
+import com.orderhippo.utils.ProjectUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,51 +39,103 @@ public class MealBomController {
 	@Autowired
 	private MealBomService mealBOMService;
 	
+	@Autowired 
+	private UserInfoService userInfoService;
+	
+	@Autowired
+	private StoreInfoService storeInfoService;
+	
 	// 新增單筆BOM
 	@ApiOperation("新增單筆BOM")
-	@PostMapping(path="/mealbom")
-	public Object addBom(@RequestBody MealBomBean mealBomBean) {
-		if (mealBomBean != null) {
-			return mealBOMService.addBOM(mealBomBean);
+	@PostMapping(path="/{requestID}/mealbom")
+	public Object addBom(
+			@PathVariable String requestID,
+			@RequestParam(name = "token", required = true) String realHashToken,
+			@RequestBody MealBomBean mealBomBean) {
+
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(null, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (mealBomBean != null) {
+				mealBomBean.setCreateid(requestID);
+				return mealBOMService.addBOM(mealBomBean);
+			} else {
+				return new ResponseEntity<String>("Input not found", HttpStatus.NOT_FOUND);
+			}
 		} else {
-			return new ResponseEntity<String>("Input not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	// 查詢BOM by BOMId 或 MealId 或 MealName 或 IngredientName 或 ALL
 	@ApiOperation("查詢BOM by BOMId 或 MealId 或 IngredientId 或 ALL")
-	@GetMapping(path="/mealboms")
-	public List<MealBomBean> getMealboms(
+	@GetMapping(path="/{requestID}/mealboms")
+	public Object getMealboms(
+			@PathVariable String requestID,
+			@RequestParam(name = "token", required = true) String realHashToken,
 			@RequestParam(name = "mealid", required = false) String mealId, 
 			@RequestParam(name = "ingredientid", required = false) String ingredientId,
-			@RequestParam(name = "bomid", required = false) String bomId)
-	{
-		if(mealId != null && mealId.trim().length() != 0) {
-			return mealBOMService.getBomByMealid(mealId);
-		} else if(ingredientId != null && ingredientId.trim().length() != 0) {
-			return mealBOMService.getBomByIngredientid(ingredientId);
-		} else if(bomId != null && bomId.trim().length() != 0) {
-			return mealBOMService.getBomByBomid(bomId);
+			@RequestParam(name = "bomid", required = false) String bomId) {
+		
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if(mealId != null && mealId.trim().length() != 0) {
+				return mealBOMService.getBomByMealid(mealId);
+			} else if(ingredientId != null && ingredientId.trim().length() != 0) {
+				return mealBOMService.getBomByIngredientid(ingredientId);
+			} else if(bomId != null && bomId.trim().length() != 0) {
+				return mealBOMService.getBomByBomid(bomId);
+			} else {
+				return mealBOMService.getAllMealbom();
+			}
 		} else {
-			return mealBOMService.getAllMealbom();
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	// 修改BOM資料 Putmapping
 	@ApiOperation("修改BOM資料")
-	@PutMapping(path="/mealbom/{reviseId}", consumes="application/json")
-	public Object patchBom(@PathVariable String reviseId, @RequestBody MealBomBean patch) {
-		if(patch == null) {
-			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
-		} else {
-			String storeId = patch.getBomid();  // StoreId "一定是人"
-
-			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
-				return mealBOMService.updateMealbom(reviseId, patch);
+	@PutMapping(path="/{requestID}/mealbom", consumes="application/json")
+	public Object patchBom(
+			@PathVariable String requestID,
+			@RequestParam(name = "token", required = true) String realHashToken,
+			@RequestBody MealBomBean mealBomBean) {
+		
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(null, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if (verifyResult) {
+			if (mealBomBean != null) {
+				mealBomBean.setCreateid(requestID);
+				return mealBOMService.updateMealbom(requestID, mealBomBean);
 			} else {
-				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or StoreId", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 			}
+		} else {
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
+		
+//		if(patch == null) {
+//			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
+//		} else {
+//			String storeId = patch.getBomid();  // StoreId "一定是人"
+//
+//			if ((reviseId.equals(storeId)) || (reviseId.equals("Admin"))) {
+//				return mealBOMService.updateMealbom(reviseId, patch);
+//			} else {
+//				return new ResponseEntity<String>("路徑參數有誤：ReviseID 只能是 Admin or StoreId", HttpStatus.BAD_REQUEST);
+//			}
+//		}
 	}
 	
 	// 修改BOM資料 Patchmapping
