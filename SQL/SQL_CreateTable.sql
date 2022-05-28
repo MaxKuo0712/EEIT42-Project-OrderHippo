@@ -149,7 +149,7 @@ create table ORDERS (
 	USER_ID varchar(100) not null,
 	-- USER_MAIL varchar(200) not null,
 	ORDERS_PRICE int not null,
-	ORDER_STATUS ENUM('0','1','2','3') not null, -- 0取消的訂單 1未確認訂單, 2已確認訂單, 3已完成訂單
+	ORDER_STATUS ENUM('1','2','3','4') not null, -- 0取消的訂單 1未確認訂單, 2已確認訂單, 3已完成訂單
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
@@ -161,6 +161,7 @@ create table ORDERS (
 	CONSTRAINT CHK_ORDERS_PRICE CHECK (ORDERS_PRICE > 0)
 );
 
+DELETE from ORDERS
 
 drop table ORDERS;
 
