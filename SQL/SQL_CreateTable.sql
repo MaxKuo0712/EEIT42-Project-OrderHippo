@@ -101,7 +101,7 @@ insert MEAL_CATEGORY (MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, MEAL_CATEGORY_DESC)
 values ('SALAD', '沙拉', '沙拉')
 
 insert MEAL_CATEGORY (MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, MEAL_CATEGORY_DESC)
-values ('PASTA', '麵食', '麵食')
+values ('PASTA', '義大利麵', '義大利麵')
 
 insert MEAL_CATEGORY (MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, MEAL_CATEGORY_DESC)
 values ('DRINK', '飲料', '飲料')
@@ -127,8 +127,9 @@ create table MEAL (
 	MEAL_CARB double not null,
 	MEAL_FAT double not null,
 	MEAL_PROTEIN double not null,
-	MEAL_HOT BOOLEAN default false NOT NULL, -- 不會有default
-	MEAL_STATUS BOOLEAN default true NOT NULL, -- 不會有default
+	MEAL_VEGAN BOOLEAN default false NOT NULL,
+	MEAL_HOT BOOLEAN default false NOT NULL,
+	MEAL_STATUS BOOLEAN default true NOT NULL,
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
