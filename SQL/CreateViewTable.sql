@@ -90,7 +90,42 @@ group by orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, orders.CREAT
 order by orders.ORDER_ID
 	
 -- 各類別售出圓餅圖
+select meal.MEAL_ID, meal.MEAL_CATEGORY_ID, meal.MEAL_CATEGORY_NAME, meal.MEAL_NAME, sum(ordersdetail.ORDER_MEAL_QTY) as QTY
+from ORDERS as orders 
+	inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
+	inner join MEAL as meal on meal.MEAL_ID = ordersdetail.MEAL_ID
+where orders.ORDER_STATUS = 3
+group by meal.MEAL_ID, meal.MEAL_CATEGORY_ID, meal.MEAL_CATEGORY_NAME, meal.MEAL_NAME
 
+select queryResult.MEAL_ID, queryResult.MEAL_CATEGORY_NAME, queryResult.MEAL_NAME, 
+	round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) as 'PERCENTAGE'
+from (
+	select meal.MEAL_ID, meal.MEAL_CATEGORY_ID, meal.MEAL_CATEGORY_NAME, meal.MEAL_NAME, sum(ordersdetail.ORDER_MEAL_QTY) as QTY
+	from ORDERS as orders 
+		inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
+		inner join MEAL as meal on meal.MEAL_ID = ordersdetail.MEAL_ID
+	where orders.ORDER_STATUS = 3
+	group by meal.MEAL_ID, meal.MEAL_CATEGORY_ID, meal.MEAL_CATEGORY_NAME, meal.MEAL_NAME
+) as queryResult
+	inner join (
+		select meal.MEAL_CATEGORY_ID , meal.MEAL_CATEGORY_NAME, sum(ordersdetail.ORDER_MEAL_QTY) as SUM_QTY
+		from ORDERS as orders 
+			inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
+			inner join MEAL as meal on meal.MEAL_ID = ordersdetail.MEAL_ID
+		where orders.ORDER_STATUS = 3
+		group by meal.MEAL_CATEGORY_ID , meal.MEAL_CATEGORY_NAME
+	) as sumResult on sumResult.MEAL_CATEGORY_ID = queryResult.MEAL_CATEGORY_ID
+
+	
+		select meal.MEAL_CATEGORY_ID , meal.MEAL_CATEGORY_NAME, sum(ordersdetail.ORDER_MEAL_QTY) as SUM_QTY
+		from ORDERS as orders 
+			inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
+			inner join MEAL as meal on meal.MEAL_ID = ordersdetail.MEAL_ID
+		where orders.ORDER_STATUS = 3
+		group by meal.MEAL_CATEGORY_ID , meal.MEAL_CATEGORY_NAME
+	
+	
+	group by meal.MEAL_CATEGORY_NAME, meal.MEAL_NAME
 
 
 select * from MEAL m 
