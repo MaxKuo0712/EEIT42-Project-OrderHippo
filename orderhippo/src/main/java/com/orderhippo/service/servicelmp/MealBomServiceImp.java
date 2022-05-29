@@ -26,8 +26,10 @@ public class MealBomServiceImp implements MealBomService {
 		
 		if (mealBomBean != null) {
 			try {
-				MealBomBean result = mealBOMBeanRepository.save(mealBomBean);
-				return new ResponseEntity<Boolean>(mealBOMBeanRepository.existsById(result.getId()),  HttpStatus.OK);
+//				MealBomBean result = mealBOMBeanRepository.save(mealBomBean);
+//				return new ResponseEntity<Boolean>(mealBOMBeanRepository.existsById(result.getId()),  HttpStatus.OK);
+				mealBOMBeanRepository.save(mealBomBean);
+				return new ResponseEntity<Boolean>(true,  HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);

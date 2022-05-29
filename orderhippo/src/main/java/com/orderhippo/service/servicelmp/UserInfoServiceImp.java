@@ -29,8 +29,10 @@ public class UserInfoServiceImp implements UserInfoService {
 		
 		if (userInfo.size() == 0) {
 			try {
-				UserInfoBean result = userInfoRepository.save(userInfoBean);
-				return new ResponseEntity<Boolean>(userInfoRepository.existsById(result.getId()), HttpStatus.OK);
+//				UserInfoBean result = userInfoRepository.save(userInfoBean);
+//				return new ResponseEntity<Boolean>(userInfoRepository.existsById(result.getId()), HttpStatus.OK);
+				userInfoRepository.save(userInfoBean);
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);

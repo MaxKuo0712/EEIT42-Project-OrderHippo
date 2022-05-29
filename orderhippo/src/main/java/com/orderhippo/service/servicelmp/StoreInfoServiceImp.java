@@ -25,8 +25,10 @@ public class StoreInfoServiceImp implements StoreInfoService {
 	public Object addStoreInfo(StoreInfoBean storeInfoBean) {
 		if (storeInfoBean != null) {
 			try {
-				StoreInfoBean result = storeInfoRepository.save(storeInfoBean);
-				return new ResponseEntity<Boolean>(storeInfoRepository.existsById(result.getId()), HttpStatus.OK);
+//				StoreInfoBean result = storeInfoRepository.save(storeInfoBean);
+//				return new ResponseEntity<Boolean>(storeInfoRepository.existsById(result.getId()), HttpStatus.OK);
+				storeInfoRepository.save(storeInfoBean);
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);

@@ -25,8 +25,10 @@ public class MealCategoryServicelmp implements MealCategoryService {
 	public Object addMealCategory(MealCategoryBean mealCategoryBean) {
 		if (mealCategoryBean != null) {
 			try {
-				MealCategoryBean result = mealCategoryRepository.save(mealCategoryBean);
-				return new ResponseEntity<Boolean>(mealCategoryRepository.existsById(result.getId()), HttpStatus.OK);
+//				MealCategoryBean result = mealCategoryRepository.save(mealCategoryBean);
+//				return new ResponseEntity<Boolean>(mealCategoryRepository.existsById(result.getId()), HttpStatus.OK);
+				mealCategoryRepository.save(mealCategoryBean);
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
