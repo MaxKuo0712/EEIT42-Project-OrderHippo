@@ -1,11 +1,15 @@
 CREATE or REPLACE  view V_MEAL_MEALBOM as
-
 select meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, meal.MEAL_HOT,
 	meal.MEAL_PRICE, GROUP_CONCAT(CONCAT(bom.INGREDIENT_NAME, bom.MEAL_INGREDIENT_WEIGHT, 'g') SEPARATOR ';') as INGREDIENT,
 	meal.MEAL_DESC
 from MEAL as meal
 	inner join MEAL_BOM as bom on bom.MEAL_ID  = meal.MEAL_ID
 	inner join STORE_INFO as s on s.STORE_ID = meal.STORE_ID
+group by meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, meal.MEAL_HOT, meal.MEAL_PRICE, meal.MEAL_DESC
+
+select * from meal m 
+
+select * from MEAL_BOM
 
 -- 本月營收
 SELECT CONCAT(EXTRACT(YEAR from CREATE_TIME), '-', EXTRACT(MONTH from CREATE_TIME)) as 'YEAR_MONTH', 
@@ -41,8 +45,25 @@ FROM orders
 where ORDER_STATUS = 3
 group by CONCAT(EXTRACT(YEAR from CREATE_TIME), '-', EXTRACT(MONTH from CREATE_TIME))
 
--- 年齡數量
-select 
+-- 年齡數量 - 百分比可用於圓餅圖
+select queryResult.AGE_RANGE, queryResult.QTY, round((queryResult.QTY/usercount.USERCOUNT)*100, 2) as 'PERCENTAGE'
+from (
+	select 
+		CASE 
+			WHEN USER_AGE BETWEEN 1 and 10 THEN '1-10'
+			WHEN USER_AGE BETWEEN 11 and 20 THEN '11-20'
+			WHEN USER_AGE BETWEEN 21 and 30 THEN '21-30'
+			WHEN USER_AGE BETWEEN 31 and 40 THEN '31-40'
+			WHEN USER_AGE BETWEEN 41 and 50 THEN '41-50'
+			WHEN USER_AGE BETWEEN 51 and 60 THEN '51-60'
+			WHEN USER_AGE BETWEEN 61 and 70 THEN '61-70'
+			WHEN USER_AGE BETWEEN 71 and 80 THEN '71-80'
+			WHEN USER_AGE BETWEEN 81 and 90 THEN '81-90'
+			WHEN USER_AGE BETWEEN 91 and 100 THEN '91-100'
+			ELSE '100+'
+		END as 'AGE_RANGE', COUNT(*) as QTY
+	from USER_INFO
+	group by 
 	CASE 
 		WHEN USER_AGE BETWEEN 1 and 10 THEN '1-10'
 		WHEN USER_AGE BETWEEN 11 and 20 THEN '11-20'
@@ -55,32 +76,25 @@ select
 		WHEN USER_AGE BETWEEN 81 and 90 THEN '81-90'
 		WHEN USER_AGE BETWEEN 91 and 100 THEN '91-100'
 		ELSE '100+'
-	END as 'AGE_RANGE', COUNT(*) 
-from USER_INFO
-group by 
-	CASE 
-		WHEN USER_AGE BETWEEN 1 and 10 THEN '1-10'
-		WHEN USER_AGE BETWEEN 11 and 20 THEN '11-20'
-		WHEN USER_AGE BETWEEN 21 and 30 THEN '21-30'
-		WHEN USER_AGE BETWEEN 31 and 40 THEN '31-40'
-		WHEN USER_AGE BETWEEN 41 and 50 THEN '41-50'
-		WHEN USER_AGE BETWEEN 51 and 60 THEN '51-60'
-		WHEN USER_AGE BETWEEN 61 and 70 THEN '61-70'
-		WHEN USER_AGE BETWEEN 71 and 80 THEN '71-80'
-		WHEN USER_AGE BETWEEN 81 and 90 THEN '81-90'
-		WHEN USER_AGE BETWEEN 91 and 100 THEN '91-100'
-		ELSE '100+'
-	END
+	end) as queryResult
+	inner join (select count(*) as USERCOUNT from user_info ui) as usercount
+order by queryResult.AGE_RANGE
 
--- 性別數量
-select USER_GENDER, count(*)
-from USER_INFO
-group by USER_GENDER
+-- 性別數量 - 百分比可用於圓餅圖
+select userGanderCount.USER_GENDER, userGanderCount.GENDER_COUNT, 
+	round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) as 'PERCENTAGE'
+from ( 
+	select USER_GENDER, count(*) as 'GENDER_COUNT'
+	from USER_INFO as userinfo
+	group by USER_GENDER
+) as userGanderCount
+	inner join (select count(*) as 'count' from user_info) as userqty
+
 
 -- 訂單頁面顯示
 select orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, 
 	GROUP_CONCAT(CONCAT(meal.MEAL_NAME, ' * ', ordersdetail.ORDER_MEAL_QTY) SEPARATOR ', '),
-	GROUP_CONCAT(CONCAT('$',ordersdetail.MEAL_PRICE) SEPARATOR ', '),
+	CONCAT('$', sum(ordersdetail.MEAL_PRICE)) as MEAL_PRICE,
 	orders.CREATE_TIME, userinfo.USER_PHONE
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
