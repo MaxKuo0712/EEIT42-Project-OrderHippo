@@ -22,6 +22,9 @@ public class VMealMelaBomBean {
 	@Column(name = "MEAL_IMAGE")
 	private String mealimage;
 	
+	@Column(name = "MEAL_HOT")
+	private Boolean mealhot;
+	
 	@Column(name = "MEAL_PRICE")
 	private Integer mealprice;
 	
@@ -61,6 +64,14 @@ public class VMealMelaBomBean {
 
 	public void setMealimage(String mealimage) {
 		this.mealimage = mealimage;
+	}
+
+	public Boolean getMealhot() {
+		return mealhot;
+	}
+
+	public void setMealhot(Boolean mealhot) {
+		this.mealhot = mealhot;
 	}
 
 	public Integer getMealprice() {
