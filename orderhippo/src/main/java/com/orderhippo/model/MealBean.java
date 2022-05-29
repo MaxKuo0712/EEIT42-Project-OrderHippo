@@ -74,6 +74,10 @@ public class MealBean {
 	@Column(name = "MEAL_PROTEIN")
 	private Double mealprotein;
 	
+	@JsonProperty("MEAL_VEGAN")
+	@Column(name = "MEAL_VEGAN")
+	private Boolean mealvegan;
+	
 	@JsonProperty("MEAL_HOT")
 	@Column(name = "MEAL_HOT")
 	private Boolean mealhot;
@@ -103,9 +107,9 @@ public class MealBean {
 		return "MealBean [id=" + id + ", mealid=" + mealid + ", mealname=" + mealname + ", mealcategoryid="
 				+ mealcategoryid + ", mealcategoryname=" + mealcategoryname + ", storeid=" + storeid + ", mealimage="
 				+ mealimage + ", mealdesc=" + mealdesc + ", mealprice=" + mealprice + ", mealcalorie=" + mealcalorie
-				+ ", mealcarb=" + mealcarb + ", mealfat=" + mealfat + ", mealprotein=" + mealprotein + ", mealhot="
-				+ mealhot + ", mealstatus=" + mealstatus + ", createtid=" + createtid + ", createtime=" + createtime
-				+ ", reviseid=" + reviseid + ", revisetime=" + revisetime + "]";
+				+ ", mealcarb=" + mealcarb + ", mealfat=" + mealfat + ", mealprotein=" + mealprotein + ", mealvegan="
+				+ mealvegan + ", mealhot=" + mealhot + ", mealstatus=" + mealstatus + ", createtid=" + createtid
+				+ ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime=" + revisetime + "]";
 	}
 
 	public Integer getId() {
@@ -210,6 +214,14 @@ public class MealBean {
 
 	public void setMealprotein(Double mealprotein) {
 		this.mealprotein = mealprotein;
+	}
+
+	public Boolean getMealvegan() {
+		return mealvegan;
+	}
+
+	public void setMealvegan(Boolean mealvegan) {
+		this.mealvegan = mealvegan;
 	}
 
 	public Boolean getMealhot() {
