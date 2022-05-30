@@ -39,7 +39,7 @@ public class StoreCouponBean {
 	private String coupondesc;
 	
 	@JsonProperty("CREATE_ID")
-	@Column(name = "CREATE_ID", insertable = false)
+	@Column(name = "CREATE_ID", updatable = false)
 	private String createid;
 	
 	@JsonProperty("CREATE_TIME")
