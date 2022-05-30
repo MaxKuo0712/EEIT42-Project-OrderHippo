@@ -7,18 +7,17 @@ from MEAL as meal
 	inner join STORE_INFO as s on s.STORE_ID = meal.STORE_ID
 group by meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, meal.MEAL_HOT, meal.MEAL_PRICE, meal.MEAL_DESC
 
-select * from meal m 
-
-select * from MEAL_BOM
-
 -- 本月營收
+/*
+CREATE or REPLACE  view V_NOW_MONTH_REVENUE as
 SELECT CONCAT(EXTRACT(YEAR from CREATE_TIME), '-', EXTRACT(MONTH from CREATE_TIME)) as 'YEAR_MONTH', 
 	sum(ORDERS_PRICE) as REVENUE_OF_MONTH
 FROM orders
 where EXTRACT(MONTH from CREATE_TIME) = EXTRACT(MONTH from SYSDATE()) and ORDER_STATUS = 3
-group by CONCAT(EXTRACT(YEAR from CREATE_TIME), '-', EXTRACT(MONTH from CREATE_TIME))
+group by CONCAT(EXTRACT(YEAR from CREATE_TIME), '-', EXTRACT(MONTH from CREATE_TIME))*/
 
 -- 訂單筆數 1未確認訂單, 2已確認訂單, 3已完成訂單 4取消的訂單
+CREATE or REPLACE  view V_ORDER_STATUS_COUNT as
 select ORDER_STATUS,
 	CASE
 		WHEN ORDER_STATUS = 1 THEN '未確認訂單'
@@ -30,6 +29,7 @@ from orders
 group by ORDER_STATUS
 
 -- 銷售前10名
+CREATE or REPLACE  view V_SALE_RANK as
 select meal.MEAL_NAME, meal.MEAL_PRICE, count(*)
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as detail on detail.ORDER_ID = orders.ORDER_ID
@@ -39,13 +39,16 @@ group by meal.MEAL_NAME, meal.MEAL_PRICE
 order by count(*) DESC, meal.MEAL_PRICE
 
 -- 每月營收 - 3已完成訂單
-SELECT CONCAT(EXTRACT(YEAR from CREATE_TIME), '-', EXTRACT(MONTH from CREATE_TIME)) as 'YEAR_MONTH', 
+CREATE or REPLACE  view V_MONTH_REVENUE as
+SELECT EXTRACT(YEAR from CREATE_TIME) as 'YEAR', EXTRACT(MONTH from CREATE_TIME) as 'MONTH', 
 	sum(ORDERS_PRICE) as REVENUE_OF_MONTH
 FROM orders
 where ORDER_STATUS = 3
-group by CONCAT(EXTRACT(YEAR from CREATE_TIME), '-', EXTRACT(MONTH from CREATE_TIME))
+group by EXTRACT(YEAR from CREATE_TIME), EXTRACT(MONTH from CREATE_TIME)
 
 -- 年齡數量 - 百分比可用於圓餅圖
+CREATE or REPLACE  view V_AGE_CHART as
+
 select queryResult.AGE_RANGE, queryResult.QTY, round((queryResult.QTY/usercount.USERCOUNT)*100, 2) as 'PERCENTAGE'
 from (
 	select 
@@ -81,6 +84,7 @@ from (
 order by queryResult.AGE_RANGE
 
 -- 性別數量 - 百分比可用於圓餅圖
+CREATE or REPLACE  view V_GENDER_CHART as
 select userGanderCount.USER_GENDER, userGanderCount.GENDER_COUNT, 
 	round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) as 'PERCENTAGE'
 from ( 
@@ -89,9 +93,11 @@ from (
 	group by USER_GENDER
 ) as userGanderCount
 	inner join (select count(*) as 'count' from user_info) as userqty
+order by round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) desc
 
 
 -- 訂單頁面顯示
+CREATE or REPLACE view V_ORDER_DISPLAY as
 select orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, 
 	GROUP_CONCAT(CONCAT(meal.MEAL_NAME, ' * ', ordersdetail.ORDER_MEAL_QTY) SEPARATOR ', '),
 	CONCAT('$', sum(ordersdetail.MEAL_PRICE)) as MEAL_PRICE,
@@ -102,8 +108,17 @@ from ORDERS as orders
 	inner join USER_INFO as userinfo on userinfo.USER_ID = orders.USER_ID
 group by orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, orders.CREATE_TIME, userinfo.USER_PHONE
 order by orders.ORDER_ID
+
+-- 更改菜單顯示
+CREATE or REPLACE view V_REVISE_MEAL_DISPLAY as
+select meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_HOT, meal.MEAL_VEGAN, meal.MEAL_IMAGE, meal.MEAL_PRICE, bom.INGREDIENT_ID, bom.INGREDIENT_NAME,
+	bom.MEAL_INGREDIENT_WEIGHT, meal.MEAL_CALORIE, meal.MEAL_CARB, meal.MEAL_FAT, meal.MEAL_PROTEIN, meal.MEAL_DESC
+from meal as meal 
+	inner join meal_bom as bom
+where meal.MEAL_STATUS = true 
 	
 -- 各類別售出圓餅圖
+CREATE or REPLACE view V_SALE_CATEGORY as
 select queryResult.MEAL_ID, queryResult.MEAL_CATEGORY_NAME, queryResult.MEAL_NAME, 
 	round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) as 'PERCENTAGE'
 from (
@@ -122,14 +137,6 @@ from (
 		where orders.ORDER_STATUS = 3
 		group by meal.MEAL_CATEGORY_ID , meal.MEAL_CATEGORY_NAME
 	) as sumResult on sumResult.MEAL_CATEGORY_ID = queryResult.MEAL_CATEGORY_ID
-
-	
-	
-select * from MEAL m 
-
-select * from ORDERS where ORDER_STATUS = 3
-
-select * from ORDER_MEALDETAIL
-
+order by round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) desc
 
 
