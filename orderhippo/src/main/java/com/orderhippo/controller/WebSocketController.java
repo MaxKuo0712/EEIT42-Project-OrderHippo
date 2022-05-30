@@ -18,7 +18,9 @@ import org.springframework.stereotype.Controller;
 @ServerEndpoint("/websocket/{requestID}")
 public class WebSocketController {
 	
-//	private static int onlineCount = 0;
+//	private static int onlineCount = 0; // 記錄線上人數
+	
+	// 儲存使用者及WebSocketController
 	private static ConcurrentHashMap<String, WebSocketController> webSocketMap = new ConcurrentHashMap<>();
 	
 	private Session session;
@@ -29,7 +31,7 @@ public class WebSocketController {
 	public void onOpen(@PathParam(value = "requestID") String requestID, Session session) {
 		this.session = session;
 		this.requestID = requestID;
-		webSocketMap.put(requestID, this);
+		webSocketMap.put(requestID, this); // 連線放入資料
 //		addOnlineCount();
 
 		try {
@@ -44,7 +46,7 @@ public class WebSocketController {
 	
 	@OnClose
 	public void onClose() {
-		webSocketMap.remove(requestID);
+		webSocketMap.remove(requestID); // 關閉連線移除資料
 		System.out.println(requestID + "斷線");
 		System.out.println(webSocketMap);
 	}
@@ -53,12 +55,17 @@ public class WebSocketController {
 	public void onMessage(String message, Session session) {
 		log.info("客戶端訊息"+session+"："+ message);
 		
+		// 拆解接收到的訊息
 		String sendMessage = message.split("#")[0];
 		String sendUserID = message.split("#")[1];
 		
 		try {
-			sendToUser(sendMessage, sendUserID);
-			System.out.println("OK");
+			// 如果sendUserID是SendToAllUser，則發送給所有使用者；否則就是發送給指定使用者
+			if (sendUserID.equals("SendToAllUser")) {
+				sendToAll(sendMessage);
+			} else {
+				sendToUser(sendMessage, sendUserID);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,6 +81,16 @@ public class WebSocketController {
 		} else {
 			System.out.println(this.requestID);
 			sendToUser("該使用者不在家", this.requestID);
+		}
+	}
+	
+	public void sendToAll(String message) throws IOException {
+		for (String key : webSocketMap.keySet()) {
+			try {
+				webSocketMap.get(key).sendMessage(message);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
