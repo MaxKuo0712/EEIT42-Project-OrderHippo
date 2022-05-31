@@ -30,7 +30,7 @@ group by ORDER_STATUS
 
 -- 銷售前10名
 CREATE or REPLACE  view V_SALE_RANK as
-select meal.MEAL_NAME, meal.MEAL_PRICE, count(*)
+select meal.MEAL_NAME, meal.MEAL_PRICE, count(*) as 'COUNT'
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as detail on detail.ORDER_ID = orders.ORDER_ID
 	inner join MEAL as meal on meal.MEAL_ID = detail.MEAL_ID
@@ -48,7 +48,6 @@ group by EXTRACT(YEAR from CREATE_TIME), EXTRACT(MONTH from CREATE_TIME)
 
 -- 年齡數量 - 百分比可用於圓餅圖
 CREATE or REPLACE  view V_AGE_CHART as
-
 select queryResult.AGE_RANGE, queryResult.QTY, round((queryResult.QTY/usercount.USERCOUNT)*100, 2) as 'PERCENTAGE'
 from (
 	select 
@@ -99,7 +98,7 @@ order by round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) desc
 -- 訂單頁面顯示
 CREATE or REPLACE view V_ORDER_DISPLAY as
 select orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, 
-	GROUP_CONCAT(CONCAT(meal.MEAL_NAME, ' * ', ordersdetail.ORDER_MEAL_QTY) SEPARATOR ', '),
+	GROUP_CONCAT(CONCAT(meal.MEAL_NAME, ' * ', ordersdetail.ORDER_MEAL_QTY) SEPARATOR ', ') as 'MEAL_NAME_QTY',
 	CONCAT('$', sum(ordersdetail.MEAL_PRICE)) as MEAL_PRICE,
 	orders.CREATE_TIME, userinfo.USER_PHONE
 from ORDERS as orders
