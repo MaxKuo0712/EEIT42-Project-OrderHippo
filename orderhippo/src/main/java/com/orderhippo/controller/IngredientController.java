@@ -26,6 +26,7 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = "食材資料API")
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 //@CrossOrigin(origins = "http://127.0.0.1:8080")
 public class IngredientController {
 	

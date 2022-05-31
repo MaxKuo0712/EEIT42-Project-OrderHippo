@@ -48,7 +48,7 @@ public class StoreMessageBean {
 	private String messageimage;    // 網址, 圖片多張的話，會佔記憶體太大，所以Max才會用Imgur API來解決
 	
 	@JsonProperty("CREATE_ID")
-	@Column(name = "CREATE_ID")
+	@Column(name = "CREATE_ID", updatable = false)
 	private String createid;
 	
 	@JsonProperty("CREATE_TIME")

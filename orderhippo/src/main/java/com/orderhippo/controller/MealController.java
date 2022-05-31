@@ -30,6 +30,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags = "餐點資料API")
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 //@CrossOrigin(origins = "http://127.0.0.1:8080")
 public class MealController {
 	

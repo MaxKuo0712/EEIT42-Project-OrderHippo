@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.StoreInfoBean;
+import com.orderhippo.model.UserInfoBean;
 import com.orderhippo.service.service.StoreInfoService;
+import com.orderhippo.service.service.UserInfoService;
 import com.orderhippo.utils.ProjectUtils;
 
 import io.swagger.annotations.Api;
@@ -28,8 +30,12 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = "店家資訊API")
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 //@CrossOrigin(origins = "http://127.0.0.1:8080")
 public class StoreController {
+	
+	@Autowired 
+	private UserInfoService userInfoService;
 	
 	@Autowired
 	private StoreInfoService storeInfoService;
@@ -40,9 +46,10 @@ public class StoreController {
 			@PathVariable String requestID,
 			@RequestParam(name = "token", required = true) String realHashToken) {
 		
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
 		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
 		
-		String dbToken = ProjectUtils.getDBToken(null, storeinfo, requestID);
+		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
 		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
 		
 		if (verifyResult) {

@@ -31,7 +31,7 @@ public class StoreCouponBean {
 	private String couponname;
 	
 	@JsonProperty("STORE_ID")
-	@Column(name = "STORE_ID")
+	@Column(name = "STORE_ID", updatable = false)
 	private String storeid;
 	
 	@JsonProperty("COUPON_DESC")

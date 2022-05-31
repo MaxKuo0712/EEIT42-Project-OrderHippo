@@ -13,9 +13,11 @@ import javax.websocket.server.ServerEndpoint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Controller
 @ServerEndpoint("/websocket/{requestID}")
+@CrossOrigin
 public class WebSocketController {
 	
 //	private static int onlineCount = 0; // 記錄線上人數

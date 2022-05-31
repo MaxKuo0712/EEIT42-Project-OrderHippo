@@ -16,6 +16,7 @@ import io.swagger.annotations.Api;
 @Api(tags = "菜單管理主頁API")
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 //@CrossOrigin(origins = "http://127.0.0.1:8080")
 public class VMealMelaBomController {
 	@Autowired

@@ -33,7 +33,8 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = "Meal BOM API")
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://127.0.0.1:8080")
+@CrossOrigin
+//@CrossOrigin(origins = "http://127.0.0.1:8080")
 public class MealBomController {
 	
 	@Autowired

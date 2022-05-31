@@ -42,7 +42,7 @@ public class OrdersBean {
 	
 	@JsonProperty("ORDERS_PRICE")
 	@Column(name = "ORDERS_PRICE")
-	private Integer ordermealqty;
+	private Integer ordersprice;
 	
 	@JsonProperty("ORDER_STATUS")
 	@Column(name = "ORDER_STATUS", columnDefinition="ENUM")
@@ -67,7 +67,7 @@ public class OrdersBean {
 	@Override
 	public String toString() {
 		return "OrdersBean [id=" + id + ", orderid=" + orderid + ", storeid=" + storeid + ", userid=" + userid
-				+ ", ordermealqty=" + ordermealqty + ", orderstatus=" + orderstatus + ", createtid=" + createtid
+				+ ", ordersprice=" + ordersprice + ", orderstatus=" + orderstatus + ", createtid=" + createtid
 				+ ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime=" + revisetime + "]";
 	}
 
@@ -103,12 +103,12 @@ public class OrdersBean {
 		this.userid = userid;
 	}
 
-	public Integer getOrdermealqty() {
-		return ordermealqty;
+	public Integer getOrdersprice() {
+		return ordersprice;
 	}
 
-	public void setOrdermealqty(Integer ordermealqty) {
-		this.ordermealqty = ordermealqty;
+	public void setOrdersprice(Integer ordersprice) {
+		this.ordersprice = ordersprice;
 	}
 
 	public String getOrderstatus() {
