@@ -73,34 +73,34 @@ public class MealServicelmp implements MealService {
 	}
 
 	// 刪除單筆餐點 -- 更改餐點狀態為false
-	@Override
-	public Object deleteMeal(String mealId) {
-		List<MealBean> result = mealRepository.findByMealidAndMealstatus(mealId, true);
-		
-		if (result.size() == 1) {
-			try {
-				MealBean targetMeal = result.get(0);
-				targetMeal.setMealstatus(false);
-				mealRepository.save(targetMeal);
-				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
-			}
-		}
-		return new ResponseEntity<String>("資料不存在：MealID", HttpStatus.NOT_FOUND);
-		
+//	@Override
+//	public Object deleteMeal(String mealId) {
+//		List<MealBean> result = mealRepository.findByMealidAndMealstatus(mealId, true);
+//		
 //		if (result.size() == 1) {
 //			try {
-//				mealRepository.deleteById(result.get(0).getId());
+//				MealBean targetMeal = result.get(0);
+//				targetMeal.setMealstatus(false);
+//				mealRepository.save(targetMeal);
 //				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 //			} catch (Exception e) {
 //				e.printStackTrace();
 //				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
 //			}
 //		}
-		
-	}
+//		return new ResponseEntity<String>("資料不存在：MealID", HttpStatus.NOT_FOUND);
+//		
+////		if (result.size() == 1) {
+////			try {
+////				mealRepository.deleteById(result.get(0).getId());
+////				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+////			} catch (Exception e) {
+////				e.printStackTrace();
+////				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+////			}
+////		}
+//		
+//	}
 
 	// 查詢餐點 By MealID 搜尋
 	@Override
@@ -128,6 +128,16 @@ public class MealServicelmp implements MealService {
 	@Override
 	public List<MealBean> getMealByStoreID(String storeId) {
 		List<MealBean> result = mealRepository.findByStoreidAndMealstatus(storeId, true);
+		
+		if (!result.isEmpty()) {
+			return result;
+		}
+		return null;
+	}
+
+	@Override
+	public List<MealBean> getByMealhot(Boolean mealhot) {
+		List<MealBean> result = mealRepository.findByMealhot(mealhot);
 		
 		if (!result.isEmpty()) {
 			return result;

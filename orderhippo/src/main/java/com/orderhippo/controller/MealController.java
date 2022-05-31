@@ -50,6 +50,7 @@ public class MealController {
 			@RequestParam(name = "mealid", required = false) String mealId, 
 			@RequestParam(name = "mealcategoryid", required = false) String mealcategoryId,
 			@RequestParam(name = "storeid", required = false) String storeId,
+			@RequestParam(name = "mealhot", required = false) Boolean mealHot,
 			@RequestParam(name = "token", required = true) String realHashToken) {
 		
 		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
@@ -65,6 +66,8 @@ public class MealController {
 				return mealService.getMealByMealCategoryID(mealcategoryId);
 			} else if (storeId != null && storeId.trim().length() > 0) {
 				return mealService.getMealByStoreID(storeId);
+			} else if (mealHot != null) {
+				return mealService.getByMealhot(mealHot);
 			} else {
 				return mealService.getAllMeal();
 			}

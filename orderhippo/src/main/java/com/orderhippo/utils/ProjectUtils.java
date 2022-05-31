@@ -1,5 +1,7 @@
 package com.orderhippo.utils;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,7 +12,7 @@ import com.orderhippo.model.UserInfoBean;
 public class ProjectUtils {
 	
 	public static String createToken(String requestID) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10, new SecureRandom()); 
 		return encoder.encode(requestID);
 	}
 	

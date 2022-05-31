@@ -17,4 +17,6 @@ public interface MealRepository extends JpaRepository<MealBean, Integer> {
 	// By STORE_ID 搜尋
 	List<MealBean> findByStoreidAndMealstatus(String storeid, Boolean mealstatus);
 	
+	// 查詢熱門餐點 By MealHot
+	List<MealBean> findByMealhot(Boolean mealhot);
 }

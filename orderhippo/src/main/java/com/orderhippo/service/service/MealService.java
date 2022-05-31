@@ -3,6 +3,7 @@ package com.orderhippo.service.service;
 import java.util.List;
 
 import com.orderhippo.model.MealBean;
+import com.orderhippo.model.MealBomBean;
 
 public interface MealService {
 	
@@ -24,6 +25,9 @@ public interface MealService {
 	// 修改單筆餐點
 	public Object updateMeal(String requestID, MealBean mealBean);
 	
+	// 查詢熱門餐點 By MealHot
+	public List<MealBean> getByMealhot(Boolean mealhot);
+	
 	// 刪除單筆餐點
-	public Object deleteMeal(String mealId);
+//	public Object deleteMeal(String mealId);
 }

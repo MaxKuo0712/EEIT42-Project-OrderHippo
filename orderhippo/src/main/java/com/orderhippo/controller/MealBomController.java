@@ -105,7 +105,7 @@ public class MealBomController {
 	// 修改BOM資料 Putmapping
 	@ApiOperation("修改BOM資料")
 	@PutMapping(path="/{requestID}/mealbom", consumes="application/json")
-	public Object patchBom(
+	public Object patchBom (
 			@PathVariable String requestID,
 			@RequestParam(name = "token", required = true) String realHashToken,
 			@RequestBody MealBomBean mealBomBean) {
