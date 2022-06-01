@@ -31,4 +31,15 @@ public class VReviseMealDisplayServiceImp implements VReviseMealDisplayService{
 		}
 	}
 
+	@Override
+	public List<VReviseMealDisplayBean> findByMealid(String mealid) {
+		List<VReviseMealDisplayBean> result = vReviseMealDisplayRepository.findByMealid(mealid);
+		
+		if (!result.isEmpty()) {
+			return result;
+		} else {
+			return null;
+		}
+	}
+
 }

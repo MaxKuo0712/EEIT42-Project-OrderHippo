@@ -34,6 +34,7 @@ public class VReviseMealDisplayController {
 	@GetMapping(path = "/{requestID}/vrevisemealdisplay")
 	public Object getAllVReviseMealDisplays(
 			@PathVariable String requestID,
+			@RequestParam(name = "mealid", required = true) String mealId,
 			@RequestParam(name = "token", required = true) String realHashToken) {
 		
 		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
@@ -42,7 +43,7 @@ public class VReviseMealDisplayController {
 		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
 		
 		if (verifyResult) {
-			return vReviseMealDisplayService.getAllReviseMealDisplay();
+			return vReviseMealDisplayService.findByMealid(mealId);
 		} else {
 			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
