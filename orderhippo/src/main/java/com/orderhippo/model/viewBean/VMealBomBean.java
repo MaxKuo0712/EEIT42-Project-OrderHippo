@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "v_meal_mealbom")
-public class VMealMelaBomBean {
+public class VMealBomBean {
 	
 	@Id
 	@Column(name = "MEAL_ID")

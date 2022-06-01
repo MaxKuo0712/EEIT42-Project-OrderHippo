@@ -7,26 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.orderhippo.model.viewBean.VMealBomBean;
-import com.orderhippo.repository.viewRepository.VMealBomRepository;
-import com.orderhippo.service.service.viewService.VMealBomService;
+import com.orderhippo.model.viewBean.VSaleRankBean;
+import com.orderhippo.repository.viewRepository.VSaleRankRepository;
+import com.orderhippo.service.service.viewService.VSaleRankService;
 
 @Service
 @Transactional(rollbackFor = SQLException.class)
-public class VMealBomServicelmp implements VMealBomService {
 
-	@Autowired
-	private VMealBomRepository vMealBomRepository;
+public class VSaleRankServiceImp implements VSaleRankService {
 	
-	@Override
-	public List<VMealBomBean> getAll() {
-		List<VMealBomBean> result = vMealBomRepository.findAll();
-		
+	@Autowired
+	private VSaleRankRepository vSaleRankRepository;
+	
+	// 查詢所有 SaleRank
+	public List<VSaleRankBean> getAllSaleRank() {
+		List<VSaleRankBean> result = vSaleRankRepository.findAll();
 		if (!result.isEmpty()) {
 			return result;
 		} else {
 			return null;
 		}
 	}
-
 }

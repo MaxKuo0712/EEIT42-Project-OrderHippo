@@ -27,7 +27,7 @@ import com.orderhippo.utils.ProjectUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags="Store Coupon API")
+@Api(tags = "店家優惠券API")
 @RestController
 @RequestMapping("/api")
 @CrossOrigin

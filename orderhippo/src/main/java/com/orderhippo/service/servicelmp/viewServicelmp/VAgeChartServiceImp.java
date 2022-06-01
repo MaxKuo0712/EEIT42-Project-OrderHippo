@@ -7,20 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.orderhippo.model.viewBean.VMealBomBean;
-import com.orderhippo.repository.viewRepository.VMealBomRepository;
-import com.orderhippo.service.service.viewService.VMealBomService;
+import com.orderhippo.model.viewBean.VAgeChartBean;
+import com.orderhippo.repository.viewRepository.VAgeChartRepository;
+import com.orderhippo.service.service.viewService.VAgeChartService;
 
 @Service
 @Transactional(rollbackFor = SQLException.class)
-public class VMealBomServicelmp implements VMealBomService {
 
-	@Autowired
-	private VMealBomRepository vMealBomRepository;
+public class VAgeChartServiceImp implements VAgeChartService{
 	
-	@Override
-	public List<VMealBomBean> getAll() {
-		List<VMealBomBean> result = vMealBomRepository.findAll();
+	@Autowired
+	private VAgeChartRepository vAgeChartRepository;
+	
+	// 查詢所有 AgeChart
+	public List<VAgeChartBean> getAllAgeChart() {
+		List<VAgeChartBean> result = vAgeChartRepository.findAll();
 		
 		if (!result.isEmpty()) {
 			return result;
@@ -28,5 +29,4 @@ public class VMealBomServicelmp implements VMealBomService {
 			return null;
 		}
 	}
-
 }

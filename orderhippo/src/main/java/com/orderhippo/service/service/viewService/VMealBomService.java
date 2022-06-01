@@ -1,10 +1,10 @@
-package com.orderhippo.service.service;
+package com.orderhippo.service.service.viewService;
 
 import java.util.List;
 
-import com.orderhippo.model.viewBean.VMealMelaBomBean;
+import com.orderhippo.model.viewBean.VMealBomBean;
 
-public interface VMealMelaBomService {
+public interface VMealBomService {
 	// 查詢資料
-	public List<VMealMelaBomBean> getAll();
+	public List<VMealBomBean> getAll();
 }

@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Api(tags = "Meal BOM API")
+@Api(tags = "餐點食材API")
 @RestController
 @RequestMapping("/api")
 @CrossOrigin

@@ -26,7 +26,7 @@ import com.orderhippo.utils.ProjectUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags = "Store Message API")
+@Api(tags = "店家公告訊息API")
 @RestController
 @RequestMapping("/api")
 
