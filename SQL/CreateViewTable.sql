@@ -60,9 +60,7 @@ from (
 			WHEN USER_AGE BETWEEN 51 and 60 THEN '51-60'
 			WHEN USER_AGE BETWEEN 61 and 70 THEN '61-70'
 			WHEN USER_AGE BETWEEN 71 and 80 THEN '71-80'
-			WHEN USER_AGE BETWEEN 81 and 90 THEN '81-90'
-			WHEN USER_AGE BETWEEN 91 and 100 THEN '91-100'
-			ELSE '100+'
+			ELSE '80+'
 		END as 'AGE_RANGE', COUNT(*) as QTY
 	from USER_INFO
 	group by 
@@ -75,14 +73,12 @@ from (
 		WHEN USER_AGE BETWEEN 51 and 60 THEN '51-60'
 		WHEN USER_AGE BETWEEN 61 and 70 THEN '61-70'
 		WHEN USER_AGE BETWEEN 71 and 80 THEN '71-80'
-		WHEN USER_AGE BETWEEN 81 and 90 THEN '81-90'
-		WHEN USER_AGE BETWEEN 91 and 100 THEN '91-100'
-		ELSE '100+'
+		ELSE '80+'
 	end) as queryResult
 	inner join (select count(*) as USERCOUNT from user_info ui) as usercount
 order by queryResult.AGE_RANGE
 
--- 性別數量 - 百分比可用於圓餅圖
+-- 性別數量 - 百分比可用於圓餅圖 -- 待查
 CREATE or REPLACE  view V_GENDER_CHART as
 select userGanderCount.USER_GENDER, userGanderCount.GENDER_COUNT, 
 	round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) as 'PERCENTAGE'
@@ -97,10 +93,10 @@ order by round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) desc
 
 -- 訂單頁面顯示
 CREATE or REPLACE view V_ORDER_DISPLAY as
-select orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, 
-	GROUP_CONCAT(CONCAT(meal.MEAL_NAME, ' * ', ordersdetail.ORDER_MEAL_QTY) SEPARATOR ', ') as 'MEAL_NAME_QTY',
+select orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, userinfo.USER_PHONE, 
+	GROUP_CONCAT(CONCAT(meal.MEAL_NAME, ' * ', ordersdetail.ORDER_MEAL_QTY) SEPARATOR ', ') as 'MEAL_ORDER_QTY',
 	CONCAT('$', sum(ordersdetail.MEAL_PRICE)) as MEAL_PRICE,
-	orders.CREATE_TIME, userinfo.USER_PHONE
+	orders.CREATE_TIME
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
 	inner join MEAL as meal on meal.MEAL_ID = ordersdetail.MEAL_ID
@@ -108,7 +104,7 @@ from ORDERS as orders
 group by orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, orders.CREATE_TIME, userinfo.USER_PHONE
 order by orders.ORDER_ID
 
--- 更改菜單顯示
+-- 更改菜單顯示 -- 待查 --增加MEAL_ID查詢
 CREATE or REPLACE view V_REVISE_MEAL_DISPLAY as
 select meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_HOT, meal.MEAL_VEGAN, meal.MEAL_IMAGE, meal.MEAL_PRICE, bom.INGREDIENT_ID, bom.INGREDIENT_NAME,
 	bom.MEAL_INGREDIENT_WEIGHT, meal.MEAL_CALORIE, meal.MEAL_CARB, meal.MEAL_FAT, meal.MEAL_PROTEIN, meal.MEAL_DESC
@@ -137,5 +133,10 @@ from (
 		group by meal.MEAL_CATEGORY_ID , meal.MEAL_CATEGORY_NAME
 	) as sumResult on sumResult.MEAL_CATEGORY_ID = queryResult.MEAL_CATEGORY_ID
 order by round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) desc
+
+
+
+
+
 
 
