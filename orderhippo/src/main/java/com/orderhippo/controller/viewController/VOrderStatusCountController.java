@@ -22,7 +22,6 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags = "訂單筆數API")
 @RestController
 @RequestMapping("/api")
-
 public class VOrderStatusCountController {
 	
 	@Autowired

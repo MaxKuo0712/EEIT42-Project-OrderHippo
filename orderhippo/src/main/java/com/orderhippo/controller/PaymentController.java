@@ -26,7 +26,7 @@ import com.orderhippo.utils.ProjectUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags="Payment API")
+@Api(tags="付款資訊API")
 @RestController
 @RequestMapping("/api")
 @CrossOrigin

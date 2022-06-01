@@ -13,7 +13,6 @@ import com.orderhippo.service.service.viewService.VOrderStatusCountService;
 
 @Service
 @Transactional(rollbackFor = SQLException.class)
-
 public class VOrderStatusCountServiceImp implements VOrderStatusCountService {
 	
 	@Autowired
