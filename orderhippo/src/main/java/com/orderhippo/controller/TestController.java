@@ -46,7 +46,7 @@ public class TestController {
 					.setSuccessUrl("http://localhost:8080/success.html")
 					.setCancelUrl("http://localhost:8080/cancel.html")
 					.addLineItem(
-							SessionCreateParams.LineItem.builder().setQuantity(Long.parseLong(orderMealDetail.getOrdermealqty().toString()))
+							SessionCreateParams.LineItem.builder().setQuantity(Long.parseLong(orderMealDetail.getOrderid().toString()))
 									.setPriceData(
 											SessionCreateParams.LineItem.PriceData.builder()
 													.setCurrency("TWD")
