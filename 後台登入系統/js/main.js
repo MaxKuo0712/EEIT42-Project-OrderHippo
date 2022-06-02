@@ -50,20 +50,24 @@ function setSignBntStatus() {
     const signBnt = document.getElementById("signBnt");
     auth.onAuthStateChanged((user) =>{
         if (user) {
-            signBnt.innerText = "Sign out";
+            // signBnt.innerText = "Sign out";
+            // window.location.href = "homepage.html";
         } else {
-            signBnt.innerText = "Sign in";
+            // signBnt.innerText = "Sign in";
+            // window.location.href = "homepage.html";
         }
     });
 }
 
 signBnt.addEventListener("click", (e) => {
-    let signText = signBnt.innerText;
-    if (signText === "Sign in") {
-        window.location.href = "login.html";
-    } else if (signText === "Sign out") {
-        userSignOut();
-        localStorage.removeItem("userinfo");
-        localStorage.removeItem("userToken");
-    }
+    // let signText = signBnt.innerText;
+    // if (signText === "Sign in") {
+    //     window.location.href = "login.html";
+    // } else if (signText === "Sign out") {
+
+    // }
+    userSignOut();
+    localStorage.removeItem("storeinfo");
+    localStorage.removeItem("storeToken");
+    window.location.href = "login.html";
 });
