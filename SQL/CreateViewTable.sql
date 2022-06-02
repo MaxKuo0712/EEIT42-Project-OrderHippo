@@ -136,19 +136,14 @@ from (
 	) as sumResult on sumResult.MEAL_CATEGORY_ID = queryResult.MEAL_CATEGORY_ID
 order by round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) desc
 
+-- 用於金流支付
 CREATE or REPLACE view V_PAYMENT_DETAIL as
-
 select orders.ORDER_ID, sum(ordersdetail.MEAL_PRICE) as 'MEAL_PRICE',
 	GROUP_CONCAT(meal.MEAL_NAME SEPARATOR ', ') as 'MEAL_NAME'
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
 	inner join MEAL as meal on meal.MEAL_ID = ordersdetail.MEAL_ID
 group by ORDER_ID
-
-
-select vpaymentde0_.ORDER_ID as order_id1_17_, vpaymentde0_.MEAL_ORDER_QTY as meal_ord2_17_, vpaymentde0_.MEAL_PRICE as meal_pri3_17_ 
-from v_payment_detail vpaymentde0_ 
-where vpaymentde0_.ORDER_ID='O20220527_00bdee0cdd7111eca4fa068cdc81eecc'
 
 
 

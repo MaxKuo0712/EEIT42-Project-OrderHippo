@@ -76,6 +76,10 @@ update STORE_INFO
 SET STORE_PHONE = '091234568'
 where STORE_ID  = 'S202205_2c157218dc9611ec95b9068cdc81eecb'
 
+insert STORE_INFO (STORE_ID, STORE_NAME, STORE_ADDRESS, STORE_PHONE, STORE_MAIL, STORE_LOCATION, STORE_TOKEN, CREATE_ID)
+values ('l3rH7uT47PTrQSteWO2V9XqbpRn1', 'Order Hippo', '408台中市南屯區公益路二段52號', '0966666666', 
+	'eeit42orderhippo@gmail.com', '24.1505311,120.6488196', REPLACE(UUID(),'-',''), 'Admin')
+
 select * from STORE_INFO
 
 delete from STORE_INFO
