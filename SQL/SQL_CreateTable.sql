@@ -154,7 +154,8 @@ create table ORDERS (
 	USER_ID varchar(100) not null,
 	-- USER_MAIL varchar(200) not null,
 	ORDERS_PRICE int not null,
-	ORDER_STATUS ENUM('1','2','3','4') not null, -- 0取消的訂單 1未確認訂單, 2已確認訂單, 3已完成訂單
+	ORDER_STATUS ENUM('1','2','3','4') not null, -- 1未確認訂單, 2已確認訂單, 3已完成訂單 4取消的訂單
+	ORDER_DESC LONGTEXT not null,
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
@@ -165,6 +166,8 @@ create table ORDERS (
 	-- CONSTRAINT CHK_USER_MAIL CHECK (USER_MAIL REGEXP '[a-zA-Z0-9_\-]+@([a-zA-Z0-9_\-]+\.)+(com|org|edu)' = 1),
 	CONSTRAINT CHK_ORDERS_PRICE CHECK (ORDERS_PRICE > 0)
 );
+
+alter table ORDERS add ORDER_DESC LONGTEXT;
 
 DELETE from ORDERS
 
@@ -250,7 +253,7 @@ CREATE TABLE PAYMENT (
 	USER_ID varchar(100) NOT NULL,
 	STORE_ID varchar(100) NOT NULL,
 	PAYMENT_PRICE int NOT NULL,
-	PAYMENT_CATEGORY ENUM('1','2','3') NOT NULL, -- 1. Credit Card, 2. Cash, 3. 3rd payment
+	PAYMENT_CATEGORY ENUM('1','2') NOT NULL, -- 1. Credit Card, 2. Cash
 	PAYMENT_STATUS BOOLEAN default true not null, -- true 有效 false 無效(退款)
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) NOT NULL,

@@ -1,3 +1,4 @@
+-- 菜單頁顯示
 CREATE or REPLACE  view V_MEAL_MEALBOM as
 select meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, meal.MEAL_HOT,
 	meal.MEAL_PRICE, GROUP_CONCAT(CONCAT(bom.INGREDIENT_NAME, bom.MEAL_INGREDIENT_WEIGHT, 'g') SEPARATOR ';') as INGREDIENT,
@@ -6,15 +7,6 @@ from MEAL as meal
 	inner join MEAL_BOM as bom on bom.MEAL_ID  = meal.MEAL_ID
 	inner join STORE_INFO as s on s.STORE_ID = meal.STORE_ID
 group by meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, meal.MEAL_HOT, meal.MEAL_PRICE, meal.MEAL_DESC
-
--- 本月營收
-/*
-CREATE or REPLACE  view V_NOW_MONTH_REVENUE as
-SELECT CONCAT(EXTRACT(YEAR from CREATE_TIME), '-', EXTRACT(MONTH from CREATE_TIME)) as 'YEAR_MONTH', 
-	sum(ORDERS_PRICE) as REVENUE_OF_MONTH
-FROM orders
-where EXTRACT(MONTH from CREATE_TIME) = EXTRACT(MONTH from SYSDATE()) and ORDER_STATUS = 3
-group by CONCAT(EXTRACT(YEAR from CREATE_TIME), '-', EXTRACT(MONTH from CREATE_TIME))*/
 
 -- 訂單筆數 1未確認訂單, 2已確認訂單, 3已完成訂單 4取消的訂單
 CREATE or REPLACE  view V_ORDER_STATUS_COUNT as
@@ -90,18 +82,18 @@ from (
 	inner join (select count(*) as 'count' from user_info) as userqty
 order by round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) desc
 
-
--- 訂單頁面顯示
+-- 訂單頁面顯示 -- 改MEAL_PRICE改成折扣後價格 -- 加上以參數搜尋
 CREATE or REPLACE view V_ORDER_DISPLAY as
 select orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, userinfo.USER_PHONE, 
 	GROUP_CONCAT(CONCAT(meal.MEAL_NAME, ' * ', ordersdetail.ORDER_MEAL_QTY) SEPARATOR ', ') as 'MEAL_ORDER_QTY',
-	CONCAT('$', sum(ordersdetail.MEAL_PRICE)) as MEAL_PRICE,
+	CONCAT('$', orders.ORDERS_PRICE) as 'ORDERS_PRICE',
 	orders.CREATE_TIME
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
 	inner join MEAL as meal on meal.MEAL_ID = ordersdetail.MEAL_ID
 	inner join USER_INFO as userinfo on userinfo.USER_ID = orders.USER_ID
-group by orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, orders.CREATE_TIME, userinfo.USER_PHONE
+group by orders.ORDER_ID , orders.ORDER_STATUS, CONCAT('$', orders.ORDERS_PRICE), 
+	userinfo.USER_NAME, orders.CREATE_TIME, userinfo.USER_PHONE
 order by orders.ORDER_ID
 
 select * from ORDER_MEALDETAIL om where ORDER_ID ='O20220527_00bdee0cdd7111eca4fa068cdc81eecc'
@@ -139,13 +131,22 @@ order by round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) desc
 -- 用於金流支付
 CREATE or REPLACE view V_PAYMENT_DETAIL as
 select orders.ORDER_ID, sum(ordersdetail.MEAL_PRICE) as 'MEAL_PRICE',
-	GROUP_CONCAT(meal.MEAL_NAME SEPARATOR ', ') as 'MEAL_NAME'
+	GROUP_CONCAT(meal.MEAL_NAME SEPARATOR ', ') as 'MEALS'
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
 	inner join MEAL as meal on meal.MEAL_ID = ordersdetail.MEAL_ID
 group by ORDER_ID
 
-
+-- 訂單結帳後的確認頁
+CREATE or REPLACE view V_AFTER_PAYMENT_PAGE as
+select o.ORDER_ID, si.STORE_NAME, p.PAYMENT_PRICE, 
+	CASE
+		WHEN p.PAYMENT_CATEGORY = 1 THEN '信用卡'
+		WHEN p.PAYMENT_CATEGORY = 2 THEN '現金'
+	END as 'PAYMENT_CATEGORY'
+from ORDERS o 
+	inner join STORE_INFO si on si.STORE_ID = o.STORE_ID 
+	inner join PAYMENT p on p.ORDER_ID = o.ORDER_ID
 
 
 
