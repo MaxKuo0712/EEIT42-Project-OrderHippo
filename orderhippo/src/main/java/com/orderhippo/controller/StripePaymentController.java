@@ -10,10 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
 import com.orderhippo.model.UserInfoBean;
 import com.orderhippo.model.viewBean.VPaymentDetailBean;
 import com.orderhippo.service.service.UserInfoService;
@@ -26,69 +28,63 @@ import com.stripe.param.checkout.SessionCreateParams;
 
 import io.swagger.annotations.Api;
 
-@Api(tags="Stripe金流API")
+@Api(tags = "Stripe金流API")
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
 public class StripePaymentController {
-	
-		@Autowired
-		UserInfoService userInfoService;
+
+	@Autowired
+	UserInfoService userInfoService;
+
+	@PostMapping("/{requestID}/stripepayment")
+	public Object getAllStripePayment(
+			@PathVariable String requestID,
+			@RequestParam(name = "token", required = true) String realHashToken,
+			@RequestBody VPaymentDetailBean vPaymentDetail) throws StripeException {
 		
-		@Autowired
-		VPaymentDetailService vPaymentDetailService;
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(userinfo, null, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
 
-		@PostMapping("/{requestID}/stripepayment")
-		public Object getAllStripePayment(
-				@PathVariable String requestID,
-				@RequestParam(name = "token", required = true) String realHashToken,
-				@RequestParam(name = "orderid", required = true) String orderId) throws StripeException {
-			
-			List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
-			
-			String dbToken = ProjectUtils.getDBToken(userinfo, null, requestID);
-			boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
-			
-			if(verifyResult) {
-				VPaymentDetailBean vPaymentDetail = vPaymentDetailService.findByOrderid(orderId).get(0);
-
-				// We initilize stripe object with the api key
-				init();
-				// We create a  stripe session parameters
-				SessionCreateParams params = SessionCreateParams.builder()
-						// We will use the credit card payment method 
-						.addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
-						.setMode(SessionCreateParams.Mode.PAYMENT)
-						.setSuccessUrl("http://localhost:8080/success.html")
-						.setCancelUrl("http://localhost:8080/cancel.html")
-						.addLineItem(
-//								SessionCreateParams.LineItem.builder().setQuantity(Long.parseLong(orderMealDetail.getOrdermealqty().toString()))
-								SessionCreateParams.LineItem.builder().setQuantity(Long.parseLong("1"))
-										.setPriceData(
-												SessionCreateParams.LineItem.PriceData.builder()
-														.setCurrency("TWD")
-														.setUnitAmount(Long.parseLong(vPaymentDetail.getMealprice().toString()) * 100)
-														.setProductData(SessionCreateParams.LineItem.PriceData.ProductData.builder()
-																.setName(vPaymentDetail.getOrderid())
-																.setDescription(vPaymentDetail.getMealname())
-																.build())
-														.build())
-										.build())
-						.build();
-				// create a stripe session
-				Session session = Session.create(params);
-				Map<String, String> responseData = new HashMap<>();
-				// We get the sessionId and we putted inside the response data you can get more info from the session object
-				responseData.put("id", session.getId());
-				// We can return only the sessionId as a String
-				return session.toJson();
-			} else {
-				return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
-			}
+		if(verifyResult) {
+			// We initilize stripe object with the api key
+			init();
+			// We create a  stripe session parameters
+			SessionCreateParams params = SessionCreateParams.builder()
+					// We will use the credit card payment method 
+					.addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
+					.setMode(SessionCreateParams.Mode.PAYMENT)
+					.setSuccessUrl("http://localhost:8080/success.html")
+					.setCancelUrl("http://localhost:8080/cancel.html")
+					.addLineItem(
+							SessionCreateParams.LineItem.builder().setQuantity(Long.parseLong("1"))
+									.setPriceData(
+											SessionCreateParams.LineItem.PriceData.builder()
+													.setCurrency("TWD").setUnitAmount((Long.parseLong(vPaymentDetail.getMealprice().toString()) * 100))
+													.setProductData(SessionCreateParams.LineItem.PriceData.ProductData
+															.builder()
+															.setName("OrderHippo Payment")
+															.setDescription(vPaymentDetail.getMeals().toString())
+															.build())
+													.build())
+									.build())
+					.build();
+			// create a stripe session
+			Session session = Session.create(params);
+			Map<String, String> responseData = new HashMap<>();
+			// We get the sessionId and we putted inside the response data you can get more info from the session object
+			responseData.put("id", session.getId());
+			// We can return only the sessionId as a String
+			return session.toJson();
+		} else {
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
+	}
 
-		private static void init() {
-			Stripe.apiKey = "sk_test_51L0jIYBaXhvcETm2CmBbKDiwlI9mdnEyLBSPfm8aysNxPnpEpR9FyhMA1aFWfy9Dv9F55NFF4ztioxbiNC0ewA7P00jbnaA0IQ";
-		}
+	private static void init() {
+		Stripe.apiKey = "sk_test_51L0jIYBaXhvcETm2CmBbKDiwlI9mdnEyLBSPfm8aysNxPnpEpR9FyhMA1aFWfy9Dv9F55NFF4ztioxbiNC0ewA7P00jbnaA0IQ";
+	}
 
 }

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.StoreInfoBean;
+import com.orderhippo.model.UserInfoBean;
 import com.orderhippo.service.service.StoreInfoService;
+import com.orderhippo.service.service.UserInfoService;
 import com.orderhippo.service.service.viewService.VOrderDisplayService;
 import com.orderhippo.utils.ProjectUtils;
 
@@ -32,19 +34,28 @@ public class VOrderDisplayController {
 	@Autowired
 	private StoreInfoService storeInfoService;
 	
-	@ApiOperation("查詢全部")
+	@Autowired
+	private UserInfoService userInfoService;
+	
+	@ApiOperation("查詢訂單頁面")
 	@GetMapping(path = "/{requestID}/vorderdisplay")
 	public Object getAllVOrderDisplays(
 			@PathVariable String requestID,
+			@RequestParam(name = "orderstatus", required = false) String orderStatus,
 			@RequestParam(name = "token", required = true) String realHashToken) {
 		
+		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
 		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
 		
-		String dbToken = ProjectUtils.getDBToken(null, storeinfo, requestID);
+		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
 		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
 		
 		if (verifyResult) {
-			return vOrderDisplayService.getAllOrderDisplay();
+			if (orderStatus != null && orderStatus.trim().length() != 0) {
+				return vOrderDisplayService.getByOrderstatus(orderStatus);
+			} else {
+				return vOrderDisplayService.getAllOrderDisplay();
+			}
 		} else {
 			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}

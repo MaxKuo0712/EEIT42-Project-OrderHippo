@@ -30,4 +30,15 @@ public class VOrderDisplayServiceImp implements VOrderDisplayService {
 			return null;
 		}
 	}
+
+	@Override
+	public List<VOrderDisplayBean> getByOrderstatus(String orderStatus) {
+		List<VOrderDisplayBean> result = vOrderDisplayRepository.findByOrderstatus(orderStatus);
+		
+		if (!result.isEmpty()) {
+			return result;
+		} else {
+			return null;
+		}
+	}
 }

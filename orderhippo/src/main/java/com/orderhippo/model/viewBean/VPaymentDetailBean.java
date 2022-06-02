@@ -14,10 +14,10 @@ public class VPaymentDetailBean {
 	private String orderid;
 	
 	@Column(name = "MEAL_PRICE", columnDefinition = "decimal")
-	private String mealprice;
+	private Integer mealprice;
 	
-	@Column(name = "MEAL_NAME", columnDefinition = "mediumtext")
-	private String mealname;
+	@Column(name = "MEALS", columnDefinition = "mediumtext")
+	private String meals;
 
 	public String getOrderid() {
 		return orderid;
@@ -27,19 +27,19 @@ public class VPaymentDetailBean {
 		this.orderid = orderid;
 	}
 
-	public String getMealprice() {
+	public Integer getMealprice() {
 		return mealprice;
 	}
 
-	public void setMealprice(String mealprice) {
+	public void setMealprice(Integer mealprice) {
 		this.mealprice = mealprice;
 	}
 
-	public String getMealname() {
-		return mealname;
+	public String getMeals() {
+		return meals;
 	}
 
-	public void setMealname(String mealname) {
-		this.mealname = mealname;
+	public void setMeals(String meals) {
+		this.meals = meals;
 	}
 }

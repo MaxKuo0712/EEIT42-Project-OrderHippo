@@ -23,8 +23,8 @@ public class VOrderDisplayBean {
 	@Column(name = "MEAL_ORDER_QTY", columnDefinition = "mediumtext")
 	private String mealorderqty;
 	
-	@Column(name = "MEAL_PRICE", columnDefinition = "VARBINARY")
-	private String mealprice;
+	@Column(name = "ORDERS_PRICE", columnDefinition = "VARBINARY")
+	private String ordersprice;
 	
 	@Column(name = "CREATE_TIME")
 	private java.util.Date createtime;
@@ -34,6 +34,10 @@ public class VOrderDisplayBean {
 
 	public String getOrderid() {
 		return orderid;
+	}
+
+	public void setOrderid(String orderid) {
+		this.orderid = orderid;
 	}
 
 	public String getOrderstatus() {
@@ -60,12 +64,12 @@ public class VOrderDisplayBean {
 		this.mealorderqty = mealorderqty;
 	}
 
-	public String getMealprice() {
-		return mealprice;
+	public String getOrdersprice() {
+		return ordersprice;
 	}
 
-	public void setMealprice(String mealprice) {
-		this.mealprice = mealprice;
+	public void setOrdersprice(String ordersprice) {
+		this.ordersprice = ordersprice;
 	}
 
 	public java.util.Date getCreatetime() {
@@ -82,9 +86,5 @@ public class VOrderDisplayBean {
 
 	public void setUserphone(String userphone) {
 		this.userphone = userphone;
-	}
-
-	public void setOrderid(String orderid) {
-		this.orderid = orderid;
 	}
 }

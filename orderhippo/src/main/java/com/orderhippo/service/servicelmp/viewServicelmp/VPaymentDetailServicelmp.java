@@ -15,18 +15,18 @@ import com.orderhippo.service.service.viewService.VPaymentDetailService;
 @Transactional(rollbackFor = SQLException.class)
 public class VPaymentDetailServicelmp implements VPaymentDetailService {
 	
-	@Autowired
-	VPaymentDetailRepository vPaymentDetailRepository;
-
-	@Override
-	public List<VPaymentDetailBean> findByOrderid(String orderid) {
-		List<VPaymentDetailBean> result = vPaymentDetailRepository.findByOrderid(orderid);
-		
-		if (result != null) {
-			return result;
-		} else {
-			return null;
-		}
-	}
+//	@Autowired
+//	VPaymentDetailRepository vPaymentDetailRepository;
+//
+//	@Override
+//	public List<VPaymentDetailBean> findByOrderid(String orderid) {
+//		List<VPaymentDetailBean> result = vPaymentDetailRepository.findByOrderid(orderid);
+//		
+//		if (result != null) {
+//			return result;
+//		} else {
+//			return null;
+//		}
+//	}
 
 }

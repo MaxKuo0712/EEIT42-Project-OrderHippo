@@ -48,6 +48,10 @@ public class OrdersBean {
 	@Column(name = "ORDER_STATUS", columnDefinition="ENUM")
 	private String orderstatus;
 	
+	@JsonProperty("ORDER_DESC")
+	@Column(name = "ORDER_DESC", columnDefinition="longtext")
+	private String orderdesc;
+	
 	@JsonProperty("CREATE_ID")
 	@Column(name = "CREATE_ID", updatable = false)
 	private String createtid;
@@ -67,8 +71,9 @@ public class OrdersBean {
 	@Override
 	public String toString() {
 		return "OrdersBean [id=" + id + ", orderid=" + orderid + ", storeid=" + storeid + ", userid=" + userid
-				+ ", ordersprice=" + ordersprice + ", orderstatus=" + orderstatus + ", createtid=" + createtid
-				+ ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime=" + revisetime + "]";
+				+ ", ordersprice=" + ordersprice + ", orderstatus=" + orderstatus + ", orderdesc=" + orderdesc
+				+ ", createtid=" + createtid + ", createtime=" + createtime + ", reviseid=" + reviseid + ", revisetime="
+				+ revisetime + "]";
 	}
 
 	public Integer getId() {
@@ -117,6 +122,14 @@ public class OrdersBean {
 
 	public void setOrderstatus(String orderstatus) {
 		this.orderstatus = orderstatus;
+	}
+
+	public String getOrderdesc() {
+		return orderdesc;
+	}
+
+	public void setOrderdesc(String orderdesc) {
+		this.orderdesc = orderdesc;
 	}
 
 	public String getCreatetid() {
