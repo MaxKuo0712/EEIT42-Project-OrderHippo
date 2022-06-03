@@ -1,5 +1,6 @@
 package com.orderhippo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +76,7 @@ public class OrderMealDetailController {
 	public Object addMeal(
 			@PathVariable String requestID,
 			@RequestParam(name = "token", required = true) String realHashToken,
-			@RequestBody OrderMealDetailBean orderMealDetailBean) {
+			@RequestBody List<OrderMealDetailBean> ListOrderMealDetailBean) {
 		
 		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
 		
@@ -83,11 +84,15 @@ public class OrderMealDetailController {
 		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
 		
 		if (verifyResult) {
-			if (orderMealDetailBean != null) {
-				orderMealDetailBean.setCreatetid(requestID);
-				return orderMealDetailService.addOrderMealDetail(orderMealDetailBean);
+			if (ListOrderMealDetailBean.size() > 0) {
+				for ( OrderMealDetailBean orderMealDetailBean : ListOrderMealDetailBean ) {
+					orderMealDetailBean.setCreatetid(requestID);
+					orderMealDetailService.addOrderMealDetail(orderMealDetailBean);
+				}
+				return new ResponseEntity<Boolean>(true, HttpStatus.NOT_FOUND);
+			} else {
+				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 			}
-			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}

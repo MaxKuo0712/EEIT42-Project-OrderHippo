@@ -55,11 +55,14 @@ public class WebSocketController {
 	
 	@OnMessage
 	public void onMessage(String message, Session session) {
-		log.info("客戶端訊息"+session+"："+ message);
+		log.info("客戶端訊息"+this.requestID+"："+ message);
 		
-		// 拆解接收到的訊息
 		String sendMessage = message.split("#")[0];
 		String sendUserID = message.split("#")[1];
+		
+		if (sendUserID.equals("l3rH7uT47PTrQSteWO2V9XqbpRn1")) {
+			sendMessage = message.split("#")[0].concat("#").concat(this.requestID);
+		}
 		
 		try {
 			// 如果sendUserID是SendToAllUser，則發送給所有使用者；否則就是發送給指定使用者
@@ -68,9 +71,24 @@ public class WebSocketController {
 			} else {
 				sendToUser(sendMessage, sendUserID);
 			}
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			e.printStackTrace();
 		}
+		
+//		// 拆解接收到的訊息
+//		String sendMessage = message.split("#")[0];
+//		String sendUserID = message.split("#")[1];
+//		
+//		try {
+//			// 如果sendUserID是SendToAllUser，則發送給所有使用者；否則就是發送給指定使用者
+//			if (sendUserID.equals("SendToAllUser")) {
+//				sendToAll(sendMessage);
+//			} else {
+//				sendToUser(sendMessage, sendUserID);
+//			}
+//		} catch (Exception e) { 
+//			e.printStackTrace();
+//		}
 	}
 	
 	public void sendToUser(String message, String sendUserID) throws IOException {
