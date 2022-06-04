@@ -92,22 +92,6 @@ public class StoreCouponServiceImp implements StoreCouponService {
 		return new ResponseEntity<String>("資料不存在：CouponID", HttpStatus.NOT_FOUND);
 	}
 	
-//	// 刪除單筆優惠卷
-//	@Override
-//	public Object deleteCoupon(String requestID, StoreCouponBean storeCouponBean) {
-//		List<StoreCouponBean> coupon = storeCouponRepository.findByCouponid(storeCouponBean.getCouponid());
-//		
-//		if(coupon.size() == 1) {
-//			try {
-//				storeCouponRepository.deleteById(coupon.get(0).getId());
-//				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
-//			}
-//		}
-//		return new ResponseEntity<String>("資料不存在：CouponID", HttpStatus.NOT_FOUND);
-//	}
 	// 刪除單筆優惠卷
 	@Override
 	public Object deleteCoupon(String requestID, String couponId) {
@@ -123,5 +107,15 @@ public class StoreCouponServiceImp implements StoreCouponService {
 			}
 		}
 		return new ResponseEntity<String>("資料不存在：CouponID", HttpStatus.NOT_FOUND);
+	}
+
+	@Override
+	public Object getStoreCouponByCouponName(String couponname) {
+		List<StoreCouponBean> result = storeCouponRepository.findByCouponname(couponname);
+		
+		if (!result.isEmpty()) {
+			return result;
+		}
+		return null;
 	}
 }

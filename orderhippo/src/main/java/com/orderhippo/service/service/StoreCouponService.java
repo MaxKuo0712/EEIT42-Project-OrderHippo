@@ -20,6 +20,9 @@ public interface StoreCouponService {
 	// 修改優惠卷資料
 	public Object updateStoreCoupon(String requestID, StoreCouponBean storeCouponBean);
 	
+	// By CouponName 搜尋
+	public Object getStoreCouponByCouponName(String couponname);
+	
 	// 刪除單筆優惠卷
 //	public Object deleteCoupon(String requestID, StoreCouponBean storeCouponBean);
 	public Object deleteCoupon(String requestID, String couponId);

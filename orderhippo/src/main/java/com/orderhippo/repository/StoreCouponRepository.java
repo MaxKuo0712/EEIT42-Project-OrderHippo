@@ -13,4 +13,6 @@ public interface StoreCouponRepository extends JpaRepository<StoreCouponBean, In
 	// By StoreID 搜尋
 	List<StoreCouponBean> findByStoreid(String storeid);
 	
+	// By CouponName 搜尋
+	List<StoreCouponBean> findByCouponname(String couponname);
 }

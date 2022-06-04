@@ -73,7 +73,7 @@ public class StoreCouponController {
 			@PathVariable String requestID,
 			@RequestParam(name = "token", required = true) String realHashToken,
 			@RequestParam(name="storeid", required=false) String storeId,
-			@RequestParam(name="couponid", required=false) String couponId) {
+			@RequestParam(name="couponname", required=false) String couponName) {
 		
 		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
 		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
@@ -84,8 +84,8 @@ public class StoreCouponController {
 		if(verifyResult) {
 			if(storeId != null && storeId.trim().length() != 0) {
 				return storeCouponService.getStoreCouponByStoreId(storeId);
-			} else if(couponId != null && couponId.trim().length() != 0) {
-				return storeCouponService.getStoreCouponByCouponId(couponId);
+			} else if(couponName != null && couponName.trim().length() != 0) {
+				return storeCouponService.getStoreCouponByCouponName(couponName);
 			} else {
 				return storeCouponService.getAllCoupons();
 			}
