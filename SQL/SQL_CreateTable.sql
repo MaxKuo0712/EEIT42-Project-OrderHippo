@@ -298,14 +298,12 @@ create table STORE_COUPON (
 	COUPON_ID varchar(100) DEFAULT(CONCAT('C', DATE_FORMAT(CURRENT_DATE(),'%Y%m'), '_', REPLACE(UUID(),'-',''))) UNIQUE NOT NULL,
 	COUPON_NAME varchar(100) UNIQUE not null,
 	STORE_ID varchar(100) not null,
-	-- STORE_NAME varchar(100) not null,
 	COUPON_DESC LONGTEXT not null,
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
 	REVISE_ID varchar(100) default null,
 	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID)
-	-- FOREIGN KEY (STORE_NAME) REFERENCES STORE_INFO(STORE_NAME)
 );
 
 drop table STORE_COUPON;
