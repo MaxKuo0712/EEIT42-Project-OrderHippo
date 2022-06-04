@@ -17,6 +17,9 @@ public class VOrderDisplayBean {
 	@Column(name = "ORDER_STATUS", columnDefinition = "ENUM")
 	private String orderstatus;
 	
+	@Column(name = "ORDER_STATUS_NAME")
+	private String orderstatusname;
+	
 	@Column(name = "USER_NAME")
 	private String username;
 	
@@ -46,6 +49,14 @@ public class VOrderDisplayBean {
 
 	public void setOrderstatus(String orderstatus) {
 		this.orderstatus = orderstatus;
+	}
+
+	public String getOrderstatusname() {
+		return orderstatusname;
+	}
+
+	public void setOrderstatusname(String orderstatusname) {
+		this.orderstatusname = orderstatusname;
 	}
 
 	public String getUsername() {
