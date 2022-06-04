@@ -73,7 +73,7 @@ public class OrderMealDetailController {
 	
 	@ApiOperation("新增訂單餐點資料")
 	@PostMapping("/{requestID}/ordermealdetail")
-	public Object addMeal(
+	public Object addOrderMealDetail(
 			@PathVariable String requestID,
 			@RequestParam(name = "token", required = true) String realHashToken,
 			@RequestBody List<OrderMealDetailBean> ListOrderMealDetailBean) {

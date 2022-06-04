@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @ServerEndpoint("/websocket/{requestID}")
 @CrossOrigin
 public class WebSocketController {
-	
-//	private static int onlineCount = 0; // 記錄線上人數
-	
 	// 儲存使用者及WebSocketController
 	private static ConcurrentHashMap<String, WebSocketController> webSocketMap = new ConcurrentHashMap<>();
 	
@@ -34,10 +31,9 @@ public class WebSocketController {
 		this.session = session;
 		this.requestID = requestID;
 		webSocketMap.put(requestID, this); // 連線放入資料
-//		addOnlineCount();
 
 		try {
-			sendMessage("Hi, "+ requestID +" 歡迎進入聊天室");
+			sendMessage("Hi, "+ requestID +" 連線成功");
 			System.out.println("OK:" + requestID + session);
 			System.out.println(webSocketMap);
 		} catch (Exception e) {
@@ -58,11 +54,10 @@ public class WebSocketController {
 		log.info("客戶端訊息"+this.requestID+"："+ message);
 		
 		String sendMessage = message.split("#")[0];
-		String sendUserID = message.split("#")[1];
+		String orderID = message.split("#")[1];
+		String sendUserID = message.split("#")[2];
 		
-		if (sendUserID.equals("l3rH7uT47PTrQSteWO2V9XqbpRn1")) {
-			sendMessage = message.split("#")[0].concat("#").concat(this.requestID);
-		}
+		sendMessage = sendMessage.concat("#").concat(orderID).concat("#").concat(this.requestID);
 		
 		try {
 			// 如果sendUserID是SendToAllUser，則發送給所有使用者；否則就是發送給指定使用者
@@ -99,7 +94,6 @@ public class WebSocketController {
 				webSocketMap.get(sendUserID).sendMessage(message);
 			}
 		} else {
-			System.out.println(this.requestID);
 			sendToUser("該使用者不在家", this.requestID);
 		}
 	}
@@ -117,12 +111,4 @@ public class WebSocketController {
 	public void sendMessage(String message) throws IOException {
 		this.session.getBasicRemote().sendText(message);
 	}
-	
-//	public void addOnlineCount() {
-//		onlineCount++;
-//	}
-//	
-//	public void subOnlineCount() {
-//		onlineCount--;
-//	}
 }
