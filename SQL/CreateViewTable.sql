@@ -84,7 +84,14 @@ order by round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) desc
 
 -- 訂單頁面顯示 -- 改MEAL_PRICE改成折扣後價格 -- 加上以參數搜尋
 CREATE or REPLACE view V_ORDER_DISPLAY as
-select orders.ORDER_ID , orders.ORDER_STATUS, userinfo.USER_NAME, userinfo.USER_PHONE, 
+select orders.ORDER_ID, orders.ORDER_STATUS,
+	CASE
+		WHEN orders.ORDER_STATUS = 1 THEN '未確認訂單'
+		WHEN orders.ORDER_STATUS = 2 THEN '已確認訂單'
+		WHEN orders.ORDER_STATUS = 3 THEN '已完成訂單'
+		WHEN orders.ORDER_STATUS = 4 THEN '取消的訂單'
+	END as 'ORDER_STATUS_NAME',
+	userinfo.USER_NAME, userinfo.USER_PHONE, 
 	GROUP_CONCAT(CONCAT(meal.MEAL_NAME, ' * ', ordersdetail.ORDER_MEAL_QTY) SEPARATOR ', ') as 'MEAL_ORDER_QTY',
 	CONCAT('$', orders.ORDERS_PRICE) as 'ORDERS_PRICE',
 	orders.CREATE_TIME
