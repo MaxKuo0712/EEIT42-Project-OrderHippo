@@ -152,7 +152,6 @@ create table ORDERS (
 	ORDER_ID varchar(100) DEFAULT(CONCAT('O', DATE_FORMAT(CURRENT_DATE(),'%Y%m%d'), '_', REPLACE(UUID(),'-',''))) UNIQUE NOT NULL,
 	STORE_ID varchar(100) not null,
 	USER_ID varchar(100) not null,
-	-- USER_MAIL varchar(200) not null,
 	ORDERS_PRICE int not null,
 	ORDER_STATUS ENUM('1','2','3','4') not null, -- 1未確認訂單, 2已確認訂單, 3已完成訂單 4取消的訂單
 	ORDER_DESC LONGTEXT not null,
@@ -162,12 +161,12 @@ create table ORDERS (
 	REVISE_ID varchar(100) default null,
 	FOREIGN KEY (STORE_ID) REFERENCES STORE_INFO(STORE_ID),
 	FOREIGN KEY (USER_ID) REFERENCES USER_INFO(USER_ID),
-	-- FOREIGN KEY (USER_MAIL) REFERENCES USER_INFO(USER_MAIL),
-	-- CONSTRAINT CHK_USER_MAIL CHECK (USER_MAIL REGEXP '[a-zA-Z0-9_\-]+@([a-zA-Z0-9_\-]+\.)+(com|org|edu)' = 1),
 	CONSTRAINT CHK_ORDERS_PRICE CHECK (ORDERS_PRICE > 0)
 );
 
 alter table ORDERS add ORDER_DESC LONGTEXT;
+
+select * from orders o 
 
 DELETE from ORDERS
 
@@ -208,7 +207,6 @@ create table ORDER_MEALDETAIL (
 	ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	ORDER_ID varchar(100) not null,
 	MEAL_ID varchar(100) not null,
-	-- MEAL_NAME varchar(100) not null,
 	ORDER_MEAL_QTY int not null,
 	MEAL_PRICE int not null,
 	CREATE_ID varchar(100) not null,
@@ -217,12 +215,13 @@ create table ORDER_MEALDETAIL (
 	REVISE_ID varchar(100) default null,
 	FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
 	FOREIGN KEY (MEAL_ID) REFERENCES MEAL(MEAL_ID),
-	-- FOREIGN KEY (MEAL_NAME) REFERENCES MEAL(MEAL_NAME),	
 	CONSTRAINT CHK_ORDER_MEAL_QTY CHECK (ORDER_MEAL_QTY > 0),
 	CONSTRAINT CHK_MEAL_PRICE CHECK (MEAL_PRICE > 0)
 );
 
 drop table ORDER_MEALDETAIL;
+
+select* from ORDER_MEALDETAIL
 
 -- --------------------------------------------------------------------------------------------
 -- 店家訊息公告(STORE_MESSAGE)
