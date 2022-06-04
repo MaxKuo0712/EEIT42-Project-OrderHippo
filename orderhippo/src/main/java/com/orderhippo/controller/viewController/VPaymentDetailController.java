@@ -36,21 +36,21 @@ public class VPaymentDetailController {
 	@Autowired
 	StoreInfoService storeInfoService;
 	
-	@GetMapping("/{requestID}/vpaymentdetail")
-	public Object getAllVPaymentDetailService (
-			@PathVariable String requestID,
-			@RequestParam(name = "token", required = true) String realHashToken,
-			@RequestParam(name = "orderid", required = false) String orderId) {
-		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
-		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
-		
-		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
-		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
-		
-		if(verifyResult) {
-			return vPaymentDetailService.findByOrderid(orderId);
-		} else {
-			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
-		}
-	}
+//	@GetMapping("/{requestID}/vpaymentdetail")
+//	public Object getAllVPaymentDetailService (
+//			@PathVariable String requestID,
+//			@RequestParam(name = "token", required = true) String realHashToken,
+//			@RequestParam(name = "orderid", required = false) String orderId) {
+//		List<UserInfoBean> userinfo = userInfoService.getUserInfofindByUserid(requestID);
+//		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+//		
+//		String dbToken = ProjectUtils.getDBToken(userinfo, storeinfo, requestID);
+//		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+//		
+//		if(verifyResult) {
+//			return vPaymentDetailService.findByOrderid(orderId);
+//		} else {
+//			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
+//		}
+//	}
 }
