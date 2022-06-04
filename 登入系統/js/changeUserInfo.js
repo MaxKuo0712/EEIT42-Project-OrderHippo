@@ -39,11 +39,10 @@ submitBnt.addEventListener("click", (e) => {
             headers: { "content-Type": "application/json" },
             body: JSON.stringify(target)
         }).then((e) => {
-            console.log(e.status)
             welcomeToUse(USER_NAME);
             setInterval(() => {
                 window.location.href = " homepage.html"
-            }, 2000); // 等待2秒導向回到上一頁(登入頁面)
+            }, 2000); // 等待2秒導向
         })
     })
 });

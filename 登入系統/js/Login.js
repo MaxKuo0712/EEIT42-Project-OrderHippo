@@ -70,9 +70,7 @@ function userMailLogin(e) {
                     }).then(result => {
                         let REVISE_ID = USER_ID;
                         let queryResult = result[0];
-
                         queryResult.LAST_LOGININ_TIME = new Date();
-
                         addLocalstorage(queryResult);
 
                         fetch(`http://localhost:8080/api/${USER_ID}/users?token=${resultToken}`, {
@@ -80,11 +78,10 @@ function userMailLogin(e) {
                             headers: { "content-Type": "application/json" },
                             body: JSON.stringify(queryResult)
                         }).then((e) => {
-                            console.log(e.status);
                             welcomeToUse(userName);
                             setInterval(() => {
                                 window.location.href = "homepage.html"
-                            }, 2000); // 等待2秒導向回到登入頁面
+                            }, 2000); // 等待2秒導向
                         })
                     })
                 })
@@ -212,7 +209,7 @@ function addGoogleUserInfo(result) {
                 console.log("Add New User.");
                 setInterval(() => {
                     window.location.href = "changeUserInfo.html"
-                }, 1000); // 等待2秒導向回到上一頁(登入頁面)
+                }, 1000); // 等待1秒導向
             })
         } else {
             localStorage.setItem('userToken', resultToken);
@@ -226,7 +223,7 @@ function addGoogleUserInfo(result) {
                 welcomeToUse(JSON.parse(localStorage.getItem("userinfo")).USER_NAME);
                 setInterval(() => {
                     window.location.href = " homepage.html"
-                }, 2000); // 等待2秒導向回到上一頁(登入頁面)
+                }, 2000); // 等待2秒導向
             })
         }
     })
