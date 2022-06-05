@@ -53,37 +53,31 @@ public class WebSocketController {
 	public void onMessage(String message, Session session) {
 		log.info("客戶端訊息"+this.requestID+"："+ message);
 		
-		String sendMessage = message.split("#")[0];
+		StringBuffer sendMessage = new StringBuffer(message.split("#")[0]);
 		String orderID = message.split("#")[1];
-		String sendUserID = message.split("#")[2];
+		String paymentID = message.split("#")[2];
+		String sendUserID = message.split("#")[3];
 		
-		sendMessage = sendMessage.concat("#").concat(orderID).concat("#").concat(this.requestID);
+		sendMessage
+			.append("#")
+			.append(orderID)
+			.append("#")
+			.append(paymentID)
+			.append("#")
+			.append(this.requestID);
+		System.out.println(sendMessage.toString());
+//		sendMessage = sendMessage.concat("#").concat(orderID).concat("#").concat(paymentID).concat("#").concat(this.requestID);
 		
 		try {
 			// 如果sendUserID是SendToAllUser，則發送給所有使用者；否則就是發送給指定使用者
 			if (sendUserID.equals("SendToAllUser")) {
-				sendToAll(sendMessage);
+				sendToAll(sendMessage.toString());
 			} else {
-				sendToUser(sendMessage, sendUserID);
+				sendToUser(sendMessage.toString(), sendUserID);
 			}
 		} catch (Exception e) { 
 			e.printStackTrace();
 		}
-		
-//		// 拆解接收到的訊息
-//		String sendMessage = message.split("#")[0];
-//		String sendUserID = message.split("#")[1];
-//		
-//		try {
-//			// 如果sendUserID是SendToAllUser，則發送給所有使用者；否則就是發送給指定使用者
-//			if (sendUserID.equals("SendToAllUser")) {
-//				sendToAll(sendMessage);
-//			} else {
-//				sendToUser(sendMessage, sendUserID);
-//			}
-//		} catch (Exception e) { 
-//			e.printStackTrace();
-//		}
 	}
 	
 	public void sendToUser(String message, String sendUserID) throws IOException {
