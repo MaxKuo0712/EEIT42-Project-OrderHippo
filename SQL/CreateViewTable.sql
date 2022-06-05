@@ -137,7 +137,7 @@ order by round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) desc
 
 -- 用於金流支付
 CREATE or REPLACE view V_PAYMENT_DETAIL as
-select orders.ORDER_ID, sum(ordersdetail.MEAL_PRICE) as 'MEAL_PRICE',
+select orders.ORDER_ID, orders.ORDERS_PRICE as 'MEAL_PRICE',
 	GROUP_CONCAT(meal.MEAL_NAME SEPARATOR ', ') as 'MEALS'
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
