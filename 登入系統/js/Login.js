@@ -28,7 +28,6 @@ myLoginFirebase.initFirebase();
 
 let email = document.getElementById("email");
 let passwd = document.getElementById("password");
-
 let mailLoginBnt = document.getElementById("loginBnt");
 let googleLoginBnt = document.getElementById("googleLoginBnt");
 let resetPasswd = document.getElementById("resetPasswd");
@@ -68,7 +67,6 @@ function userMailLogin(e) {
                     }).then(res => {
                         return res.json();
                     }).then(result => {
-                        let REVISE_ID = USER_ID;
                         let queryResult = result[0];
                         queryResult.LAST_LOGININ_TIME = new Date();
                         addLocalstorage(queryResult);
@@ -206,7 +204,6 @@ function addGoogleUserInfo(result) {
                 body: JSON.stringify(userInfo)
             }).then(() => {
                 addLocalstorage(userInfo);
-                console.log("Add New User.");
                 setInterval(() => {
                     window.location.href = "changeUserInfo.html"
                 }, 1000); // 等待1秒導向
@@ -218,7 +215,6 @@ function addGoogleUserInfo(result) {
             }).then(res => {
                 return res.json();
             }).then(queryResult => {
-                console.log("AA");
                 addLocalstorage(queryResult[0]);
                 welcomeToUse(JSON.parse(localStorage.getItem("userinfo")).USER_NAME);
                 setInterval(() => {
