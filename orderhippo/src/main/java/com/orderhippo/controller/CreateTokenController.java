@@ -20,7 +20,7 @@ import com.orderhippo.utils.ProjectUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api("提供TokenAPI")
+@Api(tags = "提供TokenAPI")
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
