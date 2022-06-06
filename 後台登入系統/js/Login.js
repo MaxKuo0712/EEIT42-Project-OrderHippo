@@ -56,7 +56,7 @@ function storeMailLogin(e) {
 
                     welcomeToUse(queryResult.STORE_NAME);
                     setInterval(() => {
-                        // window.location.href = "homepage.html"
+                        window.location.href = "homepage.html"
                     }, 2000); // 等待2秒導向回到登入頁面
                 })
             })

@@ -50,9 +50,7 @@ function setSignBntStatus() {
     const auth = getAuth();
     const signBnt = document.getElementById("signBnt");
     auth.onAuthStateChanged((store) =>{
-        if (store) { // 有登入
-            // window.location.href = "homepage.html";
-        } else { // 沒登入
+        if (!store) { // 有登入
             window.location.href = "login.html";
         }
     });
