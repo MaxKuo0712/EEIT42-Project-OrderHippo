@@ -23,6 +23,8 @@ myLoginFirebase.initFirebase();
 // Initialize Firebase
 // initializeApp(firebaseConfig);
 
+setSignBntStatus();
+
 let name = document.getElementById("name");
 let gender = document.getElementById("gender");
 let birth = document.getElementById("birth");
@@ -113,6 +115,15 @@ function getUserMail() {
 }
 function getUserPassword() {
     return passwd.value;
+}
+
+function setSignBntStatus() {
+    const auth = getAuth();
+    auth.onAuthStateChanged((user) =>{
+        if (user) {
+            window.location.href = " homepage.html"
+        }
+    });
 }
 
 submitBnt.addEventListener("click", (e) => {

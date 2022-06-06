@@ -47,12 +47,14 @@ function signOutOK() {
 
 function setSignBntStatus() {
     const auth = getAuth();
-    const signBnt = document.getElementById("signBnt");
     auth.onAuthStateChanged((user) =>{
-        if (user) {
-            signBnt.innerText = "Sign out";
-        } else {
-            signBnt.innerText = "Sign in";
+        // if (user) {
+        //     signBnt.innerText = "Sign out";
+        // } else {
+        //     signBnt.innerText = "Sign in";
+        // }
+        if (!user) {
+            window.location.href = " login.html"
         }
     });
 }

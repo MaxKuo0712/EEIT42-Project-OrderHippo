@@ -26,6 +26,8 @@ myLoginFirebase.initFirebase();
 // Initialize Firebase
 // initializeApp(firebaseConfig);
 
+setSignBntStatus();
+
 let email = document.getElementById("email");
 let passwd = document.getElementById("password");
 let mailLoginBnt = document.getElementById("loginBnt");
@@ -228,6 +230,15 @@ function addGoogleUserInfo(result) {
 function addLocalstorage(userInfo) {
     localStorage.removeItem('userinfo');
     localStorage.setItem('userinfo', JSON.stringify(userInfo));
+}
+
+function setSignBntStatus() {
+    const auth = getAuth();
+    auth.onAuthStateChanged((user) =>{
+        if (user) {
+            window.location.href = " homepage.html"
+        }
+    });
 }
 
 mailLoginBnt.addEventListener("click", (e) => {
