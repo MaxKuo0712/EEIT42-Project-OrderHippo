@@ -103,14 +103,12 @@ group by orders.ORDER_ID , orders.ORDER_STATUS, CONCAT('$', orders.ORDERS_PRICE)
 	userinfo.USER_NAME, orders.CREATE_TIME, userinfo.USER_PHONE
 order by orders.ORDER_ID
 
-select * from ORDER_MEALDETAIL om where ORDER_ID ='O20220527_00bdee0cdd7111eca4fa068cdc81eecc'
-
 -- 更改菜單顯示 -- 待查 --增加MEAL_ID查詢
 CREATE or REPLACE view V_REVISE_MEAL_DISPLAY as
 select meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_HOT, meal.MEAL_VEGAN, meal.MEAL_IMAGE, meal.MEAL_PRICE, bom.INGREDIENT_ID, bom.INGREDIENT_NAME,
 	bom.MEAL_INGREDIENT_WEIGHT, meal.MEAL_CALORIE, meal.MEAL_CARB, meal.MEAL_FAT, meal.MEAL_PROTEIN, meal.MEAL_DESC
 from meal as meal 
-	inner join meal_bom as bom
+	inner join meal_bom as bom on bom.MEAL_ID = meal.MEAL_ID 
 where meal.MEAL_STATUS = true 
 	
 -- 各類別售出圓餅圖
