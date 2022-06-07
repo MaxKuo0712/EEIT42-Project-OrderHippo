@@ -26,8 +26,6 @@ public class MealBomServiceImp implements MealBomService {
 		
 		if (listMealBomBean != null) {
 			try {
-//				MealBomBean result = mealBOMBeanRepository.save(mealBomBean);
-//				return new ResponseEntity<Boolean>(mealBOMBeanRepository.existsById(result.getId()),  HttpStatus.OK);
 				mealBOMBeanRepository.saveAll(listMealBomBean);
 				return new ResponseEntity<Boolean>(true,  HttpStatus.OK);
 			} catch (Exception e) {
@@ -36,11 +34,6 @@ public class MealBomServiceImp implements MealBomService {
 			}
 		}
 		return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
-		
-//		if(mealBOMBeanRepository.save(mealBomBean) != null) {
-//			return true;
-//		}
-//		return false;
 	}
 
 	// 查詢所有 Meal BOM
