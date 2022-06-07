@@ -68,7 +68,7 @@ values ('DRINK', '飲料', '飲料');
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
 values ('雞胸餐盒', 'HEALTHMEAL', '健康餐盒', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '雞胸餐盒', 145, 
-	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL_BOM (MEAL_ID, INGREDIENT_ID, INGREDIENT_NAME, MEAL_INGREDIENT_WEIGHT, MEAL_INGREDIENT_CALORIE, MEAL_INGREDIENT_CARB,
 	MEAL_INGREDIENT_FAT, MEAL_INGREDIENT_PROTEIN, CREATE_ID)
@@ -100,10 +100,6 @@ insert MEAL_BOM (MEAL_ID, INGREDIENT_ID, INGREDIENT_NAME, MEAL_INGREDIENT_WEIGHT
 values ('M202205_669d7c36dd7311eca4fa068cdc81eecc', 'E7500201', '甜椒(紅皮)：甜椒,甜番椒,大同仔,番羌仔,燈籠椒,生番薑,獅子椒,甘椒,生椒(紅椒,紅番(辣)椒,紅色大唐)', 
 	40, 13.2, 2.8, 0, 0, 'S202205_2c157218dc9611ec95b9068cdc81eecb')
 
-
-	
-	
-	
 	
 	
 	
@@ -111,148 +107,148 @@ values ('M202205_669d7c36dd7311eca4fa068cdc81eecc', 'E7500201', '甜椒(紅皮)�
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('牛排餐盒', 'HEALTHMEAL', '健康餐盒', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '牛排餐盒', 185, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('牛排餐盒', 'HEALTHMEAL', '健康餐盒', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '牛排餐盒', 185, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('蝦子餐盒', 'HEALTHMEAL', '健康餐盒', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '蝦子餐盒', 165, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('蝦子餐盒', 'HEALTHMEAL', '健康餐盒', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '蝦子餐盒', 165, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('鮭魚餐盒', 'HEALTHMEAL', '健康餐盒', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '鮭魚餐盒', 185, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('鮭魚餐盒', 'HEALTHMEAL', '健康餐盒', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '鮭魚餐盒', 185, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('鯖魚餐盒', 'HEALTHMEAL', '健康餐盒', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '鯖魚餐盒', 155, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('鯖魚餐盒', 'HEALTHMEAL', '健康餐盒', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '鯖魚餐盒', 155, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('蔬食餐盒', 'HEALTHMEAL', '健康餐盒', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '蔬食餐盒', 125, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('蔬食餐盒', 'HEALTHMEAL', '健康餐盒', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '蔬食餐盒', 125, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('雞腿餐盒', 'HEALTHMEAL', '健康餐盒', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '雞腿餐盒', 155, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('雞腿餐盒', 'HEALTHMEAL', '健康餐盒', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '雞腿餐盒', 155, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('滷牛肉餐盒', 'HEALTHMEAL', '健康餐盒', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '滷牛肉餐盒', 155, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('滷牛肉餐盒', 'HEALTHMEAL', '健康餐盒', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '滷牛肉餐盒', 155, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('手撕豬肉餐盒', 'HEALTHMEAL', '健康餐盒', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '手撕豬肉餐盒', 145, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('手撕豬肉餐盒', 'HEALTHMEAL', '健康餐盒', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '手撕豬肉餐盒', 145, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('凱薩沙拉', 'SALAD', '沙拉', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '凱薩沙拉', 165, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('凱薩沙拉', 'SALAD', '沙拉', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '凱薩沙拉', 165, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('鮭魚沙拉', 'SALAD', '沙拉', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '鮭魚沙拉', 175, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('鮭魚沙拉', 'SALAD', '沙拉', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '鮭魚沙拉', 175, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('鮮蝦沙拉', 'SALAD', '沙拉', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '鮮蝦沙拉', 155, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('鮮蝦沙拉', 'SALAD', '沙拉', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '鮮蝦沙拉', 155, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('雞胸沙拉', 'SALAD', '沙拉', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '雞胸沙拉', 135, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('雞胸沙拉', 'SALAD', '沙拉', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '雞胸沙拉', 135, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('牛排沙拉', 'SALAD', '沙拉', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '牛排沙拉', 175, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('牛排沙拉', 'SALAD', '沙拉', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '牛排沙拉', 175, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('蔬食沙拉', 'SALAD', '沙拉', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '蔬食沙拉', 115, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')	
+values ('蔬食沙拉', 'SALAD', '沙拉', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '蔬食沙拉', 115, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');	
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('雞胸白醬筆管麵', 'PASTA', '義大利麵', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '雞胸白醬筆管麵', 165, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('雞胸白醬筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '雞胸白醬筆管麵', 165, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('蔬食筆管麵', 'PASTA', '義大利麵', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '蔬食筆管麵', 155, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')	
+values ('蔬食筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '蔬食筆管麵', 155, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('蔬食番茄義大利麵', 'PASTA', '義大利麵', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '蔬食番茄義大利麵', 165, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')	
+values ('蔬食番茄義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '蔬食番茄義大利麵', 165, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('培根白醬筆管麵', 'PASTA', '義大利麵', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '培根白醬筆管麵', 165, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')	
+values ('培根白醬筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '培根白醬筆管麵', 165, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('雞肉青醬筆管麵', 'PASTA', '義大利麵', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '雞肉青醬筆管麵', 165, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')	
+values ('雞肉青醬筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '雞肉青醬筆管麵', 165, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('雞肉培根貝殼麵', 'PASTA', '義大利麵', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '雞肉培根貝殼麵', 165, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')	
+values ('雞肉培根貝殼麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '雞肉培根貝殼麵', 165, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('鮮蝦義大利麵', 'PASTA', '義大利麵', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '鮮蝦義大利麵', 185, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')	
+values ('鮮蝦義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '鮮蝦義大利麵', 185, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('慢燉手撕牛肉義大利麵', 'PASTA', '義大利麵', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '慢燉手撕牛肉義大利麵', 185, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')	
+values ('慢燉手撕牛肉義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '慢燉手撕牛肉義大利麵', 185, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('挪威鮭魚義大利麵', 'PASTA', '義大利麵', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '挪威鮭魚義大利麵', 195, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')	
+values ('挪威鮭魚義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '挪威鮭魚義大利麵', 195, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('青澀年華', 'DRINK', '飲料', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '青澀年華', 150, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')		
+values ('青澀年華', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '青澀年華', 150, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');	
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('巧克力櫻桃果昔', 'DRINK', '飲料', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '巧克力櫻桃果昔', 165, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('巧克力櫻桃果昔', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '巧克力櫻桃果昔', 165, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('橙橘氣泡飲', 'DRINK', '飲料', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '橙橘氣泡飲', 145, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('橙橘氣泡飲', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '橙橘氣泡飲', 145, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('綠野仙蹤', 'DRINK', '飲料', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '綠野仙蹤', 155, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('綠野仙蹤', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '綠野仙蹤', 155, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('酸甜時刻', 'DRINK', '飲料', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '酸甜時刻', 165, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('酸甜時刻', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '酸甜時刻', 165, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('吃瓜輕飲', 'DRINK', '飲料', 'S202205_fcc89faadeac11ecb46e87aac1c9abfa', '', '吃瓜輕飲', 145, 
-	0, 0, 0, 0, false, true, true, 'S202205_fcc89faadeac11ecb46e87aac1c9abfa')
+values ('吃瓜輕飲', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '吃瓜輕飲', 145, 
+	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 	
 	

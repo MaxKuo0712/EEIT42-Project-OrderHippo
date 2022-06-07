@@ -282,6 +282,8 @@ CREATE TABLE MEAL_BOM (
 
 drop table MEAL_BOM;
 
+select * from meal_bom mb  order by MEAL_ID 
+
 -- --------------------------------------------------------------------------------------------
 -- 優惠券(STORE_COUPON)
 create table STORE_COUPON (

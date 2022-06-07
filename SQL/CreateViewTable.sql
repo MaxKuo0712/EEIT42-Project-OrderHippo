@@ -6,7 +6,7 @@ select meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, m
 from MEAL as meal
 	inner join MEAL_BOM as bom on bom.MEAL_ID  = meal.MEAL_ID
 	inner join STORE_INFO as s on s.STORE_ID = meal.STORE_ID
-group by meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, meal.MEAL_HOT, meal.MEAL_PRICE, meal.MEAL_DESC
+group by meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, meal.MEAL_HOT, meal.MEAL_PRICE, meal.MEAL_DESC;
 
 -- 訂單筆數 1未確認訂單, 2已確認訂單, 3已完成訂單 4取消的訂單
 CREATE or REPLACE  view V_ORDER_STATUS_COUNT as
@@ -18,7 +18,7 @@ select ORDER_STATUS,
 		WHEN ORDER_STATUS = 4 THEN '取消的訂單'
 	END as 'ORDER_STATUS_DESC', count(*) as 'ORDER_COUNT'
 from orders
-group by ORDER_STATUS
+group by ORDER_STATUS;
 
 -- 銷售前10名
 CREATE or REPLACE  view V_SALE_RANK as
@@ -28,15 +28,17 @@ from ORDERS as orders
 	inner join MEAL as meal on meal.MEAL_ID = detail.MEAL_ID
 where orders.ORDER_STATUS = 3 and meal.MEAL_STATUS = true
 group by meal.MEAL_NAME, meal.MEAL_PRICE
-order by count(*) DESC, meal.MEAL_PRICE
+order by count(*) DESC, meal.MEAL_PRICE;
 
 -- 每月營收 - 3已完成訂單
-CREATE or REPLACE  view V_MONTH_REVENUE as
-SELECT EXTRACT(YEAR from CREATE_TIME) as 'YEAR', EXTRACT(MONTH from CREATE_TIME) as 'MONTH', 
-	sum(ORDERS_PRICE) as REVENUE_OF_MONTH
-FROM orders
-where ORDER_STATUS = 3
-group by EXTRACT(YEAR from CREATE_TIME), EXTRACT(MONTH from CREATE_TIME)
+CREATE or REPLACE view V_MONTH_REVENUE as
+select YEAR, MONTH, CONCAT(YEAR, '_', MONTH) as 'YEAR_MONTH', REVENUE_OF_MONTH
+from (
+	SELECT EXTRACT(YEAR from o.CREATE_TIME) as 'YEAR', EXTRACT(MONTH from o.CREATE_TIME) as 'MONTH', 
+		sum(o.ORDERS_PRICE) as REVENUE_OF_MONTH
+	FROM orders as o
+	where o.ORDER_STATUS = 3
+	group by EXTRACT(YEAR from o.CREATE_TIME), EXTRACT(MONTH from o.CREATE_TIME)) as result
 
 -- 年齡數量 - 百分比可用於圓餅圖
 CREATE or REPLACE  view V_AGE_CHART as
@@ -68,7 +70,7 @@ from (
 		ELSE '80+'
 	end) as queryResult
 	inner join (select count(*) as USERCOUNT from user_info ui) as usercount
-order by queryResult.AGE_RANGE
+order by queryResult.AGE_RANGE;
 
 -- 性別數量 - 百分比可用於圓餅圖 -- 待查
 CREATE or REPLACE  view V_GENDER_CHART as
@@ -80,7 +82,7 @@ from (
 	group by USER_GENDER
 ) as userGanderCount
 	inner join (select count(*) as 'count' from user_info) as userqty
-order by round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) desc
+order by round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) desc;
 
 -- 訂單頁面顯示 -- 改MEAL_PRICE改成折扣後價格 -- 加上以參數搜尋
 CREATE or REPLACE view V_ORDER_DISPLAY as
@@ -101,15 +103,16 @@ from ORDERS as orders
 	inner join USER_INFO as userinfo on userinfo.USER_ID = orders.USER_ID
 group by orders.ORDER_ID , orders.ORDER_STATUS, CONCAT('$', orders.ORDERS_PRICE), 
 	userinfo.USER_NAME, orders.CREATE_TIME, userinfo.USER_PHONE
-order by orders.ORDER_ID
+order by orders.ORDER_ID;
 
 -- 更改菜單顯示 -- 待查 --增加MEAL_ID查詢
 CREATE or REPLACE view V_REVISE_MEAL_DISPLAY as
-select meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_HOT, meal.MEAL_VEGAN, meal.MEAL_IMAGE, meal.MEAL_PRICE, bom.INGREDIENT_ID, bom.INGREDIENT_NAME,
+select meal.MEAL_ID, bom.BOM_ID, meal.MEAL_NAME, meal.MEAL_HOT, meal.MEAL_VEGAN, 
+	meal.MEAL_IMAGE, meal.MEAL_PRICE, bom.INGREDIENT_ID, bom.INGREDIENT_NAME,
 	bom.MEAL_INGREDIENT_WEIGHT, meal.MEAL_CALORIE, meal.MEAL_CARB, meal.MEAL_FAT, meal.MEAL_PROTEIN, meal.MEAL_DESC
 from meal as meal 
 	inner join meal_bom as bom on bom.MEAL_ID = meal.MEAL_ID 
-where meal.MEAL_STATUS = true 
+where meal.MEAL_STATUS = true ;
 	
 -- 各類別售出圓餅圖
 CREATE or REPLACE view V_SALE_CATEGORY as
@@ -131,7 +134,7 @@ from (
 		where orders.ORDER_STATUS = 3
 		group by meal.MEAL_CATEGORY_ID , meal.MEAL_CATEGORY_NAME
 	) as sumResult on sumResult.MEAL_CATEGORY_ID = queryResult.MEAL_CATEGORY_ID
-order by round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) desc
+order by round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) desc;
 
 -- 用於金流支付
 CREATE or REPLACE view V_PAYMENT_DETAIL as
@@ -140,7 +143,7 @@ select orders.ORDER_ID, orders.ORDERS_PRICE as 'MEAL_PRICE',
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
 	inner join MEAL as meal on meal.MEAL_ID = ordersdetail.MEAL_ID
-group by ORDER_ID
+group by ORDER_ID;
 
 -- 訂單結帳後的確認頁
 CREATE or REPLACE view V_AFTER_PAYMENT_PAGE as
@@ -151,7 +154,7 @@ select o.ORDER_ID, si.STORE_NAME, p.PAYMENT_PRICE,
 	END as 'PAYMENT_CATEGORY'
 from ORDERS o 
 	inner join STORE_INFO si on si.STORE_ID = o.STORE_ID 
-	inner join PAYMENT p on p.ORDER_ID = o.ORDER_ID
+	inner join PAYMENT p on p.ORDER_ID = o.ORDER_ID;
 
 
 
