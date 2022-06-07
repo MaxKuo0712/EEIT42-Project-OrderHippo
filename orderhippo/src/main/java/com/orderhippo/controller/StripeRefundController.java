@@ -25,7 +25,7 @@ import com.stripe.model.Refund;
 
 import io.swagger.annotations.Api;
 
-@Api(tags = "Stripe金流退款API")
+@Api(tags = "金流Stripe退款API")
 @RestController
 @RequestMapping("/api")
 @CrossOrigin

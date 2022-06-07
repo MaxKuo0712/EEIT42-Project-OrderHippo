@@ -28,7 +28,7 @@ import com.stripe.param.checkout.SessionCreateParams;
 
 import io.swagger.annotations.Api;
 
-@Api(tags = "Stripe金流付款API")
+@Api(tags = "金流Stripe付款API")
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
