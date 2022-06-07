@@ -10,6 +10,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "STORE_COUPON")
 @DynamicInsert(true)
@@ -17,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class StoreCouponBean {
 	
 	@Id
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -38,18 +41,22 @@ public class StoreCouponBean {
 	@Column(name = "COUPON_DESC", columnDefinition="LONGTEXT")
 	private String coupondesc;
 	
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("CREATE_ID")
 	@Column(name = "CREATE_ID", updatable = false)
 	private String createid;
 	
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("CREATE_TIME")
 	@Column(name = "CREATE_TIME", updatable = false, insertable = false)
 	private Date createtime;
 	
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("REVISE_TIME")
 	@Column(name = "REVISE_TIME", insertable = false)
 	private Date revisetime;
 	
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("REVISE_ID")
 	@Column(name = "REVISE_ID", insertable = false)
 	private String reviseid;

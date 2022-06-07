@@ -12,6 +12,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "MEAL_CATEGORY")
 @DynamicInsert(true)
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class MealCategoryBean {
 	
 	@Id
+	@ApiModelProperty(hidden = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty("ID")
 	@Column(name = "ID")

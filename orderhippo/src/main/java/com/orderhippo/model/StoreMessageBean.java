@@ -14,6 +14,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "STORE_MESSAGE")
 @DynamicInsert(true)
@@ -22,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class StoreMessageBean {
 	
 	@Id
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -47,18 +50,22 @@ public class StoreMessageBean {
 	@Column(name = "MESSAGE_IMAGE")
 	private String messageimage;    // 網址, 圖片多張的話，會佔記憶體太大，所以Max才會用Imgur API來解決
 	
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("CREATE_ID")
 	@Column(name = "CREATE_ID", updatable = false)
 	private String createid;
 	
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("CREATE_TIME")
 	@Column(name = "CREATE_TIME", updatable = false, insertable = false)
 	private Date createtime;
 	
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("REVISE_TIME")
 	@Column(name = "REVISE_TIME", insertable = false)
 	private Date revisetime;
 	
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("REVISE_ID")
 	@Column(name = "REVISE_ID", insertable = false)
 	private String reviseid;
