@@ -38,7 +38,7 @@ from (
 		sum(o.ORDERS_PRICE) as REVENUE_OF_MONTH
 	FROM orders as o
 	where o.ORDER_STATUS = 3
-	group by EXTRACT(YEAR from o.CREATE_TIME), EXTRACT(MONTH from o.CREATE_TIME)) as result
+	group by EXTRACT(YEAR from o.CREATE_TIME), EXTRACT(MONTH from o.CREATE_TIME)) as result;
 
 -- 年齡數量 - 百分比可用於圓餅圖
 CREATE or REPLACE  view V_AGE_CHART as
