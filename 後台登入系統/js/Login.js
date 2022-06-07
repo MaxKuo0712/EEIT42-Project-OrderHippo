@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
 import {
     getAuth,
     signOut,
@@ -7,26 +7,31 @@ import {
     signInWithPopup,
     sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js";
+import { myFirebase } from "./firebase.js";
 
 // Initialize Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyBqQ5T0uy3_68BVFhfTqS98VNWUmgLkir0",
-    authDomain: "orderhippo-store.firebaseapp.com",
-    projectId: "orderhippo-store",
-    storageBucket: "orderhippo-store.appspot.com",
-    messagingSenderId: "777247881627",
-    appId: "1:777247881627:web:6bc31c0a8fd80a4def493e"
-};
+// const firebaseConfig = {
+//     apiKey: "AIzaSyBqQ5T0uy3_68BVFhfTqS98VNWUmgLkir0",
+//     authDomain: "orderhippo-store.firebaseapp.com",
+//     projectId: "orderhippo-store",
+//     storageBucket: "orderhippo-store.appspot.com",
+//     messagingSenderId: "777247881627",
+//     appId: "1:777247881627:web:6bc31c0a8fd80a4def493e"
+// };
 
+const myLoginFirebase = new myFirebase();
+myLoginFirebase.initFirebase();
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+// initializeApp(firebaseConfig);
 
 let email = document.getElementById("email");
 let passwd = document.getElementById("password");
 
 let mailLoginBnt = document.getElementById("loginBnt");
 let resetPasswd = document.getElementById("resetPasswd");
+
+setSignBntStatus();
 
 function storeMailLogin(e) {
     e.preventDefault();
@@ -132,9 +137,30 @@ function welcomeToUse(storeName) {
     });
 }
 
+// function alreadyLogin() {
+//     Swal.fire({
+//         icon: 'success',
+//         title: `Hi, 你已經登入囉`,
+//         showConfirmButton: false,
+//         timer: 1500
+//     });
+// }
+
 function addLocalstorage(storeInfo) {
     localStorage.removeItem('storeinfo');
     localStorage.setItem('storeinfo', JSON.stringify(storeInfo));
+}
+
+function setSignBntStatus() {
+    const auth = getAuth();
+    auth.onAuthStateChanged((store) =>{
+        if (store) { // 登入
+            welcomeToUse(JSON.parse(localStorage.getItem('storeinfo')).STORE_NAME);
+            setInterval(() => {
+                window.location.href = "homepage.html"
+            }, 1500); // 等待2秒導向回到登入頁面
+        }
+    });
 }
 
 mailLoginBnt.addEventListener("click", (e) => {
