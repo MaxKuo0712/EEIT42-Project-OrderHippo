@@ -6,7 +6,7 @@ import com.orderhippo.model.MealBomBean;
 
 public interface MealBomService {
 	// 新增單筆BOM
-	public Object addBOM(MealBomBean mealBomBean);
+	public Object addBOM(List<MealBomBean> listMealBomBean);
 	
 	// 查詢所有 Meal BOM
 	public List<MealBomBean> getAllMealbom();

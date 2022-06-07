@@ -66,9 +66,8 @@ public class MealBomController {
 			if (listMealBomBean.size() > 0) {
 				for ( MealBomBean mealBomBean : listMealBomBean ) {
 					mealBomBean.setCreateid(requestID);
-					mealBOMService.addBOM(mealBomBean);
 				}
-				return new ResponseEntity<Boolean>(true, HttpStatus.NOT_FOUND);
+				return mealBOMService.addBOM(listMealBomBean);
 			} else {
 				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 			}

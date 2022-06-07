@@ -22,13 +22,13 @@ public class MealBomServiceImp implements MealBomService {
 	private MealBomBeanRepository mealBOMBeanRepository; 
 	
 	@Override
-	public Object addBOM(MealBomBean mealBomBean) {
+	public Object addBOM(List<MealBomBean> listMealBomBean) {
 		
-		if (mealBomBean != null) {
+		if (listMealBomBean != null) {
 			try {
 //				MealBomBean result = mealBOMBeanRepository.save(mealBomBean);
 //				return new ResponseEntity<Boolean>(mealBOMBeanRepository.existsById(result.getId()),  HttpStatus.OK);
-				mealBOMBeanRepository.save(mealBomBean);
+				mealBOMBeanRepository.saveAll(listMealBomBean);
 				return new ResponseEntity<Boolean>(true,  HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
