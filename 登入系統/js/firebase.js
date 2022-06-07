@@ -10,7 +10,7 @@ export class myFirebase {
             storageBucket: "login-test-18ab1.appspot.com",
             messagingSenderId: "521236544499",
             appId: "1:521236544499:web:be27cbcb82b1d84f09f086",
-            measurementId: "G-4QG29VS5S8",
+            measurementId: "G-4QG29VS5S8"
         };
         
         // Initialize Firebase

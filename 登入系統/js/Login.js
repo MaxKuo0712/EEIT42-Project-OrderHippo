@@ -227,6 +227,15 @@ function addGoogleUserInfo(result) {
     })
 }
 
+function alreadyLogin() {
+    Swal.fire({
+        icon: 'success',
+        title: `Hi, 你已經登入囉`,
+        showConfirmButton: false,
+        timer: 1500
+    });
+}
+
 function addLocalstorage(userInfo) {
     localStorage.removeItem('userinfo');
     localStorage.setItem('userinfo', JSON.stringify(userInfo));
@@ -236,7 +245,10 @@ function setSignBntStatus() {
     const auth = getAuth();
     auth.onAuthStateChanged((user) =>{
         if (user) {
-            window.location.href = " homepage.html"
+            welcomeToUse(JSON.parse(localStorage.getItem('userinfo')).USER_NAME);
+            setInterval(() => {
+                window.location.href = "homepage.html"
+            }, 1500); // 等待2秒導向回到登入頁面
         }
     });
 }
