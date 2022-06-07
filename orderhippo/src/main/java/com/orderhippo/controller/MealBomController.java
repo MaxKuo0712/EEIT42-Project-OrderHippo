@@ -49,7 +49,7 @@ public class MealBomController {
 	private StoreInfoService storeInfoService;
 	
 	// 新增單筆BOM
-	@ApiOperation("新增單筆BOM")
+	@ApiOperation("新增BOM")
 	@PostMapping(path="/{requestID}/mealbom")
 	public Object addBom(
 			@PathVariable String requestID,
