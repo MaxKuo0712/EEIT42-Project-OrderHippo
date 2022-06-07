@@ -8,6 +8,9 @@ import com.orderhippo.model.MealBomBean;
 
 public interface MealBomBeanRepository extends JpaRepository<MealBomBean, Integer> {
 	
+	// 刪除 By MealId
+	List<MealBomBean> deleteByMealid(String mealid);
+	
 	// By MealBOMId 搜尋
 	List<MealBomBean> findByBomid(String bomid);
 	

@@ -20,6 +20,9 @@ public interface MealBomService {
 	// 查詢單筆BOM By IngredientId
 	public List<MealBomBean> getBomByIngredientid(String ingredientid);
 	
+	// 刪除單筆BOM資料
+	public Object deleteBom(String requestID, String mealid);
+	
 //	// 查詢單筆BOM By MealName
 //	public List<MealBomBean> getBomByMealname(String mealname);
 	

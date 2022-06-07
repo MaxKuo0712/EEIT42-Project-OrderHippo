@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -164,5 +165,27 @@ public class MealBomController {
 ////		}
 //		return mealBOMBeanRepository.save(patch);
 //	}
-	
+
+	// 刪除單筆Bom by 一樣的 mealid(可以有多筆相同的mealid)
+	@ApiOperation("刪除單筆Bom")
+	@DeleteMapping(path = "/{requestID}/mealbom")
+	public Object removeBom(
+	  @PathVariable String requestID,
+	  @RequestParam(name="token", required=true) String realHashToken,
+	  @RequestParam(name="mealid", required=true) String mealId) {
+		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
+		
+		String dbToken = ProjectUtils.getDBToken(null, storeinfo, requestID);
+		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
+		
+		if(verifyResult) {
+			if (mealId != null && mealId.trim().length() != 0) {
+				return mealBOMService.deleteBom(requestID, mealId);
+			} else {
+				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
+			}   
+		} else {
+			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
+		}
+	}
 }

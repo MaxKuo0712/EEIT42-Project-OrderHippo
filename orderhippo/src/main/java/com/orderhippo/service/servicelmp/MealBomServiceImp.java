@@ -127,4 +127,21 @@ public class MealBomServiceImp implements MealBomService {
 		}
 		return new ResponseEntity<String>("資料不存在：BomID", HttpStatus.NOT_FOUND);
 	}
+	
+	// 刪除單筆BOM資料
+	@Override
+	public Object deleteBom(String requestID, String mealid) {
+		List<MealBomBean> result = mealBOMBeanRepository.findByMealid(mealid);
+	 
+		if(result.size() >= 1) {
+			 try {
+				 mealBOMBeanRepository.deleteByMealid(mealid);
+				 return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+			 } catch (Exception e) {
+				 e.printStackTrace();
+				 return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+			 }
+		}
+		return new ResponseEntity<String>("資料不存在：MealID", HttpStatus.NOT_FOUND);
+	}
 }
