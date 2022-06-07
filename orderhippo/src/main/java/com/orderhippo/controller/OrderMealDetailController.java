@@ -87,9 +87,8 @@ public class OrderMealDetailController {
 			if (ListOrderMealDetailBean.size() > 0) {
 				for ( OrderMealDetailBean orderMealDetailBean : ListOrderMealDetailBean ) {
 					orderMealDetailBean.setCreatetid(requestID);
-					orderMealDetailService.addOrderMealDetail(orderMealDetailBean);
 				}
-				return new ResponseEntity<Boolean>(true, HttpStatus.NOT_FOUND);
+				return orderMealDetailService.addOrderMealDetail(ListOrderMealDetailBean);
 			} else {
 				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 			}

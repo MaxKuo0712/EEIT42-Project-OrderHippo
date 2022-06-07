@@ -24,7 +24,7 @@ public class MealBomServiceImp implements MealBomService {
 	@Override
 	public Object addBOM(List<MealBomBean> listMealBomBean) {
 		
-		if (listMealBomBean != null) {
+		if (listMealBomBean.size() > 0) {
 			try {
 				mealBOMBeanRepository.saveAll(listMealBomBean);
 				return new ResponseEntity<Boolean>(true,  HttpStatus.OK);

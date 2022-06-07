@@ -23,11 +23,11 @@ public class OrderMealDetailServicelmp implements OrderMealDetailService {
 	private OrderMealDetailRepository orderMealDetailRepository;
 
 	@Override
-	public Object addOrderMealDetail(OrderMealDetailBean orderMealDetailBean) {
+	public Object addOrderMealDetail(List<OrderMealDetailBean> ListOrderMealDetailBean) {
 		
-		if (orderMealDetailBean != null) {
+		if (ListOrderMealDetailBean.size() > 0) {
 			try {
-				orderMealDetailRepository.save(orderMealDetailBean);
+				orderMealDetailRepository.saveAll(ListOrderMealDetailBean);
 				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
