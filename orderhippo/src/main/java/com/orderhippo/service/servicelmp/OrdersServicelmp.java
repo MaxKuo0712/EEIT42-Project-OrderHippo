@@ -3,6 +3,7 @@ package com.orderhippo.service.servicelmp;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class OrdersServicelmp implements OrdersService {
 		
 		if (ordersBean != null) {
 			try {
-				OrdersBean result = ordersRepository.save(ordersBean);
+				OrdersBean result = ordersRepository.saveAndFlush(ordersBean);
 				return new ResponseEntity<OrdersBean>(result, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();

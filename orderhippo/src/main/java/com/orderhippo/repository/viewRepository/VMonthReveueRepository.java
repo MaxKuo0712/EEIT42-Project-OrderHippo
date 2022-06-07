@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.orderhippo.model.viewBean.VMonthReveueBean;
 
-public interface VMonthReveueRepository extends JpaRepository<VMonthReveueBean, Integer>{
+public interface VMonthReveueRepository extends JpaRepository<VMonthReveueBean, String>{
 	
 }

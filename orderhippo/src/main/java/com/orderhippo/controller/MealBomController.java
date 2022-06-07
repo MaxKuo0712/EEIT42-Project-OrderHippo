@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderhippo.model.MealBomBean;
+import com.orderhippo.model.OrderMealDetailBean;
 import com.orderhippo.model.StoreInfoBean;
 import com.orderhippo.model.UserInfoBean;
 import com.orderhippo.repository.MealBomBeanRepository;
@@ -52,7 +53,7 @@ public class MealBomController {
 	public Object addBom(
 			@PathVariable String requestID,
 			@RequestParam(name = "token", required = true) String realHashToken,
-			@RequestBody MealBomBean mealBomBean) {
+			@RequestBody List<MealBomBean> listMealBomBean) {
 
 		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
 		
@@ -60,11 +61,15 @@ public class MealBomController {
 		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
 		
 		if (verifyResult) {
-			if (mealBomBean != null) {
-				mealBomBean.setCreateid(requestID);
-				return mealBOMService.addBOM(mealBomBean);
+			
+			if (listMealBomBean.size() > 0) {
+				for ( MealBomBean mealBomBean : listMealBomBean ) {
+					mealBomBean.setCreateid(requestID);
+					mealBOMService.addBOM(mealBomBean);
+				}
+				return new ResponseEntity<Boolean>(true, HttpStatus.NOT_FOUND);
 			} else {
-				return new ResponseEntity<String>("Input not found", HttpStatus.NOT_FOUND);
+				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 			}
 		} else {
 			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
@@ -108,7 +113,7 @@ public class MealBomController {
 	public Object patchBom (
 			@PathVariable String requestID,
 			@RequestParam(name = "token", required = true) String realHashToken,
-			@RequestBody MealBomBean mealBomBean) {
+			@RequestBody List<MealBomBean> listMealBomBean) {
 		
 		List<StoreInfoBean> storeinfo = storeInfoService.getStoreInfoByStoreid(requestID);
 		
@@ -116,8 +121,11 @@ public class MealBomController {
 		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
 		
 		if (verifyResult) {
-			if (mealBomBean != null) {
-				return mealBOMService.updateMealbom(requestID, mealBomBean);
+			if (listMealBomBean.size() > 0) {
+				for ( MealBomBean mealBomBean : listMealBomBean ) {
+					mealBOMService.updateMealbom(requestID, mealBomBean);
+				}
+				return new ResponseEntity<Boolean>(true, HttpStatus.NOT_FOUND);
 			} else {
 				return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 			}

@@ -121,7 +121,7 @@ public class OrdersController {
 		if (verifyResult) {
 			if (ordersBean != null) {
 				ordersBean.setCreatetid(requestID);
-				return ordersService.addOrder(ordersBean); 
+				return ordersService.addOrder(ordersBean);
 			}
 			return new ResponseEntity<String>("Input不存在", HttpStatus.NOT_FOUND);
 		} else {

@@ -13,6 +13,10 @@ public class VReviseMealDisplayBean {
 	@Column(name = "MEAL_ID")
 	private String mealid;
 	
+	@Id
+	@Column(name = "BOM_ID")
+	private String bomid;
+	
 	@Column(name = "MEAL_NAME")
 	private String mealname;
 	
@@ -28,7 +32,6 @@ public class VReviseMealDisplayBean {
 	@Column(name = "MEAL_PRICE")
 	private Integer mealprice;
 	
-	@Id
 	@Column(name = "INGREDIENT_ID")
 	private String ingredientid;
 	
@@ -59,6 +62,14 @@ public class VReviseMealDisplayBean {
 
 	public void setMealid(String mealid) {
 		this.mealid = mealid;
+	}
+
+	public String getBomid() {
+		return bomid;
+	}
+
+	public void setBomid(String bomid) {
+		this.bomid = bomid;
 	}
 
 	public String getMealname() {
@@ -164,8 +175,4 @@ public class VReviseMealDisplayBean {
 	public void setMealdesc(String mealdesc) {
 		this.mealdesc = mealdesc;
 	}
-	
-	
-	
-	
 }
