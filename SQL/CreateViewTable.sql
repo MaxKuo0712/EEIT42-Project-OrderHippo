@@ -116,7 +116,6 @@ where meal.MEAL_STATUS = true ;
 	
 -- 各類別售出圓餅圖
 CREATE or REPLACE view V_SALE_CATEGORY as
-
 select queryResult.MEAL_ID, queryResult.MEAL_CATEGORY_NAME, queryResult.MEAL_NAME, 
 	round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) as 'PERCENTAGE'
 from (
