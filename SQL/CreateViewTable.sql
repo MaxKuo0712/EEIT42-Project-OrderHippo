@@ -38,7 +38,7 @@ from (
 		sum(o.ORDERS_PRICE) as REVENUE_OF_MONTH
 	FROM orders as o
 	where o.ORDER_STATUS = 3
-	group by EXTRACT(YEAR from o.CREATE_TIME), EXTRACT(MONTH from o.CREATE_TIME)) as result;
+	group by EXTRACT(YEAR from o.CREATE_TIME), EXTRACT(MONTH from o.CREATE_TIME)) as result
 
 -- 年齡數量 - 百分比可用於圓餅圖
 CREATE or REPLACE  view V_AGE_CHART as
@@ -116,6 +116,7 @@ where meal.MEAL_STATUS = true ;
 	
 -- 各類別售出圓餅圖
 CREATE or REPLACE view V_SALE_CATEGORY as
+
 select queryResult.MEAL_ID, queryResult.MEAL_CATEGORY_NAME, queryResult.MEAL_NAME, 
 	round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) as 'PERCENTAGE'
 from (
