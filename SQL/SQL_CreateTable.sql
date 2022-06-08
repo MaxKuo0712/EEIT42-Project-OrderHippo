@@ -159,12 +159,6 @@ create table ORDERS (
 	CONSTRAINT CHK_ORDERS_PRICE CHECK (ORDERS_PRICE > 0)
 );
 
-alter table ORDERS add ORDER_DESC LONGTEXT;
-
-select * from orders o 
-
-DELETE from ORDERS
-
 drop table ORDERS;
 
 -- --------------------------------------------------------------------------------------------
@@ -215,8 +209,6 @@ create table ORDER_MEALDETAIL (
 );
 
 drop table ORDER_MEALDETAIL;
-
-select* from ORDER_MEALDETAIL
 
 -- --------------------------------------------------------------------------------------------
 -- 店家訊息公告(STORE_MESSAGE)
@@ -281,8 +273,6 @@ CREATE TABLE MEAL_BOM (
 );
 
 drop table MEAL_BOM;
-
-select * from meal_bom mb  order by MEAL_ID 
 
 -- --------------------------------------------------------------------------------------------
 -- 優惠券(STORE_COUPON)
