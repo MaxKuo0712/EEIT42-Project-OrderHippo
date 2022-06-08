@@ -115,7 +115,7 @@ drop table MEAL_CATEGORY;
 create table MEAL (
 	ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	MEAL_ID varchar(100) DEFAULT(CONCAT('M', DATE_FORMAT(CURRENT_DATE(),'%Y%m'), '_', REPLACE(UUID(),'-',''))) UNIQUE NOT NULL,
-	MEAL_NAME varchar(100) UNIQUE not null,
+	MEAL_NAME varchar(100) not null,
 	MEAL_CATEGORY_ID varchar(100) not null,
 	MEAL_CATEGORY_NAME varchar(100) not null,
 	STORE_ID varchar(100) not null,
