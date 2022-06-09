@@ -103,7 +103,7 @@ from ORDERS as orders
 	inner join USER_INFO as userinfo on userinfo.USER_ID = orders.USER_ID
 group by orders.ORDER_ID , orders.ORDER_STATUS, CONCAT('$', orders.ORDERS_PRICE), 
 	userinfo.USER_NAME, orders.CREATE_TIME, userinfo.USER_PHONE
-order by orders.CREATE_TIME;
+order by orders.CREATE_TIME desc ;
 
 -- 更改菜單顯示 -- 待查 --增加MEAL_ID查詢
 CREATE or REPLACE view V_REVISE_MEAL_DISPLAY as

@@ -180,47 +180,47 @@ values ('蔬食沙拉', 'SALAD', '沙拉', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'http
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('雞胸白醬筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '雞胸白醬筆管麵', 165, 
+values ('雞胸白醬筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/2zi6a1y.jpg', '雞胸白醬筆管麵', 165, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('蔬食筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '蔬食筆管麵', 155, 
+values ('蔬食筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/I440SUC.jpg', '蔬食筆管麵', 155, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('蔬食番茄義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '蔬食番茄義大利麵', 165, 
+values ('蔬食番茄義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/UipachW.jpg', '蔬食番茄義大利麵', 165, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('培根白醬筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '培根白醬筆管麵', 165, 
+values ('培根白醬筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/rhWiJQ8.jpg', '培根白醬筆管麵', 165, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('雞肉青醬筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '雞肉青醬筆管麵', 165, 
+values ('雞肉青醬筆管麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/jjQBnJl.jpg', '雞肉青醬筆管麵', 165, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('雞肉培根貝殼麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '雞肉培根貝殼麵', 165, 
+values ('雞肉培根貝殼麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/WxXG0T3.jpg', '雞肉培根貝殼麵', 165, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('鮮蝦義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '鮮蝦義大利麵', 185, 
+values ('鮮蝦義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/bli6TeV.jpg', '鮮蝦義大利麵', 185, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('慢燉手撕牛肉義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '慢燉手撕牛肉義大利麵', 185, 
+values ('慢燉手撕牛肉義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/M9sJevq.jpg', '慢燉手撕牛肉義大利麵', 185, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1')	;
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('挪威鮭魚義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', '', '挪威鮭魚義大利麵', 195, 
+values ('挪威鮭魚義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/QHDhhJv.jpg', '挪威鮭魚義大利麵', 195, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
