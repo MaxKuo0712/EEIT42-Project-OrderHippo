@@ -1,4 +1,4 @@
--- 菜單頁顯示
+-- 菜單頁顯示 - 6/10需要更新
 CREATE or REPLACE  view V_MEAL_MEALBOM as
 select meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, meal.MEAL_HOT,
 	meal.MEAL_PRICE, GROUP_CONCAT(CONCAT(bom.INGREDIENT_NAME, bom.MEAL_INGREDIENT_WEIGHT, 'g') SEPARATOR ';') as INGREDIENT,
@@ -6,6 +6,7 @@ select meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, m
 from MEAL as meal
 	inner join MEAL_BOM as bom on bom.MEAL_ID  = meal.MEAL_ID
 	inner join STORE_INFO as s on s.STORE_ID = meal.STORE_ID
+where meal.MEAL_STATUS = true
 group by meal.MEAL_ID, meal.MEAL_NAME, meal.MEAL_CATEGORY_NAME, meal.MEAL_IMAGE, meal.MEAL_HOT, meal.MEAL_PRICE, meal.MEAL_DESC;
 
 -- 訂單筆數 1未確認訂單, 2已確認訂單, 3已完成訂單 4取消的訂單
