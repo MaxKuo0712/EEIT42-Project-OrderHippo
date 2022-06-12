@@ -56,8 +56,8 @@ public class StripePaymentController {
 					// We will use the credit card payment method 
 					.addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
 					.setMode(SessionCreateParams.Mode.PAYMENT)
-					.setSuccessUrl("http://localhost:8080/success.html")
-					.setCancelUrl("http://localhost:8080/cancel.html")
+					.setSuccessUrl("http://localhost:5500/%E5%89%8D%E7%AB%AF%E8%B3%87%E6%96%99/bigproj202206081/thanks.html")
+					.setCancelUrl("http://localhost:5500/%E5%89%8D%E7%AB%AF%E8%B3%87%E6%96%99/bigproj202206081/cancel.html")
 					.addLineItem(
 							SessionCreateParams.LineItem.builder().setQuantity(Long.parseLong("1"))
 									.setPriceData(
