@@ -6,14 +6,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class OrderhippoApplication extends SpringBootServletInitializer {
+public class OrderhippoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrderhippoApplication.class, args);
 	}
-
-   @Override
-   protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-           return builder.sources(OrderhippoApplication.class);
-   }
 } 
