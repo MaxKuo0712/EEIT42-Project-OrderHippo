@@ -17,6 +17,7 @@ public class VPaymentDetailBean {
 	private Integer mealprice;
 	
 	@Column(name = "MEALS", columnDefinition = "mediumtext")
+//	@Column(name = "MEALS", columnDefinition = "text")
 	private String meals;
 
 	public String getOrderid() {

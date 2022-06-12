@@ -29,6 +29,7 @@ public class VMealBomBean {
 	private Integer mealprice;
 	
 	@Column(name = "INGREDIENT", columnDefinition = "mediumtext")
+//	@Column(name = "INGREDIENT", columnDefinition = "text")
 	private String ingredient;
 	
 	@Column(name = "MEAL_DESC", columnDefinition = "longtext")

@@ -24,6 +24,7 @@ public class VOrderDisplayBean {
 	private String username;
 	
 	@Column(name = "MEAL_ORDER_QTY", columnDefinition = "mediumtext")
+//	@Column(name = "MEAL_ORDER_QTY", columnDefinition = "text")
 	private String mealorderqty;
 	
 	@Column(name = "ORDERS_PRICE", columnDefinition = "VARBINARY")
