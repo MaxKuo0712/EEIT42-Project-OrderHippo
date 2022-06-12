@@ -12,6 +12,8 @@ create table INGREDIENT (
 	PROTEIN double not null
 );
 
+select * from INGREDIENT i where INGREDIENT_NAME like '%板腱%'
+
 select * from INGREDIENT
 
 -- --------------------------------------------------------------------------------------------

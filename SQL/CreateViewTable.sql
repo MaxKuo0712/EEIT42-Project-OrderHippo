@@ -23,13 +23,21 @@ group by ORDER_STATUS;
 
 -- 銷售前10名
 CREATE or REPLACE  view V_SALE_RANK as
-select meal.MEAL_NAME, meal.MEAL_PRICE, count(*) as 'COUNT'
+select meal.MEAL_NAME, meal.MEAL_PRICE, sum(detail.ORDER_MEAL_QTY) as 'COUNT'
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as detail on detail.ORDER_ID = orders.ORDER_ID
 	inner join MEAL as meal on meal.MEAL_ID = detail.MEAL_ID
 where orders.ORDER_STATUS = 3 and meal.MEAL_STATUS = true
 group by meal.MEAL_NAME, meal.MEAL_PRICE
-order by count(*) DESC, meal.MEAL_PRICE;
+order by sum(detail.ORDER_MEAL_QTY), meal.MEAL_PRICE;
+
+/*select meal.MEAL_NAME, meal.MEAL_PRICE, count(*) as 'COUNT'
+from ORDERS as orders
+	inner join ORDER_MEALDETAIL as detail on detail.ORDER_ID = orders.ORDER_ID
+	inner join MEAL as meal on meal.MEAL_ID = detail.MEAL_ID
+where orders.ORDER_STATUS = 3 and meal.MEAL_STATUS = true
+group by meal.MEAL_NAME, meal.MEAL_PRICE
+order by count(*) DESC, meal.MEAL_PRICE;*/
 
 -- 每月營收 - 3已完成訂單
 CREATE or REPLACE view V_MONTH_REVENUE as
@@ -136,6 +144,12 @@ from (
 		group by meal.MEAL_CATEGORY_ID , meal.MEAL_CATEGORY_NAME
 	) as sumResult on sumResult.MEAL_CATEGORY_ID = queryResult.MEAL_CATEGORY_ID
 order by round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) desc;
+
+
+SELECT * from MEAL_BOM mb  where MEAL_ID  ='M202206_107530aeea7211eca4fa068cdc81eecc'
+
+select * from meal where MEAL_ID  ='M202206_107530aeea7211eca4fa068cdc81eecc'
+
 
 -- 用於金流支付
 CREATE or REPLACE view V_PAYMENT_DETAIL as
