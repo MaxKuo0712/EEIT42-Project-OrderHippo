@@ -145,12 +145,6 @@ from (
 	) as sumResult on sumResult.MEAL_CATEGORY_ID = queryResult.MEAL_CATEGORY_ID
 order by round((queryResult.QTY/sumResult.SUM_QTY) * 100,2) desc;
 
-
-SELECT * from MEAL_BOM mb  where MEAL_ID  ='M202206_107530aeea7211eca4fa068cdc81eecc'
-
-select * from meal where MEAL_ID  ='M202206_107530aeea7211eca4fa068cdc81eecc'
-
-
 -- 用於金流支付
 CREATE or REPLACE view V_PAYMENT_DETAIL as
 select orders.ORDER_ID, orders.ORDERS_PRICE as 'MEAL_PRICE',
