@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>河馬餐廳</title>
+    <link rel="icon" href="./img/789.png" type="image/png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/carousel.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/all.css">
+
+</head>
+
+<body>
+    <header class="p-3 mb-3 border-bottom fixed-top">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="./index.html" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <img src="./img/789.png" alt="logo" width="50" height="50" class="me-2">
+                    <h4>Order Hippo</h4>
+                </a>
+
+                <!-- 導覽列中間 -->
+                <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"></div>
+
+                <div class="d-flex align-items-center col-md-4 flex-row-reverse">
+                    <div class="dropdown">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="./img/profile-user.png" alt="mdo" width="32" height="32">
+                        </a>
+                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="./changeUserInfo.html">修改會員資料</a></li>
+                            <li><a class="dropdown-item" href="./orderPage.html">訂單資訊</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><button class="dropdown-item" id="loginBnt">登出</button></li>
+                        </ul>
+                    </div>
+                    <div class="me-4" id="bag" onclick="bagClick()">
+                        <img src="./img/bag.png" alt="bag" width="32" height="32">
+                    </div>
+                    <div style="display:flex; margin: 0 1rem 0 1rem;" id="bell">
+                        <div class="btn-group" role="group" id="bellBtn">
+                            <button id="btnGroupDrop1" type="button" class="btn position-relative"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <image class="xiaoxi-icon " src="./img/bell.png" style="width: 32px; height: 32px">
+                                </image>
+                                <span id="bellValue"
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">0
+                                    <span class="visually-hidden">unread messages</span></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" id="bellInfo"
+                                style="width: 30px;">
+                                <!-- <li><a class="dropdown-item" href="#">Dropdown link</a></li> -->
+                                <!-- <li><a class="dropdown-item" href="#">Dropdown link</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div id="myCarousel" class="carousel" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                </div>
+                <div class="carousel-inner">
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+        <div class="container" id="pos">
+            <div class="row g-5">
+                <div class="col-md-3">
+                    <div class="tab position-sticky" style="top: 5rem;">
+                        <button class="tablinks" onclick="openFood(event, 'HOT')" id="defaultOpen">
+                            <h4><img src="./img/confetti.png" alt="food" width="30" height="30"> 人氣精選</h4>
+                        </button>
+                        <button class="tablinks" onclick="openFood(event, 'SALAD')">
+                            <h4><img src="./img/salad.png" alt="food" width="30" height="30"> 沙拉</h4>
+                        </button>
+                        <button class="tablinks" onclick="openFood(event, 'HEALTHMEAL')">
+                            <h4><img src="./img/bibimbap.png" alt="food" width="30" height="30"> 健康餐盒</h4>
+                        </button>
+                        <button class="tablinks" onclick="openFood(event, 'PASTA')">
+                            <h4><img src="./img/pasta.png" alt="food" width="30" height="30"> 義大利麵</h4>
+                        </button>
+                        <button class="tablinks" onclick="openFood(event, 'DRINK')">
+                            <h4><img src="./img/drink.png" alt="food" width="30" height="30"> 飲料</h4>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="row align-items-center py-2 position-sticky"
+                        style="top: 4rem; background-color: rgb(254, 247, 220);">
+                        <div class="col-9">
+                            <br>
+                            <h1 class="mb-4" id="foodType"><img src="./img/confetti.png" alt="food" width="50"
+                                    height="50"> 人氣精選</h1>
+                        </div>
+                        <div class="col-3 d-flex flex-row-reverse">
+                            <!-- <select name="sort" id="sort" class="mb-4" onchange="printMeal()"> -->
+                            <select name="sort" id="sort" class="mb-4" onchange="printMeal()">
+                                <option value="" disabled selected hidden>選擇排序方式</option>
+                                <option value="priceLToH">價格低到高</option>
+                                <option value="priceHToL">價格高到低</option>
+                                <option value="CALORIE">熱量低到高</option>
+                                <option value="water">碳水化合物高到低</option>
+                                <option value="egg">蛋白質高到低</option>
+                                <option value="fat">脂肪低到高</option>
+                            </select>
+                        </div>
+                        <hr>
+                    </div>
+                    <br>
+                    <div id="HOT" class="tabcontent">
+                        <ul class="row">
+                        </ul>
+                    </div>
+
+                    <div id="SALAD" class="tabcontent">
+                        <ul class="row">
+                        </ul>
+                    </div>
+
+                    <div id="HEALTHMEAL" class="tabcontent">
+                        <ul class="row">
+                        </ul>
+                    </div>
+
+                    <div id="PASTA" class="tabcontent">
+                        <ul class="row">
+                        </ul>
+                    </div>
+
+                    <div id="DRINK" class="tabcontent">
+                        <ul class="row">
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="sticky-top text-white text-center text-lg-start bg-dark">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!--Grid row-->
+            <div class="row mt-4">
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+
+                    <h5 class="text-uppercase mb-4">關於OrderHippo</h5>
+
+                    <p>
+                        OrderHippo是一間健康飲食餐廳的訂餐網站，
+                        除了餐點的訂購服務外也包含三大營養素的標示及計算。
+                    </p>
+
+                    <p>
+                        為了讓您更清楚，食材營養素是由政府提供的公開資料，
+                        讓您在選購及消費的同時，可以更輕鬆及精準的去管理
+                        自己的飲食狀況!
+                    </p>
+
+                    <div class="mt-4" style="display: flex; flex-direction: column; align-items: center;">
+                        <p style="text-align: center;">Line菜單BOT</p>
+                        <img src="./img/Line.png" width="200px" height="200px" alt="">
+                    </div>
+
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4 pb-1">店家資訊</h5>
+
+                    <ul class="fa-ul" style="list-style-type: none; padding-left: 0;">
+                        <li class="mb-3">
+                            <span class="fa-li"><span class="material-icons"
+                                    style="font-size: 24px; color: aliceblue;">restaurant</span></span><span
+                                class="ms-2">408台中市南屯區公益路二段51號18樓</span>
+                        </li>
+                        <li class="mb-3">
+                            <span class="fa-li"><span class="material-icons" style="font-size: 24px; color: aliceblue;">
+                                    email
+                                </span></span><span class="ms-2">OrderHippo@email.com</span>
+                        </li>
+                        <li class="mb-3">
+                            <span class="fa-li"><span class="material-icons" style="font-size: 24px; color: aliceblue;">
+                                    call
+                                </span></span><span class="ms-2">04-1234-5678</span>
+                        </li>
+                    </ul>
+
+                    <br><br><br>
+
+                    <h5 class="text-uppercase mb-4">營業時間</h5>
+
+                    <table class="table text-center text-white">
+                        <tbody class="fw-normal">
+                            <tr valign="middle">
+                                <td>週一至週六</td>
+                                <td>1100 - 1300 <br>
+                                    1630 - 1930</td>
+                            </tr>
+                            <tr>
+                                <td>週日</td>
+                                <td style="color: red;">休息</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <div id="map" style="width: 430px; height: 450px;"></div>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+    </footer>
+
+    <!-- 對話框 -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content1">
+            <div class="modal-header1">
+                <span class="close circle">&times;</span>
+            </div>
+            <div class="modal-body1">
+                <div class="row">
+                    <div class="col-10">
+                        <h1>沙讚沙嗲薑黃雞飯</h1>
+                    </div>
+                    <div class="col-2 d-flex flex-row-reverse">
+                        <p>$140</p>
+                    </div>
+                </div>
+                <p>碳水化合物:190g<br>蛋白質:90g<br>脂肪:245g</p>
+            </div>
+            <hr>
+            <div class="modal-footer1 align-items-center">
+                <div class="row">
+                    <div class="col-5 row">
+                        <div class="circle1" onclick="minusButton()">
+                            –
+                        </div>
+                        <span class="spanType1" id="count">1</span>
+                        <div class="circle1" onclick="plusButton()">
+                            +
+                        </div>
+                    </div>
+                    <div class="col-7 text-center cartButton">
+                        <span class="spanType1"><img src="./img/shopping-cart.png" alt="" width="35" height="35">
+                            加入購物車 $<span id="total"></span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /對話框 -->
+    <!-- /對話框 -->
+
+    <!-- 購物車 -->
+    <div id="cart" class="container">
+        <br>
+        <div class="text-center" style="background-color:#ccc;">
+            <br>
+            <img src="./img/789.png" alt="logo" width="50" height="50">
+            <h4 class="text-white">Order Hippo</h4>
+            <br>
+        </div>
+        <br>
+        <div id="cartHeader">
+            <ul>
+                <!-- <li>
+                    <img src="./img/bibimbap/1.JPG"  alt="food" width="120" height="80">
+                    <h5>雞肉飯便當</h5>
+                    <p>碳水化合物:50g<br>蛋白質:20g<br>脂肪:150g<br>$120</p>
+                </li> -->
+            </ul>
+        </div>
+
+        <hr>
+        <div id="cartFooter">
+            <p class="text-end">總計: $<span class="total1"></span></p>
+            <button onclick="cartClear()" class="col-12 btn btn-secondary">清空購物車</button>
+            <a href="./checkoutPage.html">
+                <button onclick="" class="col-12 btn btn-success">結帳 $<span class="total1"></span></button>
+            </a>
+        </div>
+        <br>
+    </div>
+    <!-- /購物車 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHlkTZyjEZjTkA-sPv9IAQ60FCF-oAaXE&callback=initMap">
+        </script>
+    <script>
+        let map;
+
+        function initMap() {
+            var position = {
+                lat: 24.1504763,
+                lng: 120.6510009
+            };
+            map = new google.maps.Map(document.getElementById("map"), {
+                // 中心點位置
+                center: position,
+
+                zoom: 18, // 地圖縮放比例 (0-20)
+                maxZoom: 20, // 使用者能縮放地圖的最大比例 
+                minZoom: 3, // 使用者能縮放地圖的最小比例
+
+                streetViewControl: false, // 是否顯示右下角街景小人
+                mapTypeControl: false // 使用者能否切換地圖樣式：一般、衛星圖等
+            });
+            var marker = new google.maps.Marker({
+                position: position,
+                map: map
+            });
+        }
+    </script>
+    <!-- Insert this script at the bottom of the HTML, but before you use any Firebase services -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js'
+        // Add Firebase products that you want to use
+        import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js'
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmqTvgYkvxv42UFqnHl8ejXg627WUow1k",
+            authDomain: "login-test-18ab1.firebaseapp.com",
+            projectId: "login-test-18ab1",
+            storageBucket: "login-test-18ab1.appspot.com",
+            messagingSenderId: "521236544499",
+            appId: "1:521236544499:web:be27cbcb82b1d84f09f086",
+            measurementId: "G-4QG29VS5S8",
+        };
+        initializeApp(firebaseConfig);
+
+        let loginBnt = document.getElementById("loginBnt");
+        setSignBntStatus();
+
+        function userSignOut() {
+            const auth = getAuth();
+            signOut(auth).then(() => {
+                signOutOK();
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+
+        function setSignBntStatus() {
+            const auth = getAuth();
+            const loginBnt = document.getElementById("loginBnt");
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    loginBnt.innerText = "登出";
+                } else {
+                    loginBnt.innerText = "登入";
+                }
+            });
+        }
+
+        function signOutOK() {
+            Swal.fire({
+                icon: 'success',
+                title: "登出成功，謝謝",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+
+        loginBnt.addEventListener("click", (e) => {
+            let signText = loginBnt.innerText;
+            if (signText === "登入") {
+                window.location.href = "login.html";
+            } else if (signText === "登出") {
+                userSignOut();
+                localStorage.removeItem('loginStatus');
+                setInterval(() => {
+                    window.location.reload();
+                }, 1500);
+                // localStorage.removeItem("userinfo");
+                // localStorage.removeItem("userToken");
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

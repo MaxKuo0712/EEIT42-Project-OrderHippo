@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>結帳頁面</title>
+    <link rel="icon" href="./img/789.png" type="image/png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+
+    <!-- 頂部版面 -->
+    <header class="p-3 mb-3 border-bottom fixed-top">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="./index.html" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <img src="./img/789.png" alt="logo" width="50" height="50" class="me-2">
+                    <h4>Order Hippo</h4>
+                </a>
+
+                <!-- 導覽列中間 -->
+                <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"></div>
+
+                <div class="d-flex align-items-center col-md-4 flex-row-reverse">
+                    <div class="dropdown">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="./img/profile-user.png" alt="mdo" width="32" height="32">
+                        </a>
+                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="./changeUserInfo.html">修改會員資料</a></li>
+                            <li><a class="dropdown-item" href="./orderPage.html">訂單資訊</a></li>
+                            <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><button class="dropdown-item" id="loginBnt">登出</button></li>
+                        </ul>
+                    </div>
+                    <div class="me-4" id="bag">
+                        <img src="./img/bag.png" alt="bag" width="32" height="32">
+                    </div>
+                    <div style="display:flex; margin: 0 1rem 0 1rem;" id="bell">
+                        <div class="btn-group" role="group" id="bellBtn">
+                            <button id="btnGroupDrop1" type="button" class="btn position-relative"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <image class="xiaoxi-icon " src="./img/bell.png" style="width: 32px; height: 32px">
+                                </image>
+                                <span id="bellValue"
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">0
+                                    <span class="visually-hidden">unread messages</span></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" id="bellInfo"
+                                style="width: 30px;">
+                                <!-- <li><a class="dropdown-item" href="#">Dropdown link</a></li> -->
+                                <!-- <li><a class="dropdown-item" href="#">Dropdown link</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- <header class="navbar navbar-light bg-white" style="position:sticky; z-index: 5; ">
+        <nav class="navbar navbar-light px-2">
+            <a href="#">
+                <img src="./img/789.png" class="imgLogo" alt="">
+                OrderHippo
+            </a>
+        </nav>
+        <nav class="px-2">
+            <div style="display:flex; margin: 0 1rem 0 1rem;">
+                <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn position-relative"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <image class="xiaoxi-icon " src="https://img.icons8.com/material-sharp/24/undefined/bell.png"
+                            style="width: 32px; height: 32px">
+                        </image>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">1
+                            <span class="visually-hidden">unread messages</span></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                    </ul>
+                </div>
+                <a href="" style=" margin: 0 1rem 0 1rem;"><img src="/img/bag.png" alt="" width="32" height="32"></a>
+                <a href="" style=" margin: 0 1rem 0 1rem;"><img src="/img/profile-user.png" alt="" width="32"
+                        height="32"></a>
+            </div>
+        </nav>
+    </header> -->
+
+    <main>
+        <!-- 主要呈現內容 -->
+        <section class="container">
+            <div class="row carts">
+                <!-- 左邊商品資訊列 -->
+                <!-- style="overflow:scroll; height: 890px;" -->
+                <div class="col-md-8 text-white scrollItem" style="overflow:scroll; height: 890px; overflow-x: hidden;">
+                    <!-- style="background-color: rgb(21, 45, 53);" -->
+                    <div class="text-dark">
+                        <h1 class="text-center p-2"><strong>購物車</strong></h1>
+
+                        <!-- 結帳商品表格名稱呈現 -->
+                        <div class="row d-flex align-content-around flex-wrap">
+                            <div class="col-3 text-center">商品</div>
+                            <div class="col-2 text-center">
+                                營養素(單份)
+                            </div>
+                            <div class="col-2 text-center">單價</div>
+                            <div class="col-2 ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;數量</div>
+                            <div class="col-1 text-center">小計</div>
+                            <div class="col-2 text-center">刪除</div>
+                            <hr class="text-dark" />
+                        </div>
+                    </div>
+                    <div id="foodCa"></div>
+                </div>
+                <div class="col"></div>
+                <!-- 結帳商品內容 (要做localstorage把購物車裡的商品撈出來 現在只是寫死呈現效果) -->
+                <!-- 右邊小計 -->
+                <div class="col-md-3">
+                    <div class="row text-white" style="background-color: rgb(95, 113, 97);">
+                        <!-- Customer Infomation -->
+                        <section class="customer-form p-3">
+                            <div class="section-header ">
+                                <h4 class="text-center p-2">付款方式</h4>
+                                <hr class="border-white mt-0">
+                            </div>
+                            <div class="section-body ">
+                                <form name="customerForm" checkout-customer-form=""
+                                    phones-country-codes="phonesCountryCodes"
+                                    class="ng-pristine ng-valid ng-isolate-scope">
+                                    <div class="">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                id="flexRadioDefault1" value="2" checked>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                現金支付
+                                            </label>
+                                        </div>
+                                        <!-- <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault2">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Line Pay
+                                        </label>
+                                    </div> -->
+                                        <div class="form-check ">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                id="flexRadioDefault2" value="1">
+                                            <label class="form-check-label " for="flexRadioDefault2">
+                                                信用卡
+                                            </label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                        <br>
+                        <section class="remark-form">
+                            <div class="section-header">
+                                <h5 class="text-center ">訂單備註</h5>
+                            </div>
+                            <div class="section-body">
+                                <form name="remarksForm" class="ng-pristine ng-valid">
+                                    <div class="form-group mb-3">
+                                        <textarea id="order-remarks" class="form-control" style="width: 300px;"
+                                            name="order[order_remarks]" placeholder="想要客製嗎?" rows="2"></textarea>
+                                        <br>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- style="overflow:scroll; height: 380px;" -->
+                    <div class="row p-md-3 py-3 pt-0 cart-msg-box scrollItem"
+                        style="overflow:scroll; height: 380px; overflow-x:hidden">
+                        <h4 class="text-center p-2">訂單摘要</h4>
+                        <hr class="border-white mt-0">
+                        <div id="priceCa"></div>
+                        <!-- <div class="d-flex justify-content-between"> -->
+                        <div>
+                            <!-- <input id="getDiscount" type="text" style="font-size:12px" placeholder="請輸入優惠碼"> -->
+                            <input id="getDiscount" type="text" style="font-size:12px; height: 40px; width: 150px;"
+                                placeholder="請輸入優惠碼">
+                            <button type="button" class="discount"
+                                style="font-size:12px; height: 40px; width: 40px;">使用</button>
+                        </div>
+                        <div class="discountDisplay d-flex justify-content-between p-2">
+                            <span class="h5">總計</span>
+                            <span class="allTotal h5"></span>
+                        </div>
+
+                    </div>
+                    <div class="p-2"></div>
+                    <!-- <div class="p-md-3"> -->
+                    <!-- </div> -->
+                    <!-- <button type="button" class="btn btn-primary mb-3 w-100   "
+                    style="background-color:rgb(37, 94, 113) ;">繼續購物</button>
+                <button type="button" class="orderFinish btn btn-primary w-100  "
+                    style="background-color: rgb(21, 45, 53);">結帳</button> -->
+                    <div class="sub-main">
+                        <a href="./index.html">
+                            <button class="button-two continueShop newbt"><span>繼續購物</span></button>
+                        </a>
+                        <br><br>
+                        <button class="button-two orderFinish newbt"><span>結帳</span></button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <hr />
+    </main>
+
+    <!-- 底部資訊 -->
+    <footer class="sticky-top text-white text-center text-lg-start bg-dark">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!--Grid row-->
+            <div class="row mt-4">
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+
+                    <h5 class="text-uppercase mb-4">關於OrderHippo</h5>
+
+                    <p>
+                        OrderHippo是一間健康飲食餐廳的訂餐網站，
+                        除了餐點的訂購服務外也包含三大營養素的標示及計算。
+                    </p>
+
+                    <p>
+                        為了讓您更清楚，食材營養素是由政府提供的公開資料，
+                        讓您在選購及消費的同時，可以更輕鬆及精準的去管理
+                        自己的飲食狀況!
+                    </p>
+
+                    <div class="mt-4" style="display: flex; flex-direction: column; align-items: center;">
+                        <p style="text-align: center;">Line菜單BOT</p>
+                        <img src="./img/Line.png" width="200px" height="200px" alt="">
+                    </div>
+
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4 pb-1">店家資訊</h5>
+
+                    <ul class="fa-ul" style="list-style-type: none; padding-left: 0;">
+                        <li class="mb-3">
+                            <span class="fa-li"><span class="material-icons"
+                                    style="font-size: 24px; color: aliceblue;">restaurant</span></span><span
+                                class="ms-2">408台中市南屯區公益路二段51號18樓</span>
+                        </li>
+                        <li class="mb-3">
+                            <span class="fa-li"><span class="material-icons" style="font-size: 24px; color: aliceblue;">
+                                    email
+                                </span></span><span class="ms-2">OrderHippo@email.com</span>
+                        </li>
+                        <li class="mb-3">
+                            <span class="fa-li"><span class="material-icons" style="font-size: 24px; color: aliceblue;">
+                                    call
+                                </span></span><span class="ms-2">04-1234-5678</span>
+                        </li>
+                    </ul>
+
+                    <br><br><br>
+
+                    <h5 class="text-uppercase mb-4">營業時間</h5>
+
+                    <table class="table text-center text-white">
+                        <tbody class="fw-normal">
+                            <tr valign="middle">
+                                <td>週一至週六</td>
+                                <td>1100 - 1300 <br>
+                                    1630 - 1930</td>
+                            </tr>
+                            <tr>
+                                <td>週日</td>
+                                <td style="color: red;">休息</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <div id="map" style="width: 430px; height: 450px;"></div>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+    </footer>
+    <!-- End of .container -->
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--  -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/checkoutPage.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHlkTZyjEZjTkA-sPv9IAQ60FCF-oAaXE&callback=initMap">
+        </script>
+    <script>
+        let map;
+
+        function initMap() {
+            var position = {
+                lat: 24.1504763,
+                lng: 120.6510009
+            };
+            map = new google.maps.Map(document.getElementById("map"), {
+                // 中心點位置
+                center: position,
+
+                zoom: 18, // 地圖縮放比例 (0-20)
+                maxZoom: 20, // 使用者能縮放地圖的最大比例 
+                minZoom: 3, // 使用者能縮放地圖的最小比例
+
+                streetViewControl: false, // 是否顯示右下角街景小人
+                mapTypeControl: false // 使用者能否切換地圖樣式：一般、衛星圖等
+            });
+            var marker = new google.maps.Marker({
+                position: position,
+                map: map
+            });
+        }
+    </script>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js'
+        // Add Firebase products that you want to use
+        import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js'
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmqTvgYkvxv42UFqnHl8ejXg627WUow1k",
+            authDomain: "login-test-18ab1.firebaseapp.com",
+            projectId: "login-test-18ab1",
+            storageBucket: "login-test-18ab1.appspot.com",
+            messagingSenderId: "521236544499",
+            appId: "1:521236544499:web:be27cbcb82b1d84f09f086",
+            measurementId: "G-4QG29VS5S8",
+        };
+        initializeApp(firebaseConfig);
+
+        let loginBnt = document.getElementById("loginBnt");
+        setSignBntStatus();
+
+        function userSignOut() {
+            const auth = getAuth();
+            signOut(auth).then(() => {
+                signOutOK();
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+
+        function setSignBntStatus() {
+            const auth = getAuth();
+            const loginBnt = document.getElementById("loginBnt");
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    loginBnt.innerText = "登出";
+                } else {
+                    loginBnt.innerText = "登入";
+                }
+            });
+        }
+
+        function signOutOK() {
+            Swal.fire({
+                icon: 'success',
+                title: "登出成功，謝謝",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+
+        loginBnt.addEventListener("click", (e) => {
+            let signText = loginBnt.innerText;
+            if (signText === "登入") {
+                window.location.href = "login.html";
+            } else if (signText === "登出") {
+                userSignOut();
+                localStorage.removeItem('loginStatus');
+                setInterval(() => {
+                    window.location.reload();
+                }, 1500);
+                // localStorage.removeItem("userinfo");
+                // localStorage.removeItem("userToken");
+            }
+        });
+    </script>
+</body>
+
+</html>

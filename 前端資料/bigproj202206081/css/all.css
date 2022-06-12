@@ -1,0 +1,202 @@
+.imgLogo {
+    width: 75px;
+    height: auto;
+}
+
+/* 訂單詳情背景顏色 */
+.bg-primary-lighter {
+    background-color: #F1EEE9;
+}
+
+/* 結帳頁 繼續購物、結帳 按鈕 */
+/* .btn-primary {
+    width: 200px;
+    height: 60px;
+} */
+
+/* 導覽列顏色 */
+header {
+    background-color: white;
+}
+
+/* 背景顏色 */
+body {
+    /* background-color: rgb(254, 247, 220); */
+    overflow-x: hidden;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+/* 小計 */
+.carts .cart-msg-box {
+    background-color: rgb(95, 113, 97);
+    color: white;
+}
+
+/* 結帳 */
+.btn-block {
+    display: block;
+}
+
+.img-box img {
+    height: 150px;
+    width: 150px;
+}
+
+.con {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown {
+    display: flex;
+}
+
+/* 炫泡按鈕 */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic);
+
+
+.newbt {
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.sub-main {
+    width: 40%;
+    /* margin: 22px; */
+    float: left;
+}
+
+.button-two {
+    text-align: center;
+    cursor: pointer;
+    font-size: 24px;
+    /* margin: 0 0 0 100px; */
+}
+
+/*Button Two*/
+.orderFinish {
+    border-radius: 4px;
+    background-color: #d35400;
+    border: none;
+    padding: 12px;
+    width: 305px;
+    transition: all 0.5s;
+}
+.continueShop {
+    border-radius: 4px;
+    background-color: rgb(21, 45, 53);
+    border: none;
+    padding: 12px;
+    width: 305px;
+    transition: all 0.5s;
+}
+
+
+.button-two span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button-two span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button-two:hover span {
+    padding-right: 25px;
+}
+
+.button-two:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/* 訂單查詢頁 酷酷按鈕 */
+
+#orderPageBtn ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#orderPageBtn ul li {
+    /* background-color: rgb(100, 135, 119); */
+    background-color: white;
+    --c: goldenrod;
+    color: var(--c);
+    font-size: 16px;
+    border: 0.3em solid var(--c);
+    border-radius: 0.5em;
+    width: 12em;
+    height: 3em;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: sans-serif;
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 3em;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s;
+    margin: 1em;
+}
+
+#orderPageBtn ul li span {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    background-color: var(--c);
+    transform: translateY(150%);
+    border-radius: 50%;
+    left: calc((var(--n) - 1) * 25%);
+    transition: 0.5s;
+    transition-delay: calc((var(--n) - 1) * 0.1s);
+    z-index: -1;
+}
+
+#orderPageBtn ul li:hover {
+    color: black;
+}
+
+#orderPageBtn ul li:hover span {
+    transform: translateY(0) scale(2);
+}
+
+#orderPageBtn ul li span:nth-child(1) {
+    --n: 1;
+}
+
+#orderPageBtn ul li span:nth-child(2) {
+    --n: 2;
+}
+
+#orderPageBtn ul li span:nth-child(3) {
+    --n: 3;
+}
+
+#orderPageBtn ul li span:nth-child(4) {
+    --n: 4;
+}
+
+.scrollItem::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.scrollItem::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.scrollItem::-webkit-scrollbar-thumb {
+    background-color: #11171a;
+    border-radius: 10px;
+}
