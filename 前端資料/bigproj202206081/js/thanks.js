@@ -2,7 +2,9 @@
 // WebSocket
 let websocket = null;
 
-connWebSocket(JSON.parse(localStorage.getItem('userinfo')).USER_ID);
+if (JSON.parse(localStorage.getItem('userinfo'))) {
+    connWebSocket(JSON.parse(localStorage.getItem('userinfo')).USER_ID);
+}
 
 function connWebSocket(userInfo) {
     if ('WebSocket' in window) {
@@ -17,7 +19,9 @@ function closeWebSocket() {
 }
 
 window.onbeforeunload = () => {
-    webSocket.closeWebSocket();
+    if (websocket) {
+        closeWebSocket();
+    }
 }
 
 function sednMessage(sendMsg, orderID, paymentID) {
@@ -42,7 +46,8 @@ function sednMessage(sendMsg, orderID, paymentID) {
 }
 
 
-if (localStorage.getItem('loginStatus')) {
+// if (localStorage.getItem('loginStatus')) {
+if (localStorage.getItem('userinfo')) {
     websocket.onmessage = (e) => {
         // console.log(e.data); 
         receiveMsg(e.data);
@@ -82,7 +87,8 @@ function receiveMsg(message) {
 }
 
 document.getElementById("bell").addEventListener("click", () => {
-    if (localStorage.getItem('loginStatus')) {
+    // if (localStorage.getItem('loginStatus')) {
+    if (localStorage.getItem('userinfo')) {
         let bellMsg = JSON.parse(localStorage.getItem('receiveMsg'));
 
         $("#bellInfo").empty();
@@ -224,6 +230,15 @@ function insertData() {
                         }
                         sednMessage("有一筆新訂單", orderID, paymentID);
                         thankYouDetails(JSON.parse(localStorage.getItem("ORDERS")).ORDER_ID);
+
+                        let carUserID = JSON.parse(localStorage.getItem('userinfo')).USER_ID;
+                        let shoppingCarList = JSON.parse(localStorage.getItem('shoppingCarList')) || [];
+                        let userCarIndex = shoppingCarList.findIndex(carList => carList.USER_ID == carUserID);
+                        if (userCarIndex > -1) {
+                            shoppingCarList.splice(userCarIndex, 1);
+                            localStorage.setItem("shoppingCarList", JSON.stringify(shoppingCarList));
+                        }
+
                         localStorage.removeItem("item");
                         localStorage.removeItem("ORDERS");
                         localStorage.removeItem("orderDetail");

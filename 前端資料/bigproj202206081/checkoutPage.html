@@ -327,24 +327,32 @@
         let map;
 
         function initMap() {
-            var position = {
-                lat: 24.1504763,
-                lng: 120.6510009
-            };
-            map = new google.maps.Map(document.getElementById("map"), {
-                // 中心點位置
-                center: position,
+            fetch(`http://localhost:8080/api/storelocation`, {
+                method: "GET"
+            }).then(function (response) {
+                return response.text();
+            }).then(function (storeLocation) {
+                var position = {
+                    lat: Number(storeLocation.split(',')[0]),
+                    lng: Number(storeLocation.split(',')[1])
+                };
+                map = new google.maps.Map(document.getElementById("map"), {
+                    // 中心點位置
+                    center: position,
 
-                zoom: 18, // 地圖縮放比例 (0-20)
-                maxZoom: 20, // 使用者能縮放地圖的最大比例 
-                minZoom: 3, // 使用者能縮放地圖的最小比例
+                    zoom: 18, // 地圖縮放比例 (0-20)
+                    maxZoom: 20, // 使用者能縮放地圖的最大比例 
+                    minZoom: 3, // 使用者能縮放地圖的最小比例
 
-                streetViewControl: false, // 是否顯示右下角街景小人
-                mapTypeControl: false // 使用者能否切換地圖樣式：一般、衛星圖等
-            });
-            var marker = new google.maps.Marker({
-                position: position,
-                map: map
+                    streetViewControl: false, // 是否顯示右下角街景小人
+                    mapTypeControl: false // 使用者能否切換地圖樣式：一般、衛星圖等
+                });
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map
+                });
+            }).catch((err) => {
+                console.log('取得店家經緯度錯誤');
             });
         }
     </script>
@@ -366,6 +374,9 @@
         initializeApp(firebaseConfig);
 
         let loginBnt = document.getElementById("loginBnt");
+
+        checkSignBntStatus();
+
         setSignBntStatus();
 
         function userSignOut() {
@@ -398,20 +409,74 @@
             });
         }
 
+        function checkSignBntStatus() {
+            const auth = getAuth();
+            auth.onAuthStateChanged((user) => {
+                if (!user) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: "請先登入哦！",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setInterval(() => {
+                        window.location.href = "index.html";
+                    }, 1500); // 等待2秒導向回到登入頁面
+                }
+            });
+        }
+
+        function setShoppingCarList() {
+            let shoppingCar = {
+                USER_ID: JSON.parse(localStorage.getItem('userinfo')).USER_ID,
+                shoppingCar: JSON.parse(localStorage.getItem('item'))
+            };
+            let shoppingCarList = JSON.parse(localStorage.getItem('shoppingCarList')) || [];
+            let userCarIndex = shoppingCarList.findIndex(carList => carList.USER_ID == shoppingCar.USER_ID);
+            if (userCarIndex > -1) {
+                shoppingCarList.splice(userCarIndex, 1);
+                localStorage.setItem("shoppingCarList", JSON.stringify(shoppingCarList));
+            }
+            shoppingCarList.push(shoppingCar);
+            localStorage.setItem("shoppingCarList", JSON.stringify(shoppingCarList));
+        }
+
         loginBnt.addEventListener("click", (e) => {
             let signText = loginBnt.innerText;
             if (signText === "登入") {
                 window.location.href = "login.html";
             } else if (signText === "登出") {
+                setShoppingCarList();
                 userSignOut();
                 localStorage.removeItem('loginStatus');
                 setInterval(() => {
+                    localStorage.removeItem('allTotal');
+                    localStorage.removeItem('item');
+                    localStorage.removeItem("userinfo");
+                    localStorage.removeItem("userToken");
                     window.location.reload();
                 }, 1500);
                 // localStorage.removeItem("userinfo");
                 // localStorage.removeItem("userToken");
             }
         });
+
+        // loginBnt.addEventListener("click", (e) => {
+        //     let signText = loginBnt.innerText;
+        //     if (signText === "登入") {
+        //         window.location.href = "login.html";
+        //     } else if (signText === "登出") {
+        //         userSignOut();
+        //         localStorage.removeItem('loginStatus');
+        //         setInterval(() => {
+        //             localStorage.removeItem("userinfo");
+        //             localStorage.removeItem("userToken");
+        //             window.location.reload();
+        //         }, 1500);
+        //         // localStorage.removeItem("userinfo");
+        //         // localStorage.removeItem("userToken");
+        //     }
+        // });
     </script>
 </body>
 

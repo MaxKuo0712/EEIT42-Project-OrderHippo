@@ -282,34 +282,37 @@
     <!-- /對話框 -->
 
     <!-- 購物車 -->
-    <div id="cart" class="container">
-        <br>
-        <div class="text-center" style="background-color:#ccc;">
+    <div id="cart">
+        <div id="cartIn" class="container">
             <br>
-            <img src="./img/789.png" alt="logo" width="50" height="50">
-            <h4 class="text-white">Order Hippo</h4>
+            <div class="text-center" style="background-color:#ccc;">
+                <br>
+                <img src="./img/789.png" alt="logo" width="50" height="50">
+                <h4 class="text-white">Order Hippo</h4>
+                <br>
+            </div>
             <br>
-        </div>
-        <br>
-        <div id="cartHeader">
-            <ul>
-                <!-- <li>
-                    <img src="./img/bibimbap/1.JPG"  alt="food" width="120" height="80">
-                    <h5>雞肉飯便當</h5>
-                    <p>碳水化合物:50g<br>蛋白質:20g<br>脂肪:150g<br>$120</p>
-                </li> -->
-            </ul>
-        </div>
+            <div id="cartHeader">
+                <ul>
+                    <!-- <li>
+                        <img src="./img/bibimbap/1.JPG"  alt="food" width="120" height="80">
+                        <h5>雞肉飯便當</h5>
+                        <p>碳水化合物:50g<br>蛋白質:20g<br>脂肪:150g<br>$120</p>
+                    </li> -->
+                </ul>
+            </div>
 
-        <hr>
-        <div id="cartFooter">
-            <p class="text-end">總計: $<span class="total1"></span></p>
-            <button onclick="cartClear()" class="col-12 btn btn-secondary">清空購物車</button>
-            <a href="./checkoutPage.html">
-                <button onclick="" class="col-12 btn btn-success">結帳 $<span class="total1"></span></button>
-            </a>
+            <hr>
+            <div id="cartFooter">
+                <p class="text-end">總計: $<span class="total1"></span></p>
+                <button onclick="cartClear()" class="col-12 btn btn-secondary">清空購物車</button>
+                <!-- <a href="./checkoutPage.html">
+                    <button onclick="" class="col-12 btn btn-success">結帳 $<span class="total1"></span></button>
+                </a> -->
+                <button id="checkoutBtn" class="col-12 btn btn-success">結帳 $<span class="total1"></span></button>
+            </div>
+            <br>
         </div>
-        <br>
     </div>
     <!-- /購物車 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -323,24 +326,32 @@
         let map;
 
         function initMap() {
-            var position = {
-                lat: 24.1504763,
-                lng: 120.6510009
-            };
-            map = new google.maps.Map(document.getElementById("map"), {
-                // 中心點位置
-                center: position,
+            fetch(`http://localhost:8080/api/storelocation`, {
+                method: "GET"
+            }).then(function (response) {
+                return response.text();
+            }).then(function (storeLocation) {
+                var position = {
+                    lat: Number(storeLocation.split(',')[0]),
+                    lng: Number(storeLocation.split(',')[1])
+                };
+                map = new google.maps.Map(document.getElementById("map"), {
+                    // 中心點位置
+                    center: position,
 
-                zoom: 18, // 地圖縮放比例 (0-20)
-                maxZoom: 20, // 使用者能縮放地圖的最大比例 
-                minZoom: 3, // 使用者能縮放地圖的最小比例
+                    zoom: 18, // 地圖縮放比例 (0-20)
+                    maxZoom: 20, // 使用者能縮放地圖的最大比例 
+                    minZoom: 3, // 使用者能縮放地圖的最小比例
 
-                streetViewControl: false, // 是否顯示右下角街景小人
-                mapTypeControl: false // 使用者能否切換地圖樣式：一般、衛星圖等
-            });
-            var marker = new google.maps.Marker({
-                position: position,
-                map: map
+                    streetViewControl: false, // 是否顯示右下角街景小人
+                    mapTypeControl: false // 使用者能否切換地圖樣式：一般、衛星圖等
+                });
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map
+                });
+            }).catch((err) => {
+                console.log('取得店家經緯度錯誤');
             });
         }
     </script>
@@ -394,14 +405,34 @@
             });
         }
 
+        function setShoppingCarList() {
+            let shoppingCar = {
+                USER_ID: JSON.parse(localStorage.getItem('userinfo')).USER_ID,
+                shoppingCar: JSON.parse(localStorage.getItem('item'))
+            };
+            let shoppingCarList = JSON.parse(localStorage.getItem('shoppingCarList')) || [];
+            let userCarIndex = shoppingCarList.findIndex(carList => carList.USER_ID == shoppingCar.USER_ID);
+            if (userCarIndex > -1) {
+                shoppingCarList.splice(userCarIndex, 1);
+                localStorage.setItem("shoppingCarList", JSON.stringify(shoppingCarList));
+            }
+            shoppingCarList.push(shoppingCar);
+            localStorage.setItem("shoppingCarList", JSON.stringify(shoppingCarList));
+        }
+
         loginBnt.addEventListener("click", (e) => {
             let signText = loginBnt.innerText;
             if (signText === "登入") {
                 window.location.href = "login.html";
             } else if (signText === "登出") {
+                setShoppingCarList();
                 userSignOut();
-                localStorage.removeItem('loginStatus');
+                // localStorage.removeItem('loginStatus');
                 setInterval(() => {
+                    localStorage.removeItem('allTotal');
+                    localStorage.removeItem('item');
+                    localStorage.removeItem("userinfo");
+                    localStorage.removeItem("userToken");
                     window.location.reload();
                 }, 1500);
                 // localStorage.removeItem("userinfo");

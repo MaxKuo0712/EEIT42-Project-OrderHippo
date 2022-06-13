@@ -1,3 +1,13 @@
+import {
+    getAuth,
+  } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js";
+  
+  import { myFirebase } from "./firebase.js";
+  
+  // // Initialize Firebase
+  const myLoginFirebase = new myFirebase();
+  myLoginFirebase.initFirebase();
+
 const formatDate = (date) => {
     let d = new Date(date);
     let month = (d.getMonth() + 1).toString().padStart(2, '0');
@@ -6,7 +16,26 @@ const formatDate = (date) => {
     return [year, month, day].join('/');
 }
 
-setUserInfo();
+setSignBntStatus();
+
+function setSignBntStatus() {
+    const auth = getAuth();
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        Swal.fire({
+          icon: 'warning',
+          title: "請先登入哦！",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setInterval(() => {
+          window.location.href = "index.html";
+        }, 1500); // 等待2秒導向回到登入頁面
+      } else {
+        setUserInfo();
+      }
+    });
+  }
 
 let submitBnt = document.getElementById("submitBnt");
 
@@ -41,7 +70,7 @@ submitBnt.addEventListener("click", (e) => {
         }).then((e) => {
             welcomeToUse(USER_NAME);
             setInterval(() => {
-                window.location.href = " homepage.html"
+                window.location.href = "index.html"
             }, 2000); // 等待2秒導向
         })
     })
@@ -65,7 +94,7 @@ function setUserInfo() {
     document.getElementById("gender").value = USER_GENDER;
     document.getElementById("phone").value = USER_PHONE;
     document.getElementById("email").value = USER_MAIL;
-    document.getElementById("birth").valueAsDate = "";
+    document.getElementById("birth").value = "";
     document.getElementById("age").value = "";
     document.getElementById("address").value = USER_ADDRESS;
 }

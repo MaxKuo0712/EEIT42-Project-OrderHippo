@@ -238,35 +238,80 @@
     </footer>
     <!-- End of .container -->
 
-    <div id="cart" class="container">
-        <br>
-        <div class="text-center" style="background-color:#ccc;">
-            <br>
-            <img src="./img/789.png" alt="logo" width="50" height="50">
-            <h4 class="text-white">Order Hippo</h4>
-            <br>
-        </div>
-        <br>
-        <div id="cartHeader">
-            <ul>
-                <!-- <li>
-                    <img src="./img/bibimbap/1.JPG"  alt="food" width="120" height="80">
-                    <h5>雞肉飯便當</h5>
-                    <p>碳水化合物:50g<br>蛋白質:20g<br>脂肪:150g<br>$120</p>
-                </li> -->
-            </ul>
+    <!-- 對話框 -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content1">
+            <div class="modal-header1">
+                <span class="close circle">&times;</span>
+            </div>
+            <div class="modal-body1">
+                <div class="row">
+                    <div class="col-10">
+                        <h1>沙讚沙嗲薑黃雞飯</h1>
+                    </div>
+                    <div class="col-2 d-flex flex-row-reverse">
+                        <p>$140</p>
+                    </div>
+                </div>
+                <p>碳水化合物:190g<br>蛋白質:90g<br>脂肪:245g</p>
+            </div>
+            <hr>
+            <div class="modal-footer1 align-items-center">
+                <div class="row">
+                    <div class="col-5 row">
+                        <div class="circle1" onclick="minusButton()">
+                            –
+                        </div>
+                        <span class="spanType1" id="count">1</span>
+                        <div class="circle1" onclick="plusButton()">
+                            +
+                        </div>
+                    </div>
+                    <div class="col-7 text-center cartButton">
+                        <span class="spanType1"><img src="./img/shopping-cart.png" alt="" width="35" height="35">
+                            加入購物車 $<span id="total"></span></span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <hr>
-        <div id="cartFooter">
-            <p class="text-end">總計: $<span class="total1"></span></p>
-            <button onclick="cartClear()" class="col-12 btn btn-secondary">清空購物車</button>
-            <a href="./checkoutPage.html">
-                <button onclick="" class="col-12 btn btn-success">結帳 $<span class="total1"></span></button>
-            </a>
-        </div>
-        <br>
     </div>
+    <!-- /對話框 -->
+
+    <!-- 購物車 -->
+    <div id="cart">
+        <div id="cartIn" class="container">
+            <br>
+            <div class="text-center" style="background-color:#ccc;">
+                <br>
+                <img src="./img/789.png" alt="logo" width="50" height="50">
+                <h4 class="text-white">Order Hippo</h4>
+                <br>
+            </div>
+            <br>
+            <div id="cartHeader">
+                <ul>
+                    <!-- <li>
+                        <img src="./img/bibimbap/1.JPG"  alt="food" width="120" height="80">
+                        <h5>雞肉飯便當</h5>
+                        <p>碳水化合物:50g<br>蛋白質:20g<br>脂肪:150g<br>$120</p>
+                    </li> -->
+                </ul>
+            </div>
+
+            <hr>
+            <div id="cartFooter">
+                <p class="text-end">總計: $<span class="total1"></span></p>
+                <button onclick="cartClear()" class="col-12 btn btn-secondary">清空購物車</button>
+                <a href="./checkoutPage.html">
+                    <button onclick="" class="col-12 btn btn-success">結帳 $<span class="total1"></span></button>
+                </a>
+            </div>
+            <br>
+        </div>
+    </div>
+    <!-- /購物車 -->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -278,29 +323,37 @@
         let map;
 
         function initMap() {
-            var position = {
-                lat: 24.1504763,
-                lng: 120.6510009
-            };
-            map = new google.maps.Map(document.getElementById("map"), {
-                // 中心點位置
-                center: position,
+            fetch(`http://localhost:8080/api/storelocation`, {
+                method: "GET"
+            }).then(function (response) {
+                return response.text();
+            }).then(function (storeLocation) {
+                var position = {
+                    lat: Number(storeLocation.split(',')[0]),
+                    lng: Number(storeLocation.split(',')[1])
+                };
+                map = new google.maps.Map(document.getElementById("map"), {
+                    // 中心點位置
+                    center: position,
 
-                zoom: 18, // 地圖縮放比例 (0-20)
-                maxZoom: 20, // 使用者能縮放地圖的最大比例 
-                minZoom: 3, // 使用者能縮放地圖的最小比例
+                    zoom: 18, // 地圖縮放比例 (0-20)
+                    maxZoom: 20, // 使用者能縮放地圖的最大比例 
+                    minZoom: 3, // 使用者能縮放地圖的最小比例
 
-                streetViewControl: false, // 是否顯示右下角街景小人
-                mapTypeControl: false // 使用者能否切換地圖樣式：一般、衛星圖等
-            });
-            var marker = new google.maps.Marker({
-                position: position,
-                map: map
+                    streetViewControl: false, // 是否顯示右下角街景小人
+                    mapTypeControl: false // 使用者能否切換地圖樣式：一般、衛星圖等
+                });
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map
+                });
+            }).catch((err) => {
+                console.log('取得店家經緯度錯誤');
             });
         }
     </script>
     <!--  -->
-    <script type="module">
+    <!-- <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js'
         // Add Firebase products that you want to use
         import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js'
@@ -316,57 +369,9 @@
         };
         initializeApp(firebaseConfig);
 
-        let loginBnt = document.getElementById("loginBnt");
-        setSignBntStatus();
-
-        function userSignOut() {
-            const auth = getAuth();
-            signOut(auth).then(() => {
-                signOutOK();
-            }).catch((error) => {
-                console.error(error);
-            });
-        }
-
-        function setSignBntStatus() {
-            const auth = getAuth();
-            const loginBnt = document.getElementById("loginBnt");
-            auth.onAuthStateChanged((user) => {
-                if (user) {
-                    loginBnt.innerText = "登出";
-                } else {
-                    loginBnt.innerText = "登入";
-                }
-            });
-        }
-
-        function signOutOK() {
-            Swal.fire({
-                icon: 'success',
-                title: "登出成功，謝謝",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
-
-        loginBnt.addEventListener("click", (e) => {
-            let signText = loginBnt.innerText;
-            if (signText === "登入") {
-                window.location.href = "login.html";
-            } else if (signText === "登出") {
-                userSignOut();
-                localStorage.removeItem('loginStatus');
-                setInterval(() => {
-                    window.location.reload();
-                }, 1500);
-                // localStorage.removeItem("userinfo");
-                // localStorage.removeItem("userToken");
-                // window.location.reload();
-            }
-        });
-
-    </script>
-    <script src="./js/orderPage.js"></script>
+    </script> -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="./js/orderPage.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
 </body>
 

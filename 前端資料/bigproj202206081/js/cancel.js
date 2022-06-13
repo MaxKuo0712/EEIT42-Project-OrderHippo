@@ -2,7 +2,9 @@
 // WebSocket
 let websocket = null;
 
-connWebSocket(JSON.parse(localStorage.getItem('userinfo')).USER_ID);
+if (JSON.parse(localStorage.getItem('userinfo'))) {
+  connWebSocket(JSON.parse(localStorage.getItem('userinfo')).USER_ID);
+}
 
 function connWebSocket(userInfo) {
   if ('WebSocket' in window) {
@@ -17,10 +19,12 @@ function closeWebSocket() {
 }
 
 window.onbeforeunload = () => {
-  closeWebSocket();
+  if (websocket) {
+    closeWebSocket();
+  }
 }
-
-if (localStorage.getItem('loginStatus')) {
+// if (localStorage.getItem('loginStatus')) {
+if (localStorage.getItem('userinfo')) {
   websocket.onmessage = (e) => {
     // console.log(e.data); 
     receiveMsg(e.data);
@@ -60,7 +64,8 @@ function receiveMsg(message) {
 }
 
 document.getElementById("bell").addEventListener("click", () => {
-  if (localStorage.getItem('loginStatus')) {
+  // if (localStorage.getItem('loginStatus')) {
+  if (localStorage.getItem('userinfo')) {
     let bellMsg = JSON.parse(localStorage.getItem('receiveMsg'));
 
     $("#bellInfo").empty();
@@ -99,7 +104,7 @@ document.getElementById("bell").addEventListener("click", () => {
 function addBellInfo(msg, orderID, paymentID, color) {
   console.log(color);
   $("#bellInfo").append(
-      `<li>
+    `<li>
     <div style="background-color: #FFFFDE;">
       <img src="./img/789.png" alt="logo" width="30" height="30" style="display: inline-block;">
     </div>
@@ -116,11 +121,11 @@ function addBellInfo(msg, orderID, paymentID, color) {
 var count = 10;
 var redirect = "index.html";
 function countDown() {
-    if(count >= 0){
-        document.getElementById("timer").innerHTML = count--;
-        setTimeout("countDown()", 1000);
-    }else{
-        window.location.href = redirect;
-    }
+  if (count >= 0) {
+    document.getElementById("timer").innerHTML = count--;
+    setTimeout("countDown()", 1000);
+  } else {
+    window.location.href = redirect;
+  }
 }
 countDown();

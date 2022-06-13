@@ -78,7 +78,7 @@ function userMailLogin(e) {
                             headers: { "content-Type": "application/json" },
                             body: JSON.stringify(queryResult)
                         }).then((e) => {
-                            localStorage.setItem('loginStatus', 'ok');
+                            // localStorage.setItem('loginStatus', 'ok');
                             welcomeToUse(userName);
                             setInterval(() => {
                                 window.location.href = "index.html"
@@ -108,7 +108,7 @@ function userGoogleLogin(e) {
             const token = credential.accessToken;
             const user = result.user;
             const userName = user.displayName;
-            localStorage.setItem('loginStatus', 'ok');
+            // localStorage.setItem('loginStatus', 'ok');
             addGoogleUserInfo(result);
         }).catch((error) => {
             const errorCode = error.code;
@@ -235,6 +235,12 @@ function addLocalstorage(userInfo) {
 }
 
 function setSignBntStatus() {
+    // if (localStorage.getItem('loginStatus')) {
+    //     setInterval(() => {
+    //         window.location.href = "index.html";
+    //     }, 1000); // 等待2秒導向回到登入頁面
+    // }
+
     const auth = getAuth();
     auth.onAuthStateChanged((user) =>{
         if (user) {

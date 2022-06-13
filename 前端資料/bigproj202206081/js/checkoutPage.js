@@ -20,7 +20,8 @@ window.onbeforeunload = () => {
   closeWebSocket();
 }
 
-if (localStorage.getItem('loginStatus')) {
+// if (localStorage.getItem('loginStatus')) {
+if (localStorage.getItem('userinfo')) {
   websocket.onmessage = (e) => {
     // console.log(e.data); 
     receiveMsg(e.data);
@@ -60,7 +61,8 @@ function receiveMsg(message) {
 }
 
 document.getElementById("bell").addEventListener("click", () => {
-  if (localStorage.getItem('loginStatus')) {
+  // if (localStorage.getItem('loginStatus')) {
+  if (localStorage.getItem('userinfo')) {
     let bellMsg = JSON.parse(localStorage.getItem('receiveMsg'));
 
     $("#bellInfo").empty();
@@ -284,8 +286,6 @@ for (let i = 0; i < inc.length; i++) {
 //使用優惠
 $(".discount").on("click", () => {
   let getDiscount = $("#getDiscount")[0].value;
-  // let userId = "iGImodKQRvQU1dYUfPfyM4HBD6r2";
-  // let token = "$2a$10$I9C00diMOlpiHLsgv.taueZ2wrJ1Ot8AfgFn05vMzUWld9EFSYn7q";
   let userId = JSON.parse(localStorage.getItem('userinfo')).USER_ID;
   let token = localStorage.getItem('userToken');
   if (getDiscount != "") {
@@ -325,42 +325,46 @@ totalDisplay();
 
 //按下結帳
 $(".orderFinish").on("click", () => {
-  if (!localStorage.getItem('loginStatus')) {
-    Swal.fire({
-      icon: 'warning',
-      title: "請先登入後再結帳",
-      showConfirmButton: false,
-      timer: 1500
-    });
-    setInterval(() => {
-      window.location.href = "login.html";
-    }, 1500); // 等待2秒導向回到登入頁面
-  } else {
-    let userId = JSON.parse(localStorage.getItem('userinfo')).USER_ID;
-    let token = localStorage.getItem('userToken');
-    if (getDiscount != "") {
-      fetch(`http://localhost:8080/api/${userId}/stores?token=${token}`,
-        {
-          method: "GET"
-        }).then(function (response) {
-          return response.json();
-        })
-        .then(function (storeinfo) {
-          if (storeinfo[0].STORE_OPEN_STATUS === true) {
-            checkOutFinal(userId, token);
-          } else {
-            Swal.fire({
-              icon: 'warning',
-              title: "現在還不是營業時間哦！",
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }
-        }).catch((err) => {
-          console.log('取得店家資訊錯誤');
-        });
-    }
-  }
+  let userId = JSON.parse(localStorage.getItem('userinfo')).USER_ID;
+  let token = localStorage.getItem('userToken');
+  checkOutFinal(userId, token);
+
+  // if (!localStorage.getItem('loginStatus')) {
+  //   Swal.fire({
+  //     icon: 'warning',
+  //     title: "請先登入後再結帳",
+  //     showConfirmButton: false,
+  //     timer: 1500
+  //   });
+  //   setInterval(() => {
+  //     window.location.href = "login.html";
+  //   }, 1500); // 等待2秒導向回到登入頁面
+  // } else {
+  //   let userId = JSON.parse(localStorage.getItem('userinfo')).USER_ID;
+  //   let token = localStorage.getItem('userToken');
+  //   if (getDiscount != "") {
+  //     fetch(`http://localhost:8080/api/${userId}/stores?token=${token}`,
+  //       {
+  //         method: "GET"
+  //       }).then(function (response) {
+  //         return response.json();
+  //       })
+  //       .then(function (storeinfo) {
+  //         if (storeinfo[0].STORE_OPEN_STATUS === true) {
+  //           checkOutFinal(userId, token);
+  //         } else {
+  //           Swal.fire({
+  //             icon: 'warning',
+  //             title: "現在還不是營業時間哦！",
+  //             showConfirmButton: false,
+  //             timer: 1500
+  //           });
+  //         }
+  //       }).catch((err) => {
+  //         console.log('取得店家資訊錯誤');
+  //       });
+  //   }
+  // }
 })
 
 function checkOutFinal(userId, token) {

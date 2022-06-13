@@ -311,24 +311,32 @@
         let map;
 
         function initMap() {
-            var position = {
-                lat: 24.1504763,
-                lng: 120.6510009
-            };
-            map = new google.maps.Map(document.getElementById("map"), {
-                // 中心點位置
-                center: position,
+            fetch(`http://localhost:8080/api/storelocation`, {
+                method: "GET"
+            }).then(function (response) {
+                return response.text();
+            }).then(function (storeLocation) {
+                var position = {
+                    lat: Number(storeLocation.split(',')[0]),
+                    lng: Number(storeLocation.split(',')[1])
+                };
+                map = new google.maps.Map(document.getElementById("map"), {
+                    // 中心點位置
+                    center: position,
 
-                zoom: 18, // 地圖縮放比例 (0-20)
-                maxZoom: 20, // 使用者能縮放地圖的最大比例 
-                minZoom: 3, // 使用者能縮放地圖的最小比例
+                    zoom: 18, // 地圖縮放比例 (0-20)
+                    maxZoom: 20, // 使用者能縮放地圖的最大比例 
+                    minZoom: 3, // 使用者能縮放地圖的最小比例
 
-                streetViewControl: false, // 是否顯示右下角街景小人
-                mapTypeControl: false // 使用者能否切換地圖樣式：一般、衛星圖等
-            });
-            var marker = new google.maps.Marker({
-                position: position,
-                map: map
+                    streetViewControl: false, // 是否顯示右下角街景小人
+                    mapTypeControl: false // 使用者能否切換地圖樣式：一般、衛星圖等
+                });
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map
+                });
+            }).catch((err) => {
+                console.log('取得店家經緯度錯誤');
             });
         }
     </script>

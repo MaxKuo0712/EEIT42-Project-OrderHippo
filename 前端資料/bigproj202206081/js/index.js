@@ -1,8 +1,33 @@
+let shoppingCarList = [];
+
+if (localStorage.getItem('shoppingCarList')) {
+  shoppingCarList = JSON.parse(localStorage.getItem('shoppingCarList'));
+}
+
+localStorage.setItem('shoppingCarList', JSON.stringify(shoppingCarList));
+
+if (JSON.parse(localStorage.getItem('userinfo'))) {
+  let carUserID = JSON.parse(localStorage.getItem('userinfo')).USER_ID;
+  let shoppingCarList = JSON.parse(localStorage.getItem('shoppingCarList')) || [];
+  let userCarIndex = shoppingCarList.findIndex(carList => carList.USER_ID == carUserID);
+  let shoppingCar = null;
+  if (userCarIndex > -1) {
+    shoppingCar = shoppingCarList[userCarIndex].shoppingCar;
+    localStorage.setItem('item', JSON.stringify(shoppingCar));
+    localStorage.setItem('allTotal', shoppingCar.map(car => car.total).reduce((a,b) => a+b));
+  } else {
+    shoppingCar = [];
+    localStorage.setItem('item', JSON.stringify(shoppingCar));
+    localStorage.setItem('allTotal', 0);
+  }
+}
 /**------------------------------------------------------------------------------- */
 // WebSocket
 let websocket = null;
 
-connWebSocket(JSON.parse(localStorage.getItem('userinfo')).USER_ID);
+if (JSON.parse(localStorage.getItem('userinfo'))) {
+  connWebSocket(JSON.parse(localStorage.getItem('userinfo')).USER_ID);
+}
 
 function connWebSocket(userInfo) {
   if ('WebSocket' in window) {
@@ -17,10 +42,13 @@ function closeWebSocket() {
 }
 
 window.onbeforeunload = () => {
-  closeWebSocket();
+  if (websocket) {
+    closeWebSocket();
+  } 
 }
 
-if (localStorage.getItem('loginStatus')) {
+// if (localStorage.getItem('loginStatus')) {
+if (localStorage.getItem('userinfo')) {
   websocket.onmessage = (e) => {
     // console.log(e.data); 
     receiveMsg(e.data);
@@ -60,7 +88,8 @@ function receiveMsg(message) {
 }
 
 document.getElementById("bell").addEventListener("click", () => {
-  if (localStorage.getItem('loginStatus')) {
+  // if (localStorage.getItem('loginStatus')) {
+  if (localStorage.getItem('userinfo')) {
     let bellMsg = JSON.parse(localStorage.getItem('receiveMsg'));
 
     $("#bellInfo").empty();
@@ -204,8 +233,8 @@ function loadMeal(foodName) {
   foodsList = "";
   // let userId = "iGImodKQRvQU1dYUfPfyM4HBD6r2";
   // let token = "$2a$10$I9C00diMOlpiHLsgv.taueZ2wrJ1Ot8AfgFn05vMzUWld9EFSYn7q";
-  const token = localStorage.getItem('userToken');
-  const userId = JSON.parse(localStorage.getItem('userinfo')).USER_ID;
+  // const token = localStorage.getItem('userToken');
+  // const userId = JSON.parse(localStorage.getItem('userinfo')).USER_ID;
   if (foodName == "HOT") {
     var cId = "";
     var ishot = "true";
@@ -214,7 +243,8 @@ function loadMeal(foodName) {
     var ishot = "";
   }
   $.ajax({
-    url: `http://localhost:8080/api/${userId}/meals?mealcategoryid=${cId}&mealhot=${ishot}&token=${token}`,
+    // url: `http://localhost:8080/api/${userId}/meals?mealcategoryid=${cId}&mealhot=${ishot}&token=${token}`,
+    url: `http://localhost:8080/api/meals?mealcategoryid=${cId}&mealhot=${ishot}`,
     method: "GET",
     dataType: "json",
     success: (res, status) => {
@@ -281,6 +311,7 @@ function printMeal() {
 // 對話框
 // Get the modal
 var modal = document.getElementById("myModal");
+var modal1 = document.getElementById("cart");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
@@ -294,6 +325,9 @@ span.onclick = function () {
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
+  }
+  if (event.target == modal1) {
+    modal1.style.display = "none";
   }
 }
 
@@ -516,10 +550,11 @@ function loadImage() {
   ImageList = "";
   // let userId = "iGImodKQRvQU1dYUfPfyM4HBD6r2";
   // let token = "$2a$10$I9C00diMOlpiHLsgv.taueZ2wrJ1Ot8AfgFn05vMzUWld9EFSYn7q";
-  const token = localStorage.getItem('userToken');
-  const userId = JSON.parse(localStorage.getItem('userinfo')).USER_ID;
+  // const token = localStorage.getItem('userToken');
+  // const userId = JSON.parse(localStorage.getItem('userinfo')).USER_ID;
   $.ajax({
-    url: `http://localhost:8080/api/${userId}/messages?token=${token}`,
+    // url: `http://localhost:8080/api/${userId}/messages?token=${token}`,
+    url: `http://localhost:8080/api/messages`,
     method: "GET",
     dataType: "json",
     success: (res, status) => {
@@ -576,3 +611,38 @@ function refreshImage() {
 }
 // refreshImage();
 $(document).ready(loadImage());
+
+
+document.getElementById("checkoutBtn").addEventListener("click", () => {
+    fetch(`http://localhost:8080/api/storestatus`,
+      {
+        method: "GET"
+      }).then(function (response) {
+        return response.text();
+      })
+      .then(function (storeOpenStatus) {
+        console.log(storeOpenStatus);
+        if (storeOpenStatus === 'true') {
+          // if (!localStorage.getItem('loginStatus')) {
+          if (!localStorage.getItem('userinfo')) {
+            Swal.fire({
+              icon: 'warning',
+              title: "請先登入後再結帳",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          } else {
+            window.location.href = 'checkoutPage.html';
+          }
+        } else {
+          Swal.fire({
+            icon: 'warning',
+            title: "現在還不是營業時間哦！",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      }).catch((err) => {
+        console.log('取得店家資訊錯誤');
+      });
+});
