@@ -104,7 +104,7 @@ select orders.ORDER_ID, orders.ORDER_STATUS,
 	END as 'ORDER_STATUS_NAME',
 	userinfo.USER_NAME, userinfo.USER_PHONE, 
 	GROUP_CONCAT(CONCAT(meal.MEAL_NAME, ' * ', ordersdetail.ORDER_MEAL_QTY) SEPARATOR ', ') as 'MEAL_ORDER_QTY',
-	CONCAT('$', orders.ORDERS_PRICE) as 'ORDERS_PRICE',
+	CONCAT('$', orders.ORDERS_PRICE) as 'ORDERS_PRICE', orders.ORDER_DESC,
 	orders.CREATE_TIME
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as ordersdetail on ordersdetail.ORDER_ID = orders.ORDER_ID
