@@ -11,4 +11,7 @@ public interface VOrderDisplayService {
 	
 	// 查詢 By 訂單狀態
 	public List<VOrderDisplayBean> getByOrderstatus(String orderStatus);
+	
+	//查詢by UserID + 訂單狀態
+	public List<VOrderDisplayBean> getByUserIDAndOrderStatus(String userid, String orderstatus);
 }

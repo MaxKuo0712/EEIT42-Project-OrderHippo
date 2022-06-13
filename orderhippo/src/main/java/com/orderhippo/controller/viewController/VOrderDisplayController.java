@@ -41,6 +41,7 @@ public class VOrderDisplayController {
 	@GetMapping(path = "/{requestID}/vorderdisplay")
 	public Object getAllVOrderDisplays(
 			@PathVariable String requestID,
+			@RequestParam(name = "userid", required = false) String userid,
 			@RequestParam(name = "orderstatus", required = false) String orderStatus,
 			@RequestParam(name = "token", required = true) String realHashToken) {
 		
@@ -51,7 +52,10 @@ public class VOrderDisplayController {
 		boolean verifyResult = ProjectUtils.verifyToken(realHashToken, dbToken);
 		
 		if (verifyResult) {
-			if (orderStatus != null && orderStatus.trim().length() != 0) {
+			if (orderStatus != null && orderStatus.trim().length() != 0 && 
+					userid != null && userid.trim().length() != 0) {
+				return vOrderDisplayService.getByUserIDAndOrderStatus(userid, orderStatus);
+			} else if (orderStatus != null && orderStatus.trim().length() != 0) {
 				return vOrderDisplayService.getByOrderstatus(orderStatus);
 			} else {
 				return vOrderDisplayService.getAllOrderDisplay();

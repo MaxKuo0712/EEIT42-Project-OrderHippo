@@ -59,10 +59,16 @@ public class StoreController {
 		}
 	}
 
-	@ApiOperation("查詢店家資料")
+	@ApiOperation("查詢店家開店狀態")
 	@GetMapping("/storestatus")
 	public Object getStoreOpenStatus() {
 			return storeInfoService.getAllStoreInfo().get(0).getStoreopenstatus();
+	}
+	
+	@ApiOperation("查詢店家經緯度")
+	@GetMapping("/storelocation")
+	public Object getStoreLocation() {
+			return storeInfoService.getAllStoreInfo().get(0).getStorelocation();
 	}
 	
 	@ApiOperation("新增店家資料")

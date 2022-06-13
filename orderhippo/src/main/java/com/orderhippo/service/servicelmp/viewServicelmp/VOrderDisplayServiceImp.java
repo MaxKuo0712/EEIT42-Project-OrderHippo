@@ -41,4 +41,15 @@ public class VOrderDisplayServiceImp implements VOrderDisplayService {
 			return null;
 		}
 	}
+
+	@Override
+	public List<VOrderDisplayBean> getByUserIDAndOrderStatus(String userid, String orderstatus) {
+		List<VOrderDisplayBean> result = vOrderDisplayRepository.findByUseridAndOrderstatus(userid, orderstatus);
+		
+		if (!result.isEmpty()) {
+			return result;
+		} else {
+			return null;
+		}
+	}
 }

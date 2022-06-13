@@ -13,6 +13,9 @@ public class VOrderDisplayBean {
 	@Id
 	@Column(name = "ORDER_ID")
 	private String orderid;
+
+	@Column(name = "USER_ID")
+	private String userid;
 	
 	@Column(name = "ORDER_STATUS", columnDefinition = "ENUM")
 	private String orderstatus;
@@ -45,6 +48,14 @@ public class VOrderDisplayBean {
 
 	public void setOrderid(String orderid) {
 		this.orderid = orderid;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 	public String getOrderstatus() {
