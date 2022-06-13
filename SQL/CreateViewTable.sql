@@ -31,6 +31,10 @@ where orders.ORDER_STATUS = 3 and meal.MEAL_STATUS = true
 group by meal.MEAL_NAME, meal.MEAL_PRICE
 order by sum(detail.ORDER_MEAL_QTY), meal.MEAL_PRICE;
 
+select * from ORDERS 
+
+o  where USER_ID = 'cfEW2uR3qHhnq197RdOgbZ7VcGR2'
+
 /*select meal.MEAL_NAME, meal.MEAL_PRICE, count(*) as 'COUNT'
 from ORDERS as orders
 	inner join ORDER_MEALDETAIL as detail on detail.ORDER_ID = orders.ORDER_ID
@@ -95,7 +99,7 @@ order by round((userGanderCount.GENDER_COUNT/userqty.count)*100, 2) desc;
 
 -- 訂單頁面顯示 -- 改MEAL_PRICE改成折扣後價格 -- 加上以參數搜尋
 CREATE or REPLACE view V_ORDER_DISPLAY as
-select orders.ORDER_ID, orders.ORDER_STATUS,
+select orders.ORDER_ID, orders.USER_ID, orders.ORDER_STATUS,
 	CASE
 		WHEN orders.ORDER_STATUS = 1 THEN '未確認訂單'
 		WHEN orders.ORDER_STATUS = 2 THEN '已確認訂單'
