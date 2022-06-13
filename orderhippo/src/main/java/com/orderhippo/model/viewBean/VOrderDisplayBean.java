@@ -30,6 +30,9 @@ public class VOrderDisplayBean {
 	@Column(name = "ORDERS_PRICE", columnDefinition = "VARBINARY")
 	private String ordersprice;
 	
+	@Column(name = "ORDER_DESC", columnDefinition = "longtext")
+	private String orderdesc;
+	
 	@Column(name = "CREATE_TIME")
 	private java.util.Date createtime;
 	
@@ -82,6 +85,14 @@ public class VOrderDisplayBean {
 
 	public void setOrdersprice(String ordersprice) {
 		this.ordersprice = ordersprice;
+	}
+
+	public String getOrderdesc() {
+		return orderdesc;
+	}
+
+	public void setOrderdesc(String orderdesc) {
+		this.orderdesc = orderdesc;
 	}
 
 	public java.util.Date getCreatetime() {

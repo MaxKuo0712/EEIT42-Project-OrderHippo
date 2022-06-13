@@ -17,7 +17,8 @@ public class VSaleRankBean {
 	@Column(name = "MEAL_PRICE")
 	private Integer mealprice;
 	
-	@Column(name = "COUNT", columnDefinition = "BIGINT")
+	@Column(name = "COUNT", columnDefinition = "decimal")
+//	@Column(name = "COUNT", columnDefinition = "bigint")
 	private Integer count;
 
 	public String getMealname() {
