@@ -38,8 +38,8 @@ public class StoreCouponBean {
 	private String storeid;
 	
 	@JsonProperty("COUPON_DESC")
-	@Column(name = "COUPON_DESC", columnDefinition="LONGTEXT")
-	private String coupondesc;
+	@Column(name = "COUPON_DESC")
+	private Double coupondesc;
 	
 	@ApiModelProperty(hidden = true)
 	@JsonProperty("CREATE_ID")
@@ -100,11 +100,11 @@ public class StoreCouponBean {
 		this.storeid = storeid;
 	}
 
-	public String getCoupondesc() {
+	public Double getCoupondesc() {
 		return coupondesc;
 	}
 
-	public void setCoupondesc(String coupondesc) {
+	public void setCoupondesc(Double coupondesc) {
 		this.coupondesc = coupondesc;
 	}
 

@@ -31,7 +31,6 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-//@CrossOrigin(origins = "http://127.0.0.1:8080")
 public class MealController {
 	
 	@Autowired
@@ -73,6 +72,21 @@ public class MealController {
 			}
 		} else {
 			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@ApiOperation("查詢餐點資料(mealstatus = true) by 餐點種類ID or 熱門 or All")
+	@GetMapping("/meals")
+	public Object getAllOpenMeals(
+			@RequestParam(name = "mealcategoryid", required = false) String mealcategoryId,
+			@RequestParam(name = "mealhot", required = false) Boolean mealHot) {
+
+		if (mealcategoryId != null && mealcategoryId.trim().length() > 0) {
+			return mealService.getMealByMealCategoryID(mealcategoryId);
+		} else if (mealHot != null) {
+			return mealService.getByMealhot(mealHot);
+		} else {
+			return mealService.getAllMeal();
 		}
 	}
 	

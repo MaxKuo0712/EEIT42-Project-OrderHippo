@@ -40,7 +40,7 @@ public class StoreController {
 	@Autowired
 	private StoreInfoService storeInfoService;
 	
-	@ApiOperation("查詢所有店家資料")
+	@ApiOperation("查詢店家資料")
 	@GetMapping("/{requestID}/stores")
 	public Object getAllStores(
 			@PathVariable String requestID,
@@ -57,6 +57,12 @@ public class StoreController {
 		} else {
 			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@ApiOperation("查詢店家資料")
+	@GetMapping("/storestatus")
+	public Object getStoreOpenStatus() {
+			return storeInfoService.getAllStoreInfo().get(0).getStoreopenstatus();
 	}
 	
 	@ApiOperation("新增店家資料")

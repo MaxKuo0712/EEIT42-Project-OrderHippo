@@ -27,7 +27,7 @@ import com.orderhippo.utils.ProjectUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags = "店家公告訊息API")
+@Api(tags = "店家廣告訊息API")
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
@@ -43,7 +43,7 @@ public class StoreMessageController {
 	private StoreInfoService storeInfoService;
 	
 	// 新增單筆 Message
-	@ApiOperation("新增單筆店家訊息")
+	@ApiOperation("新增單筆店家廣告訊息")
 	@PostMapping(path="/{requestID}/message")
 	public Object addMessage(
 			@PathVariable String requestID,
@@ -70,7 +70,7 @@ public class StoreMessageController {
 	
 	
 	// 查詢Message By StoreID 或 MessageID 或 ALL
-	@ApiOperation("查詢店家訊息 by StoreID 或 MessageID 或 ALL")
+	@ApiOperation("查詢店家廣告訊息 by StoreID 或 MessageID 或 ALL")
 	@GetMapping(path="/{requestID}/messages")
 	public Object getMessages(
 			@PathVariable String requestID,
@@ -95,6 +95,13 @@ public class StoreMessageController {
 		} else {
 			return new ResponseEntity<String>("權限不足", HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	// 查詢店家廣告訊息 ALL Open
+	@ApiOperation("查詢店家廣告訊息 ALL Open")
+	@GetMapping(path="/messages")
+	public Object getAllOpenMessages() {
+		return storeMessageService.getAllmessages();
 	}
 	
 	
@@ -123,7 +130,7 @@ public class StoreMessageController {
 	}
 	
 	// 刪除單筆店家資訊
-	@ApiOperation("刪除店家訊息")
+	@ApiOperation("刪除店家廣告訊息")
 	@DeleteMapping(path = "/{requestID}/message")
 	public Object removeMessage(
 			@PathVariable String requestID,
