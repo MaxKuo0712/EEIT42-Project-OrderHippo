@@ -283,7 +283,7 @@ create table STORE_COUPON (
 	COUPON_ID varchar(100) DEFAULT(CONCAT('C', DATE_FORMAT(CURRENT_DATE(),'%Y%m'), '_', REPLACE(UUID(),'-',''))) UNIQUE NOT NULL,
 	COUPON_NAME varchar(100) UNIQUE not null,
 	STORE_ID varchar(100) not null,
-	COUPON_DESC LONGTEXT not null,
+	COUPON_DESC DOUBLE not null,
 	CREATE_ID varchar(100) not null,
 	CREATE_TIME datetime default (sysdate()) not null,
 	REVISE_TIME datetime default null,
