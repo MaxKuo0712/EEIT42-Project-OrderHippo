@@ -1,2 +1,2 @@
 # EEIT42-Project-OrderHippo
-<img width="1439" alt="截圖 2022-06-12 上午9 39 33" src="https://user-images.githubusercontent.com/68499661/173210574-57d639b6-6448-43e1-a615-6a90db5cea96.png">
+<img width="1552" alt="截圖 2022-06-12 上午11 35 02" src="https://user-images.githubusercontent.com/68499661/173815614-914b8e7f-66b1-4e35-bb55-8c83197d5227.png">
