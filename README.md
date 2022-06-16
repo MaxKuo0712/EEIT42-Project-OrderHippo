@@ -13,3 +13,5 @@
 * 在整體網站開發上是使用Swagger來提供可即時更新及測試API文件，以利前端開發時查看及測試API。
 
 <img width="1436" alt="截圖 2022-06-15 下午7 21 15" src="https://user-images.githubusercontent.com/68499661/173815781-1e9c75bb-b408-4a88-83f0-d7df50061f66.png">
+
+<img width="827" alt="截圖 2022-06-16 下午4 43 43" src="https://user-images.githubusercontent.com/68499661/174030838-3f3e3d40-f3a9-4032-bf0e-b90a20f54099.png">
