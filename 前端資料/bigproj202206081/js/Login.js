@@ -79,7 +79,7 @@ function userMailLogin(e) {
                             body: JSON.stringify(queryResult)
                         }).then((e) => {
                             // localStorage.setItem('loginStatus', 'ok');
-                            welcomeToUse(userName);
+                            welcomeToUse(JSON.parse(localStorage.getItem('userinfo')).USER_NAME);
                             setInterval(() => {
                                 window.location.href = "index.html"
                             }, 800); // 等待2秒導向
@@ -235,21 +235,21 @@ function addLocalstorage(userInfo) {
 }
 
 function setSignBntStatus() {
-    // if (localStorage.getItem('loginStatus')) {
-    //     setInterval(() => {
-    //         window.location.href = "index.html";
-    //     }, 1000); // 等待2秒導向回到登入頁面
-    // }
+    if (localStorage.getItem('userinfo')) {
+        setInterval(() => {
+            window.location.href = "index.html";
+        }, 1000); // 等待2秒導向回到登入頁面
+    }
 
-    const auth = getAuth();
-    auth.onAuthStateChanged((user) =>{
-        if (user) {
-            // welcomeToUse(JSON.parse(localStorage.getItem('userinfo')).USER_NAME);
-            setInterval(() => {
-                window.location.href = "index.html";
-            }, 1000); // 等待2秒導向回到登入頁面
-        }
-    });
+    // const auth = getAuth();
+    // auth.onAuthStateChanged((user) =>{
+    //     if (user) {
+    //         // welcomeToUse(JSON.parse(localStorage.getItem('userinfo')).USER_NAME);
+    //         setInterval(() => {
+    //             window.location.href = "index.html";
+    //         }, 1000); // 等待2秒導向回到登入頁面
+    //     }
+    // });
     // if (localStorage.getItem('userToken')) {
     //     alreadyLogin();
     //     setInterval(() => {

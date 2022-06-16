@@ -13,8 +13,11 @@ if (JSON.parse(localStorage.getItem('userinfo'))) {
   let shoppingCar = null;
   if (userCarIndex > -1) {
     shoppingCar = shoppingCarList[userCarIndex].shoppingCar;
-    localStorage.setItem('item', JSON.stringify(shoppingCar));
-    localStorage.setItem('allTotal', shoppingCar.map(car => car.total).reduce((a,b) => a+b));
+    if (shoppingCar && shoppingCar.length > 0) {
+      localStorage.setItem('item', JSON.stringify(shoppingCar));
+      localStorage.setItem('allTotal', shoppingCar.map(car => car.total).reduce((a,b) => a+b));
+    }
+   
   } else {
     shoppingCar = [];
     localStorage.setItem('item', JSON.stringify(shoppingCar));
@@ -126,7 +129,6 @@ document.getElementById("bell").addEventListener("click", () => {
 });
 
 function addBellInfo(msg, orderID, paymentID, color) {
-  console.log(color);
   $("#bellInfo").append(
       `<li>
     <div style="background-color: #FFFFDE;">
@@ -621,7 +623,6 @@ document.getElementById("checkoutBtn").addEventListener("click", () => {
         return response.text();
       })
       .then(function (storeOpenStatus) {
-        console.log(storeOpenStatus);
         if (storeOpenStatus === 'true') {
           // if (!localStorage.getItem('loginStatus')) {
           if (!localStorage.getItem('userinfo')) {
