@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .textBlock {
+            overflow: hidden;
+            text-overflow : ellipsis;
+            
+            white-space: nowrap; 
+        }
+        table{
+            table-layout:fixed; width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>123</h1>
+<table border="1">
+    <tbody>
+        <tr id="">
+            <td class="textBlock" style="width: 120px;">你你你你你你你你你你你你你你你你</td>
+            <td id="">222222222222222222222222</td>
+        </tr>
+        <tr>
+            <td class="textBlock" style="width: 120px;">你你你你你你你你你你你你你你你你</td>
+            <td>111111111111111111111111111111</td>
+        </tr>
+    </tbody>
+
+</table>
+<button onclick="ishidden()">收縮展開</button>
+    <script>  
+        $('td').on('click',function(){
+            if($(this).css('word-break')=='normal'){
+                $(this).css({//可以改變多個css
+             "word-break":"break-all",
+             'white-space': 'normal'
+
+            })
+            }else{
+                $(this).css({
+             "word-break":"normal",
+             'white-space': 'nowrap'
+            })
+            }          
+        });
+    </script>
+</body>
+
+</html>

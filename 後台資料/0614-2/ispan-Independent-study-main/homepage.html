@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Bootstrap </title>
+
+    <link rel="canonical" href="https://bootstrap5.hexschool.com/docs/5.1/examples/sidebars/">
+    <!--chart.js-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- fontawesome. -->
+    <script src="https://kit.fontawesome.com/365e4b1444.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap core CSS -->
+    <!--bootswatch-->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+    <link href="./style/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Bootstrap table-->
+
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.css">
+
+    <!--google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css">
+
+
+
+    <style>
+        /*先放榮庭CSS*/
+        #tablepayments {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            /* font-family:'cwTeXYen', sans-serif;
+            font-size:20px; */
+
+
+
+
+        }
+
+        section {
+            width:
+                100%;
+            height:
+                100%;
+        }
+
+        section div[id="Padright_navbar"] li[class="nav-item"] {
+            padding:
+                10px 10px;
+        }
+
+        section>div>div[class="row"] {
+            width:
+                100vw;
+            height:
+                100vh;
+        }
+
+        section div[id="padleft"]>div {
+            width:
+                100%;
+            height:
+                100%;
+        }
+
+        div[id="padleft"] div ul li {
+            height:
+                60px;
+        }
+
+        div[id="padleft"]>div>a>img {
+            height:
+                65px;
+        }
+
+        div[id="padleft"] ul li i {
+            padding:
+                10px;
+        }
+
+        div[id="padleft"]>div {
+            height:
+                100vh;
+        }
+
+        /* div[id="padleft"] {
+            padding:
+                0;
+            box-shadow:
+                8px 0px 5px 0px #AEAFB7;
+            z-index:
+                1;
+            height:
+                100vh;
+            ;
+        } */
+
+        div[id="padright"] {
+            height:
+                100vh;
+        }
+
+        #padright {
+            padding: 0px;
+            height:
+                100vh;
+        }
+
+        /* #Padright_navbar {
+            height:
+                8vh;
+        } */
+
+        div[id="pills-home"] div[class="row tab-content"] img {
+            height:
+                100px;
+
+        }
+
+        #pills-tabContent {
+            overflow-y: auto;
+            height: 90vh;
+            background: linear-gradient(to bottom, rgba(93, 121, 154, 0.271) 0%, rgb(255, 255, 255) 100%);
+        }
+
+        #bulletinBoard {
+
+            padding: 70px 10px 10px 10px;
+        }
+
+        #padright>div {
+            height: 100vh;
+        }
+
+        .content {
+            padding-top: 70px;
+        }
+
+        .content img {
+            object-fit: contain;
+            width: 100%;
+        }
+
+        #orderDiv {
+            width: 100%;
+        }
+
+        #mailUs {
+            color: black
+        }
+
+        #floatingTextarea {
+            height: 100px;
+        }
+
+        #quickLink>div {
+            margin-top: 50px;
+        }
+
+        #bulletinBoardinfoa {
+            /* width: 200px; */
+            /* height: 200px; */
+            background-color: #081925;
+            border-radius: 10px 10px 0px 0px;
+            border-right: 5px solid #081925;
+            border-left: 5px solid #081925;
+            border-bottom: 5px solid #081925;
+            padding: 0px;
+        }
+
+        #bulletinBoardinfoa-a {
+            width: 100%;
+            margin: 0px;
+            /* height: 40px; */
+            background-color: #081925;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        #bulletinBoardinfoa-b {
+            width: 100%;
+            height: 175px;
+
+            background-color: rgb(255, 255, 255);
+        }
+
+        #bulletinBoardinfoa-b>span {
+            font-size: 20px;
+        }
+
+        #bulletinBoardinfob {
+            background-color: #081925;
+            border-radius: 10px 10px 0px 0px;
+            border-right: 5px solid #081925;
+            border-left: 5px solid #081925;
+            border-bottom: 5px solid #081925;
+            padding: 0px;
+        }
+
+        #bulletinBoardinfob-a {
+            width: 100%;
+            margin: 0px;
+            /* height: 20px; */
+            background-color: #081925;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        #bulletinBoardinfob-b {
+            width: 100%;
+            height: 175px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #bulletinBoardinfoc {
+            background-color: #081925;
+            border-radius: 10px 10px 0px 0px;
+            border-right: 5px solid #081925;
+            border-left: 5px solid #081925;
+            border-bottom: 5px solid #081925;
+            padding: 0px;
+        }
+
+        #bulletinBoardinfoc-a {
+            width: 100%;
+            margin: 0px;
+            /* height: 20px; */
+            background-color: #081925;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        #bulletinBoardinfoc-b {
+            width: 100%;
+            height: 175px;
+            background-color: rgb(255, 255, 255);
+
+        }
+
+
+
+        /*營業開關*/
+        :root {
+            --switch-width: 50px;
+            --switch-height: 30px;
+            --circle-size: 22px;
+            --circle-padding: 3px;
+            --circle-bg: #fff;
+            --circle-on-bg: #fff;
+            --switch-bg: #c9c9c9;
+            --switch-on-bg: #4cd864;
+        }
+
+
+        .switch {
+            width: var(--switch-width);
+            height: var(--switch-height);
+            border-radius: 100px;
+            cursor: pointer;
+            background: var(--switch-bg);
+            display: flex;
+            position: relative;
+            align-items: center;
+            transition: all 0.5s;
+        }
+
+        .switch::before {
+            content: "";
+            display: block;
+            background: var(--circle-bg);
+            width: var(--circle-size);
+            height: var(--circle-size);
+            border-radius: 50%;
+            position: absolute;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            left: var(--circle-padding);
+            -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            -moz-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            -ms-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            -o-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .switch-input {
+            display: none;
+        }
+
+        .switch-input:checked+.switch {
+            background: var(--switch-on-bg);
+        }
+
+        .switch-input:checked+.switch::before {
+            background: var(--circle-on-bg);
+            left: calc((var(--switch-width) - var(--circle-size)) - var(--circle-padding));
+        }
+
+        /*營業開關結束*/
+
+        /* 營養成分表*/
+        .table-box {
+            margin: 100px auto;
+            width: 1024px;
+        }
+
+        /* 卷軸寬度 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background-color: transparent;
+        }
+
+        /* 卷軸顏色 */
+        ::-webkit-scrollbar-thumb {
+            background-color: #27314d;
+        }
+
+        #pills-nutrientContent {
+            width: 100%;
+            border-spacing: 0px;
+            border-collapse: collapse;
+        }
+
+        #pills-nutrientContent caption {
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 50px;
+        }
+
+        #pills-nutrientContent th,
+        #pills-nutrientContent td {
+            height: 20px;
+            text-align: center;
+            border: 1px solid gray;
+        }
+
+        #pills-nutrientContent thead {
+            color: white;
+            background-color: #38F;
+        }
+
+        #pills-nutrientContent tbody {
+            display: block;
+            width: calc(100% + 8px);
+            /*這裡的8px是卷軸的寬度*/
+            height: 500px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #pills-nutrientContent tfoot {
+            background-color: #71ea71;
+        }
+
+        #pills-nutrientContent thead tr,
+        #pills-nutrientContent tbody tr,
+        #pills-nutrientContent tfoot tr {
+            box-sizing: border-box;
+            table-layout: fixed;
+            display: table;
+            width: 100%;
+        }
+
+        #pills-nutrientContent tbody tr:nth-of-type(odd) {
+            background: #EEE;
+        }
+
+        #pills-nutrientContent tbody tr:nth-of-type(even) {
+            background: #FFF;
+        }
+
+        #pills-nutrientContent tbody tr td {
+            border-bottom: none;
+        }
+
+        #pills-nutrientContent {
+            margin-top: 10px;
+        }
+
+        #nutrientContentsearch {
+            left: 50%;
+            position: relative;
+            -webkit-transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-style: none;
+            border-radius: 20px;
+            padding: 10px;
+            background-color: #081925;
+            outline: none;
+            transition-duration: 500ms;
+            cursor: pointer;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjExR/NCNwAAAWpJREFUWEfNljFOxDAQRbehoKDnIjTcgYtwAHpOwhE4BA3Vig6Je9ABYZ60kZbVc5xkifRHelrleRzP2rGT3TAM0ahMQmUSKpNQmYTKJFQmoTIJlUmonMFlcV88FW/F5+GXazzt1m8xKjvcFh/FVNBOnvVfhMoJHorvgtgXzNZNcXX45RpPkEe+3Wc2KhswIwz6VTwWF4Xl4Wknj/yzZlKlwDM1LiuDW84p5BH0W/1MqhRYOoLla83cKeSNy01/y+miUmB3EksHGv8Y/a29i0qBI4RgI1h7C/IJ+lt7F5UC5xzBbrX2FuQT9Lf2LiqF+BmMfwbHgWJ3cfw5CEvfJD8FcVdY3ixUTrDkXTzGe3Fd2P26qOww92uGmaM4YnWRKmfAM8VssTs5QlrfgxR1VpEq/5mzilS5AauLVLkRq4pUuSHHRb4WlvMHlRtDkS/F85FrojIJlUmoTEJlEiqTUJmEyiRUJqEyh2H3Cz4WH1fC57RBAAAAAElFTkSuQmCC);
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI';
+            font-size: 15px;
+            color: transparent;
+            overflow: hidden;
+        }
+
+        #nutrientContentsearch:focus {
+            width: 200px;
+            cursor: text;
+            padding-left: 40px;
+            color: #A0A0A0;
+        }
+
+        #nutrientContentsearch:hover,
+        #nutrientContentsearch:focus {
+            background-color: #FFFFFF;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJTSURBVFiF7ZdNSxtRFIafM5PgJGqXxXy4DIziJhBdFLrwnyi4cym40S4ClkJ/g2B/Qv+BC0s3CtkIDWYZasWtXxEzebswQxGt3sk0Nou8cHfnPTycc+fOOSaJUZb3vwFe0hgwrcaAaTUGTKuRB8wMYrLZ2dxEd3rVPC2aqAoqBi0ZDfXs8DZzsad2++ZfAFrSP0m+NPdO4gtQeSasZcbK9c8f39PAQcIW50vzmxIHQEXQkGzdU2+pc6c3nnpLkq0LGkBF4iBfmt9MC+hcwX7lDgBhfOycTu5IR3ePElotGxSvthFbgJnxPlUlJb14KJdzQSE8CQqhgmJYd/EExbAeFEIFhfCEcjnn4nnqOLV4oju9Sr+tndPJHRdP53RyJ2533z+QnADN0yIAst2n2vqUpKM7ZLsP/EMDFFUAn+gwSfI4PvYPIidA9Z+U6641kySP4/X8k/Ss3CoILYB8RmGS5HF87B9EbhU0GgARfqK7FMfH/kHkBtiz+7tnWjOrZV08ZrUsprUH/mEB3mYu9oCWQTUoXm27eILi1bZBFWj1/cMDVLt9Y8YK0ENs5Upz9b9V0qyWzZXm6ogPAF6PjTSDQ6Jh4f5frE+AJ2gg2/WJDq+71sxnFEb4i5jW+pWL1fS7/vLl+fHZ0AHvId2mGa/HRs/jMxCmgUwMCO7z4NTbhZkoE+2ngRwIMInSQg595L88Pz7zu/4y0ATCKBPtT71dmHH1v8pOkgby1ZamR5DZ6KuL71W3uj+Q9k3SLxfP0D+StBr5vXgMmFZjwLQaA6bVyAP+BkJqfmMbSKF/AAAAAElFTkSuQmCC);
+        }
+
+        .div1 {
+            position: absolute;
+            left: 0px;
+            top: 45px;
+            width: 50px;
+            height: 5px;
+        }
+    </style>
+    <!-- 分析資料表 直線 -->
+
+    <!-- 分析資料表 圓餅 -->
+
+    <link rel="stylesheet" href="./style/mystyleNew.css">
+    <!-- <link rel="stylesheet" href="./style/mystyle.css"> -->
+</head>
+
+<body class="text-center" style="line-height: 100vh;">
+    <!-- 整塊板子 -->
+    <section style="width: 6rem; height: 6rem;" class="spinner-border text-secondary  " role="status">
+        <div class="conatiner visually-hidden ">
+            <div class="row" style="margin: 0px;">
+                <!-- 畫面比例 :2 導覽nav-->
+                <div id="padleft" class="col-md-2">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark ">
+                        <a id="orderhippo"
+                            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <img src="./img/456.png" alt="我不見了">
+                            <span class="fs-4">OrderHippo</span>
+                        </a>
+                        <hr>
+                        <ul class="nav nav-pills flex-column mb-auto btn  " id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white active bg-transparent text-start" data-bs-toggle="pill"
+                                    data-bs-target="#pills-home" role="tab" aria-controls="pills-home"
+                                    aria-selected="true">
+                                    <i class="fa-solid fa-house"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">首頁</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a id="test111" class="nav-link text-white bg-transparent text-start"
+                                    data-bs-toggle="pill" data-bs-target="#pills-menu" role="tab"
+                                    aria-controls="pills-menu" aria-selected="false">
+                                    <i class="fa-solid fa-utensils"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">菜單管理</p>
+
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
+                                    data-bs-target="#pills-analyze" role="tab" aria-controls="pills-analyze"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">分析資料</p>
+
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
+                                    data-bs-target="#pills-order" role="tab" aria-controls="pills-order"
+                                    aria-selected="false" id="ordera">
+                                    <i class="fa-solid fa-file-invoice"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">訂單管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
+                                    data-bs-target="#pills-nutrientContent" role="tab"
+                                    aria-controls="pills-nutrientContent" aria-selected="false">
+                                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">營養成份表</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
+                                    data-bs-target="#pills-member" role="tab" aria-controls="pills-member"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-circle-user"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">顧客管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
+                                    data-bs-target="#pills-broadcast" role="tab" aria-controls="pills-broadcast"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-bullhorn"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">廣播與優惠卷</p>
+                                </a>
+                            </li>
+                            <!-- #pills-reconciliationStatement -->
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
+                                    data-bs-target="#pills-reconciliationStatement" role="tab"
+                                    aria-controls="pills-reconciliationStatement" aria-selected="false">
+                                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">對帳單</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="dropdown">
+                            <!-- <a href="#"
+                                    class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                                    id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                                        class="rounded-circle me-2">
+                                    <strong>mdo</strong>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark text-small shadow"
+                                    aria-labelledby="dropdownUser1">
+                                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                                </ul> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- 畫面比例 :10 -->
+                <div id="padright" class="col-md-10">
+                    <div class="conatiner">
+                        <div>
+                            <div id="Padright_navbar" class="col-md-12">
+                                <!--上頭nav bar-->
+
+                                <nav class="navbar navbar-light  justify-content-end">
+                                    <ul class="nav justify-content-end nav-pills">
+
+                                        <li class="nav-item">
+                                            <input type="checkbox" id="switch" class="switch-input" />
+                                            <label for="switch" class="switch"> </label>
+                                        </li>
+                                        <!-- 聯絡資訊 -->
+                                        <div style="display:flex; height: 45px;" id="bell">
+                                            <div class="btn-group" role="group" id="bellBtn">
+                                                <button id="btnGroupDrop1" type="button" class="btn position-relative"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <!-- <image class="xiaoxi-icon " src="./img/bell.png"
+                                                        style="width: 20px; height: 20px">
+                                                    </image> -->
+                                                    <i class="fa-solid fa-bell"></i>
+                                                    <span id="bellValue"
+                                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">0
+                                                        <span class="visually-hidden">unread messages</span></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" id="bellInfo"
+                                                    style="width: 30px;">
+                                                    <!-- <li><a class="dropdown-item" href="#">Dropdown link</a></li> -->
+                                                    <!-- <li><a class="dropdown-item" href="#">Dropdown link</a></li> -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <li class="nav-item">
+                                            <!-- 寄信給我們 -->
+                                            <a href="mailto:eeit42orderhippo@gmail.com?subject=使用者意見回饋及問題聯絡設計團隊&body=您好,%0A我在使用 orderhippo餐廳管理介面遭遇了底下的問題，請協助處理～"
+                                                id="mailUs"> <i class="fa-solid fa-envelope"></i></a>
+
+                                        </li>
+                                        <li class="nav-item">
+                                            <!-- <a class="nav-link disabled">Disabled</a> -->
+                                            Order Hippo
+                                        </li>
+                                        <li class="nav-item">
+                                            <button class="btn btn-outline-dark" id="signOutbtn"
+                                                style="padding-top: 0px;">登出</button>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- 首頁 -->
+                            <div>
+                                <!-- 首頁 -->
+                                <div class="col-md-12 tab-content" id="pills-tabContent">
+                                    <!-- 首頁 -->
+
+                                    <div class="container tab-pane  show active" id="pills-home" role="tabpanel"
+                                        aria-labelledby="pills-home-tab">
+                                        <div id="quickLink" class="row tab-content">
+                                            <div class="col-md-3" data-tilt data-tilt-max="50">
+                                                <a id="test123"><img src="./img/group1.png" class="cav-box"></a>
+                                            </div>
+                                            <div class="col-md-3" data-tilt data-tilt-max="50">
+                                                <img src="./img/group2.png" class="cav-box">
+                                            </div>
+                                            <div class="col-md-3" data-tilt data-tilt-max="50">
+                                                <img src="./img/group3.png" class="cav-box">
+                                            </div>
+                                            <div class="col-md-3" data-tilt data-tilt-max="50">
+                                                <img src="./img/group4.png" class="cav-box">
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row" id="bulletinBoard">
+                                                <div id="bulletinBoardinfoa" class="col-md-3 m-3" data-tilt
+                                                    data-tilt-max="10">
+                                                    <div id="bulletinBoardinfoa-a">
+                                                        <h3 style="color:white;">銷售前三名</h3>
+                                                    </div>
+                                                    <div id="bulletinBoardinfoa-b" style="padding-top:23px ;"
+                                                        class="text-center">
+
+
+                                                        <span>第一名:<span id="vsalerankHomepage-fst"></span></span><br>
+                                                        <span>第二名:<span id="vsalerankHomepage-sed"></span></span><br>
+                                                        <span>第三名:<span id="vsalerankHomepage-thr"></span></span><br>
+                                                    </div>
+                                                </div>
+                                                <div id="bulletinBoardinfob" class="col-md-3 m-3" data-tilt
+                                                    data-tilt-max="10">
+                                                    <div id="bulletinBoardinfob-a">
+                                                        <h3 style="color:white;">訂單管理</h3>
+                                                    </div>
+                                                    <div id="bulletinBoardinfob-b" class="text-center">
+                                                        <h4 style="padding-top:23px ;">未完成訂單:<p id="ordercomranka"
+                                                                style="font-size: 50px;color:red;"></p>
+                                                        </h4>
+                                                        <!-- <h4 >已完成訂單:</h4><p id="ordercomrankb"></p> -->
+                                                    </div>
+                                                </div>
+                                                <div id="bulletinBoardinfoc" class="col-md-3 m-3" data-tilt
+                                                    data-tilt-max="10">
+                                                    <div id="bulletinBoardinfoc-a">
+                                                        <h3 id="nowMon" style="color:white;">月目前總營收</h3>
+                                                    </div>
+                                                    <div id="bulletinBoardinfoc-b" style="line-height:175px"
+                                                        class="text-center ">
+                                                        <span style="font-size:30px" id="vmonthreveueHompage"></span>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="row content">
+                                            <div class="col-md-6" data-tilt data-tilt-max="10"
+                                                style="width: 600px;margin-bottom: 75px;">
+                                                <h4><strong><i class="fa-solid fa-crown text-warning"></i>Top10
+                                                    </strong>熱銷餐點</h4>
+                                                <canvas class="Chart3"
+                                                    style="background-color: rgb(219, 223, 253); border-radius: 10px;"></canvas>
+                                            </div>
+                                            <div class="col-md-6" data-tilt data-tilt-max="10"
+                                                style="width: 600px;margin-bottom: 75px;">
+                                                <h4><strong>月營業額</strong></h4>
+                                                <canvas class="Chart4"
+                                                    style="background-color: rgb(255, 255, 255); border-radius: 10px;"></canvas>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- menu -->
+                                    <div class="container tab-pane " id="pills-menu" role="tabpanel"
+                                        aria-labelledby="pills-menu-tab">
+                                        <div class="row tab-content">
+                                            <!-- alert 1-->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                data-bs-backdrop="static">
+                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                    <div class="modal-content" style="border-right-width: 0px;">
+                                                        <div class=" modal-header my-color1">
+                                                            <span class="modal-title my-title-css-2"
+                                                                id="exampleModalLabel">新增菜單</span>
+                                                            <button type="button" class="btn"
+                                                                style="background-color:rgb(34, 46, 60) ;"
+                                                                data-bs-dismiss="modal" aria-label="Close"><i
+                                                                    class="fa-solid fa-x"
+                                                                    style="color:white;"></i></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div>
+                                                                <table style="width:100%;">
+                                                                    <tr>
+                                                                        <th colspan="2">餐點名稱 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"><input id="inputMealName"
+                                                                                type="text" class="my-input"
+                                                                                placeholder="請輸入餐點名稱...">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">餐點種類 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <select id="inputMealType"
+                                                                                name="mealtypevalue" style="width:40%;">
+                                                                                <option value="" disabled>請選擇種類...
+                                                                                </option>
+                                                                            </select>
+                                                                            <span id="check1">
+                                                                                熱門:
+                                                                                <input type="checkbox"
+                                                                                    id="mealHotCheck">
+                                                                            </span>
+                                                                            <span>
+                                                                                素食:
+                                                                                <input type="checkbox"
+                                                                                    id="mealveganCheck" value="false">
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">餐點圖檔 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="1">
+                                                                            <!-- 選取圖片的 input -->
+                                                                            <span>
+                                                                                <input id="uploadImage" type="file"
+                                                                                    accept="image/*">
+                                                                                <div id="makerUrl"></div>
+                                                                            </span>
+                                                                            <!-- 上傳按鈕 -->
+
+                                                                            <div>
+                                                                                <button
+                                                                                    class="my-append-btn my-right-radius my-left-radius"
+                                                                                    id="saveImageBtn"
+                                                                                    type="button">送出</button>
+                                                                            </div>
+                                                                            <!--還不能上傳圖檔-->
+                                                                            <!-- <input id="inputMealImage" type="button"
+                                                                                class="my-append-btn my-right-radius my-left-radius"
+                                                                                value="上傳"> -->
+                                                                        </td>
+                                                                        <td colspan="1">
+                                                                            <span style="float:right;">
+                                                                                <img id="preview-image"
+                                                                                    style="width: 150px;" />
+                                                                                <img id="showImage" src=""
+                                                                                    referrerpolicy="no-referrer"
+                                                                                    style="width: 150px;">
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">售價 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"><span><input id="inputMealPrice"
+                                                                                    type="number" class="my-input"
+                                                                                    placeholder="請輸入售價...">TWD</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>餐點食材 :
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <ol id="addIngredients">
+                                                                                <li id="examIngredients"
+                                                                                    style="display: none;">
+                                                                                    <input list="mealIngredients"
+                                                                                        name="ingredientsName"
+                                                                                        placeholder="請選擇食材..."
+                                                                                        style="width:55%;">
+                                                                                    <datalist id="mealIngredients">
+                                                                                        <!-- 讀取食材 -->
+                                                                                    </datalist>
+                                                                                    <input type="number"
+                                                                                        name="ingredientsGrams" min="0"
+                                                                                        placeholder="輸入克數"
+                                                                                        style="width:25%;"><span>(g)
+                                                                                        <button class="btn btn-light"
+                                                                                            onclick="javascript:ingredientsDelBtn(this)">
+                                                                                            <i class="fa-solid fa-trash"
+                                                                                                style="color: red;"></i>
+                                                                                        </button>
+
+                                                                                    </span>
+                                                                                </li>
+
+                                                                            </ol>
+                                                                            <div>
+                                                                                <span>
+                                                                                    <input
+                                                                                        class="my-append-btn my-right-radius my-left-radius"
+                                                                                        type="button"
+                                                                                        onclick="ingredientsAppendBtn()"
+                                                                                        value="新增欄位">
+
+                                                                                </span>
+                                                                                <span style="float:right;">
+                                                                                    <!-- <div style="text-align:right;"> -->
+                                                                                    <input
+                                                                                        class="my-append-btn my-right-radius my-left-radius"
+                                                                                        type="button"
+                                                                                        onclick="ingredientsOPA()"
+                                                                                        value="計算營養成份表">
+                                                                                    <!-- </div> -->
+                                                                                </span>
+                                                                            </div>
+
+                                                                            <span id="nutritionOperation"></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">餐點描述 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <textarea id="inputMealDesc"
+                                                                                style="width:100%" class="my-input"
+                                                                                rows="4"
+                                                                                placeholder="請輸入餐點描述..."></textarea>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer  my-color1">
+                                                            <div style="float:right;">
+                                                                <button id="add"
+                                                                    class="btn btn-light my-right-radius my-left-radius"
+                                                                    onclick="saveField()"><strong>儲存</strong> </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="myMenuTable">
+                                                <div class="container-fluid my-web-header">
+                                                    <div class="row">
+                                                        <div class=" col-4">
+                                                            <span class="my-title-css"><i
+                                                                    class="fa-solid fa-utensils"></i>
+                                                                菜單管理</span>
+                                                        </div>
+                                                        <!-- <div class=" col-5"></div> -->
+                                                        <div class="col-8">
+                                                            <span style="float:right;">
+                                                                <div class="my-btn-box">
+                                                                    <button type="button"
+                                                                        class=" my-btn-color my-left-radius appendMenu"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModal">
+                                                                        新增菜單
+                                                                    </button>
+
+                                                                    <input type="text" id="searchMenu"
+                                                                        class="my-search-css my-right-radius"
+                                                                        placeholder="搜尋餐點">
+                                                                    <button type="submit" id="menuBtn"
+                                                                        class=" my-btn-color my-btn-search my-right-radius">
+                                                                        <i class="fas fa-search"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <table border="0" id="tableMenu">
+                                                    <thead>
+
+                                                        <tr>
+                                                            <th class="my-td-width14" style="padding:10px">餐點名稱</th>
+                                                            <th class="my-td-width4">熱賣</th>
+                                                            <th class="my-td-width10" style="padding:10px">餐點種類</th>
+                                                            <th class="my-td-width10" style="padding:10px">餐點圖檔</th>
+                                                            <th class="my-td-width22" style="padding:10px">餐點食材</th>
+                                                            <th class="my-td-width10">售價</th>
+                                                            <th class="my-td-width22">餐點描述</th>
+                                                            <th class="my-td-width4">修改</th>
+                                                            <th class="my-td-width4">刪除</th>
+
+                                                        </tr>
+
+                                                    </thead>
+                                                    <tbody id="tableMenubody">
+
+                                                        <!-- <tr>
+                                                            <td class="my-td-width14">雞腿便當</td>
+                                                            <td class="my-td-width4"><span class="hidehot">HOT </span>
+                                                            </td>
+                                                            <td class="my-td-width10">便當類</td>
+                                                            <td class="my-td-width10">XXXXXX</td>
+                                                            <td class="my-td-width22 textBlock">
+                                                                土雞腿肉1盒干貝4顆永心鳳茶剝皮辣椒4條剝皮辣椒汁4匙水1500ml脆瓜條10條脆瓜汁4匙魚丸5顆貢丸5顆調味鹽適量麵關廟麵4片煮麵水適量鹽
+                                                            </td>
+                                                            <td class="my-td-width10">100.00TWD</td>
+                                                            <td class="my-td-width22 textBlock">
+                                                                雞腿也是相當大隻呢！！雞腿經特製醬汁滷至而成，帶有淡雅的鹹甜滋味，肉質紮實不乾柴，大口啃食整個超過癮！吃過就回味無窮呢😍
+                                                            </td>
+                                                            <td class="my-td-width4">
+                                                                <input type='button' value='修改' id='modifyMenuBtn'
+                                                                    data-bs-toggle='modal'
+                                                                    data-bs-target='#exampleModal'>
+                                                            </td>
+                                                            <td class="my-td-width4">
+                                                                <input type='button' value='刪除'
+                                                                    onclick='javascript:delField(this);'>
+                                                            </td>
+                                                        </tr> -->
+                                                        <!-- <tr>
+                                                            <td class="my-td-width14">三杯雞米便當</td>
+                                                            <td class="my-td-width4"><span class="">HOT </span> </td>
+
+                                                            <td class="my-td-width10">便當類</td>
+                                                            <td class="my-td-width10">YYYYYY</td>
+                                                            <td class="my-td-width22 textBlock">香煎豆皮 豆皮 2 片 三杯雞 帶骨雞肉塊500
+                                                                g 豆干 10 片 九層塔 適量 米酒 醬油 蠔油 香菇炒芹菜 鮮香菇 4 朵 芹菜 200 g 鹽</td>
+                                                            <td class="my-td-width10">85.00TWD</td>
+                                                            <td class="my-td-width22 textBlock">
+                                                                溫體雞肉扎實Q嫩，包覆著特製的醬汁鹹甜夠味！帶有淡雅的麻油香氣非常銷魂！會讓人忍不住一口接一口呢🥰</td>
+                                                            <td class="my-td-width4">
+                                                                <input type='button' value='修改' id='modifyMenuBtn'
+                                                                    data-bs-toggle='modal'
+                                                                    data-bs-target='#exampleModal'>
+                                                            </td>
+                                                            <td class="my-td-width4">
+                                                                <input type='button' value='刪除'
+                                                                    onclick='javascript:delField(this);'>
+                                                            </td>
+                                                        </tr> -->
+
+
+
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- order -->
+                                    <div class="container tab-pane " id="pills-order" role="tabpanel"
+                                        aria-labelledby="pills-order-tab">
+                                        <div class="row tab-content">
+                                            <div class="conatiner">
+                                                <div class=" bg-gradient">
+                                                    <div style="padding-top:75px ;">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h1 style="color:rgb(34, 46, 60)white;"><i
+                                                                        class="fa-solid fa-file-invoice"></i>訂單管理</h1>
+                                                            </div>
+                                                        </div>
+                                                        <div class=""></div>
+
+
+                                                        <div class="row">
+                                                            <div class="col-md-6 nav  nav-pills " role="tablist"
+                                                                aria-orientation="vertical">
+                                                                <button class="nav-link active link-dark"
+                                                                    id="preafterOrder" data-bs-toggle="pill"
+                                                                    data-bs-target="#v-pills-home" type="button"
+                                                                    role="tab" aria-controls="v-pills-home"
+                                                                    aria-selected="true">未確認訂單/已確認訂單</button>
+                                                                <p>|</p>
+                                                                <button class="nav-link link-dark" id="cancelOrder"
+                                                                    data-bs-toggle="pill"
+                                                                    data-bs-target="#v-pills-profile" type="button"
+                                                                    role="tab" aria-controls="v-pills-profile"
+                                                                    aria-selected="false">取消訂單</button>
+                                                                <p>|</p>
+                                                                <button class="nav-link link-dark" id="completeOrder"
+                                                                    data-bs-toggle="pill"
+                                                                    data-bs-target="#v-pills-messages" type="button"
+                                                                    role="tab" aria-controls="v-pills-messages"
+                                                                    aria-selected="false">已完成訂單</button>
+                                                                <p>|</p>
+                                                            </div>
+
+                                                            <div class="col-md-6  text-end"
+                                                                style="padding-right :50px; ;">
+                                                                <input id="searchOrder" type="text"
+                                                                    style="width: 150px;display:inline;"
+                                                                    class="form-control" placeholder="請輸入"
+                                                                    aria-label="Example text with button addon"
+                                                                    aria-describedby="button-addon1">
+                                                                <button class="btn btn-outline-secondary" type="button"
+                                                                    id="orderBtn">搜尋</button>
+
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+
+                                                    <div class="col-md-12 pt-2 ">
+                                                        <!--餐點名稱 會員姓名 餐點數量  餐點金額 訂單狀態-->
+                                                        <div class="tab-content" id="orderDiv" id="v-pills-tabContent">
+                                                            <div class="tab-pane fade show active" id="v-pills-home"
+                                                                role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                                                <div style="overflow: scroll; height: 300px;">
+                                                                    <table class="table table-hover table-light">
+                                                                        <thead class="table-dark">
+                                                                            <tr id="testtr">
+                                                                                <th scope="col">訂單狀態</th>
+                                                                                <th scope="col">會員姓名</th>
+                                                                                <th scope="col">電話</th>
+                                                                                <th scope="col">餐點名稱/餐點數量</th>
+                                                                                <th style="width: 170px;" scope="col">
+                                                                                    餐點備註</th>
+                                                                                <th scope="col">餐點總計金額</th>
+                                                                                <th scope="col">訂單建立時間</th>
+                                                                                <th scope="col">確認/取消</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="orderPreview">
+                                                                            <!-- <tr>
+                                                                                <td>未確認訂單</td>
+                                                                                <td>joe</td>
+                                                                                <td>0912345678</td>
+                                                                                <td>雞肉飯*6</td>
+                                                                                <td>100</td>
+                                                                                <td>年/月/日</td>
+                                                                                <td><button
+                                                                                        class="btn btn-primary">確認</button><button
+                                                                                        class="btn btn-danger">取消</button>
+                                                                                </td>
+                                                                            </tr> -->
+
+                                                                        </tbody>
+
+                                                                    </table>
+                                                                </div>
+                                                                <div style="overflow: scroll;height: 300px;">
+                                                                    <table class="table table-hover table-light">
+                                                                        <thead class="table-dark">
+                                                                            <tr>
+                                                                                <th scope="col">訂單狀態</th>
+                                                                                <th scope="col">會員姓名</th>
+                                                                                <th scope="col">電話</th>
+                                                                                <th scope="col">餐點名稱/餐點數量</th>
+                                                                                <th style="width: 170px;" scope="col">
+                                                                                    餐點備註</th>
+                                                                                <th scope="col">餐點總計金額</th>
+
+                                                                                <th scope="col">訂單建立時間</th>
+                                                                                <th scope="col">完成訂單</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="orderAfteview">
+                                                                            <!-- <tr>
+                                                                                <td>已確認訂單</td>
+                                                                                <td>2</td>
+                                                                                <td>0912345678</td>
+                                                                                <td>排骨麵*8</td>
+                                                                                <td>200</td>
+                                                                                <td><button
+                                                                                        class="btn btn-dark">列印</button>
+                                                                                </td>
+                                                                                <td>年/月/日</td>
+                                                                            </tr> -->
+
+                                                                        </tbody>
+
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="v-pills-profile"
+                                                                role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                                                <div style="overflow: scroll;height: 300px;">
+                                                                    <table class="table table-hover table-light">
+                                                                        <thead class="table-dark">
+                                                                            <tr>
+                                                                                <th scope="col">訂單狀態</th>
+                                                                                <th scope="col">會員姓名</th>
+                                                                                <th scope="col">電話</th>
+                                                                                <th scope="col">餐點名稱/餐點數量</th>
+                                                                                <th style="width: 170px;" scope="col">
+                                                                                    餐點備註</th>
+                                                                                <th scope="col">餐點總計金額</th>
+                                                                                <th scope="col">訂單取消時間</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="orderCancel">
+                                                                            <!-- <tr>
+                                                                                <td>取消訂單</td>
+                                                                                <td>1</td>
+                                                                                <td>0912345678</td>
+                                                                                <td>雞肉飯*6</td>
+                                                                                <td>100</td>
+                                                                                <td>年/月/日</td>
+                                                                            </tr> -->
+                                                                        </tbody>
+
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="v-pills-messages"
+                                                                role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                                                <div style="overflow: scroll;height: 300px;">
+                                                                    <table class="table table-hover table-light">
+                                                                        <thead class="table-dark">
+                                                                            <tr>
+
+                                                                                <th scope="col">訂單狀態</th>
+                                                                                <th scope="col">會員姓名</th>
+                                                                                <th scope="col">電話</th>
+                                                                                <th scope="col">餐點名稱/餐點數量</th>
+                                                                                <th style="width:170px;" scope="col">
+                                                                                    餐點備註</th>
+                                                                                <th scope="col">餐點總計金額</th>
+                                                                                <th scope="col">訂單完成時間</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="orderComplete">
+
+                                                                            <!-- <tr>
+                                                                                <td>完成訂單 </td>
+                                                                                <td>2</td>
+                                                                                <td>0912345678</td>
+                                                                                <td>排骨麵*8</td>
+                                                                                <td>200</td>
+                                                                                <td>年/月/日</td>
+                                                                            </tr> -->
+                                                                        </tbody>
+
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- broadcast -->
+                                    <div class="container tab-pane " id="pills-broadcast" role="tabpanel"
+                                        aria-labelledby="pills-broadcast-tab">
+                                        <h1><i class="fa-solid fa-bullhorn"></i>廣播與優惠卷</h1>
+                                        <div class="text-top">
+                                            <div class="input-group flex-nowrap" style="width:250px">
+
+                                                <input id="broadcastName" type="text" class="form-control"
+                                                    placeholder="廣播標題   " aria-label="Username"
+                                                    aria-describedby="addon-wrapping">
+                                                <div>
+                                                    <!-- 優惠卷 -->
+                                                    <button id="couponBtn" type="button" class="btn btn-warning"
+                                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                        優惠卷管理
+                                                    </button>
+
+                                                    <!-- 優惠卷Modal -->
+                                                    <div class="modal fade" id="staticBackdrop"
+                                                        data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="staticBackdropLabel">
+                                                                        優惠卷管理
+                                                                    </h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div>
+
+                                                                        <input type="hidden">
+                                                                        <p>名稱:</p><input type="text" id="couponName">
+                                                                        <p>折扣內容:</p><input type="number"
+                                                                            id="couponText">
+                                                                        <button class="btn btn-warning"
+                                                                            id="couponSave">修改</button>
+                                                                        <button class="btn btn-info"
+                                                                            id="couponInsert">新增</button>
+                                                                        <button class="btn btn-danger"
+                                                                            id="couponDelete">刪除
+                                                                        </button>
+
+                                                                    </div>
+                                                                    <table class="table table-warning">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>選擇</th>
+                                                                                <th style="display:none;">優惠卷id</th>
+
+                                                                                <th>優惠卷名稱</th>
+                                                                                <th>優惠卷內容</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody class="table table-white"
+                                                                            id="couponTbody">
+                                                                            <tr>
+                                                                                <td><input type="radio"
+                                                                                        name="couponRadio"
+                                                                                        class="form-check-input couponRadio">
+                                                                                </td>
+                                                                                <td style="display:none;">優惠卷id</td>
+                                                                                <td>COUPON_NAME</td>
+                                                                                <td>COUPON_DESC</td>
+
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><input type="radio"
+                                                                                        name="couponRadio"
+                                                                                        class="form-check-input couponRadio">
+                                                                                </td>
+                                                                                <td style="display:none;">優惠卷id</td>
+                                                                                <td>COUPON_NAME</td>
+                                                                                <td>COUPON_DESC</td>
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">退出</button>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="form-floating">
+                                                <textarea class="form-control" placeholder="Leave a comment here"
+                                                    id="broadcastText"></textarea>
+                                                <label for="floatingTextarea">請輸入廣播訊息</label>
+                                                <input type="hidden" id="broadcastimage">
+                                            </div>
+                                            <hr>
+                                            <div id="myDiv">
+                                                <label for="upload">選擇上傳圖檔</label>
+
+                                                <!-- 選取圖片的 input -->
+                                                <input id="upload" type="file" accept="image/*">
+                                                <p id="url"></p>
+                                                <img id="preview-img" style="width: 150px;"
+                                                    referrerpolicy="no-referrer" />
+                                                <img id="showImg" src="" referrerpolicy="no-referrer"
+                                                    style="width: 150px;">
+
+                                                <!-- 新增按鈕 -->
+                                            </div>
+
+                                            <div>
+                                                <button class="btn btn-secondary" id="broadcastInsert"
+                                                    type="button">新增</button>
+                                                <button class="btn btn-secondary" id="broadcastSave"
+                                                    type="button">修改</button>
+                                                <button class="btn btn-secondary" id="broadcastDelete"
+                                                    type="button">刪除</button>
+                                            </div>
+                                            <div class="" style="margin-top:50px">
+                                                <table id="broadcastTable" class="table table-dark">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col"></th>
+                                                            <th scope="col" style="display:none"></th>
+                                                            <th scope="col">廣告標題</th>
+                                                            <th scope="col">廣告內容</th>
+                                                            <th scope="col">廣告圖片</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table table-light" id="broadcastTbody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- member -->
+                                    <div class="container tab-pane " id="pills-member" role="tabpanel"
+                                        aria-labelledby="pills-member-tab">
+
+                                        <div class="container-fluid my-web-header">
+                                            <div class="row">
+                                                <div class=" col-9">
+                                                    <span class="my-title-css">
+                                                        <i class="fa-solid fa-circle-user"></i>
+                                                        顧客管理
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <span>
+                                                        <div class="my-search-box">
+                                                            <input type="text" id="searchMember"
+                                                                class="my-left-radius my-search-css"
+                                                                placeholder="搜尋顧客資訊">
+                                                            <button type="submit" id="memberBtn"
+                                                                class=" my-btn-color my-btn-search  my-right-radius">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <table id="tableMember">
+                                                <thead>
+                                                    <tr>
+                                                        <th>會員編號</th>
+                                                        <th>姓名</th>
+                                                        <th>性別</th>
+                                                        <th>電話</th>
+                                                        <th>電子郵件</th>
+                                                        <th>生日</th>
+                                                        <th>年齡</th>
+                                                        <!-- <th>地址</th> -->
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tableMemberbody">
+                                                    <tr>
+                                                        <td>會員編號</td>
+                                                        <td>姓名</td>
+                                                        <td>性別</td>
+                                                        <td>電話</td>
+                                                        <td>電子郵件</td>
+                                                        <td>生日</td>
+                                                        <td>年齡</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- nutrientContent -->
+                                    <div class="container tab-pane " id="pills-nutrientContent" role="tabpanel"
+                                        aria-labelledby="pills-nutrientContent-tab">
+                                        <h1><i class="fa-solid fa-magnifying-glass-chart"></i>營養成分表</h1>
+
+
+                                        <table class="table table-dark table-hover" id="ingredientsTable">
+                                            <thead>
+                                                <!-- <tr>
+                                                    <th>俗名</th>
+                                                    <th>食材分類</th>
+                                                    <th>食材描述</th>
+                                                    <th>熱量</th>
+                                                    <th>碳水化合物</th>
+                                                    <th>脂肪</th>
+                                                    <th>蛋白質</th>
+                                                </tr> -->
+                                            </thead>
+                                            <tbody class="table-light">
+
+                                            </tbody>
+                                            <tfoot>
+                                                <!-- 
+                                                <tr></tr>
+
+                                                <tr></tr> -->
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- analyze -->
+                                    <!--銷售統計 商品銷量:圓餅 消費者年齡範圍 銀收:折線圖-->
+                                    <div class="container tab-pane " style="font-family:'cwTeXYen', sans-serif;"
+                                        id="pills-analyze" role="tabpanel" aria-labelledby="pills-analyze-tab">
+                                        <h1 style="color:rgb(34, 46, 60)white; padding-top: 50px;"><i
+                                                class="fa-solid fa-chart-line"></i><strong> 分析資料表</strong></h1>
+                                        <div class="row" style="font-size: 25px;font-weight: 600;">
+
+                                            <div class="col-md-6" style="margin-top: 45px;margin-bottom: 75px;">
+                                                <h4><strong><i class="fa-solid fa-crown text-warning"></i>Top10
+                                                    </strong>熱銷餐點</h4>
+                                                <canvas class="Chart3 cav-box"
+                                                    style=" background-color: rgb(219, 223, 253);"></canvas>
+                                                <hr>
+                                                <h4><strong>顧客性別比例圖</strong></h4>
+
+                                                <canvas class="Chart10 cav-box"
+                                                    style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-6" style="margin-top: 45px;margin-bottom: 75px;">
+                                                <h4><strong>月營業額</strong></h4>
+
+                                                <canvas class="Chart4 cav-box"
+                                                    style="background-color: white;"></canvas>
+                                                <hr>
+                                                <h4><strong>顧客年齡層比例圖</strong></h4>
+
+                                                <canvas class="Chart5 cav-box"
+                                                    style="background-color: white; "></canvas>
+                                            </div>
+                                            <!-- <div class="col-md-6"
+                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                
+                                            </div> -->
+                                            <div class="col-md-6" style="margin-top: 0px;margin-bottom: 75px;">
+                                                <h4><strong><img src="./img/bibimbap.png"
+                                                            style="width:25px;height: 25px;">餐點銷售比例圖 - 健康餐盒類</strong>
+                                                </h4>
+
+                                                <canvas class="Chart6 cav-box"
+                                                    style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-6" style="margin-top: 0px;margin-bottom: 75px;">
+                                                <h4><strong><img src="./img/salad.png" style="width:25px;height: 25px;">
+                                                        餐點銷售比例圖 - 沙拉類</strong></h4>
+
+                                                <canvas class="Chart7 cav-box"
+                                                    style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-6" style="margin-top: 0px;margin-bottom: 75px;">
+                                                <h4><strong><img src="./img/pasta.png"
+                                                            style="width:25px;height: 25px;">餐點銷售比例圖 - 義大利麵類</strong>
+                                                </h4>
+
+                                                <canvas class="Chart8 cav-box"
+                                                    style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-6" style="margin-top: 0px;margin-bottom: 75px;">
+                                                <h4><strong><img src="./img/drink.png"
+                                                            style="width:25px;height: 25px;">餐點銷售比例圖 - 飲料類</strong></h4>
+
+                                                <canvas class="Chart9 cav-box"
+                                                    style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-12"
+                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 對帳單 -->
+                                    <div class="container tab-pane " id="pills-reconciliationStatement" role="tabpanel"
+                                        aria-labelledby="pills-reconciliationStatement-tab">
+                                        <div class="container">
+
+
+                                            <table id="tablepayments" class="table table-dark ">
+                                                <thead></thead>
+                                                <tbody class="table table-light"></tbody>
+
+                                            </table>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" `
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+
+    <!-- 語系 -->
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table-locale-all.min.js"></script>
+
+    <!-- 吐司訊息 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <script
+        src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/export/bootstrap-table-export.min.js"></script>
+    <!--PDF-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jspdf/dist/jspdf.umd.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF/jspdf.min.js"></script>
+    <!--字型-->
+    <script src="./app/source-han-sans-normal.js"></script>
+
+    <script src=" https://unpkg.com/jspdf-autotable@3.5.25/dist/jspdf.plugin.autotable.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+
+
+
+    <!-- Latest compiled and minified JavaScript -->
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/tableExport.min.js"></script>
+
+
+
+
+    <!-- <script src="./app/fixedScroll.js"></script> -->
+    <script type="text/javascript" src="./app/vanilla-tilt.min.js"></script>
+
+    <script type="module" src="./app/footerscript.js"></script>
+    <script src="./app/UPDATE.js"></script>
+
+
+
+
+
+</body>
+
+
+</html>

@@ -235,6 +235,9 @@
 
         }
 
+        .rongTingtableset-a {
+            width: 96px;
+        }
 
 
         /*營業開關*/
@@ -546,31 +549,14 @@
                                             <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip"
                                                 data-bs-placement="left" title='聯絡資訊:aaa@gmail.com'></i>
                                         </li>
-                                        <!-- 訂單提示 -->
-                                        <!-- <li class="nav-item" role="presentation">
+                                        <li class="nav-item" role="presentation">
+                                            <!-- 訂單提示 -->
                                             <a id="belltest"><i class="fa-solid fa-bell"></i></a>
-                                        </li> -->
-                                        <!-- <li class="nav-item" style="height: 40px;"> -->
-                                        <div style="display:flex; height: 45px;" id="bell">
-                                            <div class="btn-group" role="group" id="bellBtn">
-                                                <button id="btnGroupDrop1" type="button" class="btn position-relative"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <!-- <image class="xiaoxi-icon " src="./img/bell.png"
-                                                        style="width: 20px; height: 20px">
-                                                    </image> -->
-                                                    <i class="fa-solid fa-bell"></i>
-                                                    <span id="bellValue"
-                                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">0
-                                                        <span class="visually-hidden">unread messages</span></span>
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" id="bellInfo"
-                                                    style="width: 30px;">
-                                                    <!-- <li><a class="dropdown-item" href="#">Dropdown link</a></li> -->
-                                                    <!-- <li><a class="dropdown-item" href="#">Dropdown link</a></li> -->
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- </li> -->
+
+
+
+
+                                        </li>
                                         <li class="nav-item">
                                             <!-- 寄信給我們 -->
                                             <a href="mailto:xxx@gmail.com   " id="mailUs"> <i
@@ -699,15 +685,14 @@
                                                                     <tr>
                                                                         <td colspan="2">
                                                                             <select id="inputMealType"
-                                                                                name="mealtypevalue"
-                                                                                style="width:50%;"></select>
-                                                                            <option value="" selected>請選擇種類...
-                                                                            </option>
+                                                                                name="mealtypevalue" style="width:40%;">
+                                                                                <option value="" disabled>請選擇種類...
+                                                                                </option>
                                                                             </select>
                                                                             <span id="check1">
                                                                                 熱門:
-                                                                                <input type="checkbox" id="mealHotCheck"
-                                                                                    value="false">
+                                                                                <input type="checkbox"
+                                                                                    id="mealHotCheck">
                                                                             </span>
                                                                             <span>
                                                                                 素食:
@@ -720,11 +705,34 @@
                                                                         <th colspan="2">餐點圖檔 :</th>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td colspan="2">
+                                                                        <td colspan="1">
+                                                                            <!-- 選取圖片的 input -->
+                                                                            <span>
+                                                                                <input id="uploadImage" type="file"
+                                                                                    accept="image/*">
+                                                                                <div id="makerUrl"></div>
+                                                                            </span>
+                                                                            <!-- 上傳按鈕 -->
+
+                                                                            <div>
+                                                                                <button
+                                                                                    class="my-append-btn my-right-radius my-left-radius"
+                                                                                    id="saveImageBtn"
+                                                                                    type="button">送出</button>
+                                                                            </div>
                                                                             <!--還不能上傳圖檔-->
-                                                                            <input id="inputMealImage" type="button"
+                                                                            <!-- <input id="inputMealImage" type="button"
                                                                                 class="my-append-btn my-right-radius my-left-radius"
-                                                                                value="上傳">
+                                                                                value="上傳"> -->
+                                                                        </td>
+                                                                        <td colspan="1">
+                                                                            <span style="float:right;">
+                                                                                <img id="preview-image"
+                                                                                    style="width: 150px;" />
+                                                                                <img id="showImage" src=""
+                                                                                    referrerpolicy="no-referrer"
+                                                                                    style="width: 150px;">
+                                                                            </span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -743,18 +751,24 @@
                                                                     <tr>
                                                                         <td colspan="2">
                                                                             <ol id="addIngredients">
-                                                                                <li id="examIngredients">
+                                                                                <li id="examIngredients"
+                                                                                    style="display: none;">
                                                                                     <input list="mealIngredients"
                                                                                         name="ingredientsName"
                                                                                         placeholder="請選擇食材..."
-                                                                                        style="width:60%;">
+                                                                                        style="width:55%;">
                                                                                     <datalist id="mealIngredients">
                                                                                         <!-- 讀取食材 -->
                                                                                     </datalist>
                                                                                     <input type="number"
                                                                                         name="ingredientsGrams" min="0"
-                                                                                        placeholder="請輸入克數..."
-                                                                                        style="width:30%;"><span>(g)</span>
+                                                                                        placeholder="輸入克數"
+                                                                                        style="width:25%;"><span>(g)
+                                                                                        <input class="btn-danger"
+                                                                                            type="button"
+                                                                                            onclick="javascript:ingredientsDelBtn(this)"
+                                                                                            value="刪除">
+                                                                                    </span>
                                                                                 </li>
 
                                                                             </ol>
@@ -765,11 +779,7 @@
                                                                                         type="button"
                                                                                         onclick="ingredientsAppendBtn()"
                                                                                         value="新增欄位">
-                                                                                    <input
-                                                                                        class="my-append-btn my-right-radius my-left-radius"
-                                                                                        type="button"
-                                                                                        onclick="ingredientsDelBtn()"
-                                                                                        value="刪減欄位">
+
                                                                                 </span>
                                                                                 <span style="float:right;">
                                                                                     <!-- <div style="text-align:right;"> -->
@@ -799,7 +809,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer  my-color1">
-                                                            <div style="float:right;"><button id="add"
+                                                            <div style="float:right;">
+                                                                <button id="add" class="btn btn-light"
                                                                     data-bs-dismiss="modal" href="javascript:"
                                                                     onclick="saveField()">儲存</button>
                                                             </div>
@@ -825,12 +836,7 @@
                                                                         data-bs-target="#exampleModal">
                                                                         新增菜單
                                                                     </button>
-                                                                    <button type="button" class=" my-btn-color">
-                                                                        刪除
-                                                                    </button>
-                                                                    <button type="button" class=" my-btn-color">
-                                                                        修改
-                                                                    </button>
+
                                                                     <input type="text" id="searchMenu"
                                                                         class="my-search-css my-right-radius"
                                                                         placeholder="搜尋餐點">
@@ -865,7 +871,8 @@
 
                                                         <tr>
                                                             <td class="my-td-width14">雞腿便當</td>
-                                                            <td class="my-td-width4"></td>
+                                                            <td class="my-td-width4"><span class="hidehot">HOT </span>
+                                                            </td>
                                                             <td class="my-td-width10">便當類</td>
                                                             <td class="my-td-width10">XXXXXX</td>
                                                             <td class="my-td-width22 textBlock">
@@ -887,7 +894,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="my-td-width14">三杯雞米便當</td>
-                                                            <td class="my-td-width4"></td>
+                                                            <td class="my-td-width4"><span class="">HOT </span> </td>
 
                                                             <td class="my-td-width10">便當類</td>
                                                             <td class="my-td-width10">YYYYYY</td>
@@ -978,10 +985,11 @@
                                                                 <table class="table table-hover table-light">
                                                                     <thead class="table-dark">
                                                                         <tr id="testtr">
-                                                                            <th scope="col">訂單狀態</th>
+                                                                            <th  class="rongTingtableset-a" scope="col">
+                                                                                訂單狀態</th>
                                                                             <th scope="col">會員姓名</th>
                                                                             <th scope="col">電話</th>
-                                                                            <th scope="col">餐點名稱/餐點數量</th>
+                                                                            <th scope="col" >餐點名稱/餐點數量</th>
                                                                             <th scope="col">餐點總計金額</th>
                                                                             <th scope="col">訂單建立時間</th>
                                                                             <th scope="col">確認/取消</th>
@@ -1148,7 +1156,7 @@
                                                                                 <th>優惠卷內容</th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody class="table table-white"
+                                                                        <tbody class="table table-warning"
                                                                             id="couponTbody">
                                                                             <tr>
                                                                                 <td><input type="radio"
@@ -1428,7 +1436,6 @@
 
     <!-- <script src="./app/fixedScroll.js"></script> -->
     <script type="text/javascript" src="./app/vanilla-tilt.min.js"></script>
-    <script src="./app/app.js"></script>
     <script type="module" src="./app/footerscript.js"></script>
     <script src="./app/UPDATE.js"></script>
 

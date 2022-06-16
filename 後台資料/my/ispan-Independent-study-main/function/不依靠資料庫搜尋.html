@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+            $("#nutrientContentsearch").keyup(function () {
+            //將輸入值轉為小寫去除空格
+            var keyword = this.value.toLowerCase().trim();
+
+            $("table tr").each(function (index) {
+                if (!index) return;
+                $(this).find("td").each(function () {
+                    var id = $(this).text().toLowerCase().trim();
+                    var unfound = (id.indexOf(keyword) == -1);
+                    //.closest由tr開始搜尋/tr結束
+                    //.toggle()=>hide()、show切換
+                    $(this).closest('tr').toggle(!unfound);
+                    return unfound;
+                });
+            });
+        });
+</script>
+</body>
+</html>

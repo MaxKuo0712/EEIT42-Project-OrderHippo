@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //讀json做下拉式選單
+        var ingredientsJS = function () {
+    $.ajax("./Jsontest.json")//toarry
+        .done(function (index) {
+            for (var meal of index) {
+                console.log($('#mealIngredients').val())
+                $('#mealIngredients').append(
+                    `<option value = "${meal.INGREDIENT_NAME}">`
+                )
+
+
+            }
+        })
+        .fail(function () {
+            alert("error");
+        })
+
+}();
+
+//增加表格新增減欄位
+function ingredientsAppendBtn() {
+
+    $('#addIngredients').append(
+        `<li>` +
+        `${document.getElementById('examIngredients').innerHTML}` +
+        `</li>`
+    );
+}
+function ingredientsDelBtn() {
+    $('#addIngredients li:last').remove(
+    )
+
+}
+
+
+
+//把欄位對照熱量印出來
+function btn() {
+    $.ajax("./Jsontest.json")//toarry
+        .done(function (apple) {
+            var foodname = document.getElementsByName('foodName');
+            var foodg = document.getElementsByName('foodG');
+            var tota = 0;
+            var totb = 0;
+            var totc = 0;
+            var totd = 0;
+            for (var i = 0; i < foodname.length; i++) {
+                if (foodname[i].value != "" && foodg[i].value != "") {
+                    var CALORIE;
+                    var CARB;
+                    var FAT;
+                    var PROTEIN;
+                    for (var a of apple) {
+                        if (foodname[i].value == a.INGREDIENT_NAME) {
+                            b = a.INGREDIENT_NAME;
+                            CALORIE = a.CALORIE;
+                            CARB = a.CARB;
+                            FAT = a.FAT;
+                            PROTEIN = a.PROTEIN
+                            var catchN = Number(foodg[i].value);
+                            var a = (100 * catchN) * (CALORIE * 100) / 10000
+                            var b = (100 * catchN) * (CARB * 100) / 10000;
+                            var c = (100 * catchN) * (FAT * 100) / 10000;
+                            var d = (100 * catchN) * (PROTEIN * 100) / 10000;
+                            tota += a;
+                            totb += b;
+                            totc += c;
+                            totd += d;
+                        }
+
+                    }
+                }
+            }
+            $('#test3').html(
+                "熱量:" + `${tota}` +
+                "kcal。<br>碳水化合物:" + `${totb}` +
+                "g。<br>脂肪:" + `${totc}` +
+                "g。<br>蛋白質:" + `${totd}` + "g。");
+
+            console.log(CALORIE + ":" + CARB + ":" + FAT + ":" + PROTEIN);
+        })
+        .fail(function () {
+            alert("error");
+        })
+}
+    </script>
+</body>
+</html>

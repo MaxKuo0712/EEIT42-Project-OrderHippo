@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="test">123123123123123</p>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js%27%3E'></script>
+<script>
+
+    $.get(
+        "http://localhost:8080/api/ingredients",
+        function (data, status, jqXHR) {
+            console.log(jqXHR);
+        },
+    )
+    // $('#test').load('http://localhost:8080/api/ingredients', function (responseText, textStatus, jqXHR) {
+    //     // this - 指向 #result DOM 元素
+    //     // responseText - 請求的文件內容
+    //     // textStatus - 請求狀態 (success, error)
+    //     // jqXHR - XMLHttpRequest Object
+    //     console.log(JSON.stringify(textStatus));
+    //     // console.log(JSON.stringify(jqXHR));
+    //     // console.log(JSON.stringify(responseText));
+    // });
+
+    // $.ajax({
+    //     url: "http://localhost:8080/api/ingredients",
+    //     method: 'GET',
+    //     dataType: 'json',
+    //     data: '',
+    //     async: true,
+
+    //     success: (res, status) => {
+    //         console.log(res)
+    //         console.log(status)
+    //     },
+    //     error: err => {
+    //         console.log(err)
+    //     },
+    // });
+
+</script>
+
+</html>

@@ -93,7 +93,7 @@ td{
 }
 .my-btn-box{
     text-align: center;
-    width: 507px;
+    /* width: 507px; */
     height: 55px;
     background-color: #6f6f6fbd;
     border-radius:3px;
@@ -157,9 +157,9 @@ td{
     width: 10%;
 }
 .textBlock {
-    overflow: hidden;
-    text-overflow : ellipsis;
-    white-space: nowrap; 
+    overflow: hidden ;
+    text-overflow : ellipsis ;
+    white-space: nowrap ;
 }
 .my-append-btn{
     color:rgb(240, 240, 240);

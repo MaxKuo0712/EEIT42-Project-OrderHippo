@@ -1,162 +1,3 @@
-let newToken = localStorage.getItem('storeToken');
-// localStorage.getItem('storeToken') == null ? function () { alert("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
-let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
-let localhost = 8080;
-/**------------------------------------------------------------------------------- */
-// WebSocket
-let websocket = null;
-
-connWebSocket(JSON.parse(localStorage.getItem('storeinfo')).STORE_ID);
-
-function connWebSocket(storeInfo) {
-    if ('WebSocket' in window) {
-        websocket = new WebSocket(`ws://localhost:8080/websocket/${storeInfo}`);
-    } else {
-        console.log("WebSocket連線失敗");
-    }
-}
-
-function closeWebSocket() {
-    websocket.close();
-}
-
-window.onbeforeunload = () => {
-    closeWebSocket();
-}
-
-if (localStorage.getItem('storeinfo')) {
-    websocket.onmessage = (e) => {
-        console.log(e.data);
-        receiveMsg(e.data);
-    }
-    if (!JSON.parse(localStorage.getItem('receiveMsg'))) {
-        bellValue.innerText = 0;
-    } else {
-        bellValue.innerText = JSON.parse(localStorage.getItem('receiveMsg')).length;
-    }
-}
-
-function sednMessage(sendMsg, orderID) {
-    fetch(`http://localhost:8080/api/${storeId}/payments?token=${newToken}&orderid=${orderID}`,
-        {
-            method: "GET"
-        }).then(function (response) {
-            return response.json();
-        })
-        .then(function (paymentinfo) {
-            if (paymentinfo[0] && paymentinfo[0].ORDER_ID == orderID) {
-                let sendToWho = paymentinfo[0].USER_ID;
-                let paymentID = paymentinfo[0].PAYMENT_ID;
-
-                if (orderID != null && orderID != "" && paymentID != null && paymentID != ""
-                    && sendToWho != null && sendToWho != "") {
-                    sendMsg = `${sendMsg}#${orderID}#${paymentID}#${sendToWho}`;
-                    websocket.send(sendMsg);
-                }
-            } else {
-                console.log('取得付款資訊錯誤');
-            }
-        }).catch((err) => {
-            console.log('取得付款資訊錯誤');
-        });
-}
-
-// 收到訊息，確認有一筆新訂單後需要做什麼事情
-function receiveMsg(message) {
-    let msg = message.split('#')[0];
-    let orderID = message.split('#')[1];
-    let paymentID = message.split('#')[2];
-    let userID = message.split('#')[3];
-
-    let receiveMessage = { msg, orderID, paymentID, userID };
-    let bellValue = document.querySelector("#bellValue");
-
-    if (msg == "有一筆新訂單") {
-        let receiveInfo = JSON.parse(localStorage.getItem('receiveMsg')) || [];
-        receiveInfo.push(receiveMessage);
-        localStorage.setItem("receiveMsg", JSON.stringify(receiveInfo));
-        bellValue.innerText = JSON.parse(localStorage.getItem('receiveMsg')).length;
-        homepageOrderDisplay();
-    }
-}
-
-document.getElementById("bell").addEventListener("click", () => {
-    if (localStorage.getItem('storeinfo')) {
-        let bellMsg = JSON.parse(localStorage.getItem('receiveMsg'));
-
-        $("#bellInfo").empty();
-
-        bellMsg.forEach(e => {
-            let color = "";
-            if (e.msg.includes("新訂單")) {
-                color = "#FFD4D4";
-            }
-            addBellInfo(e.msg, e.orderID, e.paymentID, color);
-        });
-
-        let bellDropdown = document.querySelectorAll(".bellDropdown");
-        let bellAry = JSON.parse(localStorage.getItem('receiveMsg'));
-
-        for (let i = 0; i < bellDropdown.length; i++) {
-            bellDropdown[i].addEventListener("click", () => {
-                let bellIndex = bellAry.map(x => x.orderID).indexOf(bellAry[i].orderID);
-
-                if (bellAry.length == 1) {
-                    bellAry.pop();
-                } else {
-                    bellAry.splice(bellIndex, 1);
-                }
-                localStorage.setItem('receiveMsg', JSON.stringify(bellAry));
-
-                $('#padleft .active').removeClass('active');
-                $('#pills-tabContent>div').removeClass('active');
-                $('#pills-tabContent>div').removeClass('show');
-                $('#ordera').attr('class', 'nav-link text-white bg-transparent text-start');
-                $('#pills-order').attr('class', 'show active container tab-pane ');
-                Orderpage();
-                bellDropdown[i].remove();
-            });
-        }
-    }
-});
-
-function homepageOrderDisplay() {
-    $('#vorderstatuscountHomepage').empty();
-    $.ajax({
-        url: `http://localhost:${localhost}/api/${storeId}/vorderstatuscount?token=${newToken}`,
-        method: 'GET',
-        success: (res, status) => {
-            // console.log(res)
-            console.log("vorderstatuscountHomepage ok")
-            for (var vorder of res) {
-                $('#vorderstatuscountHomepage').append(
-                    '<li>' + `${vorder.orderstatusdesc}` + ":" + `${vorder.ordercount}` + '</li>'
-                )
-            }
-        },
-        error: err => {
-            console.log("vorderstatuscountHomepage fale")
-            console.log(err)
-        },
-    });
-}
-
-function addBellInfo(msg, orderID, paymentID, color) {
-    $("#bellInfo").append(
-        `<li>
-      <div style="background-color: #FFFFDE;">
-        <img src="./img/789.png" alt="logo" width="30" height="30" style="display: inline-block;">
-      </div>
-      <button class="bellDropdown dropdown-item" type="button" 
-        style="background-color: ${color}; font-size: 12px; overflow:hidden;
-        white-space: nowrap; text-overflow: ellipsis;">
-        ${msg}：<br> ${orderID}, <br> ${paymentID}
-      </button>
-    </li>`
-    );
-}
-/**------------------------------------------------------------------------------- */
-
 /*firebase*/
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
 import {
@@ -213,10 +54,10 @@ function setSignBntStatus() {
 // 拿取Token跟id
 // console.log(localStorage.getItem('storeToken'));
 // console.log(JSON.parse(localStorage.getItem('storeinfo')).STORE_ID);
-// let newToken = localStorage.getItem('storeToken');
+let newToken = localStorage.getItem('storeToken');
 // localStorage.getItem('storeToken') == null ? function () { alert("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
-// let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
-// let localhost = 8080;
+let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
+let localhost = 8080;
 //總開關處理
 $("#switch")[0].checked = false;
 // window.onload = openstatus;
@@ -261,15 +102,15 @@ document.getElementById("switch").addEventListener('click', () => {
     openSwitch($("#switch")[0].checked);
 });
 
-// $('#belltest').on('click', function () {
-//     $('#padleft .active').removeClass('active');
-//     $('#pills-tabContent>div').removeClass('active');
-//     $('#pills-tabContent>div').removeClass('show');
-//     $('#ordera').attr('class', 'nav-link text-white bg-transparent text-start');
-//     $('#pills-order').attr('class', 'show active container tab-pane ');
-//     Orderpage();
+$('#belltest').on('click', function () {
+    $('#padleft .active').removeClass('active');
+    $('#pills-tabContent>div').removeClass('active');
+    $('#pills-tabContent>div').removeClass('show');
+    $('#ordera').attr('class', 'nav-link text-white bg-transparent text-start');
+    $('#pills-order').attr('class', 'show active container tab-pane ');
+    Orderpage();
 
-// })
+})
 
 $('img[src="./img/group2.png"]').on('click', function () {
     $('#padleft .active').removeClass('active');
@@ -344,40 +185,52 @@ function Homepage() {
             var data = [];
             console.log("vsalerankHomepage ok")
             // console.log(res)
-            for (var salserank of res) {
+            var backgroundColor = colorRandom(res.length, 0.5)
+            var rankdata=res.slice(0,3)
+            for (var salserank of rankdata) {
+                // console.log(salserank   )
                 $('#vsalerankHomepage').append(
                     '<li>' + `${salserank.mealname}` + ":" + `${salserank.count}` + '</li>'
                 )
-                labels.push(salserank.mealname)
-                data.push(salserank.count)
             }
-            // console.log(labels)
-
+            //排序 10名作輸出
+            function res_count(a, b) {
+                if (a.count < b.count) {
+                    return 1;
+                }
+                if (a.count > b.count) {
+                    return -1;
+                }
+                return 0;
+            };
+            console.log(res)
+            res.sort(res_count);
+            
+            var rankdata=res.slice(0,10);
+            console.log(rankdata);
+            for(var i=0; i<rankdata.length; i++) {
+                labels.push(rankdata[i].mealname);
+                data.push(rankdata[i].count)
+            }
+            
             // console.log(document.getElementsByClassName('Chart3'))
             if (Chart3 instanceof Chart) {
                 Chart3.destroy();
             }
             Chart3 = new Chart(document.getElementsByClassName('Chart3')[0], {
-                type: 'pie', //圖表類型
+                type: 'bar', //圖表類型
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: '銷售前10', //這些資料都是在講什麼，也就是data 300 500 100是什麼
+                        label: '', //這些資料都是在講什麼，也就是data 300 500 100是什麼
                         data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
-                        backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                        ],
+                        backgroundColor: backgroundColor,
                         hoverOffset: 4
                     }]
                 }, //設定圖表資料
                 options: {} //圖表的一些其他設定，像是hover時外匡加粗
             })
             Chart3.clear();
-
-
-
         },
         error: err => {
             console.log("vsalerankHomepage fale")
@@ -430,7 +283,8 @@ function Homepage() {
                 }
 
             }
-
+            var datarank = data.slice(0, 3)
+            var labelsrank = labels.slice(0, 3)
             // console.log(document.getElementsByClassName('Chart3'))
             if (Chart4 instanceof Chart) {
                 Chart4.destroy();
@@ -438,10 +292,10 @@ function Homepage() {
             Chart4 = new Chart(document.getElementsByClassName('Chart4')[0], {
                 type: 'line', //圖表類型
                 data: {
-                    labels: labels,
+                    labels: labelsrank,
                     datasets: [{
                         label: '今年營收', //這些資料都是在講什麼，也就是data 300 500 100是什麼
-                        data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
+                        data: datarank, //每一塊的資料分別是什麼，台北：300、台中：50..
                         backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
                             'rgb(255, 255, 255)',
                             // 'rgb(54, 162, 235)',
@@ -490,38 +344,44 @@ function Analyzepage() {
             var data = [];
             console.log("vsalerankHomepage ok")
             // console.log(res)
-            for (var salserank of res) {
-                // $('#vsalerankHomepage').append(
-                //     '<li>' + `${salserank.mealname}` + ":" + `${salserank.count}` + '</li>'
-                // )
-                labels.push(salserank.mealname)
-                data.push(salserank.count)
+            var backgroundColor = colorRandom(res.length, 0.5)
+            //排序 10名作輸出
+            function res_count(a, b) {
+                if (a.count < b.count) {
+                    return 1;
+                }
+                if (a.count > b.count) {
+                    return -1;
+                }
+                return 0;
             }
-            // console.log(labels)
-
+            res.sort(res_count);
+            console.log(res);
+            var rankdata=res.slice(0,10);
+            console.log(rankdata);
+            for(var i=0; i<rankdata.length; i++) {
+                labels.push(rankdata[i].mealname);
+                data.push(rankdata[i].count)
+            }
+            
+            // console.log(document.getElementsByClassName('Chart3'))
             if (Chart3 instanceof Chart) {
                 Chart3.destroy();
             }
             Chart3 = new Chart(document.getElementsByClassName('Chart3')[1], {
-                type: 'pie', //圖表類型
+                type: 'bar', //圖表類型
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: '銷售前10', //這些資料都是在講什麼，也就是data 300 500 100是什麼
+                        label: '', //這些資料都是在講什麼，也就是data 300 500 100是什麼
                         data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
-                        backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                        ],
+                        backgroundColor: backgroundColor,
                         hoverOffset: 4
                     }]
                 }, //設定圖表資料
                 options: {} //圖表的一些其他設定，像是hover時外匡加粗
             })
-
-
-
+            Chart3.clear();
         },
         error: err => {
             console.log("vsalerankHomepage fale")
@@ -801,8 +661,7 @@ function Analyzepage() {
 }
 //訂單管理頁面處理
 function Orderpage() {
-    console.log("AAAAAAAAA");
-    //訂單管理TODO
+    
     //1:orderPreview 2:orderAfteview 4:orderCancel 3:orderComplete
     $.ajax({
         url: `http://localhost:${localhost}/api/${storeId}/vorderdisplay?token=${newToken}`,
@@ -818,25 +677,25 @@ function Orderpage() {
 
                 if (orderInfo.orderstatus == "1") {
                     $('#orderPreview').append(
-                        '<tr class="orderTrr">' +
-                        '<td class="orderTr" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
-                        '<td>' + `未確認定單` + '</td>' +
+                        '<tr class=" orderTrr">' +
+                        '<td class="textBlock orderTr" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
+                        '<td class="textBlock">' + `未確認定單` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td >' + `${orderInfo.userphone}` + '</td>' +
-                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
                         '<td >' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
-                        '<td ><button  class="orderBtn btn btn-primary">確認</button><br><button  class="orderCBtn btn btn-danger">取消</button></td>' +
+                        '<td class="textBlock"><button  class="orderBtn btn btn-primary">確認</button><button  class="orderCBtn btn btn-danger">取消</button></td>' +
                         '</tr>'
                     )
                 } else if (orderInfo.orderstatus == "2") {
                     $('#orderAfteview').append(
                         '<tr  class="orderTrrcom">' +
                         '<td class="orderTrcom" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
-                        '<td >' + `已確認定單` + '</td>' +
+                        '<td  class="textBlock">' + `已確認定單` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
-                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '<td><button class="ordercomBtn btn btn-dark">完成</button></td>' +
@@ -846,10 +705,10 @@ function Orderpage() {
                 } else if (orderInfo.orderstatus == "4") {
                     $('#orderCancel').append(
                         '<tr>' +
-                        '<td>' + `已取消訂單` + '</td>' +
+                        '<td  class="textBlock">' + `已取消訂單` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
-                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '</tr>'
@@ -857,10 +716,10 @@ function Orderpage() {
                 } else if (orderInfo.orderstatus == "3") {
                     $('#orderComplete').append(
                         '<tr>' +
-                        '<td>' + `已完成訂單` + '</td>' +
+                        '<td  class="textBlock">' + `已完成訂單` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
-                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '</tr>'
@@ -869,20 +728,20 @@ function Orderpage() {
 
             }
             //縮放
-            $('#orderPreview tr').on('click', function () {
-                if ($(this).find('td').css('word-break') == 'normal') {
-                    $(this).find('td').css({//可以改變多個css
-                        "word-break": "break-all",
-                        'white-space': 'normal'
+            // $('#orderPreview tr').on('click', function () {
+            //     if ($(this).find('td').css('word-break') == 'normal') {
+            //         $(this).find('td').css({//可以改變多個css
+            //             "word-break": "break-all",
+            //             'white-space': 'normal'
 
-                    })
-                } else {
-                    $(this).find('td').css({
-                        "word-break": "normal",
-                        'white-space': 'nowrap'
-                    })
-                }
-            });
+            //         })
+            //     } else {
+            //         $(this).find('td').css({
+            //             "word-break": "normal",
+            //             'white-space': 'nowrap'
+            //         })
+            //     }
+            // });
             // $('#orderAfteview tr').on('click', function () {
             //     if ($(this).find('td').css('word-break') == 'normal') {
             //         $(this).find('td').css({//可以改變多個css
@@ -968,10 +827,6 @@ function Orderpage() {
             //刪除
             $('.orderCBtn').click(function () {
                 var orderid = $('.orderTr')[$(this).closest("tr").index()].innerText
-
-                // 送出訊息給前端
-                sednMessage('有一筆取消的訂單', orderid);
-
                 $.ajax({
                     url: `http://localhost:${localhost}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
                     method: 'GET',
@@ -1026,6 +881,7 @@ function Orderpage() {
                 // 7
                 for (var i = 0; i < 7; i++) {
                     selectData.push($(this).closest("tr")[0].children[i].innerText)
+
                 }
                 var nowDate = new Date();
                 var nowTime = nowDate.getFullYear() + "年" + (nowDate.getMonth() + 1) + "月" +
@@ -1046,14 +902,14 @@ function Orderpage() {
 
                     '</tr>'
                 )
-                // 送出訊息給前端
-                sednMessage('有一筆確認的訂單', orderid);
-
                 var doc = new jsPDF();
 
                 doc.addFont('SourceHanSans-Normal.ttf', 'SourceHanSans-Normal', 'normal');
                 doc.setFont('SourceHanSans-Normal');
-                doc.text(20, 20, `會員id:${selectData[0]}\r會員姓名:${selectData[2]}\r點餐時間${nowTime}\r餐點內容:${selectData[4]}\r餐點總金額:${selectData[5]}`);
+                var order =selectData[4]
+                var orders=order.replace(/,/g,`\r`)
+                console.log(orders)
+                doc.text(20, 20, `訂單單號:${selectData[0]}\r會員姓名:${selectData[2]}\r點餐時間:${nowTime}\r餐點內容:\r${orders}\r餐點總金額:${selectData[5]}`);
                 doc.save(`${selectData[2]}的點單.pdf`);
 
 
@@ -1194,6 +1050,7 @@ function Memberpage() {
 
             }
             $('#tableMemberbody tr').on('click', function () {
+                console.log($(this))
                 if ($(this).find('td').css('word-break') == 'normal') {
                     $(this).find('td').css({//可以改變多個css
                         "word-break": "break-all",
@@ -1301,7 +1158,7 @@ function couponTable() {
         success: function (res, status) {
             $('#couponTbody').empty();
             console.log("couponTbody ok")
-            console.log(res)
+            // console.log(res)
             $(".couponclass").unbind();
             $("#couponDelete").unbind();
             $("#couponSave").unbind();
@@ -1314,7 +1171,7 @@ function couponTable() {
                     name="couponRadio"
                     class="form-check-input couponClass">` + '</td>' +
                     '<td style="display:none;">' + `${coupon.COUPON_ID}` + '</td>' +
-                    '<td class="teet" id="couponNAME">' + `${coupon.COUPON_NAME}` + '</td>' +
+                    '<td class="teet" id="couponNAME" style="word-break: break-all;min-width: 50px;max-width: 200px;">' + `${coupon.COUPON_NAME}` + '</td>' +
                     '<td id="couponDESC">' + `${coupon.COUPON_DESC}` + '</td>' +
                     '</tr>'
                 )
@@ -1338,65 +1195,74 @@ function couponTable() {
             // [$(this).closest("tr").index()]
             //修改
             $('#couponSave').on('click', function () {
+                if (document.getElementById('couponName').value == "" || document.getElementById('couponText').value == "") {
+                    alert('請輸入完整值')
+                } else {
 
-                couponid = $('input:radio:checked[name="couponRadio"]').val();
-                var couponName = document.getElementById('couponName').value;
-                var couponText = document.getElementById('couponText').value;
-                var data = {
-                    "COUPON_DESC": `${couponText}`,
-                    "COUPON_ID": `${couponid}`,
-                    "COUPON_NAME": `${couponName}`,
-                    "STORE_ID": `${storeId}`
-                }
-
-                $.ajax({
-                    url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}`,
-                    method: 'PUT',
-                    contentType: "application/json",
-                    data: JSON.stringify(data),
-                    success: function (e) { alert('修改成功'); console.log(e); couponTable(); },
-                    error: function (err) {
-                        if (err.status == "500") {
-
-                            alert('名稱重複')
-                        } if (err.status == "404") {
-                            alert('請選擇欄位')
-                        }
+                    couponid = $('input:radio:checked[name="couponRadio"]').val();
+                    var couponName = document.getElementById('couponName').value;
+                    var couponText = document.getElementById('couponText').value;
+                    var data = {
+                        "COUPON_DESC": `${couponText}`,
+                        "COUPON_ID": `${couponid}`,
+                        "COUPON_NAME": `${couponName}`,
+                        "STORE_ID": `${storeId}`
                     }
 
+                    $.ajax({
+                        url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}`,
+                        method: 'PUT',
+                        contentType: "application/json",
+                        data: JSON.stringify(data),
+                        success: function (e) { alert('修改成功'); console.log(e); couponTable(); },
+                        error: function (err) {
+                            if (err.status == "500") {
 
-                })
+                                alert('修改錯誤')
+                            } if (err.status == "404") {
+                                alert('請選擇欄位')
+                            }
+                        }
+
+
+                    })
+                }
+
 
 
             });
             //新增
             $('#couponInsert').on('click', function () {
+                if (document.getElementById('couponName').value == "" || document.getElementById('couponText').value == "") {
+                    alert('請輸入完整值')
+                } else {
+                    // var couponid = $('input:radio:checked[name="couponRadio"]').val();
+                    var couponName = document.getElementById('couponName').value;
+                    var couponText = document.getElementById('couponText').value;
+                    var data = {
+                        "COUPON_DESC": `${couponText}`,
+                        "COUPON_NAME": `${couponName}`,
+                        "STORE_ID": `${storeId}`
+                    }
+                    $.ajax({
+                        url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}`,
+                        method: 'POST',
+                        contentType: "application/json",
+                        data: JSON.stringify(data),
+                        success: function (e) { alert('新增成功'); console.log(e); couponTable(); },
+                        error: function (err) {
+                            if (err.status == "500") {
+                                alert('名稱重複')
+                            } else if (err.status == "404") {
+                                alert('新增失敗')
+                            }
 
-                // var couponid = $('input:radio:checked[name="couponRadio"]').val();
-                var couponName = document.getElementById('couponName').value;
-                var couponText = document.getElementById('couponText').value;
-                var data = {
-                    "COUPON_DESC": `${couponText}`,
-                    "COUPON_NAME": `${couponName}`,
-                    "STORE_ID": `${storeId}`
-                }
-                $.ajax({
-                    url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}`,
-                    method: 'POST',
-                    contentType: "application/json",
-                    data: JSON.stringify(data),
-                    success: function (e) { alert('新增成功'); console.log(e); couponTable(); },
-                    error: function (err) {
-                        if (err.status == "500") {
-                            alert('名稱重複')
-                        } else if (err.status == "404") {
-                            alert('新增失敗')
                         }
 
-                    }
 
+                    })
 
-                })
+                }
 
 
             });
@@ -1437,10 +1303,10 @@ function broadcastTable() {
     document.getElementById('broadcastName').value = "";
     document.getElementById('broadcastText').value = "";
     document.getElementById('broadcastimage').value = "";
-
+    // document.getElementById('')
     document.getElementById('showImg').src = "";
     document.getElementById('preview-img').src = "";
-    var broadcastid = ""
+    // var broadcastid = ""
     $.ajax({
         //         CREATE_ID: "l3rH7uT47PTrQSteWO2V9XqbpRn1"
         // CREATE_TIME: "2022-06-10T15:27:07.000+00:00"
@@ -1457,7 +1323,7 @@ function broadcastTable() {
         success: function (res, status) {
             $('#broadcastTbody').empty();
             // console.log("couponTbody ok")
-            console.log(res)
+            // console.log(res)
             $(".broadcastclass").unbind();
             $("#broadcastSave").unbind();
             $("#broadcastInsert").unbind();
@@ -1466,12 +1332,12 @@ function broadcastTable() {
 
                 $('#broadcastTbody').append(
                     '<tr class="broadcastTr">' +
-                    '<td>' + `<input class="broadcastclass" type="radio" value="${broadcast.MESSAGE_ID}"
+                    '<td class="text-center">' + `<input class="broadcastclass " type="radio" value="${broadcast.MESSAGE_ID}"
                     name="broadcastRadio" class="form-check-input broadcastClass">` + '</td>' +
                     '<td style="display:none;">' + `${broadcast.MESSAGE_ID}` + '</td>' +
                     '<td class="broadcastcs" id="broadcastNAME">' + `${broadcast.MESSAGE_NAME}` + '</td>' +
-                    '<td id="broadcastDESC">' + `${broadcast.MESSAGE_DESC}` + '</td>' +
-                    '<td>' + `<img src="${broadcast.MESSAGE_IMAGE}" style="height:150px">` + '</td>' +
+                    '<td id="broadcastDESC" style="word-break: break-all;min-width: 50px;max-width: 200px;">' + `${broadcast.MESSAGE_DESC}` + '</td>' +
+                    '<td>' + `<img src="${broadcast.MESSAGE_IMAGE}"  referrerpolicy="no-referrer" style="height:150px">` + '</td>' +
                     '</tr>'
                 )
 
@@ -1500,62 +1366,73 @@ function broadcastTable() {
             // [$(this).closest("tr").index()]
             //修改
             $('#broadcastSave').on('click', function () {
-                var broadcastid = $('input:radio:checked[name="broadcastRadio"]').val();
-                var broadcastName = document.getElementById('broadcastName').value;
-                var broadcastText = document.getElementById('broadcastText').value;
-                var broadcastimage = document.getElementById('broadcastimage').value;
+                if (document.getElementById('broadcastName').value == "" || document.getElementById('broadcastText').value == "") {
+                    alert('請輸入完整值')
+                } else {
+                    var broadcastid = $('input:radio:checked[name="broadcastRadio"]').val();
+                    var broadcastName = document.getElementById('broadcastName').value;
+                    var broadcastText = document.getElementById('broadcastText').value;
+                    var broadcastimage = document.getElementById('broadcastimage').value;
+                    console.log(broadcastimage)
+                    submit();
+
+                    setTimeout(function () {
+                        broadcastimage = document.getElementById('broadcastimage').value;
 
 
-                var data = {
-                    "MESSAGE_DESC": `${broadcastText}`,
-                    "MESSAGE_ID": `${broadcastid}`,
-                    "MESSAGE_NAME": `${broadcastName}`,
-                    "STORE_ID": `${storeId}`,
-                    "MESSAGE_IMAGE": `${broadcastimage}`,
-                }
 
-                $.ajax({
-                    url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}`,
-                    method: 'PUT',
-                    contentType: "application/json",
-                    data: JSON.stringify(data),
-                    success: function (e) { alert('修改成功'); console.log(e); broadcastTable(); },
-                    error: function (err) {
-                        if (err.status == "500") {
+                        console.log(broadcastimage)
+                        console.log(document.getElementById("showImg").src)
 
-                            alert('名稱重複')
-                        } if (err.status == "404") {
-                            alert('請選擇欄位')
+                        console.log(document.getElementById('preview-img').src)
+                        console.log(document.getElementById('broadcastimage').value)
+
+                        var data = {
+                            "MESSAGE_DESC": `${broadcastText}`,
+                            "MESSAGE_ID": `${broadcastid}`,
+                            "MESSAGE_NAME": `${broadcastName}`,
+                            "STORE_ID": `${storeId}`,
+                            "MESSAGE_IMAGE": `${broadcastimage}`,
                         }
-                    }
+
+                        $.ajax({
+                            url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}`,
+                            method: 'PUT',
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function (e) { alert('修改成功'); console.log(e); broadcastTable(); },
+                            error: function (err) {
+                                if (err.status == "500") {
+
+                                    alert('名稱重複')
+                                } if (err.status == "404") {
+                                    alert('請選擇欄位')
+                                }
+                            }
 
 
-                })
+                        })
+                    }, 2000)
+                }
             });
 
 
 
             //新增
             $('#broadcastInsert').on('click', function () {
-
-                // var couponid = $('input:radio:checked[name="couponRadio"]').val();
-                var broadcastName = document.getElementById('broadcastName').value;
-                var broadcastText = document.getElementById('broadcastText').value;
-
-                var previewimg = document.getElementById('preview-img').src;
-                console.log(previewimg)
-
-                var broadcastimage = document.getElementById('broadcastimage').value;
-
-                if (broadcastimage == "") {
-                    alert('請選擇圖片')
+                if (document.getElementById('broadcastName').value == "" || document.getElementById('broadcastText').value == "") {
+                    alert('請輸入完整值')
                 } else {
+                    // var couponid = $('input:radio:checked[name="couponRadio"]').val();
+                    var broadcastName = document.getElementById('broadcastName').value;
+                    var broadcastText = document.getElementById('broadcastText').value; var previewimg = document.getElementById('preview-img').src;
+                    // console.log(previewimg)
                     submit();
                     setTimeout(function () {
 
+                        var broadcastimage = document.getElementById('broadcastimage').value;
 
 
-                        broadcastimage = document.getElementById('broadcastimage').value;
                         var data = {
                             "MESSAGE_DESC": `${broadcastText}`,
                             "MESSAGE_NAME": `${broadcastName}`,
@@ -1579,8 +1456,10 @@ function broadcastTable() {
 
 
                         })
-                    }, 1500)
+                    }, 2000)
+
                 }
+
 
 
 
@@ -1772,11 +1651,12 @@ $("#menuBtn").on("click", function () {
         });
     });
 });
-var eleval1 = document.getElementById("searchMember");
+
+var eleval2 = document.getElementById("searchMember");
 $("#memberBtn").on("click", function () {
-    console.log(eleval1.value);
+    console.log(eleval2.value);
     //將輸入值轉為小寫去除前後空格
-    var keyword = eleval1.value.toLowerCase().trim();
+    var keyword = eleval2.value.toLowerCase().trim();
 
     $("#tableMember tr").each(function (index) {
         if (!index) return;
@@ -1790,6 +1670,7 @@ $("#memberBtn").on("click", function () {
         });
     });
 });
+
 var eleval1 = document.getElementById("searchOrder");
 $("#orderBtn").on("click", function () {
     console.log(eleval1.value);
@@ -1924,12 +1805,14 @@ function submit() {
 
     // 傳遞資料
     $.ajax(settings).done(function (res) {
-        const imgURL = JSON.parse(res).data.link
-        addImg(imgURL);
-        console.log(JSON.parse(res)); // 可以看見上傳成功後回傳的URL
-        console.log(JSON.parse(res).data.link)
-        // alert('上傳完成');
+        const imgURL = JSON.parse(res).data.link;
         document.getElementById('broadcastimage').value = imgURL;
+        addImg(imgURL);
+        console.log(document.getElementById('broadcastimage').value);
+        console.log(JSON.parse(res)); // 可以看見上傳成功後回傳的URL
+        // console.log(JSON.parse(res).data.link)
+        // alert('上傳完成');
+
     });
     document.getElementById("preview-img").src = "";
 }
@@ -1948,7 +1831,7 @@ uploadInput.addEventListener("change", (e) => {
     var file = uploadInput.files[0], imageType = /^image\//, reader = '';
     // 檔案是否為圖片
     if (!imageType.test(file.type)) {
-        alert("請選擇圖片！");
+        alert("請選擇圖片檔案！");
         return;
     }
     // 判斷是否支援FileReader  // IE9及以下不支援FileReader
@@ -1964,8 +1847,12 @@ uploadInput.addEventListener("change", (e) => {
 
         var img = document.getElementById("preview-img");
         // 圖片路徑設定為讀取的圖片    
+        // console.log(img.src)
+        // document.getElementById('broadcastimage').value=img.src;
         img.src = event.target.result;
-        document.getElementById('broadcastimage').value = img.src;
+        console.log(img)
+        // var img = document.getElementById("preview-img");
+
     };
     reader.readAsDataURL(file);
     document.getElementById("showImg").src = ""

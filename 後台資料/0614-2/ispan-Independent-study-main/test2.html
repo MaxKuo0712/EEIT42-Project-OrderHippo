@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello, Bootstrap Table!</title>
+    // 引入 css
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.css">
+</head>
+<body>
+    // 需要填充的表格
+    <table id="tb_departments" data-filter-control="true" data-show-columns="true"></table>
+// 引入js
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.js"></script>
+<script>
+        window.operateEvents = {
+            // 當點選 時觸發
+            'click .delete': function (e,value,row,index) {
+                // 在 console 列印出整行資料
+                console.log(row);
+            }
+        };
+
+        $('#tb_departments').bootstrapTable({
+            url: 'http://localhost:8081/api/l3rH7uT47PTrQSteWO2V9XqbpRn1/orders?token=$2a$10$WcqSdkG/OIJJkkMgiSJgzONwQ5aQaXkGWcAtQXcE2HcpI5nP7Gjze',         //請求後臺的 URL（*）
+            method: 'get',                      //請求方式（*）
+            // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
+            toolbar: '#toolbar',                //工具按鈕用哪個容器
+            striped: true,                      //是否顯示行間隔色
+            cache: false,                       //是否使用快取，預設為 true，所以一般情況下需要設定一下這個屬性（*）
+            pagination: true,                   //是否顯示分頁（*）
+            sortable: false,                    //是否啟用排序
+            sortOrder: "asc",                   //排序方式
+            sidePagination: "client",           //分頁方式：client 使用者端分頁，server 伺服器端分頁（*）
+            pageNumber:1,                       //初始化載入第一頁，預設第一頁
+            pageSize: 6,                        //每頁的記錄行數（*）
+            pageList: [10, 25, 50, 100],        //可供選擇的每頁的行數（*）
+            search: true,                       //是否顯示錶格搜尋，此搜尋是使用者端搜尋，不會進伺服器端，所以個人感覺意義不大
+            strictSearch: true,                 //啟用嚴格搜尋。禁用比較檢查。
+            showColumns: true,                  //是否顯示所有的列
+            showRefresh: true,                  //是否顯示重新整理按鈕
+            minimumCountColumns: 2,             //最少允許的列數
+            clickToSelect: true,                //是否啟用點選選中行
+            height: 500,                        //行高，如果沒有設定 height 屬性，表格自動根據記錄條數覺得表格高度
+            uniqueId: "ID",                     //每一行的唯一標識，一般為主鍵列
+            showToggle:true,                    //是否顯示詳細檢視和列表檢視的切換按鈕
+            cardView: false,                    //是否顯示詳細檢視
+            detailView: false,                  //是否顯示父子表
+            showExport: true,                   //是否顯示匯出
+            exportDataType: "basic",            //basic', 'all', 'selected'.
+            columns: [{
+                checkbox: true     //核取方塊標題，就是我們看到可以通過核取方塊選擇整行。
+            }, {
+                field: 'ID', title: 'ID'       //我們取json中id的值，並將表頭title設定為ID
+            }, {
+                field: 'ORDER_ID', title: '使用者名稱'         //我們取 json 中 username 的值，並將表頭 title 設定為使用者名稱
+            },{
+                field: 'STORE_ID', title: '性別'                //我們取 json 中 sex 的值，並將表頭 title 設定為性別
+            },{
+                field: 'USER_ID', title: '城市'               //我們取 json 中 city 的值，並將表頭 title 設定為城市
+            },{
+                field: 'ORDERS_PRICE', title: '簽名'               //我們取 json 中 sign 的值，並將表頭 title 設定為簽名
+            },{
+                field: 'ORDER_STATUS', title: '分類'           //我們取 json 中 classify 的值，並將表頭 title 設定為分類
+            },{
+                //ormatter:function(value,row,index) 對後臺傳入資料 進行操作 對資料重新賦值 返回 return 到前臺
+                // events 觸發事件
+                field: 'Button',title:"操作",align: 'center',events:operateEvents,formatter:function(value,row,index){
+                    var del = '<button type="button" class="btn btn-danger delete">刪除</button>'
+                    return del;
+                }
+            }
+            ],
+            responseHandler: function (res) {
+                return res.data      //在載入遠端資料之前，處理響應資料格式.
+                // 我們取的值在data欄位中，所以需要先進行處理，這樣才能獲取我們想要的結果
+            }
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+@charset "UTF-8";
+
+#tableMenu,
+#tableMember {
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px 10px 0px 0px;
+}
+
+#tableMenu thead tr,
+#tableMenu tbody tr,
+#tableMenu tfoot tr,
+#tableMember thead tr,
+#tableMember tbody tr,
+#tableMember tfoot tr {
+    /* box-sizing: border-box; */
+    table-layout: fixed;
+    display: table;
+    width: 100%;
+}
+
+#tableMenu tbody,
+#tableMember tbody {
+    border: 3px solid rgb(34, 46, 60);
+    display: block;
+    /* width: calc(100% + 8px);  */
+    height: 500px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#tableMenu thead tr,
+#tableMember thead tr {
+    background-color: #222e3c;
+    /* border-bottom: 2px solid rgb(187, 187, 187); */
+    color: #ffffff;
+    height: 49px;
+    border-radius: 10px 10px 0px 0px;
+
+}
+#tableMember thead th,
+#tableMember tbody td{
+    padding: 10px;
+}
+
+#tableMenu tbody tr:hover,
+#tableMember tbody tr:hover {
+    background-color: #b882ff33;
+}
+
+#tableMenu tbody td,
+#tableMember tbody td {
+    border-bottom: 0.1px solid rgb(184, 184, 184);
+}
+
+td {
+    border-bottom: 0.1px solid rgb(184, 184, 184);
+
+}
+
+/* tr:hover{
+    background-color: #feeafb;
+} */
+
+
+.my-title-css {
+    text-align: left;
+    font-size: 40px;
+    /* font-family: "LiGothic", "FangSong", Arial, serif; */
+    color: rgb(34, 46, 60);
+}
+
+.my-title-css-2 {
+    text-align: left;
+    font-size: 40px;
+    font-family: "Helvetica", "Arial", "LiHei Pro", "黑體-繁", "微軟正黑體", sans-serif;
+    /* font-family: "LiGothic", "FangSong", Arial, serif; */
+    /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    color: rgb(239, 239, 239);
+}
+
+.my-left-radius {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    /* border-radius:3px 0 0 3px; */
+}
+
+.my-right-radius {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    /* border-radius: 0px 3px 3px 0px; */
+}
+
+
+.my-btn-color {
+    color: rgb(255, 255, 255);
+    background-color: rgb(34, 46, 60);
+    border-color: rgb(59, 77, 99);
+    font-family: "Helvetica", "Arial", "LiHei Pro", "黑體-繁", "微軟正黑體", sans-serif;
+
+    width: 94px;
+    border: none;
+    /* color: white; */
+    padding: 17px 15px 13px 15px;
+    text-align: center;
+    /* text-decoration: none; */
+    /* display: inline-block; */
+    /* font-size: 16px; */
+    /* margin: 10px 0px; */
+    /* cursor: pointer; */
+}
+
+.my-btn-color:hover {
+    color: rgb(239, 241, 255);
+    background-color: rgb(50, 76, 103);
+    border-color: rgb(196, 196, 196);
+}
+
+.my-btn-box {
+    text-align: center;
+    /* width: 507px; */
+    height: 55px;
+    background-color: #6f6f6fbd;
+    border-radius: 3px;
+    text-align: left;
+    margin: 1px;
+}
+
+.my-search-css {
+    width: 207px;
+    height: 55px;
+    border: 1px solid rgb(196, 196, 196);
+    padding: 3px 2px 1px 15px;
+    outline: none;
+}
+
+
+.my-btn-search {
+    /* font-size: 25px; */
+    width: 57px;
+    height: 55px;
+    margin-left: -55px;
+}
+
+.my-input {
+    border: none;
+    outline: none;
+}
+
+.my-color1 {
+    background-color: rgb(34, 46, 60);
+}
+
+.my-colo2 {
+    background-color: rgb(86, 113, 143);
+}
+
+.my-shadow {
+    /* background-color: #feeafb; */
+    background-color: #ffffff7c;
+}
+
+
+
+.my-search-box {
+    text-align: center;
+    width: 213px;
+    height: 55px;
+    background-color: #6f6f6fbd;
+    border-radius: 3px;
+    text-align: left;
+    margin: 1px;
+}
+
+.my-td-width4 {
+    width: 4%;
+}
+
+.my-td-width10 {
+    width: 10%;
+}
+
+.my-td-width14 {
+    width: 14%;
+}
+.my-td-width22 {
+    width: 22%;
+}
+
+.textBlock {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.my-append-btn {
+    color: rgb(240, 240, 240);
+    background-color: rgb(85, 112, 143);
+    border-color: rgb(59, 77, 99);
+    font-weight: 600;
+    font-size: 15px;
+    font-family: "Helvetica", "Arial", "LiHei Pro", "黑體-繁", "微軟正黑體", sans-serif;
+
+    /* width:50px; */
+    padding: 10px;
+    /* height:30px; */
+    border: none;
+    text-align: center;
+}
+
+.my-append-btn:hover {
+    color: rgb(239, 241, 255);
+    background-color: rgb(50, 76, 103);
+    border-color: rgb(196, 196, 196);
+}
+
+
+/*分析資料------------------------------------------------- */
+/* header 匯入字體  <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css"> */
+.cav-box {
+    box-shadow: 0 0 0.875rem 0 rgba(33, 37, 41, 0.233);
+
+}
+
+
+
+/* ------------------------------------------------- */
+div[id="padleft"] {
+    padding:
+        0;
+    /* box-shadow:
+        8px 0px 5px 0px #AEAFB7; */
+    z-index:
+        1;
+    height:
+        100vh;
+    ;
+}
+
+#Padright_navbar {
+    height:
+        8vh;
+    box-shadow: 0px 5px 10px 0px rgba(33, 37, 41, 0.145);
+
+}
+/* 0614--------------------------------------------------------------------------------------------- */
+#pills-tab li{
+    font-family:'cwTeXYen';
+    font-size: 20px;
+}
+#pills-tab li:hover{
+    border-left: 5px solid rgba(28, 123, 196, 0.7);
+    border-bottom: 1px solid rgb(28, 123, 196);
+    background: linear-gradient(to right, rgb(28, 123, 196) -81%, rgb(255 255 255 / 0%) 75%);
+}
+#pills-tab li:active{
+    border-left: 5px solid rgba(28, 123, 196, 0.7);
+    border-bottom: 1px solid rgb(28, 123, 196);
+    background: linear-gradient(to right, rgb(28, 123, 196) -81%, rgb(255 255 255 / 0%) 75%);
+}
+#pills-tab li:focus{
+    border-left: 5px solid rgba(28, 123, 196, 0.7);
+    border-bottom: 1px solid rgb(28, 123, 196);
+    background: linear-gradient(to right, rgb(28, 123, 196) -81%, rgb(255 255 255 / 0%) 75%);
+}
+
+#padleft>div[class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark "]{
+    padding: 0px !important;
+    background-color: rgb(34, 46, 60) !important;
+}
+#padleft>div[class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark "]>a{
+margin-top: 10px;
+margin-left: 10px;
+}
+
+#bulletinBoard{
+    text-align: center;
+}
+.my-web-header {
+    font-family:'cwTeXYen';
+    padding: 40px;
+    width: 100%;
+    height: 120px;
+    align-items: center;
+    /* font-weight: 800; */
+
+    /* display: flex; */
+    /* justify-content:left;  */
+}
+#pills-order div[style="padding-top:75px ;"]{
+    padding-top: 0px !important;
+}
+#pills-order div[style="padding-top:75px ;"] div[class="col-md-12"]{
+    font-family:'cwTeXYen';
+    padding: 40px;
+    width: 100%;
+    height: 120px;
+    align-items: center;
+    font-weight: 800 !important;
+    /* background-color: red; */
+}
+#pills-nutrientContent{
+    font-family:'cwTeXYen';
+    padding: 40px;
+    width: 100%;
+    height: 120px;
+    align-items: center;
+    font-weight: 800 !important;
+}
+#pills-broadcast{
+    font-family:'cwTeXYen';
+    padding: 40px;
+    width: 100%;
+    height: 120px;
+    align-items: center;
+    font-weight: 800 !important;
+}
