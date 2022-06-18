@@ -271,17 +271,17 @@ function downloadAndRefresh(foodName) {
   $(`#${foodName}>ul`).empty();
   for (let i = 0; i < foodsList.length; i++) {
     var item = foodsList[i];
-    var vegan;
-    if (item.MEAL_VEGAN) {
-      vegan = "(素)"
-    } else {
-      vegan = ""
-    }
+    // var vegan;
+    // if (item.MEAL_VEGAN) {
+    //   vegan = "(素)"
+    // } else {
+    //   vegan = ""
+    // }
     var divHtml =
       `<li class="col-lg-4">
             <div class="foodItem" onclick="showFood(${i})">
                 <img src="${item.MEAL_IMAGE}" alt="food" width="240" height="160" referrerpolicy="no-referrer">
-                <h3>${item.MEAL_NAME}${vegan}</h3>
+                <h3>${item.MEAL_NAME}</h3>
               <p>熱量:${item.MEAL_CALORIE}大卡<br>碳水化合物:${item.MEAL_CARB}公克<br>蛋白質:${item.MEAL_PROTEIN}公克<br>脂肪:${item.MEAL_FAT}公克<br>$${item.MEAL_PRICE}</p>
             </div>
         </li>`;
@@ -345,16 +345,16 @@ function showFood(i) {
   price = parseInt(foodsList[i].MEAL_PRICE);
   total = price;
   $("#total").text(total);
-  var vegan;
-  if (foodsList[i].MEAL_VEGAN) {
-    vegan = "(素)"
-  } else {
-    vegan = ""
-  }
+  // var vegan;
+  // if (foodsList[i].MEAL_VEGAN) {
+  //   vegan = "(素)"
+  // } else {
+  //   vegan = ""
+  // }
   var divHtml =
     `<div class="row">
         <div class="col-10">
-            <h1>${foodsList[i].MEAL_NAME}${vegan}</h1>
+            <h1>${foodsList[i].MEAL_NAME}</h1>
         </div>
         <div class="col-2 d-flex flex-row-reverse">
             <p>$${foodsList[i].MEAL_PRICE}</p>
@@ -451,12 +451,12 @@ function cartView() {
   $("#cartHeader>ul").empty();
   for (let index = 0; index < cartArray.length; index++) {
     var item = cartArray[index];
-    var vegan;
-    if (item.MEAL_VEGAN) {
-      vegan = "(素)"
-    } else {
-      vegan = ""
-    }
+    // var vegan;
+    // if (item.MEAL_VEGAN) {
+    //   vegan = "(素)"
+    // } else {
+    //   vegan = ""
+    // }
     var divHtml =
       `<li class="cartLi">
           <div class="row">
@@ -465,7 +465,7 @@ function cartView() {
             </div>
             <div class="col-2"></div>
             <div class="col-7">
-              <h5>${item.MEAL_NAME}${vegan}</h5>
+              <h5>${item.MEAL_NAME}</h5>
               <p>數量:${item.count}<br>$${item.MEAL_PRICE}</p>
             </div>
           </div>
