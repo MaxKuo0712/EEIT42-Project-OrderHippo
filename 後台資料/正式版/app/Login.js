@@ -14,7 +14,7 @@ import {
 // if (localStorage.getItem('storeToken') != null) {
 //     alreadyLogin();
 //     setInterval(() => {
-//         window.location.href = "homepage.html"
+//         window.location.href = "index.html"
 //     }, 1500);
 
 // }
@@ -54,13 +54,13 @@ function storeMailLogin(e) {
             // Signed in 
             let STORE_ID = auth.currentUser.uid;
 
-            fetch(`http://${postName}/api/getToken/${STORE_ID}`, {
+            fetch(`https://${postName}/api/getToken/${STORE_ID}`, {
                 method: "GET"
             }).then(res => {
                 return res.text();
             }).then(resultToken => {
-                sessionStorage.setItem('storeToken', resultToken);
-                fetch(`http://${postName}/api/${STORE_ID}/stores?token=${resultToken}`, {
+                localStorage.setItem('storeToken', resultToken);
+                fetch(`https://${postName}/api/${STORE_ID}/stores?token=${resultToken}`, {
                     method: "GET"
                 }).then(res => {
                     return res.json();
@@ -70,7 +70,7 @@ function storeMailLogin(e) {
 
                     welcomeToUse(queryResult.STORE_NAME);
                     setInterval(() => {
-                        window.location.href = "homepage.html"
+                        window.location.href = "index.html"
                     }, 1000); // 等待2秒導向回到登入頁面
                 })
             })
@@ -147,8 +147,8 @@ function welcomeToUse(storeName) {
 }
 
 function addLocalstorage(storeInfo) {
-    sessionStorage.removeItem('storeinfo');
-    sessionStorage.setItem('storeinfo', JSON.stringify(storeInfo));
+    localStorage.removeItem('storeinfo');
+    localStorage.setItem('storeinfo', JSON.stringify(storeInfo));
 }
 
 mailLoginBnt.addEventListener("click", (e) => {
@@ -174,7 +174,7 @@ function setSignBntStatus() {
         if (store) { // 有登入
             alreadyLogin();
             setInterval(() => {
-                // window.location.href = "homepage.html"
+                // window.location.href = "index.html"
             }, 1500);
         }
     });

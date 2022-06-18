@@ -5,9 +5,9 @@ let postName = 'eeit42-order-hippo.herokuapp.com';
 // 拿取Token跟id
 // console.log(localStorage.getItem('storeToken'));
 // console.log(JSON.parse(localStorage.getItem('storeinfo')).STORE_ID);
-let newToken = sessionStorage.getItem('storeToken');
-sessionStorage.getItem('storeToken') == null ? function () { Swal.fire('Any fool can use a computer'); window.location.href = "login.html" }() : newToken = sessionStorage.getItem('storeToken');
-let storeId = JSON.parse(sessionStorage.getItem('storeinfo')).STORE_ID;
+let newToken = localStorage.getItem('storeToken');
+localStorage.getItem('storeToken') == null ? function () { Swal.fire('Any fool can use a computer'); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
+let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
 let localhost = 8080;
 
 toastr.options = {
@@ -33,11 +33,11 @@ toastr.options = {
 // WebSocket
 let websocket = null;
 
-connWebSocket(JSON.parse(sessionStorage.getItem('storeinfo')).STORE_ID);
+connWebSocket(JSON.parse(localStorage.getItem('storeinfo')).STORE_ID);
 
 function connWebSocket(storeInfo) {
     if ('WebSocket' in window) {
-        websocket = new WebSocket(`ws://${postName}/websocket/${storeInfo}`);
+        websocket = new WebSocket(`wss://${postName}/websocket/${storeInfo}`);
     } else {
         console.log("WebSocket連線失敗");
     }
@@ -51,7 +51,7 @@ window.onbeforeunload = () => {
     closeWebSocket();
 }
 
-if (sessionStorage.getItem('storeinfo')) {
+if (localStorage.getItem('storeinfo')) {
     websocket.onmessage = (e) => {
         // console.log(e.data);
         receiveMsg(e.data);
@@ -70,7 +70,7 @@ if (sessionStorage.getItem('storeinfo')) {
 }
 
 function sednMessage(sendMsg, orderID) {
-    fetch(`http://${postName}/api/${storeId}/payments?token=${newToken}&orderid=${orderID}`,
+    fetch(`https://${postName}/api/${storeId}/payments?token=${newToken}&orderid=${orderID}`,
         {
             method: "GET"
         }).then(function (response) {
@@ -113,12 +113,38 @@ function receiveMsg(message) {
         document.querySelector('#btnGroupDrop1 i').style.color = '#F00000';
         document.querySelector('#bellValue').classList.remove('bg-secondary');
         document.querySelector('#bellValue').classList.add('bg-danger');
+
+        $('#ordercomranka').empty();
+
+        $.ajax({
+            url: `https://${postName}/api/${storeId}/vorderstatuscount?token=${newToken}`,
+            method: 'GET',
+            success: (res, status) => {
+                var ranka = "";
+    
+                for (var vorder of res) {
+                    if (vorder.orderstatus == "1") {
+                        ranka = vorder.ordercount
+                    }
+                }
+                if (ranka != "") {
+                    $('#ordercomranka').append(ranka);
+                } else {
+                    $('#ordercomranka').append("0");
+                }
+            },
+            error: err => {
+                // console.log("vorderstatuscountHomepage fale")
+                console.log(err)
+            },
+        });
+
         toastr.info("您有一筆新訂單");
     }
 }
 
 document.getElementById("bell").addEventListener("click", () => {
-    if (sessionStorage.getItem('storeinfo')) {
+    if (localStorage.getItem('storeinfo')) {
         let bellMsg = JSON.parse(localStorage.getItem('receiveMsg'));
 
         $("#bellInfo").empty();
@@ -168,7 +194,7 @@ $('#btnGroupDrop1 i').on('click', function () {
 function homepageOrderDisplay() {
     $('#vorderstatuscountHomepage').empty();
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vorderstatuscount?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vorderstatuscount?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             // console.log(res)
@@ -258,7 +284,7 @@ function setSignBntStatus() {
 window.onload = function () {
 
     $.ajax({
-        url: `http://${postName}/api/${storeId}/stores?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/stores?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             // console.log(res[0].STORE_OPEN_STATUS)
@@ -302,7 +328,7 @@ if (localStorage.getItem('openstatus') == "true") {
 
 function openSwitch(isOpen) {
     $.ajax({
-        url: `http://${postName}/api/${storeId}/stores?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/stores?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             localStorage.setItem('openstatus', $("#switch")[0].checked)
@@ -310,7 +336,7 @@ function openSwitch(isOpen) {
             res[0].STORE_OPEN_STATUS = isOpen
             // console.log(typeof JSON.stringify(res[0]))
             $.ajax({
-                url: `http://${postName}/api/${storeId}/stores?token=${newToken}`,
+                url: `https://${postName}/api/${storeId}/stores?token=${newToken}`,
                 method: 'PUT',
                 contentType: "application/json",
                 data: JSON.stringify(res[0]),
@@ -379,8 +405,8 @@ $('#orderhippo').on('click', function () {
 $('#signOutbtn').on('click', () => {
 
     openSwitch(false);
-    sessionStorage.removeItem("storeinfo");
-    sessionStorage.removeItem("storeToken");
+    localStorage.removeItem("storeinfo");
+    localStorage.removeItem("storeToken");
     setInterval(function () {
         storeSignOut();
         localStorage.removeItem("openstatus");
@@ -391,7 +417,7 @@ $('#signOutbtn').on('click', () => {
 //Analyzepage Orderpage Memberpage Broadcastpage ReconciliationStatementpage
 //#pills-analyze #pills-order #pills-member #pills-broadcast #pills-reconciliationStatement
 $("a[data-bs-target='#pills-home']").on('click', Homepage);
-// $("a[data-bs-target='#pills-menu']").on('click', Mealpage);
+
 $("a[data-bs-target='#pills-analyze']").on('click', Analyzepage);
 $("a[data-bs-target='#pills-order']").on('click', Orderpage);
 $("a[data-bs-target='#pills-member']").on('click', Memberpage);
@@ -401,7 +427,16 @@ $("a[data-bs-target='#pills-reconciliationStatement']").on('click', Reconciliati
 $("a[data-bs-target='#pills-broadcast']").on('click', broadcastTable);
 $("a[data-bs-target='#pills-nutrientContent']").on('click', ingredientsTable);
 $("a[data-bs-target='#pills-menu']").on('click', mealIngredients);
-
+$("a[data-bs-target='#pills-home']").on('click', delay);
+function delay() {
+      
+      $("a[data-bs-target='#pills-home']").attr("disabled", true);//開始讓他不可按
+      $("a[data-bs-target='#pills-home']").css("pointer-events","none");
+      setTimeout(function(){
+        $("a[data-bs-target='#pills-home']").attr("disabled", false);
+        $("a[data-bs-target='#pills-home']").css("pointer-events","auto");
+      }, 1000);
+}
 var Chart3;
 var Chart4;
 var Chart5;
@@ -426,7 +461,7 @@ function Homepage() {
 
 
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vsalerank?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vsalerank?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             var labels = [];
@@ -435,6 +470,19 @@ function Homepage() {
             // console.log("vsalerankHomepage ok")
             // console.log(res)
             var backgroundColor = colorRandom(res.length, 0.5)
+             //排序 10名作輸出
+             function res_count(a, b) {
+                if (a.count < b.count) {
+                    return 1;
+                }
+                if (a.count > b.count) {
+                    return -1;
+                }
+                return 0;
+            }
+            if (res) {
+                res.sort(res_count);
+            }
             var rankdata = res.slice(0, 3)
             // console.log(rankdata)
             for (var salserank of rankdata) {
@@ -462,19 +510,7 @@ function Homepage() {
             }
 
 
-            //排序 10名作輸出
-            function res_count(a, b) {
-                if (a.count < b.count) {
-                    return 1;
-                }
-                if (a.count > b.count) {
-                    return -1;
-                }
-                return 0;
-            }
-            if (res) {
-                res.sort(res_count);
-            }
+           
 
             // console.log("rES="+res);
             var rankdata = res.slice(0, 10);
@@ -521,7 +557,7 @@ function Homepage() {
     });
     //首頁移交情況TODO
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vorderstatuscount?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vorderstatuscount?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             // console.log(res)
@@ -562,7 +598,7 @@ function Homepage() {
     });
     //目前總營利//分析資料-月營業額
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vmonthreveue?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vmonthreveue?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             $('#nowMon').empty();
@@ -634,7 +670,7 @@ Homepage();
 //分析資料頁面處理
 function Analyzepage() {
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vsalerank?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vsalerank?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             var labels = [];
@@ -689,7 +725,7 @@ function Analyzepage() {
     });
     //目前總營利//分析資料-月營業額
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vmonthreveue?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vmonthreveue?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             var date = new Date()
@@ -750,7 +786,7 @@ function Analyzepage() {
     });
     //分析資料-年齡客群TODO
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vagechart?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vagechart?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             // console.log(res);
@@ -803,7 +839,7 @@ function Analyzepage() {
     //分析資料-類別圓餅TODO 類別跟餐盒*4
     //{mealid: 'M202206_bc9105cee4de11ecad989828a620e5eb', mealcategoryname: '健康餐盒', mealname: '雞胸餐盒', percentage: 85.71}
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vsalecategory?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vsalecategory?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             // console.log(res)
@@ -939,7 +975,7 @@ function Analyzepage() {
     //分析資料-男女比例TODO
     //{usergender: 'F', gendercount: 5, percentage: 45.45}
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vgenderchart?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vgenderchart?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             // console.log(res)
@@ -990,7 +1026,7 @@ function Orderpage() {
 
     //1:orderPreview 2:orderAfteview 4:orderCancel 3:orderComplete
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vorderdisplay?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vorderdisplay?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             // console.log(res);
@@ -1119,7 +1155,7 @@ function Orderpage() {
                 var orderid = $('.orderTrcom')[$(this).closest("tr").index()].innerText
                 // console.log(orderid)
                 $.ajax({
-                    url: `http://${postName}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
+                    url: `https://${postName}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
                     method: 'GET',
                     success: (res, status) => {
                         res[0].ORDER_STATUS = "3"
@@ -1133,7 +1169,7 @@ function Orderpage() {
                         }
 
                         $.ajax({
-                            url: `http://${postName}/api/${storeId}/order?token=${newToken}`,
+                            url: `https://${postName}/api/${storeId}/order?token=${newToken}`,
                             method: 'PUT',
                             contentType: "application/JSON",
                             data: JSON.stringify(putres),
@@ -1162,7 +1198,7 @@ function Orderpage() {
                 sednMessage('有一筆取消的訂單', orderid);
 
                 $.ajax({
-                    url: `http://${postName}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
+                    url: `https://${postName}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
                     method: 'GET',
                     success: (res, status) => {
                         res[0].ORDER_STATUS = "4"
@@ -1177,12 +1213,12 @@ function Orderpage() {
 
                         // 信用卡刷退流程
                         $.ajax({
-                            url: `http://${postName}/api/${storeId}/payments?token=${newToken}&orderid=${putress.ORDER_ID}`,
+                            url: `https://${postName}/api/${storeId}/payments?token=${newToken}&orderid=${putress.ORDER_ID}`,
                             method: 'GET',
                             success: (res, status) => {
                                 if (res[0].PAYMENT_CATEGORY === '1') {
                                     $.ajax({
-                                        url: `http://${postName}/api/${storeId}/striperefund?token=${newToken}&paymentintent=${res[0].PAYMENT_ID}`,
+                                        url: `https://${postName}/api/${storeId}/striperefund?token=${newToken}&paymentintent=${res[0].PAYMENT_ID}`,
                                         method: 'POST',
                                         success: (res, status) => {
                                             console.log("退款成功");
@@ -1197,7 +1233,7 @@ function Orderpage() {
                         })     
 
                         $.ajax({
-                            url: `http://${postName}/api/${storeId}/order?token=${newToken}`,
+                            url: `https://${postName}/api/${storeId}/order?token=${newToken}`,
                             method: 'PUT',
                             contentType: "application/JSON",
                             data: JSON.stringify(putress),
@@ -1275,7 +1311,7 @@ function Orderpage() {
 
 
                 $.ajax({
-                    url: `http://${postName}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
+                    url: `https://${postName}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
                     method: 'GET',
                     success: (res, status) => {
                         //完成按鈕
@@ -1283,7 +1319,7 @@ function Orderpage() {
                             var orderid = $('.orderTrcom')[$(this).closest("tr").index()].innerText
                             // console.log(orderid)
                             $.ajax({
-                                url: `http://${postName}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
+                                url: `https://${postName}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
                                 method: 'GET',
                                 success: (res, status) => {
 
@@ -1299,7 +1335,7 @@ function Orderpage() {
                                     }
                                     // console.log(putres)
                                     $.ajax({
-                                        url: `http://${postName}/api/${storeId}/order?token=${newToken}`,
+                                        url: `https://${postName}/api/${storeId}/order?token=${newToken}`,
                                         method: 'PUT',
                                         contentType: "application/JSON",
                                         data: JSON.stringify(putres),
@@ -1331,7 +1367,7 @@ function Orderpage() {
                         }
 
                         $.ajax({
-                            url: `http://${postName}/api/${storeId}/order?token=${newToken}`,
+                            url: `https://${postName}/api/${storeId}/order?token=${newToken}`,
                             method: 'PUT',
                             contentType: "application/JSON",
                             data: JSON.stringify(putres),
@@ -1388,7 +1424,7 @@ $('#completeOrder').on('click', Orderpage)
 //顧客管理頁面處理
 function Memberpage() {
     $.ajax({
-        url: `http://${postName}/api/${storeId}/users?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/users?token=${newToken}`,
         method: 'GET',
         success: function (res, status) {
             $('#tableMemberbody').empty();
@@ -1436,7 +1472,7 @@ function Memberpage() {
 //對帳單頁面處理
 function ReconciliationStatementpage() {
     $('#tablepayments').bootstrapTable({
-        url: `http://${postName}/api/${storeId}/payments?token=${newToken}`,         //請求後臺的 URL（*）
+        url: `https://${postName}/api/${storeId}/payments?token=${newToken}`,         //請求後臺的 URL（*）
         striped: false,
         method: 'get',                      //請求方式（*）
         // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
@@ -1485,7 +1521,15 @@ function ReconciliationStatementpage() {
                 return '$' + value;
             }
         }, {
-            field: 'PAYMENT_CATEGORY', title: '結帳方式'               //我們取 json 中 sign 的值，並將表頭 title 設定為簽名
+            field: 'PAYMENT_CATEGORY', title: '結帳方式', formatter: function (value, row, index){
+                if(value=="1"){
+                    return "信用卡結帳"
+                }else if(value=="2"){
+                    return "現金結帳"
+                }else{
+                    return "無法判斷結帳方式"
+                }
+            }               //我們取 json 中 sign 的值，並將表頭 title 設定為簽名
         }, {
             field: 'CREATE_TIME', title: '結帳時間', formatter: function (value, row, index) {
                 // console.log(value);
@@ -1514,7 +1558,7 @@ function couponTable() {
     // $('#couponInput').attr('value','');
     $.ajax({
 
-        url: `http://${postName}/api/${storeId}/coupons?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/coupons?token=${newToken}`,
         method: 'GET',
         success: function (res, status) {
             $('#couponTbody').empty();
@@ -1572,7 +1616,7 @@ function couponTable() {
                     }
 
                     $.ajax({
-                        url: `http://${postName}/api/${storeId}/coupon?token=${newToken}`,
+                        url: `https://${postName}/api/${storeId}/coupon?token=${newToken}`,
                         method: 'PUT',
                         contentType: "application/json",
                         data: JSON.stringify(data),
@@ -1607,7 +1651,7 @@ function couponTable() {
                         "STORE_ID": `${storeId}`
                     }
                     $.ajax({
-                        url: `http://${postName}/api/${storeId}/coupon?token=${newToken}`,
+                        url: `https://${postName}/api/${storeId}/coupon?token=${newToken}`,
                         method: 'POST',
                         contentType: "application/json",
                         data: JSON.stringify(data),
@@ -1631,23 +1675,32 @@ function couponTable() {
             //刪除
             $('#couponDelete').on('click', function () {
                 var couponid = $('input:radio:checked[name="couponRadio"]').val();
-
-                $.ajax({
-                    url: `http://${postName}/api/${storeId}/coupon?token=${newToken}&couponid=${couponid}`,
-                    method: 'DELETE',
-                    contentType: "application/json",
-                    success: function (e) { Swal.fire('刪除成功'); console.log(e); couponTable(); },
-                    error: function (err) {
-                        if (err.status == "400") {
-                            Swal.fire('請選擇欄位')
-                        } else if (err.status == "404") {
-                            Swal.fire('請選擇欄位')
-                        }
-
+                Swal.fire({
+                    title: "是否要刪除",
+                    
+                    icon: 'warning',
+                    showCancelButton: true
+                }).then(function(result){
+                    if(result.value){
+                        $.ajax({
+                            url: `https://${postName}/api/${storeId}/coupon?token=${newToken}&couponid=${couponid}`,
+                            method: 'DELETE',
+                            contentType: "application/json",
+                            success: function (e) { Swal.fire('刪除成功'); console.log(e); couponTable(); },
+                            error: function (err) {
+                                if (err.status == "400") {
+                                    Swal.fire('請選擇欄位')
+                                } else if (err.status == "404") {
+                                    Swal.fire('請選擇欄位')
+                                }
+        
+                            }
+        
+        
+                        })
                     }
-
-
                 })
+                
 
 
 
@@ -1680,7 +1733,7 @@ function broadcastTable() {
         // REVISE_ID: null
         // REVISE_TIME: null
         // STORE_ID: "l3rH7uT47PTrQSteWO2V9XqbpRn1"
-        url: `http://${postName}/api/${storeId}/messages?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/messages?token=${newToken}`,
         method: 'GET',
         success: function (res, status) {
             $('#broadcastTbody').empty();
@@ -1781,7 +1834,7 @@ function broadcastTable() {
                             }
 
                             $.ajax({
-                                url: `http://${postName}/api/${storeId}/message?token=${newToken}`,
+                                url: `https://${postName}/api/${storeId}/message?token=${newToken}`,
                                 method: 'PUT',
                                 contentType: "application/json",
                                 data: JSON.stringify(data),
@@ -1866,7 +1919,7 @@ function broadcastTable() {
                                 "MESSAGE_IMAGE": `${broadcastimage}`
                             }
                             $.ajax({
-                                url: `http://${postName}/api/${storeId}/message?token=${newToken}`,
+                                url: `https://${postName}/api/${storeId}/message?token=${newToken}`,
                                 method: 'POST',
                                 contentType: "application/json",
                                 data: JSON.stringify(data),
@@ -1911,27 +1964,37 @@ function broadcastTable() {
             //刪除
             $('#broadcastDelete').on('click', function () {
                 var broadcastid = $('input:radio:checked[name="broadcastRadio"]').val();
-
-                $.ajax({
-                    url: `http://${postName}/api/${storeId}/message?token=${newToken}&messageid=${broadcastid}`,
-                    method: 'DELETE',
-                    contentType: "application/json",
-                    success: function (e) { Swal.fire('刪除成功'); console.log(e); broadcastTable(); },
-                    error: function (err) {
-                        if (err.status == "400") {
-                            Swal.fire('請選擇欄位')
-                        } else if (err.status == "404") {
-                            Swal.fire('請選擇欄位')
-                        }
-
+                Swal.fire({
+                    title: "是否要刪除",
+                    
+                    icon: 'warning',
+                    showCancelButton: true
+                }).then(function(result){
+                    if(result.value){
+                        $.ajax({
+                            url: `https://${postName}/api/${storeId}/message?token=${newToken}&messageid=${broadcastid}`,
+                            method: 'DELETE',
+                            contentType: "application/json",
+                            success: function (e) { Swal.fire('刪除成功'); console.log(e); broadcastTable(); },
+                            error: function (err) {
+                                if (err.status == "400") {
+                                    Swal.fire('請選擇欄位')
+                                } else if (err.status == "404") {
+                                    Swal.fire('請選擇欄位')
+                                }
+        
+                            }
+        
+        
+                        })   
                     }
-
-
+                    
                 })
+                
+            
 
 
-
-            });
+                });
 
         },
         error: function () {
@@ -1946,7 +2009,7 @@ function broadcastTable() {
 //營養表格 菜單印出營養素 重點輸出  
 function ingredientsTable() {
     $('#ingredientsTable').bootstrapTable({
-        url: `http://${postName}/api/${storeId}/ingredients?token=${newToken}`,         //請求後臺的 URL（*）
+        url: `https://${postName}/api/${storeId}/ingredients?token=${newToken}`,         //請求後臺的 URL（*）
         striped: false,
         method: 'get',                      //請求方式（*）
         // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
@@ -2141,7 +2204,7 @@ function mealIngredients() {
     if (document.querySelectorAll('#mealIngredients option').length == 0) {
 
         $.ajax({
-            url: `http://${postName}/api/${storeId}/ingredients?token=${newToken}`,
+            url: `https://${postName}/api/${storeId}/ingredients?token=${newToken}`,
             method: 'GET',
             success: function (res, status) {
 

@@ -2,8 +2,8 @@
 let postName = 'eeit42-order-hippo.herokuapp.com';
 
 // let newToken = localStorage.getItem('storeToken');
-sessionStorage.getItem('storeToken') == null ? function () { Swal.fire("請先登入"); window.location.href = "login.html" }() : newToken = sessionStorage.getItem('storeToken');
-let storeId = JSON.parse(sessionStorage.getItem('storeinfo')).STORE_ID;
+localStorage.getItem('storeToken') == null ? function () { Swal.fire("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
+let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
 let localhost = 8080;
 /*---------------嘉彬------------*/
 $('img[src="./img/group1.png"]').on('click', function () {
@@ -212,7 +212,7 @@ var ingredientjson = {};
 //
 function ingredientsOPA() {
     $.ajax({
-        url: `http://${postName}/api/${storeId}/ingredients?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/ingredients?token=${newToken}`,
         method: 'GET',
         success: function (res, status) {
             console.log("ingredientsOPA() success");
@@ -295,10 +295,11 @@ function ingredientsOPA() {
 //菜單管理GET創建菜單 -嘉彬
 var vmealjson = {};
 var mealjson = {};
-runmenu();
+// runmenu();
+$("a[data-bs-target='#pills-menu']").on('click', runmenu);
 function runmenu() {
     $.ajax({
-        url: `http://${postName}/api/${storeId}/vmealbom?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/vmealbom?token=${newToken}`,
         method: 'GET',
         success: function (res, status) {
             {//res json
@@ -355,7 +356,7 @@ function delField(obj) {
 
     // function deleteMeal(){
     $.ajax({
-        url: `http://${postName}/api/${storeId}/meals?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/meals?token=${newToken}`,
         method: 'GET',
         success: (mealid, status) => {
             var selectmealname = mealid.filter(function (item, index, array) {//
@@ -380,7 +381,7 @@ function delField(obj) {
                     // $("#exampleModal").modal('hide');
                     // deleteMeal();
                     $.ajax({
-                        url: `http://${postName}/api/${storeId}/meal?token=${newToken}`,
+                        url: `https://${postName}/api/${storeId}/meal?token=${newToken}`,
                         method: 'PUT',
                         contentType: "application/json",
                         data: JSON.stringify(
@@ -421,7 +422,7 @@ function modifyMenuBtn(obj) {
     var row = obj.closest('tr');
 
     $.ajax({
-        url: `http://${postName}/api/${storeId}/meals?token=${newToken}`,
+        url: `https://${postName}/api/${storeId}/meals?token=${newToken}`,
         method: 'GET',
         success: (mealid, status) => {
 
@@ -432,7 +433,7 @@ function modifyMenuBtn(obj) {
             ingredientsOPA();
 
             $.ajax({
-                url: `http://${postName}/api/${storeId}/vrevisemealdisplay?token=${newToken}&mealid=${selectmealname[0].MEAL_ID}`,
+                url: `https://${postName}/api/${storeId}/vrevisemealdisplay?token=${newToken}&mealid=${selectmealname[0].MEAL_ID}`,
                 method: 'GET',
                 success: function (res, status) {
                     document.getElementById('nutritionOperation').innerHTML = "";
@@ -616,7 +617,7 @@ function saveField() {
 
 //GET餐點種類  
 $.ajax({
-    url: `http://${postName}/api/${storeId}/mealcategorys?token=${newToken}`,
+    url: `https://${postName}/api/${storeId}/mealcategorys?token=${newToken}`,
     method: 'GET',
     success: function (res, status) {
 
@@ -690,7 +691,7 @@ function saveAppendMenu() {
     if (unitmealid != "") {
 
         $.ajax({
-            url: `http://${postName}/api/${storeId}/mealcategorys?token=${newToken}`,
+            url: `https://${postName}/api/${storeId}/mealcategorys?token=${newToken}`,
             method: 'GET',
             success: function (res, status) {
 
@@ -700,7 +701,7 @@ function saveAppendMenu() {
                         // console.log(mealcategoryid);
 
                         $.ajax({
-                            url: `http://${postName}/api/${storeId}/meal?token=${newToken}`,
+                            url: `https://${postName}/api/${storeId}/meal?token=${newToken}`,
                             method: 'PUT',
                             contentType: "application/json",
                             data: JSON.stringify(
@@ -749,13 +750,13 @@ function saveAppendMenu() {
         // console.log(unitmealid);
 
         $.ajax({
-            url: `http://${postName}/api/${storeId}/mealbom?token=${newToken}&mealid=${unitmealid}`,
+            url: `https://${postName}/api/${storeId}/mealbom?token=${newToken}&mealid=${unitmealid}`,
             method: 'DELETE',
             success: function (delesuccess) {
                 if (delesuccess) {
 
                     $.ajax({
-                        url: `http://${postName}/api/${storeId}/ingredients?token=${newToken}`,
+                        url: `https://${postName}/api/${storeId}/ingredients?token=${newToken}`,
                         method: 'GET',
                         success: function (ingredientvalue, status) {
                             // console.log(ingredientvalue);
@@ -785,7 +786,7 @@ function saveAppendMenu() {
                                     // console.log(mealingredientprotein);//計算
 
                                     $.ajax({
-                                        url: `http://${postName}/api/${storeId}/mealbom?token=${newToken}`,
+                                        url: `https://${postName}/api/${storeId}/mealbom?token=${newToken}`,
                                         method: 'POST',
                                         contentType: "application/json",
                                         data: JSON.stringify(
@@ -835,7 +836,7 @@ function saveAppendMenu() {
     } else {
 
         $.ajax({
-            url: `http://${postName}/api/${storeId}/mealcategorys?token=${newToken}`,
+            url: `https://${postName}/api/${storeId}/mealcategorys?token=${newToken}`,
             method: 'GET',
             success: function (res, status) {
 
@@ -846,7 +847,7 @@ function saveAppendMenu() {
                         // console.log(mealcategoryid);
 
                         $.ajax({
-                            url: `http://${postName}/api/${storeId}/meal?token=${newToken}`,
+                            url: `https://${postName}/api/${storeId}/meal?token=${newToken}`,
                             method: 'POST',
                             contentType: "application/json",
                             data: JSON.stringify(
@@ -874,7 +875,7 @@ function saveAppendMenu() {
                                 // console.log(a);
 
                                 $.ajax({
-                                    url: `http://${postName}/api/${storeId}/meals?token=${newToken}`,
+                                    url: `https://${postName}/api/${storeId}/meals?token=${newToken}`,
                                     method: 'GET',
                                     success: (mealid, status) => {
 
@@ -882,7 +883,7 @@ function saveAppendMenu() {
 
 
                                         $.ajax({
-                                            url: `http://${postName}/api/${storeId}/ingredients?token=${newToken}`,
+                                            url: `https://${postName}/api/${storeId}/ingredients?token=${newToken}`,
                                             method: 'GET',
                                             success: function (ingredientvalue, status) {
                                                 // console.log(ingredientvalue);
@@ -912,7 +913,7 @@ function saveAppendMenu() {
                                                         // console.log(mealingredientprotein);//計算
 
                                                         $.ajax({
-                                                            url: `http://${postName}/api/${storeId}/mealbom?token=${newToken}`,
+                                                            url: `https://${postName}/api/${storeId}/mealbom?token=${newToken}`,
                                                             method: 'POST',
                                                             contentType: "application/json",
                                                             data: JSON.stringify(

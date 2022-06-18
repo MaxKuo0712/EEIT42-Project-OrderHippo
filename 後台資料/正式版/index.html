@@ -426,6 +426,34 @@
             width: 50px;
             height: 5px;
         }
+
+        #padleft>div>ul>li>a>p {
+            display: inline-block;
+        }
+
+        @media screen and (max-width:1300px) {
+            #padleft>div>a>span {
+
+                display: none;
+            }
+
+            #padleft>div>ul>li>a>p {
+
+                display: none;
+            }
+        }
+
+        @media screen and (max-width:767px) {
+            #padleft>div>a>span {
+
+                display: inline-block;
+            }
+
+            #padleft>div>ul>li>a>p {
+
+                display: inline-block;
+            }
+        }
     </style>
     <!-- 分析資料表 直線 -->
 
@@ -455,7 +483,7 @@
                                     data-bs-target="#pills-home" role="tab" aria-controls="pills-home"
                                     aria-selected="true">
                                     <i class="fa-solid fa-house"></i>
-                                    <p style="display:inline-block ; text-align: center;width:120px;">首頁</p>
+                                    <p style=" text-align: center;width:120px;">首頁</p>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -463,7 +491,7 @@
                                     data-bs-toggle="pill" data-bs-target="#pills-menu" role="tab"
                                     aria-controls="pills-menu" aria-selected="false">
                                     <i class="fa-solid fa-utensils"></i>
-                                    <p style="display:inline-block ; text-align: center;width:120px;">菜單管理</p>
+                                    <p style=" text-align: center;width:120px;">菜單管理</p>
 
                                 </a>
                             </li>
@@ -472,7 +500,7 @@
                                     data-bs-target="#pills-analyze" role="tab" aria-controls="pills-analyze"
                                     aria-selected="false">
                                     <i class="fa-solid fa-chart-line"></i>
-                                    <p style="display:inline-block ; text-align: center;width:120px;">分析資料</p>
+                                    <p style=" text-align: center;width:120px;">分析資料</p>
 
                                 </a>
                             </li>
@@ -481,7 +509,7 @@
                                     data-bs-target="#pills-order" role="tab" aria-controls="pills-order"
                                     aria-selected="false" id="ordera">
                                     <i class="fa-solid fa-file-invoice"></i>
-                                    <p style="display:inline-block ; text-align: center;width:120px;">訂單管理</p>
+                                    <p style=" text-align: center;width:120px;">訂單管理</p>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -489,7 +517,7 @@
                                     data-bs-target="#pills-nutrientContent" role="tab"
                                     aria-controls="pills-nutrientContent" aria-selected="false">
                                     <i class="fa-solid fa-magnifying-glass-chart"></i>
-                                    <p style="display:inline-block ; text-align: center;width:120px;">營養成份表</p>
+                                    <p style=" text-align: center;width:120px;">營養成份表</p>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -497,7 +525,7 @@
                                     data-bs-target="#pills-member" role="tab" aria-controls="pills-member"
                                     aria-selected="false">
                                     <i class="fa-solid fa-circle-user"></i>
-                                    <p style="display:inline-block ; text-align: center;width:120px;">顧客管理</p>
+                                    <p style=" text-align: center;width:120px;">顧客管理</p>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -505,7 +533,7 @@
                                     data-bs-target="#pills-broadcast" role="tab" aria-controls="pills-broadcast"
                                     aria-selected="false">
                                     <i class="fa-solid fa-bullhorn"></i>
-                                    <p style="display:inline-block ; text-align: center;width:120px;">廣播與優惠卷</p>
+                                    <p style=" text-align: center;width:120px;">廣播與優惠卷</p>
                                 </a>
                             </li>
                             <!-- #pills-reconciliationStatement -->
@@ -514,7 +542,7 @@
                                     data-bs-target="#pills-reconciliationStatement" role="tab"
                                     aria-controls="pills-reconciliationStatement" aria-selected="false">
                                     <i class="fa-solid fa-file-invoice-dollar"></i>
-                                    <p style="display:inline-block ; text-align: center;width:120px;">對帳單</p>
+                                    <p style=" text-align: center;width:120px;">對帳單</p>
                                 </a>
                             </li>
                         </ul>
