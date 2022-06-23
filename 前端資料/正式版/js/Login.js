@@ -203,8 +203,8 @@ function addGoogleUserInfo(result) {
             const CREATE_ID = userId;
 
             const userInfo = { USER_ID, USER_NAME, USER_GENDER, USER_BIRTH, USER_PHONE, USER_ADDRESS, USER_MAIL, CREATE_ID };
-
-            fetch("https://${postName}/api/users", {
+            console.log(userInfo);
+            fetch(`https://${postName}/api/users`, {
                 method: "POST",
                 headers: { "content-Type": "application/json" },
                 body: JSON.stringify(userInfo)

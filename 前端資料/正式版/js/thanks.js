@@ -18,8 +18,9 @@ function connWebSocket(userInfo) {
 }
 
 function closeWebSocket() {
+    console.log("WebSocket斷線");
     websocket.close();
-}
+  }
 
 window.onbeforeunload = () => {
     if (websocket) {
@@ -43,6 +44,7 @@ function sednMessage(sendMsg, orderID, paymentID) {
         if (orderID != null && orderID != "" && paymentID != null && paymentID != ""
             && sendToWho != null && sendToWho != "") {
             sendMsg = `${sendMsg}#${orderID}#${paymentID}#${sendToWho}`;
+            console.log(sendMsg);
             websocket.send(sendMsg);
         }
     });
@@ -137,10 +139,11 @@ function addBellInfo(msg, orderID, paymentID, color) {
       <button class="bellDropdown dropdown-item" type="button" 
         style="background-color: ${color}; font-size: 12px; overflow:hidden;
         white-space: nowrap; text-overflow: ellipsis;">
-        ${msg}：<br> ${orderID}, <br> ${paymentID}
+        ${msg}
       </button>
     </li>`
     );
+    // ${msg}
 }
 /**------------------------------------------------------------------------------- */
 // let userID = 'iGImodKQRvQU1dYUfPfyM4HBD6r2';

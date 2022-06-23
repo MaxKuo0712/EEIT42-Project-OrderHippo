@@ -15,6 +15,7 @@ function connWebSocket(userInfo) {
 }
 
 function closeWebSocket() {
+  console.log("WebSocket斷線");
   websocket.close();
 }
 
@@ -110,7 +111,7 @@ function addBellInfo(msg, orderID, paymentID, color) {
     <button class="bellDropdown dropdown-item" type="button" 
       style="background-color: ${color}; font-size: 12px; overflow:hidden;
       white-space: nowrap; text-overflow: ellipsis;">
-      ${msg}：<br> ${orderID}, <br> ${paymentID}
+      ${msg}
     </button>
   </li>`
   );
@@ -309,7 +310,12 @@ $(".discount").on("click", () => {
         );
         $(".discount").attr("disabled", true);
       }).catch((err) => {
-        alert("沒有這個優惠碼,請重新輸入");
+        Swal.fire({
+          icon: 'warning',
+          title: "沒有這個優惠券，請重新輸入！",
+          showConfirmButton: false,
+          timer: 1500
+        });
       });
   }
 })
