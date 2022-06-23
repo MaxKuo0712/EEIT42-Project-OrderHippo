@@ -44,8 +44,9 @@ function connWebSocket(storeInfo) {
 }
 
 function closeWebSocket() {
+    console.log("WebSocket斷線");
     websocket.close();
-}
+  }
 
 window.onbeforeunload = () => {
     closeWebSocket();
@@ -185,7 +186,7 @@ document.getElementById("bell").addEventListener("click", () => {
     }
 });
 
-$('#btnGroupDrop1 i').on('click', function () {
+$('#bell').on('click', function () {
     document.querySelector('#btnGroupDrop1 i').style.color = '#373a3c';
     document.querySelector('#bellValue').classList.remove('bg-danger');
     document.querySelector('#bellValue').classList.add('bg-secondary');
@@ -1194,9 +1195,6 @@ function Orderpage() {
             $('.orderCBtn').click(function () {
                 var orderid = $('.orderTr')[$(this).closest("tr").index()].innerText;
 
-                // 送出訊息給前端
-                sednMessage('有一筆取消的訂單', orderid);
-
                 $.ajax({
                     url: `https://${postName}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
                     method: 'GET',
@@ -1252,6 +1250,10 @@ function Orderpage() {
                         console.log(err)
                     },
                 })
+
+                // 送出訊息給前端
+                sednMessage('有一筆取消的訂單', orderid);
+
                 $(' .orderTrr')[$(this).closest("tr").index()].style.display = 'none';
             })
             //確定
@@ -1295,9 +1297,6 @@ function Orderpage() {
 
                     '</tr>'
                 )
-
-                // 送出訊息給前端
-                sednMessage('有一筆確認的訂單', orderid);
 
                 var doc = new jsPDF();
 
@@ -1386,6 +1385,10 @@ function Orderpage() {
                         console.log(err)
                     },
                 })
+
+                // 送出訊息給前端
+                sednMessage('有一筆確認的訂單', orderid);
+
                 $(' .orderTrr')[$(this).closest("tr").index()].style.display = 'none';
             });
 
