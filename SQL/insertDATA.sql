@@ -225,32 +225,32 @@ values ('挪威鮭魚義大利麵', 'PASTA', '義大利麵', 'l3rH7uT47PTrQSteWO
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('青澀年華', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/gEHNd4w.jpg', '青澀年華', 150, 
+values ('青澀年華', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/gEHNd4w.jpg', '青澀年華', 70, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');	
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('巧克力櫻桃果昔', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/kFgxUWE.jpg', '巧克力櫻桃果昔', 165, 
+values ('巧克力櫻桃果昔', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/kFgxUWE.jpg', '巧克力櫻桃果昔', 90, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('橙橘氣泡飲', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/6WsVPrK.jpg', '橙橘氣泡飲', 145, 
+values ('橙橘氣泡飲', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/6WsVPrK.jpg', '橙橘氣泡飲', 65, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('綠野仙蹤', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/zFGVPcg.jpg', '綠野仙蹤', 155, 
+values ('綠野仙蹤', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/zFGVPcg.jpg', '綠野仙蹤', 85, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('酸甜時刻', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/HwZyi5A.jpg', '酸甜時刻', 165, 
+values ('酸甜時刻', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/HwZyi5A.jpg', '酸甜時刻', 90, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 insert MEAL (MEAL_NAME, MEAL_CATEGORY_ID, MEAL_CATEGORY_NAME, STORE_ID, MEAL_IMAGE, MEAL_DESC, MEAL_PRICE, MEAL_CALORIE,
 	MEAL_CARB, MEAL_FAT, MEAL_PROTEIN, MEAL_VEGAN, MEAL_HOT, MEAL_STATUS, CREATE_ID)
-values ('吃瓜輕飲', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/mHCj1Rr.jpg', '吃瓜輕飲', 145, 
+values ('吃瓜輕飲', 'DRINK', '飲料', 'l3rH7uT47PTrQSteWO2V9XqbpRn1', 'https://i.imgur.com/mHCj1Rr.jpg', '吃瓜輕飲', 65, 
 	0, 0, 0, 0, false, true, true, 'l3rH7uT47PTrQSteWO2V9XqbpRn1');
 	
 	
