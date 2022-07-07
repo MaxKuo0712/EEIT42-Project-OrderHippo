@@ -34,4 +34,6 @@
 
 <img width="1436" alt="截圖 2022-06-15 下午7 21 15" src="https://user-images.githubusercontent.com/68499661/173815781-1e9c75bb-b408-4a88-83f0-d7df50061f66.png">
 
+![175342820-adedf7f6-1f4c-407c-89dd-2b592ea3fffc](https://user-images.githubusercontent.com/68499661/177828178-0204db71-05ec-4cb5-a08a-ca5810a8cacc.png)
+
 <img width="827" alt="截圖 2022-06-16 下午4 43 43" src="https://user-images.githubusercontent.com/68499661/174030838-3f3e3d40-f3a9-4032-bf0e-b90a20f54099.png">
